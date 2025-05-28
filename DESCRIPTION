@@ -35,3 +35,5 @@ Roxygen: list(markdown = TRUE)
 Authors@R: c(
     person("Ralph", "Møller Trane", email = "rtrane@wisc.edu", role = c("aut", "cre"))
   )
+URL: https://github.com/rmtrane/NpsychAssessmentTool
+BugReports: https://github.com/rmtrane/NpsychAssessmentTool/issues
