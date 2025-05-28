@@ -41,4 +41,4 @@ shinyAssessmentApp()
 
 Alternatively, the app is also available as an RStudio add-in. I.e., once the package is installed, you should be able to launch it from the RStudio add-in dropdown menu:
 
-!["Screenshot showing the RStudio add-in.]("img/rstudio-addin.png")
+![Screenshot showing the RStudio add-in.](img/rstudio-addin.png)

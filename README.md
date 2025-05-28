@@ -35,8 +35,8 @@ once the package is installed, you should be able to launch it from the
 RStudio add-in dropdown menu:
 
 <figure>
-<img src="%22img/rstudio-addin.png%22"
-alt="“Screenshot showing the RStudio add-in." />
-<figcaption aria-hidden="true">“Screenshot showing the RStudio
+<img src="img/rstudio-addin.png"
+alt="Screenshot showing the RStudio add-in." />
+<figcaption aria-hidden="true">Screenshot showing the RStudio
 add-in.</figcaption>
 </figure>
