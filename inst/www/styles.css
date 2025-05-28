@@ -1,0 +1,48 @@
+/* For inline dropdown */
+.inline-input-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+.inline-input-container label {
+  margin: 0;
+  white-space: nowrap;
+}
+.inline-input-container .shiny-input-container {
+  margin: 0;
+}
+
+/* Spinner... */
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  z-index: 9999;
+}
+
+.loader_overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #aeaeae;
+  opacity: 0.5;
+  filter: blur(5px);
+  z-index: 9998;
+  display: none;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

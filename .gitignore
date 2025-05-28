@@ -1,0 +1,12 @@
+.DS_store
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+docs
+data-raw/*
+inst/editableTable/*
+inst/shinylive/*
+scratch/*
+*.Rproj
+.Rproj.user

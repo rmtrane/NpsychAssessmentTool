@@ -1,0 +1,4 @@
+Name: Neuropsychological Assessment Tool
+Description: Opens the application from the NpsychAssessmentTool package
+Binding: shinyAssessmentApp
+Interactive: true

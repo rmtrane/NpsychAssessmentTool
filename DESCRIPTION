@@ -1,0 +1,37 @@
+Package: NpsychAssessmentTool
+Type: Package
+Title: What the Package Does (Title Case)
+Version: 0.1.0
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Suggests: 
+    htmltools,
+    REDCapR,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+RoxygenNote: 7.3.2
+Depends: 
+    R (>= 4.2.0)
+Imports: 
+    bslib,
+    data.table (>= 1.9.8),
+    DT,
+    gt,
+    lubridate,
+    NpsychBatteryNorms,
+    plotly,
+    purrr,
+    shiny,
+    shinyWidgets,
+    rlang,
+    methods,
+    utils
+Remotes: 
+    rmtrane/NpsychBatteryNorms
+Roxygen: list(markdown = TRUE)
+Authors@R: c(
+    person("Ralph", "Møller Trane", email = "rtrane@wisc.edu", role = c("aut", "cre"))
+  )

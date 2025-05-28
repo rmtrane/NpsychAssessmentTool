@@ -1,0 +1,13 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^data-raw$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^inst/shinylive/*
+^inst/editableTable/*
+^inst/qmd/*
+^references.bib$
+^scratch/*
+^LICENSE\.md$
+^\.github$
