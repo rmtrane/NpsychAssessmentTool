@@ -11,3 +11,4 @@
 ^scratch/*
 ^LICENSE\.md$
 ^\.github$
+^README\.Rmd$
