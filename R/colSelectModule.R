@@ -487,7 +487,8 @@ colSelectServer <- function(
     std_methods <- shiny::reactiveVal()
 
     shiny::observe({
-      print(paste0("Assign clicked... (", input$assign, ")"))
+      # print(paste0("Assign clicked... (", input$assign, ")"))
+
       var_cols_tmp <- setNames(vars_table()$Column, vars_table()$Variable)
       var_cols_tmp <- var_cols_tmp[-which(var_cols_tmp %in% "(blank)")]
 
@@ -554,6 +555,22 @@ colSelectServer <- function(
 #' @rdname colSelectModule
 #'
 #' @export
+#' Column selection app
+#'
+#' @description
+#' A short description...
+#'
+#' @param col_names Column names.
+#' @param default_methods Default methods.
+#' @param data_type One of `"nacc"`, `"wls"`, or `"wadrc"`.
+#' @param allow_col_selection A logical; whether column selection is allowed. If
+#'   `TRUE`,
+#'
+#' @returns
+#' A shiny app.
+#'
+#' @export
+
 colSelectApp <- function(
   col_names,
   default_methods,

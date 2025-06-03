@@ -27,11 +27,31 @@ longTableUI <- function(id) {
 longTableServer <- function(
   id,
   dat,
-  # descriptions = ,
+  descriptions = c(
+    "Impaired" = 0.03,
+    "Borderline" = 0.10,
+    "Low Average" = 0.26,
+    "Average" = 0.76,
+    "High Average" = 0.92,
+    "Superior" = 0.97,
+    "Very Superior" = 1
+  ),
+  fill_values = NULL,
   methods = "infer",
-  table_font_size = shiny::reactive(100),
+  table_font_size = 100,
   print_updating = F
 ) {
+  if (!shiny::is.reactive(descriptions))
+    descriptions <- shiny::reactiveVal(descriptions)
+
+  if (!shiny::is.reactive(fill_values))
+    fill_values <- shiny::reactiveVal(fill_values)
+
+  if (!shiny::is.reactive(table_font_size))
+    table_font_size <- shiny::reactiveVal(table_font_size)
+
+  if (!shiny::is.reactive(methods)) methods <- shiny::reactiveVal(methods)
+
   shiny::moduleServer(id, function(input, output, session) {
     all_visits <- shiny::reactiveVal(value = TRUE)
 
@@ -52,12 +72,16 @@ longTableServer <- function(
         print("Updating longitudinal table...")
       }
 
+      cur_show_hide_empty <- input$show_hide_empty
+
       assessment_longitudinal_table(
         dat(),
-        methods = methods,
+        methods = methods(),
         table_font_size = table_font_size(),
         table_id = "long_table",
         show_all_visits = all_visits(),
+        descriptions = descriptions(),
+        fill_values = fill_values(),
         stubhead_label = shiny::HTML(
           paste0(
             '<button id="',
@@ -65,7 +89,11 @@ longTableServer <- function(
             '" type="button"',
             'class="btn btn-default action-button"',
             'style="height: 16px; line-height: 80%; padding-top: 7px; padding-bottom: 16px; width: 250px">',
-            'Hide Visits with No Scores',
+            ifelse(
+              all_visits(),
+              'Hide Visits with No Scores',
+              'Show All Visits'
+            ),
             '</button>'
           )
         )

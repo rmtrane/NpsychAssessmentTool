@@ -8,7 +8,6 @@
 prevDiagnosesUI <- function(id) {
   shiny::tagList(
     shiny::uiOutput(shiny::NS(id, "prev_diagnoses_table"))
-    # gt::gt_output(shiny::NS(id, "prev_diagnoses_table"))
   )
 }
 
@@ -19,15 +18,14 @@ prevDiagnosesUI <- function(id) {
 #'
 #' @export
 prevDiagnosesServer <- function(
-    id,
-    dat,
-    print_updating = F,
-    table_font_size = shiny::reactive(100)) {
+  id,
+  dat,
+  print_updating = F,
+  table_font_size = shiny::reactive(100)
+) {
   shiny::moduleServer(id, function(input, output, session) {
-    output$prev_diagnoses_table <- shiny::renderUI({ # gt::render_gt({
-      if (print_updating) {
-        print("Updating longitudinal table...")
-      }
+    output$prev_diagnoses_table <- shiny::renderUI({
+      if (print_updating) print("Updating longitudinal table...")
 
       prev_diagnoses_table(
         dat(),

@@ -58,12 +58,13 @@ base_plot_z_scores <- function(
 
   if (
     shade_descriptions &
-      (missing(fill_values) || identical(fill_values, quote(expr = )))
+      (missing(fill_values) ||
+        identical(fill_values, quote(expr = )) ||
+        is.null(fill_values))
   ) {
     fill_values <- setNames(
-      # RColorBrewer::brewer.pal(n = length(descriptions), "RdYlGn"),
       calc_fill_colors(length(descriptions)),
-      nm = names(descriptions) # c("Impaired", "Borderline", "Low Average", "Average", "High Average", "Superior", "Very Superior")
+      nm = names(descriptions)
     )
   }
 

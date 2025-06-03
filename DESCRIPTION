@@ -28,7 +28,8 @@ Imports:
     shinyWidgets,
     rlang,
     methods,
-    utils
+    utils,
+    cli
 Remotes: 
     rmtrane/NpsychBatteryNorms
 Roxygen: list(markdown = TRUE)

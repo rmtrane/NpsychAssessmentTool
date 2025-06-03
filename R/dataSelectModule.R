@@ -123,7 +123,7 @@ dataSelectServer <- function(id) {
               value = uri_and_token$redcap_uri
             ),
             .cssSelector = "input",
-            autocomplete = "user-name"
+            autocomplete = "username"
           ),
           shiny::tagAppendAttributes(
             shiny::passwordInput(

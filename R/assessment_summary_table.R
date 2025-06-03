@@ -27,24 +27,24 @@
 #'
 #' @export
 assessment_summary_table <- function(
-  dat,
-  # summary_dat,
-  id = "NACCID",
-  descriptions = c(
-    "Impaired" = 0.03,
-    "Borderline" = 0.10,
-    "Low Average" = 0.26,
-    "Average" = 0.76,
-    "High Average" = 0.92,
-    "Superior" = 0.97,
-    "Very Superior" = 1
-  ),
-  fill_values,
-  methods = "infer",
-  include_caption = F,
+  # dat,
+  summary_dat,
+  # id = "NACCID",
+  # descriptions = c(
+  #   "Impaired" = 0.03,
+  #   "Borderline" = 0.10,
+  #   "Low Average" = 0.26,
+  #   "Average" = 0.76,
+  #   "High Average" = 0.92,
+  #   "Superior" = 0.97,
+  #   "Very Superior" = 1
+  # ),
+  # fill_values,
+  # methods = "infer",
+  # include_caption = F,
   bar_height = 16
 ) {
-  if (missingArg(fill_values)) fill_values <- NULL
+  # if (missingArg(fill_values)) fill_values <- NULL
 
   # stopifnot(
   #   "Exactly one of 'dat' or 'summary_dat' must be provided" = missingArg(dat) +
@@ -59,14 +59,14 @@ assessment_summary_table <- function(
   # }
 
   # if (missingArg(summary_dat)) {
-  summary_dat <- assessment_summary_data(
-    dat = dat,
-    id = id,
-    descriptions = descriptions,
-    fill_values = fill_values,
-    methods = methods,
-    include_caption = include_caption
-  )
+  # summary_dat <- assessment_summary_data(
+  #   dat = dat,
+  #   id = id,
+  #   descriptions = descriptions,
+  #   fill_values = fill_values,
+  #   methods = methods,
+  #   include_caption = include_caption
+  # )
   # }
 
   for_main_table <- summary_dat$for_main_table
@@ -91,6 +91,12 @@ assessment_summary_table <- function(
     ) |>
     gt::fmt_number(
       columns = "std"
+    ) |>
+    gt::tab_style(
+      style = gt::css(
+        "white-space" = "nowrap"
+      ),
+      locations = gt::cells_stub()
     ) |>
     gt::tab_stub_indent(
       rows = T,
@@ -199,8 +205,18 @@ assessment_summary_table <- function(
       "raw" = "R",
       "raw_suffix" = "aw",
       "units" = "",
-      "std" = "Standardized"
+      "std" = gt::html(as.character(bslib::tooltip(
+        "Std.",
+        "Results of standardizing raw scores"
+      )))
       # gtExtras::with_tooltip("Standardized", "Results of standardizing raw scores")
+    ) |>
+    gt::tab_style(
+      style = gt::css(
+        "text-decoration-line" = "underline",
+        "text-decoration-style" = "dashed"
+      ),
+      locations = gt::cells_column_labels("std")
     ) |>
     gt::tab_spanner(
       columns = c("raw", "raw_suffix", "units", "std"),
@@ -308,7 +324,7 @@ assessment_summary_data <- function(
     "Superior" = 0.97,
     "Very Superior" = 1
   ),
-  fill_values,
+  fill_values = NULL,
   methods = "infer",
   include_caption = TRUE
 ) {
@@ -323,7 +339,7 @@ assessment_summary_data <- function(
     "'dat' must be of class 'data.table'" = data.table::is.data.table(dat)
   )
 
-  if (missingArg(fill_values) || is.null(fill_values)) {
+  if (is.null(fill_values)) {
     fill_values <- setNames(
       calc_fill_colors(length(descriptions)),
       nm = names(descriptions)
@@ -594,14 +610,21 @@ assessment_summary_data <- function(
     for_cap$NACCAGE <- floor(for_cap$NACCAGE)
 
     for_cap$IQCODESELF <- ifelse(
-      is.null(for_cap$IQCODESELF) | is.na(for_cap$IQCODESELF),
+      is.null(for_cap$IQCODESELF) || is.na(for_cap$IQCODESELF),
       "&mdash;",
       sprintf("%.2f", for_cap$IQCODESELF)
     )
+
     for_cap$IQCODEINFORM <- ifelse(
-      is.null(for_cap$IQCODEINFORM) | is.na(for_cap$IQCODEINFORM),
+      is.null(for_cap$IQCODEINFORM) || is.na(for_cap$IQCODEINFORM),
       "&mdash;",
       sprintf("%.2f", for_cap$IQCODEINFORM)
+    )
+
+    for_cap$FAS <- ifelse(
+      is.null(for_cap$FAS) || is.na(for_cap$FAS),
+      "&mdash;",
+      for_cap$FAS
     )
 
     out$cap <- data.table::data.table(

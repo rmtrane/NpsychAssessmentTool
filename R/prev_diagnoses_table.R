@@ -308,11 +308,7 @@ prev_diagnoses_table <- function(dat, table_font_size = 100) {
     )
   )
 
-  which_mmse <- diagnosis_table[
-    !is.na(diagnosis_table$NACCMMSE),
-    "VISITDATE",
-    with = F
-  ]
+  which_mmse <- diagnosis_table[!is.na(diagnosis_table$NACCMMSE)]$VISITDATE
 
   diagnosis_table <- diagnosis_table[,
     which(!colnames(diagnosis_table) %in% "NACCMMSE"),
@@ -481,6 +477,12 @@ prev_diagnoses_table <- function(dat, table_font_size = 100) {
     gt::tab_style(
       style = gt::cell_text(v_align = "top"),
       locations = gt::cells_body()
+    ) |>
+    gt::tab_style(
+      style = gt::css(
+        "white-space" = "nowrap"
+      ),
+      locations = gt::cells_column_labels()
     ) |>
     gt::cols_align(
       align = "left"

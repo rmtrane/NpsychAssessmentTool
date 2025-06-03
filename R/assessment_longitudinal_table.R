@@ -1,14 +1,21 @@
-#' Longitudinal Table of Standardized Scores
+#' Assessment Longitudinal Table
 #'
-#' Create a table of standardized scores across multiple visits.
+#' @description
+#' Create a table of standardized scores across multiple visits
 #'
-#' @inheritParams assessment_summary_table
-#' @param date column with visit dates.
-#' @param table_id character string to add as id to table.
-#' @param table_font_size (optional) scalar indicating font size as a percentage.
-#' @param show_all_visits logical; should all visits be displayed (`TRUE`, default), or
-#'   only visits with at least one standardized score (`FALSE`)?
-#' @param stubhead_label passed to the label argument of `gt::tab_stubhead`.
+#' @param dat A data.table object.
+#' @param id A character string specifying a column in the data frame `dat`. Default is `"NACCID"`.
+#' @param date A character string specifying a column in the data frame `dat`. Default is `"VISITDATE"`.
+#' @param descriptions A named numeric vector. Default has names `"Impaired"`, `"Borderline"`, `"Low Average"`, `"Average"`, `"High Average"`, `"Superior"`, and `"Very Superior"` with corresponding values `0.03`, `0.10`, `0.26`, `0.76`, `0.92`, `0.97`, and `1`.
+#' @param fill_values Optional.
+#' @param methods Either a list containing methods used for standardization (each a character vector with named entried `method` and `version`), or `"infer"` (default). If `"infer"`, then methods are pulled from attributes of standardized columns.
+#' @param table_font_size A numeric value passed to `gt::tab_options(table.font.size = gt::pct(table_font_size))`. Defaults to 100.
+#' @param table_id Optional. ID given to the table. If not provided, random string assigned.
+#' @param show_all_visits A boolean. If `TRUE` (default), all visits present in the data are shown in the table. If `FALSE`, only visits with at least one standardized score are presented.
+#' @param stubhead_label Optional. Passed to `gt::tab_stubhead(label = stubhead_label)`.
+#'
+#' @returns
+#' A `shiny::HTML` table created from a `gt::gt` object.
 #'
 #' @export
 assessment_longitudinal_table <- function(
@@ -28,7 +35,7 @@ assessment_longitudinal_table <- function(
   methods = "infer",
   table_font_size = 100,
   table_id = NULL,
-  show_all_visits = T,
+  show_all_visits = TRUE,
   stubhead_label = NULL
 ) {
   stopifnot(
@@ -62,7 +69,7 @@ assessment_longitudinal_table <- function(
     table_id <- paste(sample(letters, size = 10, replace = T), collapse = "")
   }
 
-  if (missingArg(fill_values)) {
+  if (missingArg(fill_values) || is.null(fill_values)) {
     fill_values <- setNames(
       calc_fill_colors(length(descriptions)),
       nm = names(descriptions)
@@ -241,9 +248,17 @@ assessment_longitudinal_table <- function(
     ) |>
     gt::cols_hide("name") |>
     gt::cols_align("right", columns = -c("group", "labels")) |>
-    gt::cols_width(
-      -c("name", "labels", "group") ~ px(95),
-      labels ~ px(375)
+    # gt::cols_width(
+    #   -c("name", "labels", "group") ~ px(95),
+    #   labels ~ px(375)
+    # ) |>
+    gt::tab_style(
+      style = gt::css(
+        "white-space" = "nowrap",
+        "padding-right" = "10px",
+        "padding-left" = "10px"
+      ),
+      locations = gt::cells_column_labels()
     ) |>
     ## Make parts of the table bold
     gt::tab_options(
@@ -261,7 +276,7 @@ assessment_longitudinal_table <- function(
     ) |>
     gt::tab_stub_indent(
       rows = T,
-      indent = 5
+      indent = 4
     ) |>
     gt::sub_missing()
 
@@ -361,7 +376,14 @@ assessment_longitudinal_table <- function(
   ## Fix rownames and sourcenotes when scrolling horizontally
   out <- out |>
     gt::tab_style(
-      style = list(gt::css(position = "sticky", left = 0)),
+      style = list(
+        gt::css(
+          position = "sticky",
+          "white-space" = "nowrap",
+          "padding-right" = "10px",
+          left = 0
+        )
+      ),
       locations = list(
         gt::cells_stub(),
         gt::cells_stubhead()

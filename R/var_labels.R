@@ -71,7 +71,7 @@ var_labels <- function(
   all_scores <- list(
     "CDRSUM" = ifelse(
       is.na(CDRSUM),
-      "N/A",
+      "&mdash;",
       NpsychBatteryNorms::valid_values_only(
         CDRSUM,
         var_name = "CDRSUM",
@@ -80,7 +80,7 @@ var_labels <- function(
     ),
     "TRAILARR" = ifelse(
       is.na(TRAILARR),
-      "N/A",
+      "&mdash;",
       NpsychBatteryNorms::valid_values_only(
         TRAILARR,
         var_name = "TRAILARR",
@@ -89,7 +89,7 @@ var_labels <- function(
     ),
     "TRAILALI" = ifelse(
       is.na(TRAILALI),
-      "N/A",
+      "&mdash;",
       NpsychBatteryNorms::valid_values_only(
         TRAILALI,
         var_name = "TRAILALI",
@@ -98,7 +98,7 @@ var_labels <- function(
     ),
     "TRAILBRR" = ifelse(
       is.na(TRAILBRR),
-      "N/A",
+      "&mdash;",
       NpsychBatteryNorms::valid_values_only(
         TRAILBRR,
         var_name = "TRAILBRR",
@@ -107,7 +107,7 @@ var_labels <- function(
     ),
     "TRAILBLI" = ifelse(
       is.na(TRAILBLI),
-      "N/A",
+      "&mdash;",
       NpsychBatteryNorms::valid_values_only(
         TRAILBLI,
         var_name = "TRAILBLI",
@@ -116,7 +116,7 @@ var_labels <- function(
     ),
     "UDSBENRS" = ifelse(
       is.na(UDSBENRS),
-      "N/A",
+      "&mdash;",
       NpsychBatteryNorms::valid_values_only(
         UDSBENRS,
         var_name = "UDSBENRS",
@@ -125,7 +125,7 @@ var_labels <- function(
     ),
     "UDSBENTD" = ifelse(
       is.na(UDSBENTD),
-      "N/A",
+      "&mdash;",
       NpsychBatteryNorms::valid_values_only(
         UDSBENTD,
         var_name = "UDSBENTD",
@@ -134,7 +134,7 @@ var_labels <- function(
     ),
     "UDSBENTC" = ifelse(
       is.na(UDSBENTC),
-      "N/A",
+      "&mdash;",
       NpsychBatteryNorms::valid_values_only(
         UDSBENTC,
         var_name = "UDSBENTC",
@@ -143,7 +143,7 @@ var_labels <- function(
     ),
     "REY1REC" = ifelse(
       is.na(REY1REC),
-      "N/A",
+      "&mdash;",
       NpsychBatteryNorms::valid_values_only(
         REY1REC,
         var_name = "REY1REC",
@@ -152,7 +152,7 @@ var_labels <- function(
     ),
     "REY2REC" = ifelse(
       is.na(REY2REC),
-      "N/A",
+      "&mdash;",
       NpsychBatteryNorms::valid_values_only(
         REY2REC,
         var_name = "REY2REC",
@@ -161,7 +161,7 @@ var_labels <- function(
     ),
     "REY3REC" = ifelse(
       is.na(REY3REC),
-      "N/A",
+      "&mdash;",
       NpsychBatteryNorms::valid_values_only(
         REY3REC,
         var_name = "REY3REC",
@@ -170,7 +170,7 @@ var_labels <- function(
     ),
     "REY4REC" = ifelse(
       is.na(REY4REC),
-      "N/A",
+      "&mdash;",
       NpsychBatteryNorms::valid_values_only(
         REY4REC,
         var_name = "REY4REC",
@@ -179,7 +179,7 @@ var_labels <- function(
     ),
     "REY5REC" = ifelse(
       is.na(REY5REC),
-      "N/A",
+      "&mdash;",
       NpsychBatteryNorms::valid_values_only(
         REY5REC,
         var_name = "REY5REC",
@@ -188,7 +188,7 @@ var_labels <- function(
     ),
     "REYTCOR" = ifelse(
       is.na(REYTCOR),
-      "N/A",
+      "&mdash;",
       NpsychBatteryNorms::valid_values_only(
         REYTCOR,
         var_name = "REYTCOR",
@@ -197,7 +197,7 @@ var_labels <- function(
     ),
     "REYFPOS" = ifelse(
       is.na(REYFPOS),
-      "N/A",
+      "&mdash;",
       NpsychBatteryNorms::valid_values_only(
         REYFPOS,
         var_name = "REYFPOS",
@@ -206,7 +206,7 @@ var_labels <- function(
     ),
     "CRAFTURS" = ifelse(
       is.na(CRAFTURS),
-      "N/A",
+      "&mdash;",
       NpsychBatteryNorms::valid_values_only(
         CRAFTURS,
         var_name = "CRAFTURS",
@@ -215,7 +215,7 @@ var_labels <- function(
     ),
     "CRAFTVRS" = ifelse(
       is.na(CRAFTVRS),
-      "N/A",
+      "&mdash;",
       NpsychBatteryNorms::valid_values_only(
         CRAFTVRS,
         var_name = "CRAFTVRS",
@@ -224,7 +224,7 @@ var_labels <- function(
     ),
     "CRAFTDVR" = ifelse(
       is.na(CRAFTDVR),
-      "N/A",
+      "&mdash;",
       NpsychBatteryNorms::valid_values_only(
         CRAFTDVR,
         var_name = "CRAFTDVR",
@@ -233,7 +233,7 @@ var_labels <- function(
     ),
     "CRAFTDRE" = ifelse(
       is.na(CRAFTDRE),
-      "N/A",
+      "&mdash;",
       NpsychBatteryNorms::valid_values_only(
         CRAFTDRE,
         var_name = "CRAFTDRE",
@@ -242,22 +242,22 @@ var_labels <- function(
     ),
     "craft_delay_ver_retain" = ifelse(
       CRAFTDVR %in% rdd$CRAFTDVR$codes,
-      "N/A",
+      "&mdash;",
       floor(CRAFTDVR / CRAFTVRS * 100)
     ),
     "craft_delay_par_retain" = ifelse(
       CRAFTDRE %in% rdd$CRAFTDRE$codes,
-      "N/A",
+      "&mdash;",
       floor(CRAFTDRE / CRAFTURS * 100)
     ),
     "benson_retained" = ifelse(
       UDSBENTD %in% rdd$UDSBENTD$codes,
-      "N/A",
+      "&mdash;",
       floor(UDSBENTD / UDSBENTC * 100)
     ),
     "benson_recog" = ifelse(
       is.na(UDSBENRS) | UDSBENRS == -4,
-      "N/A",
+      "&mdash;",
       NpsychBatteryNorms::values_to_labels(UDSBENRS, 'UDSBENRS')
     )
   )

@@ -1,41 +1,72 @@
+#' Descriptions UI
+#'
+#' @description
+#' UI to let the user select the groups used for coloring. Includes a table where
+#' group labels can be specified, cutoffs set, and color selected.
+#'
+#' @param id A string used to namespace the module.
+#'
+#' @returns
+#' A UI definition.
+#'
+#' @export
 descriptionsUI <- function(id) {
   ns <- shiny::NS(id)
   shiny::tagList(
     DT::dataTableOutput(
       ns("descriptions")
     ),
-    shiny::actionButton(
-      inputId = ns("add_row"),
-      label = "Add Group"
+    bslib::layout_columns(
+      col_widths = c(6, 6),
+      shiny::actionButton(
+        inputId = ns("add_row"),
+        label = "+"
+      ),
+      shiny::actionButton(
+        inputId = ns("reset"),
+        label = "Reset"
+      )
     )
   )
 }
 
-descriptionsServer <- function(id) {
+descriptionsServer <- function(
+  id,
+  default_descriptions = c(
+    "Impaired" = 0.03,
+    "Borderline" = 0.10,
+    "Low Average" = 0.26,
+    "Average" = 0.76,
+    "High Average" = 0.92,
+    "Superior" = 0.97,
+    "Very Superior" = 1
+  )
+) {
   shiny::moduleServer(id, function(input, output, session) {
-    descriptions <- shiny::reactiveVal(
-      data.frame(
-        Label = c(
-          "Impaired",
-          "Borderline",
-          "Low Average",
-          "Average",
-          "High Average",
-          "Superior",
-          "Very Superior"
-        ),
-        Upper_Bound = c(0.03, 0.10, 0.26, 0.76, 0.92, 0.97, 1) * 100,
-        Color = calc_fill_colors(7),
-        # as.character(shiny::icon("remove", lib = "glyphicon"))
-        Remove = '<i aria-label="remove icon" class="glyphicon glyphicon-remove" role="presentation"></i>'
-      )
+    init_n <- length(default_descriptions)
+
+    default_descriptions <- data.frame(
+      rowId = 1:init_n,
+      Label = names(default_descriptions),
+      Upper_Bound = default_descriptions * 100,
+      col = calc_fill_colors(init_n),
+      Color = paste0(
+        '<input type="color" id="color',
+        1:init_n,
+        '" value = "',
+        calc_fill_colors(init_n),
+        '">'
+      ),
+      Remove = '<i aria-label="remove icon" class="glyphicon glyphicon-remove" role="presentation"></i>'
     )
 
-    # descriptions <- reactiveVal(default_descriptions)
+    descriptions <- shiny::reactiveVal(
+      default_descriptions
+    )
 
     output$descriptions <- DT::renderDataTable({
       DT::datatable(
-        descriptions(),
+        default_descriptions,
         colnames = c(
           "Upper Bound" = "Upper_Bound",
           " " = "Remove"
@@ -45,30 +76,57 @@ descriptionsServer <- function(id) {
           dom = "t",
           columnDefs = list(
             list(
-              targets = 1,
+              targets = which(colnames(default_descriptions) == "rowId") - 1,
+              visible = F
+            ),
+            list(
+              targets = which(colnames(default_descriptions) == "Upper_Bound") -
+                1,
               render = DT::JS(
                 'function(data, type, row, meta) {
                   return data + `%`
                 }'
-              )
+              ),
+              width = "125px"
             ),
             list(
-              targets = 2,
-              render = DT::JS(
-                'function (data, type, row, meta) {
-                return `<div style="text-align: center; background:`+data+`">`+data+`</div>`
+              targets = which(colnames(default_descriptions) == "col") - 1,
+              visible = F
+            ),
+            list(
+              targets = which(colnames(default_descriptions) == "Color") - 1,
+              width = "50px"
+            ),
+            list(
+              targets = which(colnames(default_descriptions) == "Remove") - 1,
+              width = "15px"
+            )
+          ),
+          preDrawCallback = DT::JS(
+            'function() { Shiny.unbindAll(this.api().table().node()); }'
+          ),
+          drawCallback = DT::JS(
+            paste0(
+              'function() {
+                Shiny.bindAll(this.api().table().node());
+                addEventListenersToColors("',
+              id,
+              '");
               }'
-              )
             )
           )
         ),
         rownames = F,
-        editable = list(target = "cell", disable = list(columns = 2)),
+        editable = list(
+          target = "cell",
+          disable = list(
+            columns = which(
+              !colnames(default_descriptions) %in% c("Upper_Bound", "Label")
+            ) -
+              1
+          )
+        ),
         selection = "none",
-        #   list(
-        #   target = "row",
-        #   mode = "single"
-        # ),
         escape = F
       )
     })
@@ -76,41 +134,54 @@ descriptionsServer <- function(id) {
     descriptions_proxy <- DT::dataTableProxy("descriptions")
 
     shiny::observe({
+      descriptions(default_descriptions)
+
+      DT::replaceData(
+        descriptions_proxy,
+        data = default_descriptions,
+        rownames = F
+      )
+    }) |>
+      shiny::bindEvent(input$reset)
+
+    shiny::observe({
+      tmp <- descriptions()
+
+      # message(input$newColorPicked)
+      # message(input$color1)
+
+      tmp$col[paste0("color", tmp$rowId) == input$newColorPicked] <- input[[
+        input$newColorPicked
+      ]]
+
+      # message(paste(
+      #   input$newColorPicked,
+      #   "was updated to",
+      #   input[[input$newColorPicked]]
+      # ))
+
+      descriptions(tmp)
+    }) |>
+      shiny::bindEvent(input$newColorPicked)
+
+    shiny::observe({
       shiny::req(input$descriptions_cell_clicked$col)
 
       row <- input$descriptions_cell_clicked$row
       col <- input$descriptions_cell_clicked$col
 
-      if (col == 3) {
+      remove_col <- which(colnames(descriptions()) == "Remove")
+
+      if (col == remove_col - 1) {
         tmp <- descriptions()
         tmp <- tmp[-row, ]
+
+        if (max(tmp$Upper_Bound) < 100)
+          tmp$Upper_Bound[which.max(tmp$Upper_Bound)] <- 100
 
         DT::replaceData(descriptions_proxy, data = tmp, rownames = F)
 
         descriptions(tmp)
-      }
-
-      if (col == 2) {
-        shiny::showModal(
-          shiny::modalDialog(
-            shinyWidgets::colorPickr(
-              inputId = shiny::NS(id, "new_color"),
-              label = "",
-              selected = descriptions()$Color[row]
-            ),
-            footer = bslib::layout_columns(
-              shiny::actionButton(
-                inputId = shiny::NS(id, "update_color"),
-                label = "Use"
-              ),
-              shiny::modalButton(
-                label = "Dismiss"
-              ),
-              col_widths = c(3, -6, 3)
-            ),
-            easyClose = T
-          )
-        )
       }
     }) |>
       shiny::bindEvent(
@@ -118,29 +189,18 @@ descriptionsServer <- function(id) {
       )
 
     shiny::observe({
-      tmp <- descriptions()
-
-      tmp$Color[
-        input$descriptions_cell_clicked$row
-      ] <- input$new_color
-
-      DT::replaceData(
-        descriptions_proxy,
-        data = tmp,
-        rownames = F
-      )
-
-      descriptions(tmp)
-
-      shiny::removeModal()
-    }) |>
-      shiny::bindEvent(input$update_color)
-
-    shiny::observe({
       tmp <- DT::editData(
         descriptions(),
         input$descriptions_cell_edit,
         rownames = F
+      )
+
+      tmp$Color <- paste0(
+        '<input type="color" id="color-',
+        tmp$rowId,
+        '" value = "',
+        tmp$col,
+        '">'
       )
 
       tmp <- tmp[order(tmp$Upper_Bound), ]
@@ -161,11 +221,25 @@ descriptionsServer <- function(id) {
       tmp <- rbind(
         descriptions(),
         data.frame(
+          "rowId" = max(descriptions()$rowId) + 1,
           "Label" = "New Group",
           "Upper_Bound" = Inf,
-          "Color" = "#FFFFFF",
+          "Color" = paste0(
+            '<input type="color" id="color-',
+            max(descriptions()$rowId) + 1,
+            '" value = "#ffffff">'
+          ),
+          "col" = "#ffffff",
           "Remove" = '<i aria-label="remove icon" class="glyphicon glyphicon-remove" role="presentation"></i>'
         )
+      )
+
+      tmp$Color <- paste0(
+        '<input type="color" id="color-',
+        tmp$rowId,
+        '" value = "',
+        tmp$col,
+        '">'
       )
 
       DT::replaceData(descriptions_proxy, data = tmp, rownames = FALSE)
@@ -181,7 +255,7 @@ descriptionsServer <- function(id) {
 
     shiny::observe({
       desc_out(with(descriptions(), setNames(Upper_Bound / 100, Label)))
-      fill_out(with(descriptions(), setNames(Color, Label)))
+      fill_out(with(descriptions(), setNames(col, Label)))
     })
 
     return(
@@ -193,10 +267,66 @@ descriptionsServer <- function(id) {
   })
 }
 
-descriptionsApp <- function() {
-  ui <- bslib::page_fluid(descriptionsUI("desc"))
+descriptionsApp <- function(
+  default_descriptions = c(
+    "Impaired" = 0.03,
+    "Borderline" = 0.10,
+    "Low Average" = 0.26,
+    "Average" = 0.76,
+    "High Average" = 0.92,
+    "Superior" = 0.97,
+    "Very Superior" = 1
+  )
+) {
+  ui <- bslib::page_fluid(
+    shiny::tags$head(
+      shiny::tags$script(
+        src = "www/scripts.js"
+      ),
+      shiny::tags$link(
+        rel = "stylesheet",
+        type = "text/css",
+        href = "www/styles.css"
+      )
+    ),
+    shiny::tags$div(id = "spinner", class = "loader"),
+    shiny::tags$div(id = "spinner_overlay", class = "loader_overlay"),
+    descriptionsUI("desc"),
+    shiny::verbatimTextOutput("fill_out"),
+    shiny::verbatimTextOutput("cur_fill_out")
+  )
 
-  server <- function(input, output, session) descriptionsServer("desc")
+  server <- function(input, output, session) {
+    desc <- descriptionsServer(
+      "desc",
+      default_descriptions = c(
+        "Impaired" = 0.03,
+        "Borderline" = 0.10,
+        "Low Average" = 0.26,
+        "Average" = 0.76,
+        "High Average" = 0.92,
+        "Superior" = 0.97,
+        "Very Superior" = 1
+      )
+    )
+
+    fill_values <- shiny::reactiveVal()
+
+    shiny::observe({
+      fill_values(desc$fill_values())
+    })
+
+    output$fill_out <- shiny::renderText({
+      paste(
+        "Default colors:",
+        paste(calc_fill_colors(length(default_descriptions)), collapse = ", ")
+      )
+    })
+
+    output$cur_fill_out <- shiny::renderText({
+      paste("Current colors:", paste(fill_values(), collapse = ", "))
+    })
+  }
 
   shiny::shinyApp(ui, server)
 }

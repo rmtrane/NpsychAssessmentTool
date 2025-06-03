@@ -5,6 +5,7 @@
 #' @export
 appUI <- function() {
   bslib::page_navbar(
+    ## Header: add JS scripts, CSS, and spinner elements to be shown/hidden later.
     header = shiny::tagList(
       shiny::tags$head(
         shiny::tags$script(
@@ -16,44 +17,17 @@ appUI <- function() {
           href = "www/styles.css"
         )
       ),
-      ## Secret buttons used to skip steps. TODO: rewrite using custom messages and JS.
-      # actionButton("moveToTables", label = "test"),
-      # actionButton("moveToColSelect", label = "test"),
       shiny::tags$div(id = "spinner", class = "loader"),
       shiny::tags$div(id = "spinner_overlay", class = "loader_overlay")
     ),
-    theme = bslib::bs_theme(
-      version = 5
-    ) |>
-      bslib::bs_add_rules(
-        "
-      .my-tooltip .tooltip-inner {
-        min-width: 500px;
-        text-align: left;
-      }
-
-      .bslib-full-screen-enter {
-        bottom: var(--bslib-full-screen-enter-bottom) !important;
-      }
-
-      .inline-input-container {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 15px;
-      }
-      .inline-input-container label {
-        margin: 0;
-        white-space: nowrap;
-      }
-      .inline-input-container .shiny-input-container {
-        margin: 0;
-      }
-    "
-      ),
-    title = "Main App Title",
+    theme = bslib::bs_theme(version = 5),
+    title = "Npsych Scoring Application",
     id = "main_navbar",
     navbar_options = bslib::navbar_options(underline = TRUE),
+    ######
+    ## Panels
+    ######
+    ## Introduction Panel
     bslib::nav_panel(
       title = "Introduction",
       shiny::tags$iframe(
@@ -62,32 +36,48 @@ appUI <- function() {
         width = "100%"
       )
     ),
+    ## Data Selection Panel
     bslib::nav_panel(
       title = "Data Selection",
       value = "dataSelect",
-      # shinyjs::useShinyjs(),
       bslib::layout_columns(
         max_height = 500,
         col_widths = c(-3, 6, -3),
         dataSelectUI("dataSelect")
       )
     ),
+    ## Main Panels
     bslib::nav_panel(
-      title = "Participant Data",
+      title = "Scoring Tables and Figures",
+      value = "tables-and-figures",
+      ## Create side bar with study ID selector, demographics table, and options (in accordion)
       bslib::page_sidebar(
+        fillable = T,
         sidebar = bslib::sidebar(
           width = "325px",
-          shiny::selectizeInput(
-            inputId = "current_studyid",
-            label = "Study IDs",
-            choices = NULL,
-            options = list(create = FALSE)
+          shiny::tagList(
+            shiny::selectizeInput(
+              inputId = "current_studyid",
+              label = "Study IDs",
+              choices = NULL,
+              width = NULL,
+              options = list(
+                create = FALSE,
+                maxOptions = 100,
+                closeAfterSelect = TRUE
+              )
+            ),
+            gt::gt_output("demographics_table_output")
           ),
-          gt::gt_output("demographics_table"),
           bslib::accordion(
+            id = "options",
             open = FALSE,
             bslib::accordion_panel(
               title = "Options",
+              shiny::actionButton(
+                inputId = "update_colors",
+                label = "Save"
+              ),
               descriptionsUI("desc"),
               shiny::hr(),
               shiny::sliderInput(
@@ -99,7 +89,7 @@ appUI <- function() {
               ),
               shiny::hr(),
               shiny::checkboxInput(
-                inputId = shiny::NS("plot_var", "shade_descriptions"),
+                inputId = "shade_descriptions",
                 label = "Shade according to descriptions?",
                 value = T
               ),
@@ -121,7 +111,7 @@ appUI <- function() {
               "NACC T-Cog Neuropsychological Assessment Summary Table"
             ),
             bslib::card_body(
-              shiny::div(
+              shiny::span(
                 class = "inline-input-container",
                 shiny::tags$label("Visit Date", `for` = "current_date"),
                 shiny::div(

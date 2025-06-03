@@ -6,7 +6,7 @@
 appServer <- function(input, output, session) {
   ## Hide 'Participant Data' on startup
   bslib::nav_hide(id = "main_navbar", target = "colSelect")
-  bslib::nav_hide(id = "main_navbar", target = "Participant Data")
+  bslib::nav_hide(id = "main_navbar", target = "tables-and-figures")
 
   ## Setup data select module
   dat_sel <- dataSelectServer("dataSelect")
@@ -119,18 +119,6 @@ appServer <- function(input, output, session) {
       ignoreNULL = T
     )
 
-  if (F) {
-    shiny::observe({
-      shiny::req(input$goToColSelect)
-      print(paste0("goToColSelect triggered... (", input$goToColSelect, ")"))
-    })
-
-    shiny::observe({
-      shiny::req(input$moveToTables)
-      print(paste0("moveToTables triggered... (", input$moveToTables, ")"))
-    })
-  }
-
   ## Prepare data
   fin_dat <- shiny::reactiveVal()
 
@@ -156,7 +144,11 @@ appServer <- function(input, output, session) {
     )
 
   shiny::observe({
-    bslib::nav_show(id = "main_navbar", target = "Participant Data", select = T)
+    bslib::nav_show(
+      id = "main_navbar",
+      target = "tables-and-figures",
+      select = T
+    )
 
     shiny::showModal(
       shiny::modalDialog(
@@ -185,42 +177,55 @@ appServer <- function(input, output, session) {
   study_id_choices <- shiny::reactiveVal()
 
   shiny::observe({
-    bslib::nav_show(id = "main_navbar", target = "Participant Data", select = T)
+    bslib::nav_show(
+      id = "main_navbar",
+      target = "tables-and-figures",
+      select = T
+    )
 
     new_choices <- unique(fin_dat()$NACCID)
 
     if (
       is.null(study_id_choices()) |
         any(!new_choices %in% study_id_choices()) |
-        (input$devmode & is.null(names(study_id_choices())))
+        (!is.null(devmode()) &&
+          (devmode() & is.null(names(study_id_choices()))))
     ) {
       study_id_choices(sort(unique(fin_dat()$NACCID)))
 
       cur_choices <- study_id_choices()
 
-      if (input$devmode) {
+      if (!is.null(devmode()) && devmode()) {
         n_visits <- table(fin_dat()$NACCID)[cur_choices]
         names(cur_choices) <- paste0(names(n_visits), " (", n_visits, ")")
+      }
+
+      if (
+        !is.null(input$current_studyid) & input$current_studyid %in% cur_choices
+      ) {
+        cur_select <- input$current_studyid
+      } else {
+        cur_select <- cur_choices[1]
       }
 
       shiny::updateSelectizeInput(
         session,
         "current_studyid",
         choices = cur_choices,
-        selected = cur_choices[1],
+        selected = cur_select, #cur_choices[1],
         server = TRUE
       )
     }
   }) |>
     shiny::bindEvent(
       fin_dat(),
-      input$devmode,
+      devmode(),
       ignoreInit = TRUE,
       ignoreNULL = TRUE
     )
 
   ## Create demographics table
-  output$demographics_table <- gt::render_gt({
+  output$demographics_table_output <- gt::render_gt({
     shiny::req(input$current_studyid)
 
     if (input$current_studyid %in% fin_dat()$NACCID) {
@@ -234,11 +239,19 @@ appServer <- function(input, output, session) {
   shiny::observe({
     dates <- fin_dat()$VISITDATE[fin_dat()$NACCID == input$current_studyid]
 
+    sel_date <- NULL
+
+    if (!is.null(selected_date()) && selected_date() %in% dates)
+      sel_date <- selected_date()
+
     shiny::updateSelectizeInput(
       session,
       inputId = "current_date",
-      choices = as.character(sort(unique(dates), decreasing = T))
+      choices = as.character(sort(unique(dates), decreasing = T)),
+      selected = sel_date
     )
+
+    selected_date(NULL)
   }) |>
     shiny::bindEvent(
       input$current_studyid,
@@ -258,18 +271,61 @@ appServer <- function(input, output, session) {
     )
   })
 
-  ## Get description and fill_values vectors from user inputs
-  descriptions <- shiny::reactiveVal()
-  fill_values <- shiny::reactiveVal()
+  ## Setup reactiveVal for descriptions with default values
+  descriptions <- shiny::reactiveVal(
+    value = c(
+      "Impaired" = 0.03,
+      "Borderline" = 0.10,
+      "Low Average" = 0.26,
+      "Average" = 0.76,
+      "High Average" = 0.92,
+      "Superior" = 0.97,
+      "Very Superior" = 1
+    )
+  )
 
-  descriptions_and_fills <- descriptionsServer("desc")
+  ## Setup reactiveVal for fill_values with default values
+  fill_values <- shiny::reactiveVal(
+    value = setNames(
+      calc_fill_colors(7),
+      c(
+        "Impaired",
+        "Borderline",
+        "Low Average",
+        "Average",
+        "High Average",
+        "Superior",
+        "Very Superior"
+      )
+    )
+  )
 
-  shiny::observe({
-    shiny::req(descriptions_and_fills)
+  ## Setup reactiveVal for devmode
+  devmode <- shiny::reactiveVal(value = FALSE)
 
-    descriptions(descriptions_and_fills$descriptions())
-    fill_values(descriptions_and_fills$fill_values())
-  })
+  ## Setup reactiveVal for table_font_size
+  table_font_size <- shiny::reactiveVal(
+    value = 80
+  )
+
+  ## Setup reactiveVal for shading
+  shade_descriptions <- shiny::reactiveVal(
+    value = TRUE
+  )
+
+  ## Server logic to let user modify description values and fill values.
+  descriptions_and_fills <- descriptionsServer(
+    id = "desc",
+    default_descriptions = c(
+      "Impaired" = 0.03,
+      "Borderline" = 0.10,
+      "Low Average" = 0.26,
+      "Average" = 0.76,
+      "High Average" = 0.92,
+      "Superior" = 0.97,
+      "Very Superior" = 1
+    )
+  )
 
   ## Subset full data to the data needed for the main assessment table
   dat_for_table <- shiny::reactive({
@@ -286,10 +342,10 @@ appServer <- function(input, output, session) {
   mainTableServer(
     "main_table",
     dat = dat_for_table,
-    table_font_size = shiny::reactive(input$main_table_pct),
+    table_font_size = table_font_size,
     descriptions = descriptions,
     fill_values = fill_values,
-    methods = std_methods(),
+    methods = std_methods,
     include_caption = T,
     print_updating = F
   )
@@ -303,7 +359,8 @@ appServer <- function(input, output, session) {
     studyid = shiny::reactive(input$current_studyid),
     descriptions = descriptions,
     fill_values = fill_values,
-    print_updating = F
+    print_updating = F,
+    shade_descriptions = shade_descriptions
   )
 
   ### Cognitive scores (Table)
@@ -321,13 +378,10 @@ appServer <- function(input, output, session) {
   longTableServer(
     "long_table",
     dat = dat_for_long,
-    #   shiny::reactive(
-    #   fin_dat()[
-    #     fin_dat()$NACCID == input$current_studyid,
-    #   ]
-    # ),
-    methods = std_methods(),
-    table_font_size = shiny::reactive(input$main_table_pct),
+    methods = std_methods,
+    table_font_size = table_font_size, # shiny::reactive(input$main_table_pct),
+    fill_values = fill_values,
+    descriptions = descriptions,
     print_updating = F
   )
 
@@ -335,7 +389,50 @@ appServer <- function(input, output, session) {
   prevDiagnosesServer(
     "prev_diagnoses_table",
     dat = dat_for_long,
-    table_font_size = shiny::reactive(input$main_table_pct),
+    table_font_size = table_font_size, # shiny::reactive(input$main_table_pct),
     print_updating = F
   )
+
+  ## Update reactiveVals for values chosen in Options pane.
+  selected_date <- shiny::reactiveVal()
+
+  shiny::observe({
+    bslib::accordion_panel_close(id = "options", values = TRUE)
+
+    descriptions(
+      descriptions_and_fills$descriptions()
+    )
+
+    fill_values(
+      descriptions_and_fills$fill_values()
+    )
+
+    devmode(
+      input$devmode
+    )
+
+    shade_descriptions(
+      input$shade_descriptions
+    )
+
+    table_font_size(
+      input$main_table_pct
+    )
+
+    ## Trigger a rerender of tables and plots by "poking" the input$current_studyid.
+    ## First, get current date. This is used in the "update date".
+    selected_date(input$current_date)
+
+    session$sendCustomMessage(
+      "setInputValue",
+      list(
+        inputId = "current_studyid",
+        inputValue = input$current_studyid,
+        priority = "event"
+      )
+    )
+  }) |>
+    shiny::bindEvent(
+      input$update_colors
+    )
 }

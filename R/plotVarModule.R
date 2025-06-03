@@ -45,13 +45,19 @@ plotVarServer <- function(
     "Very Superior" = 1
   ),
   fill_values = NULL,
-  print_updating = T
-  # fill_values = setNames(
-  #   RColorBrewer::brewer.pal(n = 7, "RdYlGn"),
-  #   nm = c("Impaired", "Borderline", "Low Average", "Average", "High Average", "Superior", "Very Superior")
-  # )
+  print_updating = T,
+  shade_descriptions = TRUE
 ) {
   # stopifnot("studyid must be a reactive" = shiny::is.reactive(studyid))
+
+  if (!shiny::is.reactive(descriptions))
+    descriptions <- shiny::reactiveVal(descriptions)
+
+  if (!shiny::is.reactive(fill_values))
+    fill_values <- shiny::reactiveVal(fill_values)
+
+  if (!shiny::is.reactive(shade_descriptions))
+    shade_descriptions <- shiny::reactiveVal(shade_descriptions)
 
   shiny::moduleServer(id, function(input, output, session) {
     ## Create UI for plots
@@ -134,7 +140,7 @@ plotVarServer <- function(
     shiny::observe({
       if (is.data.frame(dat()) | inherits(dat(), "data.table")) {
         if (nrow(dat()) > 0) {
-          print("Creating base plots...")
+          if (print_updating) print("Creating base plots...")
 
           ## Create base plot for each group of variables
           for (var_group in unique(nacc_var_groups)) {
@@ -172,11 +178,12 @@ plotVarServer <- function(
                   ),
                   fill_values = fill_values(),
                   descriptions = descriptions(),
-                  shade_descriptions = T,
+                  shade_descriptions = shade_descriptions(),
                   source = my_var_group
                 ) |>
                   plotly::layout(
                     showlegend = TRUE,
+                    hoverlabel = list(align = "left"),
                     legend = list(
                       traceorder = "normal"
                     ),
@@ -247,8 +254,6 @@ plotVarServer <- function(
     }) |>
       shiny::bindEvent(
         dat(),
-        fill_values(),
-        descriptions(),
         ignoreNULL = TRUE # ,
         # ignoreInit = TRUE
       )
@@ -323,14 +328,16 @@ plotVarServer <- function(
             plotly::plotlyProxyInvoke(
               method = "restyle",
               list(
-                visible = rep(list(input$shade_descriptions), length(indices))
+                visible = rep(list(shade_descriptions()), length(indices))
               ),
               indices
             )
         }
       })
     }) |>
-      shiny::bindEvent(input$shade_descriptions)
+      shiny::bindEvent(
+        shade_descriptions()
+      )
 
     cog_vars_colors <- setNames(
       rep(
@@ -346,9 +353,7 @@ plotVarServer <- function(
       shiny::req(studyid())
 
       if (base_plots_drawn() > 0 & studyid() %in% dat()$NACCID) {
-        if (print_updating) {
-          print("Updating plots...")
-        }
+        if (print_updating) print("Updating plots...")
 
         cur_studyid_dat <- dat()[dat()$NACCID == studyid(), ]
 
@@ -381,9 +386,7 @@ plotVarServer <- function(
 
             if (print_updating) print("Old traces removed...")
           } else {
-            if (print_updating) {
-              print("No old traces to remove...")
-            }
+            if (print_updating) print("No old traces to remove...")
           }
 
           ## Select only VISITDATE, raw, and std columns, and only if there is at least one non-missing value
@@ -517,7 +520,7 @@ plotVarServer <- function(
                 legendgroup = legend_name,
                 customdata = nm,
                 hovertemplate = paste0(
-                  '<span style="font-weight:bold">%{text}</span><br>',
+                  '<span style="font-weight:bold;">%{text}</span><br>',
                   "Visit Date: %{x}<br>",
                   "Scores:<br>",
                   " - raw: ",
@@ -859,7 +862,6 @@ plotVarApp <- function(
       "plot_cog_var",
       dat = shiny::reactive(dat),
       studyid = shiny::reactive(input$studyid)
-      # fill_values = shiny::reactive(color_scales[[1]]) #[[as.numeric(input$brighter_colors) + 1]])
     )
 
     mainTableServer(

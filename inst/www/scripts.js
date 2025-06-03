@@ -19,11 +19,17 @@ Shiny.addCustomMessageHandler("click", (message) => {
 Shiny.addCustomMessageHandler("setInputValue", (message) => {
   // console.log("setInputValue!!!");
   console.log("Setting input " + message.inputId + " to " + message.inputValue);
-  Shiny.setInputValue(message.inputId, message.inputValue);
+  if (message.priority) {
+    Shiny.setInputValue(message.inputId, message.inputValue, {priority: message.priority});
+  } else {
+    Shiny.setInputValue(message.inputId, message.inputValue);
+  }
 })
 
+// Function to resize dropdown menu so that the width is determined by the longest 
+// element in the list.
 function resizeSelectize(id) {
-  console.log('Here...');
+  // console.log('Here...');
   var selectize = $('#' + id)[0].selectize;
   if (selectize) {
     var longest = '';
@@ -47,10 +53,6 @@ function resizeSelectize(id) {
     $('#' + id)[0].selectize.$control.css('width', width + 'px');
   }
 }
-
-Shiny.addCustomMessageHandler("removeRawSuffix", (message) => {
-  removeRawSuffix();
-})
 
 // Remove empty raw_suffix columns, and make raw column span both
 function removeRawSuffix() {
@@ -84,7 +86,7 @@ function removeRawSuffix() {
       for (let row_element of row_children) {
         if (row_element.headers.split(" ").includes("raw_suffix") && 
           row_element.textContent == "") {
-            console.log("Removing raw_suffix!");
+            // console.log("Removing raw_suffix!");
             row_element.remove();
             var raw_suffix_removed = true;
         }
@@ -93,7 +95,7 @@ function removeRawSuffix() {
       if (raw_suffix_removed) {
         for (let row_element of row_children) {
           if (row_element.headers.split(" ").includes("raw")) {
-            console.log("Adjusting raw column");
+            // console.log("Adjusting raw column");
             row_element.colSpan = "2";
             row_element.style.textAlign = "center";
           }
@@ -102,9 +104,30 @@ function removeRawSuffix() {
     }
 }
 
+// Custom Message Handler to run the function above. 
+Shiny.addCustomMessageHandler("removeRawSuffix", (message) => {
+  removeRawSuffix();
+})
+
+
 // Enable hitting enter after password input
 $(document).keyup(function(event) {
   if ($("[id$=api_token]").is(":focus") && event.key == "Enter") {
     $("[id$=fetch_data_button]").click();
   }
 });
+
+// Add listeners and callbacks for color inputs in the descriptions/fill_values 
+// table under "Options"
+function addEventListenersToColors(id) {
+  [].forEach.call($("[type=color]"), function(v,i,a) {
+    v.addEventListener("input", function(event) {
+      var shinyInputVar = id + "-" + event.target.id;
+
+      // console.log(shinyInputVar);
+
+      Shiny.setInputValue(shinyInputVar, event.target.value);
+      Shiny.setInputValue(id + "-newColorPicked", event.target.id, {priority: "event"});
+    })
+  })
+}

@@ -39,19 +39,22 @@ mainTableServer <- function(
   include_caption = F,
   print_updating = F
 ) {
+  if (!shiny::is.reactive(descriptions))
+    descriptions <- shiny::reactive(descriptions)
+
+  if (!shiny::is.reactive(fill_values)) {
+    fill_values <- shiny::reactiveVal(fill_values)
+  }
+
+  if (!shiny::is.reactive(table_font_size)) {
+    table_font_size <- shiny::reactiveVal(table_font_size)
+  }
+
+  if (!shiny::is.reactive(methods)) {
+    methods <- shiny::reactiveVal(methods)
+  }
+
   shiny::moduleServer(id, function(input, output, session) {
-    # if (!shiny::is.reactive(descriptions)) {
-    #   descriptions <- shiny::reactiveVal(descriptions)
-    # }
-
-    # if (!shiny::is.reactive(fill_values)) {
-    #   fill_values <- shiny::reactiveVal(fill_values)
-    # }
-
-    # if (!shiny::is.reactive(table_font_size)) {
-    #   table_font_size <- shiny::reactiveVal(table_font_size)
-    # }
-
     output$mainTable <- gt::render_gt({
       for_table <- dat()
 
@@ -70,19 +73,21 @@ mainTableServer <- function(
       }
 
       if (print_updating) {
-        print("Updating main table...")
+        cli::cli_alert(text = "Updating main table...")
       }
 
-      # message("Within mainTable: ", for_table$std_REYTOTAL)
+      summary_dat <- assessment_summary_data(
+        dat = for_table,
+        id = "NACCID",
+        descriptions = descriptions(),
+        fill_values = fill_values(),
+        methods = methods(),
+        include_caption = include_caption
+      )
 
       assessment_summary_table(
-        for_table,
-        "NACCID",
-        descriptions(),
-        fill_values(),
-        methods,
-        include_caption,
-        16 * table_font_size() / 100
+        summary_dat = summary_dat,
+        bar_height = 16 * table_font_size() / 100
       ) |>
         gt::tab_options(
           data_row.padding = gt::px(2),
@@ -93,14 +98,10 @@ mainTableServer <- function(
       shiny::bindCache(
         dat(),
         table_font_size(),
+        fill_values(),
         descriptions(),
-        fill_values()
+        methods()
       )
-
-    # shiny::observe(
-    #   session$sendCustomMessage("removeRawSuffix", "")
-    # ) |>
-    #   shiny::bindEvent(input$updateTable)
   })
 }
 

@@ -1,6 +1,10 @@
-#' Start Shiny App
+#' Run Shiny App
 #'
-#' Wrapper function to start shiny app.
+#' @description
+#' Wrapper that runs the Shiny application.
+#'
+#' @returns
+#' Runs the Shiny app.
 #'
 #' @export
 shinyAssessmentApp <- function() {
@@ -22,7 +26,8 @@ shinyAssessmentApp <- function() {
     ui = appUI,
     server = appServer,
     options = list(
-      port = 5556
+      port = 5556,
+      launch.browser = TRUE
     )
   )
 }

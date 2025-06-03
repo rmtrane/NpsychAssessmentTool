@@ -12,7 +12,7 @@ bibliography: references.bib
 This R Shiny application is build on the R package [`NpsychBatteryNorms`]() 
 (Link to come...), which implements a handful of methods to standardize various 
 neuropsychological scores. The main focus is to standardize scores that are part 
-of UDS 3, but some legacy and a few additional scores are included as well. 
+of UDS 3, but some legacy and a few additional scores are included as well.  
 
 ## General Workflow 
 
@@ -31,15 +31,16 @@ interaction. As a few examples, you can zoom in/out and select/deselect scores
 on the plots, and error codes in the summary table (highlighted with red text 
 and underlined) will show description when hovered.
 
-The video below shows a brief walk through using the demo data that is included.
+The video below shows a brief walk through using the demo data that is included. 
+(Note: the application might have been updated since the recording of this video,
+but the core functionality has not changed.)
 
-```{=html}
 <center>
   <video width="750px" controls style="border-style: solid; border-width: 7px; border-color: #757575; border-radius: 10px;">
+    <!-- <source src="https://github.com/rmtrane/NpsychAssessmentTool/raw/refs/heads/main/inst/qmd/walk-through.mp4" type="video/mp4"> -->
     <source src="walk-through.mp4" type="video/mp4">
   </video>
 </center>
-```
 
 ## Standardization Methods
 
@@ -83,72 +84,78 @@ library(tidyverse)
 for_tab <- data.frame(
   method = c("norms", "norms", "regression", "regression", "T-score"),
   version = c("nacc", "updated", "nacc", "updated", NA)
-) |> 
+) |>
   mutate(
     variables = map2(
-      method, version, 
-      \(x,y) NpsychBatteryNorms::std_methods(method = x, version = y)
+      method,
+      version,
+      \(x, y) NpsychBatteryNorms::std_methods(method = x, version = y)
     )
-  ) |> 
-  unnest_longer(variables) |> 
+  ) |>
+  unnest_longer(variables) |>
   mutate(
     method = factor(method, levels = c("norms", "regression", "T-score")),
-    version = factor(if_else(is.na(version), "T", version), levels = c("nacc", "updated", "T")),
+    version = factor(
+      if_else(is.na(version), "T", version),
+      levels = c("nacc", "updated", "T")
+    ),
     available = "check"
   ) |>
-  complete(method, version, variables, fill = list(available = "x")) |>  
+  complete(method, version, variables, fill = list(available = "x")) |>
   mutate(
-    short_descriptor = purrr::map(variables, \(x) purrr::pluck(NpsychBatteryNorms::rdd, x, "short_descriptor")),
+    short_descriptor = purrr::map(
+      variables,
+      \(x) purrr::pluck(NpsychBatteryNorms::rdd, x, "short_descriptor")
+    ),
   ) |>
-  unnest(short_descriptor) |> 
+  unnest(short_descriptor) |>
   filter(
     !(method == "T-score" & version != "T"),
     !(method != "T-score" & version == "T")
-  ) |> 
-  arrange(variables) |> 
+  ) |>
+  arrange(variables) |>
   left_join(
-    NpsychBatteryNorms::default_methods |> 
-      bind_rows(.id = "variables") |> 
+    NpsychBatteryNorms::default_methods |>
+      bind_rows(.id = "variables") |>
       mutate(
         default = T,
         version = if_else(method == "T-score", "T", version)
       )
-  ) |> 
-  select(variables, short_descriptor, method, version, available, default) |> 
+  ) |>
+  select(variables, short_descriptor, method, version, available, default) |>
   unite(
     col = "version",
-    version, available
-  ) |> 
+    version,
+    available
+  ) |>
   mutate(
-    version = map2_chr(version, default, 
-                       \(x, y) {
-                         if (isTRUE(y)) {
-                           out <- str_replace_all(
-                             x, 
-                             c(
-                               "nacc" = "<span style=\"font-weight: bold; text-decoration: underline;\">NACC</span>",
-                               "updated" = "<span style=\"font-weight: bold; text-decoration: underline;\">Updated</span>",
-                               "T" = "",
-                               "_check" = " (<span style=\"font-weight: bold; color: #1D8A28; text-decoration: underline;\">&#10003;</span>)"
-                             )
-                           )
-                         } else {
-                           out <- str_replace_all(
-                             x, 
-                             c(
-                               "nacc" = "NACC", 
-                               "updated" = "Updated", 
-                               "T" = "",
-                               "_check" = " (<span style=\"font-weight: bold; color: #1D8A28;\">&#10003;</span>)", 
-                               "_x" = " (<span style=\"font-weight: bold; color: #B61717;\">&#10007;</span>)"
-                             )
-                           )
-                         }
-                         
-                         out
-                       })
+    version = map2_chr(version, default, \(x, y) {
+      if (isTRUE(y)) {
+        out <- str_replace_all(
+          x,
+          c(
+            "nacc" = "<span style=\"font-weight: bold; text-decoration: underline;\">NACC</span>",
+            "updated" = "<span style=\"font-weight: bold; text-decoration: underline;\">Updated</span>",
+            "T" = "",
+            "_check" = " (<span style=\"font-weight: bold; color: #1D8A28; text-decoration: underline;\">&#10003;</span>)"
+          )
+        )
+      } else {
+        out <- str_replace_all(
+          x,
+          c(
+            "nacc" = "NACC",
+            "updated" = "Updated",
+            "T" = "",
+            "_check" = " (<span style=\"font-weight: bold; color: #1D8A28;\">&#10003;</span>)",
+            "_x" = " (<span style=\"font-weight: bold; color: #B61717;\">&#10007;</span>)"
+          )
+        )
+      }
 
-)
+      out
+    })
+  )
 ```
 
 
@@ -160,10 +167,10 @@ for_tab <- data.frame(
 #| message: false
 #| include: true
 
-for_tab |> 
-  select(-default) |> 
-  summarize(.by = -version, version = paste(version, collapse = "<br>")) |> 
-  pivot_wider(names_from = method, values_from = version) |> 
+for_tab |>
+  select(-default) |>
+  summarize(.by = -version, version = paste(version, collapse = "<br>")) |>
+  pivot_wider(names_from = method, values_from = version) |>
   reactable::reactable(
     sortable = F,
     searchable = T,

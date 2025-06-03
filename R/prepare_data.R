@@ -86,34 +86,10 @@ prepare_data <- function(
   print_messages = F,
   with_diags = T
 ) {
-  # print(selected_cols)
-
   if (is.null(names(selected_cols))) {
-    # dat <- dat |>
-    #   dplyr::select(
-    #     ## From selected
-    #     tidyselect::all_of(selected_cols),
-    #     ## For diagnoses
-    #     tidyselect::any_of(with(
-    #       diag_contr_pairs,
-    #       sort(c(presump_etio_diag, contribution, na.omit(other)))
-    #     )),
-    #     ## For FAS, MoCA clock, REYARE, and variable labels
-    #     tidyselect::any_of(
-    #       unlist(lapply(
-    #         list(
-    #           NpsychBatteryNorms::calculate_fas,
-    #           NpsychBatteryNorms::calculate_mocaclock,
-    #           NpsychBatteryNorms::calculate_reyarec,
-    #           var_labels
-    #         ),
-    #         formalArgs
-    #       ))
-    #     )
-    #   )
     names(selected_cols) <- selected_cols
   }
-  # else {
+
   cols_to_select <- c(
     selected_cols[!names(selected_cols) %in% c("", "(blank)")],
     intersect(
@@ -141,48 +117,21 @@ prepare_data <- function(
     dat
   )]
 
+  if (is.null(methods)) {
+    # ... retrieve the default methods
+    methods <- NpsychBatteryNorms::default_methods
+
+    # Remove methods for things not present in supplied data
+    methods <- methods[names(methods) %in% colnames(dat)]
+
+    # Stop with
+    stopifnot("No known variables found in the data" = length(methods) > 0)
+  }
+
   dat[,
     names(.SD) := lapply(.SD, as.numeric),
     .SDcols = is.logical
   ]
-
-  # dat_old_new <- dat |>
-  #   dplyr::select(
-  #     tidyselect::all_of(selected_cols[
-  #       !names(selected_cols) %in% c("", "(blank)")
-  #     ]),
-  #     ## For diagnoses
-  #     tidyselect::any_of(with(
-  #       diag_contr_pairs,
-  #       sort(c(presump_etio_diag, contribution, na.omit(other)))
-  #     )),
-  #     tidyselect::any_of(
-  #       unlist(lapply(
-  #         list(
-  #           NpsychBatteryNorms::calculate_fas,
-  #           NpsychBatteryNorms::calculate_mocaclock,
-  #           NpsychBatteryNorms::calculate_reyarec,
-  #           var_labels
-  #         ),
-  #         formalArgs
-  #       ))
-  #     )
-  #   ) |>
-  #   dplyr::mutate(
-  #     dplyr::across(
-  #       # -tidyselect::where(is.numeric),
-  #       # \(x) {
-  #       #   if (is.logical(x)) {
-  #       #     return(as.numeric(x))
-  #       #   }
-
-  #       #   x
-  #       # }
-  #       tidyselect::where(is.logical),
-  #       as.numeric
-  #     )
-  #   )
-  # }
 
   ## Remove 'empty' rows, i.e. rows with no
   dat <- dat[
@@ -289,23 +238,49 @@ prepare_data <- function(
     colnames(dat) %in% names(diag_renames)
   ] <- diag_renames[colnames(dat)[colnames(dat) %in% names(diag_renames)]]
 
-  # dat_old <- dat |>
-  #   dplyr::rename(
-  #     dplyr::any_of(
-  #       c(
-  #         setNames(
-  #           diag_contr_pairs$presump_etio_diag,
-  #           paste0(diag_contr_pairs$presump_etio_diag, "_etiology")
-  #         ),
-  #         setNames(
-  #           diag_contr_pairs$contribution,
-  #           nm = paste0(diag_contr_pairs$presump_etio_diag, "_contribution")
-  #         )
-  #       )
-  #     )
-  #   )
-
   dat <- NpsychBatteryNorms::add_derived_scores(dat)
+
+  ## Check that raw scores are numeric. If not, try to convert.
+  ## Check if any raw_ columns are NOT numeric
+  not_numeric_raw <- !unlist(dat[,
+    lapply(.SD, is.numeric),
+    .SDcols = names(methods)
+  ])
+
+  if (any(not_numeric_raw)) {
+    not_numeric_raw <- names(which(not_numeric_raw))
+
+    for (cur_raw in not_numeric_raw) {
+      cur_raw_scores <- dat[[cur_raw]]
+
+      digits_only <- grepl(
+        "^[0-9]*\\.?[0-9]*$",
+        na.omit(cur_raw_scores),
+        perl = TRUE
+      )
+
+      if (!all(digits_only)) {
+        cli::cli_abort(
+          message = "'raw_scores' for {cur_raw} must be a numeric vector. You provided a vector of class {class(cur_raw_scores)}, which contains some non-digit characters, and therefore could not be converted."
+        )
+      }
+
+      cur_raw_scores_numeric <- as.numeric(cur_raw_scores)
+
+      ## Check that no values were converted to NA
+      if (sum(is.na(cur_raw_scores)) == sum(is.na(cur_raw_scores_numeric))) {
+        cli::cli_alert_warning(
+          text = "'raw_scores' for {cur_raw} must be a numeric vector. You provided a {class(cur_raw_scores)}, but it was successfully converted to numeric."
+        )
+
+        dat[[cur_raw]] <- cur_raw_scores_numeric
+      } else {
+        cli::cli_abort(
+          message = "'raw_scores' for {cur_raw} must be a numeric vector. You provided a vector of class {class(cur_raw_scores)}. No non-digit characters were found, but converting to numeric using `as.numeric` failed."
+        )
+      }
+    }
+  }
 
   dat <- NpsychBatteryNorms::add_standardized_scores(
     as.data.frame(dat),
