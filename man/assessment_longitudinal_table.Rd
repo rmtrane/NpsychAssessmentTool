@@ -2,7 +2,7 @@
 % Please edit documentation in R/assessment_longitudinal_table.R
 \name{assessment_longitudinal_table}
 \alias{assessment_longitudinal_table}
-\title{Longitudinal Table of Standardized Scores}
+\title{Assessment Longitudinal Table}
 \usage{
 assessment_longitudinal_table(
   dat,
@@ -14,38 +14,34 @@ assessment_longitudinal_table(
   methods = "infer",
   table_font_size = 100,
   table_id = NULL,
-  show_all_visits = T,
+  show_all_visits = TRUE,
   stubhead_label = NULL
 )
 }
 \arguments{
-\item{dat}{Data to use. Must have exactly one row (data from one participant and one visit).}
+\item{dat}{A data.table object.}
 
-\item{id}{Column containing ID.}
+\item{id}{A character string specifying a column in the data frame \code{dat}. Default is \code{"NACCID"}.}
 
-\item{date}{column with visit dates.}
+\item{date}{A character string specifying a column in the data frame \code{dat}. Default is \code{"VISITDATE"}.}
 
-\item{descriptions}{A named vector giving cutoffs to use for creating descriptions.}
+\item{descriptions}{A named numeric vector. Default has names \code{"Impaired"}, \code{"Borderline"}, \code{"Low Average"}, \code{"Average"}, \code{"High Average"}, \code{"Superior"}, and \code{"Very Superior"} with corresponding values \code{0.03}, \code{0.10}, \code{0.26}, \code{0.76}, \code{0.92}, \code{0.97}, and \code{1}.}
 
-\item{fill_values}{(optional) A named vector of same length (with same names)
-as \code{descriptions} with hex color values to use. If \code{NULL}, no colorcoding used.
-By default, evenly spread out colors from red through yellow to green are used.}
+\item{fill_values}{Optional.}
 
-\item{methods}{(optional) either list of named entries specifying which model was used
-for standardizing cognitive scores, or the character string "infer". For the
-latter, methods are infered from the \code{dat} object using
-\code{NpsychBatteryNorms::methods_from_std_data}. If specified, footnotes are added
-to indicate the methods used.}
+\item{methods}{Either a list containing methods used for standardization (each a character vector with named entried \code{method} and \code{version}), or \code{"infer"} (default). If \code{"infer"}, then methods are pulled from attributes of standardized columns.}
 
-\item{table_font_size}{(optional) scalar indicating font size as a percentage.}
+\item{table_font_size}{A numeric value passed to \code{gt::tab_options(table.font.size = gt::pct(table_font_size))}. Defaults to 100.}
 
-\item{table_id}{character string to add as id to table.}
+\item{table_id}{Optional. ID given to the table. If not provided, random string assigned.}
 
-\item{show_all_visits}{logical; should all visits be displayed (\code{TRUE}, default), or
-only visits with at least one standardized score (\code{FALSE})?}
+\item{show_all_visits}{A boolean. If \code{TRUE} (default), all visits present in the data are shown in the table. If \code{FALSE}, only visits with at least one standardized score are presented.}
 
-\item{stubhead_label}{passed to the label argument of \code{gt::tab_stubhead}.}
+\item{stubhead_label}{Optional. Passed to \code{gt::tab_stubhead(label = stubhead_label)}.}
+}
+\value{
+A \code{shiny::HTML} table created from a \code{gt::gt} object.
 }
 \description{
-Create a table of standardized scores across multiple visits.
+Create a table of standardized scores across multiple visits
 }

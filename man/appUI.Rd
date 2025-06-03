@@ -2,10 +2,11 @@
 % Please edit documentation in R/appUI.R
 \name{appUI}
 \alias{appUI}
-\title{UI}
+\title{UI for shinyAssessmentApp}
 \usage{
 appUI()
 }
 \description{
-UI
+UI for shinyAssessmentApp
 }
+\keyword{internal}

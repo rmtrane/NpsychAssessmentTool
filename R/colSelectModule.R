@@ -552,9 +552,6 @@ colSelectServer <- function(
   })
 }
 
-#' @rdname colSelectModule
-#'
-#' @export
 #' Column selection app
 #'
 #' @description
@@ -565,6 +562,8 @@ colSelectServer <- function(
 #' @param data_type One of `"nacc"`, `"wls"`, or `"wadrc"`.
 #' @param allow_col_selection A logical; whether column selection is allowed. If
 #'   `TRUE`,
+#'
+#' @rdname colSelectModule
 #'
 #' @returns
 #' A shiny app.

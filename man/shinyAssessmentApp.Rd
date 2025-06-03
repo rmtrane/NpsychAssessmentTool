@@ -2,10 +2,13 @@
 % Please edit documentation in R/shinyAssessmentApp.R
 \name{shinyAssessmentApp}
 \alias{shinyAssessmentApp}
-\title{Start Shiny App}
+\title{Run Shiny App}
 \usage{
 shinyAssessmentApp()
 }
+\value{
+Runs the Shiny app.
+}
 \description{
-Wrapper function to start shiny app.
+Wrapper that runs the Shiny application.
 }

@@ -1,7 +1,9 @@
 test_that("assessment_summary_table", {
   for_test <- data.table::data.table(prepare_data(demo_data[5, ]))
 
-  assessment_table <- assessment_summary_table(for_test)$`_data`
+  assessment_table <- assessment_summary_table(assessment_summary_data(
+    for_test
+  ))$`_data`
 
   expect_equal(
     colnames(assessment_table),

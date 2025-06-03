@@ -5,28 +5,21 @@
 \alias{assessment_summary_data}
 \title{Create NACC T-Cog Neuropsychological Assessment Summary Table}
 \usage{
-assessment_summary_table(
-  dat,
-  id = "NACCID",
-  descriptions = c(Impaired = 0.03, Borderline = 0.1, `Low Average` = 0.26, Average =
-    0.76, `High Average` = 0.92, Superior = 0.97, `Very Superior` = 1),
-  fill_values,
-  methods = "infer",
-  include_caption = F,
-  bar_height = 16
-)
+assessment_summary_table(summary_dat, bar_height = 16)
 
 assessment_summary_data(
   dat,
   id = "NACCID",
   descriptions = c(Impaired = 0.03, Borderline = 0.1, `Low Average` = 0.26, Average =
     0.76, `High Average` = 0.92, Superior = 0.97, `Very Superior` = 1),
-  fill_values,
+  fill_values = NULL,
   methods = "infer",
   include_caption = TRUE
 )
 }
 \arguments{
+\item{bar_height}{In pixels. Height of the percentile bars. Default: 16}
+
 \item{dat}{Data to use. Must have exactly one row (data from one participant and one visit).}
 
 \item{id}{Column containing ID.}
@@ -45,8 +38,6 @@ to indicate the methods used.}
 
 \item{include_caption}{Logical; should a caption be included above the table
 with age and IQCODEs at current visit?}
-
-\item{bar_height}{In pixels. Height of the percentile bars. Default: 16}
 }
 \value{
 An object of class \code{gt::gt_tbl}
@@ -54,11 +45,5 @@ An object of class \code{gt::gt_tbl}
 \description{
 This function create a summary table of measures from the NACC T-Cog Neuropsychological
 Assessment.
-}
-\examples{
-assessment_summary_table(
-  dat = prepare_data(NpsychAssessmentTool::demo_data[1, ])
-)
-
 }
 \keyword{internal}

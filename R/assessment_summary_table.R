@@ -20,28 +20,9 @@
 #'
 #' @returns An object of class `gt::gt_tbl`
 #'
-#' @examples
-#' assessment_summary_table(
-#'   dat = prepare_data(NpsychAssessmentTool::demo_data[1, ])
-#' )
-#'
 #' @export
 assessment_summary_table <- function(
-  # dat,
   summary_dat,
-  # id = "NACCID",
-  # descriptions = c(
-  #   "Impaired" = 0.03,
-  #   "Borderline" = 0.10,
-  #   "Low Average" = 0.26,
-  #   "Average" = 0.76,
-  #   "High Average" = 0.92,
-  #   "Superior" = 0.97,
-  #   "Very Superior" = 1
-  # ),
-  # fill_values,
-  # methods = "infer",
-  # include_caption = F,
   bar_height = 16
 ) {
   # if (missingArg(fill_values)) fill_values <- NULL

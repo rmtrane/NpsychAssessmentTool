@@ -30,6 +30,20 @@ descriptionsUI <- function(id) {
   )
 }
 
+#' Descriptions Server
+#'
+#' @description
+#' A short description...
+#'
+#' @param id A string.
+#' @param default_descriptions Optional. A named numeric vector with names for `Label` and values for `Upper_Bound`.
+#'
+#' @returns
+#' A list containing `fill_values` and `descriptions`.
+#'
+#' @rdname descriptionsModule
+#'
+#' @export
 descriptionsServer <- function(
   id,
   default_descriptions = c(
@@ -267,6 +281,10 @@ descriptionsServer <- function(
   })
 }
 
+#' Descriptions App
+#'
+#' @rdname descriptionsModule
+#' @export
 descriptionsApp <- function(
   default_descriptions = c(
     "Impaired" = 0.03,

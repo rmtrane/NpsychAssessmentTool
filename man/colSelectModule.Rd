@@ -26,15 +26,21 @@ colSelectApp(
 \arguments{
 \item{id}{id to link shiny modules}
 
-\item{col_names}{reactive character vector with names to choose from}
+\item{col_names}{Column names.}
 
-\item{default_methods}{named list. Each entry should be named after a variable. The entry should be a named character vector with to elements: one named 'method' to indicate the standardization method to use, and one name 'version' to indicate the version to use for standardization.}
+\item{default_methods}{Default methods.}
 
-\item{data_type}{reactive value; one of 'wls', 'nacc', 'wadrc'}
+\item{data_type}{One of \code{"nacc"}, \code{"wls"}, or \code{"wadrc"}.}
 
-\item{allow_col_selection}{logical; if \code{TRUE} (default), allow user to select which columns should be used for each variable.}
+\item{allow_col_selection}{A logical; whether column selection is allowed. If
+\code{TRUE},}
+}
+\value{
+A shiny app.
 }
 \description{
 This shiny module gives the user the option to manually map column names to
 NACC variable names.
+
+A short description...
 }

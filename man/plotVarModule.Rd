@@ -15,7 +15,8 @@ plotVarServer(
   descriptions = c(Impaired = 0.03, Borderline = 0.1, `Low Average` = 0.26, Average =
     0.76, `High Average` = 0.92, Superior = 0.97, `Very Superior` = 1),
   fill_values = NULL,
-  print_updating = T
+  print_updating = T,
+  shade_descriptions = TRUE
 )
 
 plotVarApp(dat = prepare_data(demo_data), studyids = NULL)
@@ -34,6 +35,8 @@ as \code{descriptions} with hex color values to use. If \code{NULL}, no colorcod
 By default, evenly spread out colors from red through yellow to green are used.}
 
 \item{print_updating}{logical (defualt \code{FALSE}); should a message be displayed when table is being updated? For debugging.}
+
+\item{shade_descriptions}{logical; should ranges for descriptions be shaded?}
 
 \item{studyids}{vector of studyids to include in drop-down menu}
 }

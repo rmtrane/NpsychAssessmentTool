@@ -10,23 +10,26 @@ longTableUI(id)
 longTableServer(
   id,
   dat,
+  descriptions = c(Impaired = 0.03, Borderline = 0.1, `Low Average` = 0.26, Average =
+    0.76, `High Average` = 0.92, Superior = 0.97, `Very Superior` = 1),
+  fill_values = NULL,
   methods = "infer",
-  table_font_size = shiny::reactive(100),
+  table_font_size = 100,
   print_updating = F
 )
 }
 \arguments{
 \item{id}{string to tie UI to Server}
 
-\item{dat}{Data to use. Must have exactly one row (data from one participant and one visit).}
+\item{dat}{A data.table object.}
 
-\item{methods}{(optional) either list of named entries specifying which model was used
-for standardizing cognitive scores, or the character string "infer". For the
-latter, methods are infered from the \code{dat} object using
-\code{NpsychBatteryNorms::methods_from_std_data}. If specified, footnotes are added
-to indicate the methods used.}
+\item{descriptions}{A named numeric vector. Default has names \code{"Impaired"}, \code{"Borderline"}, \code{"Low Average"}, \code{"Average"}, \code{"High Average"}, \code{"Superior"}, and \code{"Very Superior"} with corresponding values \code{0.03}, \code{0.10}, \code{0.26}, \code{0.76}, \code{0.92}, \code{0.97}, and \code{1}.}
 
-\item{table_font_size}{(optional) scalar indicating font size as a percentage.}
+\item{fill_values}{Optional.}
+
+\item{methods}{Either a list containing methods used for standardization (each a character vector with named entried \code{method} and \code{version}), or \code{"infer"} (default). If \code{"infer"}, then methods are pulled from attributes of standardized columns.}
+
+\item{table_font_size}{A numeric value passed to \code{gt::tab_options(table.font.size = gt::pct(table_font_size))}. Defaults to 100.}
 
 \item{print_updating}{logical (default \code{FALSE}); should message be printed to let user know the table is updating. For debugging.}
 }
