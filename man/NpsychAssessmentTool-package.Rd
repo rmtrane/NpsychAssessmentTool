@@ -4,9 +4,9 @@
 \name{NpsychAssessmentTool-package}
 \alias{NpsychAssessmentTool}
 \alias{NpsychAssessmentTool-package}
-\title{NpsychAssessmentTool: What the Package Does (Title Case)}
+\title{NpsychAssessmentTool: UDS Battery Scores in Interactive Tables and Figures}
 \description{
-More about what it does (maybe more than one line) Use four spaces when indenting paragraphs within the Description.
+Building on the NpsychBatteryNorms package, this package includes a Shiny application that makes it easy to present UDS battery scores in a way useful to consensus diagnosis.
 }
 \seealso{
 Useful links:

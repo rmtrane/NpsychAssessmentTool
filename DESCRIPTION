@@ -1,9 +1,11 @@
 Package: NpsychAssessmentTool
 Type: Package
-Title: What the Package Does (Title Case)
+Title: UDS Battery Scores in Interactive Tables and Figures
 Version: 0.1.0
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: Building on the NpsychBatteryNorms package,
+    this package includes a Shiny application that makes 
+    it easy to present UDS battery scores in a way useful
+    to consensus diagnosis. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
