@@ -6,7 +6,7 @@
 ^pkgdown$
 ^inst/shinylive/*
 ^inst/editableTable/*
-^inst/qmd/*
+^inst/qmd/*.mp4
 ^references.bib$
 ^scratch/*
 ^LICENSE\.md$

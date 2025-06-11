@@ -16,11 +16,14 @@ shinyAssessmentApp <- function() {
   if (development) {
     print("Development...")
     www_path <- "inst/www"
+    qmd_path <- "inst/qmd"
   } else {
     www_path <- system.file("www", package = "NpsychAssessmentTool")
+    qmd_path <- system.file("qmd", package = "NpsychAssessmentTool")
   }
 
   shiny::addResourcePath("www", www_path)
+  shiny::addResourcePath("qmd", qmd_path)
 
   shiny::shinyApp(
     ui = appUI,

@@ -31,7 +31,7 @@ appUI <- function() {
     bslib::nav_panel(
       title = "Introduction",
       shiny::tags$iframe(
-        src = "www/introduction.html",
+        src = "qmd/introduction.html",
         height = "100%",
         width = "100%"
       )
