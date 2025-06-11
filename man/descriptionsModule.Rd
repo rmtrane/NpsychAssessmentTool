@@ -8,7 +8,8 @@
 descriptionsServer(
   id,
   default_descriptions = c(Impaired = 0.03, Borderline = 0.1, `Low Average` = 0.26,
-    Average = 0.76, `High Average` = 0.92, Superior = 0.97, `Very Superior` = 1)
+    Average = 0.76, `High Average` = 0.92, Superior = 0.97, `Very Superior` = 1),
+  default_fill_values = NULL
 )
 
 descriptionsApp(
@@ -20,6 +21,8 @@ descriptionsApp(
 \item{id}{A string.}
 
 \item{default_descriptions}{Optional. A named numeric vector with names for \code{Label} and values for \code{Upper_Bound}.}
+
+\item{default_fill_values}{Optional. A named character vector with names for \code{Label} and values for colors (as HEX values)}
 }
 \value{
 A list containing \code{fill_values} and \code{descriptions}.

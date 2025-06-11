@@ -50,14 +50,17 @@ plotVarServer <- function(
 ) {
   # stopifnot("studyid must be a reactive" = shiny::is.reactive(studyid))
 
-  if (!shiny::is.reactive(descriptions))
+  if (!shiny::is.reactive(descriptions)) {
     descriptions <- shiny::reactiveVal(descriptions)
+  }
 
-  if (!shiny::is.reactive(fill_values))
+  if (!shiny::is.reactive(fill_values)) {
     fill_values <- shiny::reactiveVal(fill_values)
+  }
 
-  if (!shiny::is.reactive(shade_descriptions))
+  if (!shiny::is.reactive(shade_descriptions)) {
     shade_descriptions <- shiny::reactiveVal(shade_descriptions)
+  }
 
   shiny::moduleServer(id, function(input, output, session) {
     ## Create UI for plots
@@ -140,7 +143,9 @@ plotVarServer <- function(
     shiny::observe({
       if (is.data.frame(dat()) | inherits(dat(), "data.table")) {
         if (nrow(dat()) > 0) {
-          if (print_updating) print("Creating base plots...")
+          if (print_updating) {
+            print("Creating base plots...")
+          }
 
           ## Create base plot for each group of variables
           for (var_group in unique(nacc_var_groups)) {
@@ -339,13 +344,29 @@ plotVarServer <- function(
         shade_descriptions()
       )
 
-    cog_vars_colors <- setNames(
-      rep(
-        calc_line_colors(n = 12)[-11],
-        length.out = length(nacc_var_groups)
-      ),
-      names(nacc_var_groups)
-    )
+    cog_vars_colors <- unlist(lapply(unique(nacc_var_groups), \(x) {
+      group_vars <- names(nacc_var_groups[nacc_var_groups == x])
+
+      setNames(
+        rep(
+          c(
+            "#A6CEE3",
+            "#1F78B4",
+            "#B2DF8A",
+            "#33A02C",
+            "#FB9A99",
+            "#E31A1C",
+            "#FDBF6F",
+            "#FF7F00",
+            "#CAB2D6",
+            "#6A3D9A",
+            "#B15928"
+          ),
+          length.out = length(group_vars)
+        ),
+        nm = group_vars
+      )
+    }))
 
     legend_names <- shiny::reactiveVal(nacc_var_labels)
 
@@ -353,7 +374,9 @@ plotVarServer <- function(
       shiny::req(studyid())
 
       if (base_plots_drawn() > 0 & studyid() %in% dat()$NACCID) {
-        if (print_updating) print("Updating plots...")
+        if (print_updating) {
+          print("Updating plots...")
+        }
 
         cur_studyid_dat <- dat()[dat()$NACCID == studyid(), ]
 
@@ -477,7 +500,7 @@ plotVarServer <- function(
                     x = legend_name
                   )
                 ) {
-                  if (grepl(pattern = "\\ \\-\\ Total", x = legend_name))
+                  if (grepl(pattern = "\\ \\-\\ Total", x = legend_name)) {
                     legend_name <- paste0(
                       gsub(
                         pattern = "\\ \\-\\ Total",
@@ -486,8 +509,11 @@ plotVarServer <- function(
                       ),
                       " - Total"
                     )
+                  }
 
-                  if (grepl(pattern = "\\ \\-\\ Span Length", x = legend_name))
+                  if (
+                    grepl(pattern = "\\ \\-\\ Span Length", x = legend_name)
+                  ) {
                     legend_name <- paste0(
                       gsub(
                         pattern = "\\ \\-\\ Span\\ Length",
@@ -496,6 +522,7 @@ plotVarServer <- function(
                       ),
                       " - Span Length"
                     )
+                  }
                 }
               } else {
                 legend_name <- unique(tmp_dat$label)
@@ -536,10 +563,8 @@ plotVarServer <- function(
                 symbs <- as.list(c("diamond", "cross")[as.numeric(factor(
                   tmp_dat$label
                 ))])
-                symb_size <- 8
               } else {
                 symbs <- "o"
-                symb_size <- 5
               }
 
               new_markers <- list(
@@ -551,7 +576,7 @@ plotVarServer <- function(
                 marker = list(
                   color = cog_vars_colors[[nm]],
                   symbol = symbs,
-                  size = symb_size
+                  size = 8
                 ),
                 name = legend_name,
                 visible = vis,

@@ -271,9 +271,10 @@ appServer <- function(input, output, session) {
     )
   })
 
-  ## Setup reactiveVal for descriptions with default values
-  descriptions <- shiny::reactiveVal(
-    value = c(
+  ## Get default descriptions if saved as option, other set defaults
+  default_descriptions <- getOption("NpsychAssessmentTool.default_descriptions")
+  if (is.null(default_descriptions)) {
+    default_descriptions <- c(
       "Impaired" = 0.03,
       "Borderline" = 0.10,
       "Low Average" = 0.26,
@@ -282,22 +283,25 @@ appServer <- function(input, output, session) {
       "Superior" = 0.97,
       "Very Superior" = 1
     )
+  }
+
+  ## Get default colors if saved as option, other set defaults
+  default_fill_values <- getOption("NpsychAssessmentTool.default_fill_values")
+  if (is.null(default_fill_values)) {
+    default_fill_values <- setNames(
+      calc_fill_colors(n = length(default_descriptions)),
+      nm = names(default_descriptions)
+    )
+  }
+
+  ## Setup reactiveVal for descriptions with default values
+  descriptions <- shiny::reactiveVal(
+    value = default_descriptions
   )
 
   ## Setup reactiveVal for fill_values with default values
   fill_values <- shiny::reactiveVal(
-    value = setNames(
-      calc_fill_colors(7),
-      c(
-        "Impaired",
-        "Borderline",
-        "Low Average",
-        "Average",
-        "High Average",
-        "Superior",
-        "Very Superior"
-      )
-    )
+    value = default_fill_values
   )
 
   ## Setup reactiveVal for devmode
@@ -316,15 +320,8 @@ appServer <- function(input, output, session) {
   ## Server logic to let user modify description values and fill values.
   descriptions_and_fills <- descriptionsServer(
     id = "desc",
-    default_descriptions = c(
-      "Impaired" = 0.03,
-      "Borderline" = 0.10,
-      "Low Average" = 0.26,
-      "Average" = 0.76,
-      "High Average" = 0.92,
-      "Superior" = 0.97,
-      "Very Superior" = 1
-    )
+    default_descriptions = default_descriptions,
+    default_fill_values = default_fill_values
   )
 
   ## Subset full data to the data needed for the main assessment table

@@ -37,6 +37,7 @@ descriptionsUI <- function(id) {
 #'
 #' @param id A string.
 #' @param default_descriptions Optional. A named numeric vector with names for `Label` and values for `Upper_Bound`.
+#' @param default_fill_values Optional. A named character vector with names for `Label` and values for colors (as HEX values)
 #'
 #' @returns
 #' A list containing `fill_values` and `descriptions`.
@@ -54,10 +55,53 @@ descriptionsServer <- function(
     "High Average" = 0.92,
     "Superior" = 0.97,
     "Very Superior" = 1
-  )
+  ),
+  default_fill_values = NULL
 ) {
   shiny::moduleServer(id, function(input, output, session) {
-    init_n <- length(default_descriptions)
+    if (!is.numeric(default_descriptions)) {
+      cli::cli_abort(
+        "{.arg default_descriptions} must be of class `numeric` (got {class(default_descriptions)})"
+      )
+    }
+
+    if (is.null(names(default_descriptions))) {
+      cli::cli_abort(
+        "{.arg default_descriptions} must be named."
+      )
+    }
+
+    if (is.null(default_fill_values)) {
+      default_fill_values <- setNames(
+        calc_fill_colors(n = length(default_descriptions)),
+        nm = names(default_descriptions)
+      )
+    }
+
+    if (!check_colors(default_fill_values)) {
+      cli::cli_abort(
+        "{.arg default_fill_values} contains entries that are not recognized as hex values."
+      )
+    }
+
+    if (length(default_fill_values) != length(default_descriptions)) {
+      cli::cli_abort(
+        "Length of {.arg default_descriptions} ({length(default_descriptions)}) must be the same as length of {.arg default_fill_values} ({length(default_fill_values)})"
+      )
+    }
+
+    if (
+      !identical(
+        sort(names(default_fill_values)),
+        sort(names(default_descriptions))
+      )
+    ) {
+      cli::cli_abort(
+        "The names of {.arg default_descriptions} ({names(default_descriptions)}) must be the same as the names of {.arg default_fill_values} ({names(default_fill_values)})"
+      )
+    }
+
+    init_n <- length(default_fill_values)
 
     default_descriptions <- data.frame(
       rowId = 1:init_n,

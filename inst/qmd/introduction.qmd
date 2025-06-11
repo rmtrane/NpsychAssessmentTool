@@ -9,8 +9,7 @@ bibliography: references.bib
 
 ## Introduction
 
-This R Shiny application is build on the R package [`NpsychBatteryNorms`]() 
-(Link to come...), which implements a handful of methods to standardize various 
+This R Shiny application is build on the R package [`NpsychBatteryNorms`](https://rmtrane.github.io/NpsychBatteryNorms), which implements a handful of methods to standardize various 
 neuropsychological scores. The main focus is to standardize scores that are part 
 of UDS 3, but some legacy and a few additional scores are included as well.  
 
