@@ -7,7 +7,6 @@ docs
 data-raw/*
 inst/editableTable/*
 inst/shinylive/*
-inst/qmd/*
 scratch/*
 *.Rproj
 .Rproj.user
