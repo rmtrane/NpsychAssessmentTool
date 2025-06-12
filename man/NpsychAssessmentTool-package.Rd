@@ -6,7 +6,7 @@
 \alias{NpsychAssessmentTool-package}
 \title{NpsychAssessmentTool: UDS Battery Scores in Interactive Tables and Figures}
 \description{
-Building on the NpsychBatteryNorms package, this package includes a Shiny application that makes it easy to present UDS battery scores in a way useful to consensus diagnosis.
+Building on the NpsychBatteryNorms package, this package includes a Shiny application that makes it easy to present UDS battery scores in a way useful to consensus diagnosis. Data can be imported as an .csv file or pulled directly from a REDCap database (`REDCapR` needed).
 }
 \seealso{
 Useful links:

@@ -10,3 +10,4 @@ inst/shinylive/*
 scratch/*
 *.Rproj
 .Rproj.user
+/.quarto/

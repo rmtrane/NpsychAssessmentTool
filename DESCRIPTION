@@ -5,7 +5,9 @@ Version: 0.1.0
 Description: Building on the NpsychBatteryNorms package,
     this package includes a Shiny application that makes 
     it easy to present UDS battery scores in a way useful
-    to consensus diagnosis. 
+    to consensus diagnosis. Data can be imported as an
+    .csv file or pulled directly from a REDCap database
+    (`REDCapR` needed).
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -35,7 +37,7 @@ Remotes:
     rmtrane/NpsychBatteryNorms
 Roxygen: list(markdown = TRUE)
 Authors@R: c(
-    person("Ralph", "Møller Trane", email = "rtrane@wisc.edu", role = c("aut", "cre"))
+    person("Ralph", "Møller Trane", email = "rtrane@wisc.edu", role = c("aut", "cre"), comment = c(ORCID = "0000-0001-7824-1785"))
   )
 URL: https://github.com/rmtrane/NpsychAssessmentTool
 BugReports: https://github.com/rmtrane/NpsychAssessmentTool/issues
