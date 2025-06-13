@@ -5,9 +5,8 @@
 \title{Create base plotly figure}
 \usage{
 base_plot_z_scores(
-  dat,
-  nacc_vars = c("TRAILA", "OTRAILA", "OTRLARR", "DIGFORCT", "DIGFORSL", "DIGBACCT",
-    "DIGBACLS"),
+  x_range,
+  y_range,
   descriptions = c(Impaired = 0.03, Borderline = 0.1, `Low Average` = 0.26, Average =
     0.76, `High Average` = 0.92, Superior = 0.97, `Very Superior` = 1),
   fill_values,
@@ -17,9 +16,9 @@ base_plot_z_scores(
 )
 }
 \arguments{
-\item{dat}{data object to get ranges for axes from}
+\item{x_range}{vector with two elements giving the smallest and largest values to use on x-axis (in order)}
 
-\item{nacc_vars}{vector of variables to infer ranges from \strong{without prefix}}
+\item{y_range}{vector with two elements giving the smallest and largest values to use on y-axis (in order)}
 
 \item{descriptions}{A named vector giving cutoffs to use for creating descriptions.}
 

@@ -131,3 +131,51 @@ function addEventListenersToColors(id) {
     })
   })
 }
+
+
+
+// Function to call when base plots are plotted. This includes re-plotting after restyling of relayout.
+// We use this to keep track of visibility of traces
+function afterPlot (x, input) {
+  // Array to hold info on all traces
+  var out = [];
+
+  // inputName to use in Shiny
+  var inputName = input.ns + '-' + input.name
+
+  // Function to get needed info from traces.
+  function getTraceInfo(trace, traceindex) {
+    // If trace has a name, set tracename
+    if (typeof trace.name !== 'undefined') {
+      var tracename = trace.name ;
+    } else {
+      var tracename = '';
+    }
+
+    // If trace has visible attribute, set tracevisible
+    if (typeof trace.visible !== 'undefined') {
+      var tracevisible = trace.visible ;
+    } else {
+      var tracevisible = '';
+    }
+
+    // If trace has customdata attribute, set name and create
+    // input$ns-name_visibility in R session
+    if (typeof trace.customdata !== 'undefined') {
+      var name = trace.customdata ;
+
+      Shiny.setInputValue(input.ns + '-' + name + '_visibility', tracevisible);
+    } else {
+      var name = '';
+    }
+
+    // Add to out list
+    out.push([tracename=tracename, index=traceindex, name = name, visible = tracevisible]);
+  }
+
+  // Run function for each trace
+  x.data.forEach(getTraceInfo);
+
+  // Create input$input.name. This holds all traces with name, index, and visibility.
+  Shiny.setInputValue(inputName, out);
+}

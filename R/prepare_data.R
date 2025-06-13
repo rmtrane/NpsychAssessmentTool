@@ -90,29 +90,43 @@ prepare_data <- function(
     names(selected_cols) <- selected_cols
   }
 
-  cols_to_select <- c(
-    selected_cols[!names(selected_cols) %in% c("", "(blank)")],
-    intersect(
-      c(
-        with(
-          diag_contr_pairs,
-          sort(c(presump_etio_diag, contribution, na.omit(other)))
-        ),
-        unlist(lapply(
-          list(
-            NpsychBatteryNorms::calculate_fas,
-            NpsychBatteryNorms::calculate_mocaclock,
-            NpsychBatteryNorms::calculate_reyarec,
-            var_labels
-          ),
-          formalArgs
-        ))
+  selected_cols <- selected_cols[!names(selected_cols) %in% c("", "(blank)")]
+
+  other_cols <- intersect(
+    c(
+      with(
+        diag_contr_pairs,
+        sort(c(presump_etio_diag, contribution, na.omit(other)))
       ),
-      colnames(dat)
-    )
+      unlist(lapply(
+        list(
+          NpsychBatteryNorms::calculate_fas,
+          NpsychBatteryNorms::calculate_mocaclock,
+          NpsychBatteryNorms::calculate_reyarec,
+          var_labels
+        ),
+        formalArgs
+      ))
+    ),
+    colnames(dat)
   )
 
+  ## Remove other_cols that were included in selected_cols
+  other_cols <- setdiff(other_cols, selected_cols)
+
+  ## Final vector of columns to select WITH NAMES!!!
+  cols_to_select <- c(selected_cols, other_cols)
+
   dat <- dat[, cols_to_select, with = F]
+
+  ## Fix missing names
+  names(cols_to_select) <- ifelse(
+    names(cols_to_select) == "",
+    cols_to_select,
+    names(cols_to_select)
+  )
+
+  ## Change column names
   colnames(dat) <- setNames(names(cols_to_select), cols_to_select)[colnames(
     dat
   )]

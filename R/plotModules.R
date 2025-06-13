@@ -1,0 +1,635 @@
+plotUI <- function(id) {
+  if (!id %in% nacc_var_groups) {
+    cli::cli_abort(
+      "{.arg id} should be one of {.var {unique(nacc_var_groups)}}, but is {.var {id}}"
+    )
+  }
+
+  tooltip_text <- FALSE
+
+  if (id == "General Cognition") {
+    tooltip_text <- "When both MoCA and MMSE are available, these are plotted as one line, but with different markers. Hover markers to see details."
+  }
+
+  if (id == "Attention/Processing") {
+    tooltip_text <- shiny::HTML(
+      "When both of the following pairs of scores are present, these are plotted as one line, but with different markers. Hover markers to see details.<br>
+        - Digit Span Forward <> Number Span Forward.<br>
+        - Digit Span Backward <> Number Span Backward."
+    )
+  }
+
+  if (id == "Memory") {
+    tooltip_text <- shiny::HTML(
+      "When both of the following pairs of scores are present, these are plotted as one line, but with different markers. Hover markers to see details.<br>
+        - Logical Memory IA, Immediate <> Craft Immediate - Paraphrase.<br>
+        - Logical Memory IIA, Delayed <> Craft Delay - Paraphrase."
+    )
+  }
+
+  if (id == "Language") {
+    tooltip_text <- "When both Boston Naming Test and MINT are available, these are plotted as one line, but with different markers. Hover markers to see details."
+  }
+
+  if (!isFALSE(tooltip_text)) {
+    cardtitle <- bslib::tooltip(
+      shiny::h5(
+        id,
+        .noWS = "outside"
+      ) |>
+        shiny::tagAppendAttributes(
+          style = "text-decoration-line: underline; text-decoration-style: dotted; overflow-y: hidden;"
+        ),
+      tooltip_text,
+      options = list(customClass = "my-tooltip")
+    )
+  } else {
+    cardtitle <- shiny::h5(id, .noWS = "outside") |>
+      shiny::tagAppendAttributes(style = "overflow-y: hidden;")
+  }
+
+  shiny::tagList(
+    shiny::conditionalPanel(
+      "input.showPlot == 'yes'",
+      ns = shiny::NS(id),
+      #bslib::card(
+      bslib::accordion_panel(
+        title = cardtitle,
+        bslib::card_body(
+          plotly::plotlyOutput(
+            shiny::NS(id, "plot"),
+            width = "100%"
+          )
+        ),
+        value = id
+        # min_height = "475px"
+      )
+    ),
+
+    shiny::conditionalPanel(
+      "input.showPlot == 'no'",
+      ns = shiny::NS(id),
+      # bslib::card(
+      bslib::accordion_panel(
+        title = cardtitle,
+        bslib::card_body(
+          shiny::p("No standardized scores found")
+        ),
+        value = id #,
+        #min_height = "100px"
+      )
+    )
+  )
+}
+
+#' @export
+plotServer <- function(
+  id = "Attention/Processing", # should be one of nacc_var_groups
+  dat, # should be participant specific
+  x_range = c("2016-05-01", "2020-08-01"),
+  y_range = c(-2.5, 2.5),
+  descriptions = c(
+    "Impaired" = 0.03,
+    "Borderline" = 0.10,
+    "Low Average" = 0.26,
+    "Average" = 0.76,
+    "High Average" = 0.92,
+    "Superior" = 0.97,
+    "Very Superior" = 1
+  ),
+  fill_values = calc_fill_colors(n = 7),
+  print_updating = T,
+  shade_descriptions = TRUE
+) {
+  if (!id %in% nacc_var_groups) {
+    cli::cli_abort(
+      "{.arg id} should be one of {.var {unique(nacc_var_groups)}}, but is {.var {id}}"
+    )
+  }
+
+  #################
+  ## BEFORE SERVER
+  ##
+  ## Make sure everything that should be a reactive is a reactive
+  if (!shiny::is.reactive(descriptions)) {
+    descriptions <- shiny::reactiveVal(descriptions)
+  }
+
+  if (!shiny::is.reactive(fill_values)) {
+    fill_values <- shiny::reactiveVal(fill_values)
+  }
+
+  if (!shiny::is.reactive(shade_descriptions)) {
+    shade_descriptions <- shiny::reactiveVal(shade_descriptions)
+  }
+
+  if (!shiny::is.reactive(x_range)) {
+    shade_descriptions <- shiny::reactiveVal(x_range)
+  }
+
+  if (!shiny::is.reactive(y_range)) {
+    shade_descriptions <- shiny::reactiveVal(y_range)
+  }
+
+  ## Counter to include in cli_alert_info
+  base_plot_drawing_counter <- shiny::reactiveVal(0)
+
+  ## Variables in this group
+  cur_vars <- names(nacc_var_groups[nacc_var_groups == id])
+
+  #### Colors to use for lines and markers.
+  ## We give crosswalk pairs same color.
+  ## First, non-legacy scores.
+  non_crosswalks <- setdiff(cur_vars, names(crosswalk_translations))
+  cog_vars_colors <- setNames(
+    rep(
+      c(
+        "#A6CEE3",
+        "#1F78B4",
+        "#B2DF8A",
+        "#33A02C",
+        "#FB9A99",
+        # "#E31A1C",
+        "#FDBF6F",
+        "#FF7F00",
+        "#CAB2D6",
+        "#6A3D9A",
+        "#B15928"
+      ),
+      length.out = length(non_crosswalks)
+    ),
+    nm = non_crosswalks
+  )
+
+  ## Next, add in legacy scores such that colors match.
+  crosswalks <- intersect(cur_vars, names(crosswalk_translations))
+  cog_vars_colors <- c(
+    cog_vars_colors,
+    setNames(
+      cog_vars_colors[crosswalk_translations[crosswalks]],
+      nm = crosswalks
+    )
+  )
+
+  ## Legend names. Make reactive, since we might need to adjust if any crosswalk pairs are present
+  legend_names <- shiny::reactiveVal(nacc_var_labels[cur_vars])
+
+  ## Create visibility vector indicating if the traces are visible or not
+  visibility <- do.call(
+    shiny::reactiveValues,
+    visibility_defaults
+  )
+
+  ##
+  ###################
+
+  ###################
+  ## START SERVER
+  shiny::moduleServer(id, function(input, output, session) {
+    ## Set input$showPlot = "yes" so that plot is shown in UI
+    session$sendCustomMessage(
+      "setInputValue",
+      message = list(
+        inputId = paste(id, "showPlot", sep = "-"),
+        inputValue = 'yes'
+      )
+    )
+    ###################
+    ## CREATE WORKING DATA
+    ##
+    ## Limit data to relevant columns. This could maybe help to not replot too frequently.
+    cur_studyid_dat <- shiny::reactive({
+      cur_vars <- names(nacc_var_groups[nacc_var_groups == id])
+      cur_vars_in_dat <- intersect(
+        c(paste0("std_", cur_vars), paste0("raw_", cur_vars)),
+        colnames(dat())
+      )
+
+      dat()[, c("VISITDATE", cur_vars_in_dat), with = F]
+    })
+
+    ###################
+    ## INITIATE PLOT
+    output$plot <- plotly::renderPlotly({
+      if (print_updating) {
+        shiny::isolate({
+          base_plot_drawing_counter(base_plot_drawing_counter() + 1)
+        })
+
+        cli::cli_alert_info(
+          "Base plot for group {.var {id}} updating (done {base_plot_drawing_counter()} time{?s})"
+        )
+      }
+
+      ## Base plot
+      base_plot_z_scores(
+        x_range = x_range(),
+        y_range = y_range(),
+        descriptions = descriptions(),
+        fill_values = fill_values(),
+        shade_descriptions = T,
+        fill_alpha = 0.2,
+        source = id
+      ) |>
+        ## Make sure layout is as desired
+        plotly::layout(
+          showlegend = TRUE,
+          hoverlabel = list(align = "left"),
+          legend = list(
+            traceorder = "normal"
+          ),
+          xaxis = list(
+            title = ""
+          )
+        ) |>
+        ## Register events on click and double click in legend
+        plotly::event_register(event = "plotly_legendclick") |>
+        plotly::event_register(event = "plotly_legenddoubleclick") |>
+        ## Add JS function to run on render
+        onRender(
+          "function(el, x, input) {
+            // Function to run when plot is plotted (including after restyling and relayout)
+            el.on('plotly_afterplot', function () {
+              afterPlot(x, input);
+            });
+
+            // Create input$base_plot_drawn to indicate base plots have been created. 
+            // Include priority: 'event' to fire every time
+            Shiny.setInputValue(input.ns + '-base_plot_drawn', 1, {priority: 'event'});
+          }",
+          data = list(
+            name = "TraceMapping",
+            ns = id
+          )
+        )
+    }) |>
+      shiny::bindEvent(
+        x_range(),
+        y_range(),
+        descriptions(),
+        fill_values()
+      )
+
+    ## Here we update the reactiveValues 'visibility'
+    ## For all names in 'visibility_defaults', we want
+    ## to listen for changes to input$`name`_visibility,
+    ## since this is updated when visibility is toggled.
+    for (nam in names(visibility_defaults)) {
+      ## We use the rlang::inject to avoid environment weirdness.
+      ## Without this, only the last observer is created.
+      rlang::inject({
+        shiny::observe({
+          visibility[[!!nam]] <- input[[paste(
+            !!nam,
+            "visibility",
+            sep = "_"
+          )]]
+
+          ## Create new var to pass to cli
+          var_nm <- !!nam
+          cli::cli_alert_info("visibility updated for {var_nm}")
+        }) |>
+          shiny::bindEvent(
+            input[[paste(!!nam, "visibility", sep = "_")]]
+          )
+      })
+    }
+
+    ###################
+    ## LINES AND MARKERS
+    shiny::observe({
+      shiny::req(cur_studyid_dat(), input$base_plot_drawn)
+
+      if (print_updating) {
+        cli::cli_alert_info("Updating plots.")
+      }
+
+      # Remove old trace if any. We can tell by checking input$TraceMapping. This is
+      # set every time plot is rerendered. See the javascript in 'onRender' for the plot.
+      if (!is.null(input$TraceMapping)) {
+        ## Create matrix from input$TraceMapping
+        traces <- matrix(
+          input$TraceMapping,
+          ncol = 4,
+          byrow = TRUE
+        )
+
+        ## Get trace indices corresponding to traces in legend or with tracename "no_values"
+        indices <- as.integer(traces[
+          traces[, 1] %in% c(legend_names(), "no_values"),
+          2
+        ])
+
+        ## Remove traces
+        plotly::plotlyProxy("plot", session) |>
+          plotly::plotlyProxyInvoke("deleteTraces", indices)
+
+        if (print_updating) {
+          cli::cli_alert_info(
+            "Old traces removed for {.var {id}}"
+          )
+        }
+      } else {
+        if (print_updating) {
+          cli::cli_alert_info(
+            "No traces to remove for {.var {id}}"
+          )
+        }
+      }
+
+      ## Get list of lists with new traces (lines and markers). Also returns
+      # new x_range, new y_range, and updated legend_names. If no std_* columns
+      # in data, will be empty.
+      new_traces <- plotly_new_traces(
+        new_dat = cur_studyid_dat(),
+        visibility = shiny::reactiveValuesToList(visibility),
+        legend_names = legend_names(),
+        vars_colors = cog_vars_colors[cur_vars]
+      )
+
+      ## If no new traces...
+      if (!"new_traces" %in% names(new_traces)) {
+        # ... set input$showPlot to "no"
+        session$sendCustomMessage(
+          "setInputValue",
+          message = list(
+            inputId = paste(id, "showPlot", sep = "-"),
+            inputValue = 'no'
+          )
+        )
+
+        ## Note: could not get this to work. Wonder if there's some namespacing going on...
+        # bslib::accordion_panel_close(
+        #   id = "plots-accordion",
+        #   values = id
+        # )
+      } else {
+        ## Update legend_names
+        legend_names(new_traces$legend_names)
+
+        ## Add traces
+        plotly::plotlyProxy("plot", session) |>
+          plotly::plotlyProxyInvoke(
+            method = "addTraces",
+            new_traces$new_traces
+          )
+
+        ## Set input$showPlot = "yes" so that plot is shown in UI
+        session$sendCustomMessage(
+          "setInputValue",
+          message = list(
+            inputId = paste(id, "showPlot", sep = "-"),
+            inputValue = 'yes'
+          )
+        )
+
+        ## Note: could not get this to work. Wonder if there's some namespacing going on...
+        # bslib::accordion_panel_open(
+        #   id = "plots-accordion",
+        #   values = id
+        # )
+
+        ## Relayout: update axes, and set showlegend = TRUE in case
+        # all traces are hidden.
+        plotly::plotlyProxy("plot", session) |>
+          # plotly::plotlyProxyInvoke(
+          #   method = "reconfig",
+          #   staticPlot = FALSE
+          # ) |>
+
+          plotly::plotlyProxyInvoke(
+            method = "relayout",
+            list(
+              xaxis = list(
+                automargin = TRUE,
+                range = new_traces$new_x_range, # date_range(new_dat$VISITDATE),
+                minallowed = x_range()[1],
+                maxallowed = x_range()[2]
+              ),
+              yaxis = list(
+                title = "z-score",
+                y = as.list(0),
+                yanchor = "bottom",
+                yref = "container",
+                minallowed = y_range()[1],
+                maxallowed = y_range()[2],
+                range = c(
+                  min(-2.5, new_traces$new_y_range[1]),
+                  max(2.5, new_traces$new_y_range[2])
+                ) *
+                  1.02
+              ),
+              showlegend = TRUE
+            )
+          )
+      }
+    }) |>
+      shiny::bindEvent(
+        cur_studyid_dat(),
+        input$base_plot_drawn,
+        ignoreInit = F
+      )
+  })
+}
+
+#' @export
+plotApp <- function(
+  dat_input = prepare_data(demo_data),
+  studyids = NULL
+) {
+  ui <- bslib::page_sidebar(
+    theme = bslib::bs_theme(
+      version = 5
+    ) |>
+      bslib::bs_add_rules(
+        ".my-tooltip .tooltip-inner {
+          min-width: 500px;
+          text-align: left;
+        }"
+      ),
+    sidebar = bslib::sidebar(
+      shiny::selectizeInput(
+        inputId = "studyid",
+        label = "Study ID",
+        choices = NULL,
+        selected = NULL
+      ) # ,
+      # shiny::checkboxInput(
+      #   inputId = "brighter_colors",
+      #   label = "Use Brighter Colors"
+      # )
+    ),
+    shiny::tags$head(
+      shiny::tags$script(
+        src = "www/scripts.js"
+      )
+    ),
+    bslib::layout_columns(
+      col_widths = c(6, 6),
+      bslib::card(
+        id = "main-table",
+        full_screen = T,
+        bslib::card_header(
+          "NACC T-Cog Neuropsychological Assessment Summary Table"
+        ),
+        bslib::card_body(
+          shiny::selectInput(
+            inputId = "test_date",
+            label = "Date",
+            choices = NULL
+          ),
+          mainTableUI("main_table")
+          # verbatimTextOutput(NS("plot_cog_var", "click"))
+          # verbatimTextOutput(NS("plot_cog_var", "PrintTraceMapping"))
+        )
+      ),
+      bslib::card(
+        id = "main-plot",
+        full_screen = T,
+        bslib::card_header("Longitudinal Trends"),
+        # plotUI(id = "Attention/Processing")
+        # do.call(
+        # htmltools::tagList,
+        bslib::accordion(
+          !!!lapply(unique(nacc_var_groups), \(x) plotUI(id = x)),
+          open = TRUE
+        )
+        # )
+      )
+    )
+  )
+
+  server <- function(input, output, session) {
+    if (!shiny::is.reactive(dat_input)) {
+      cli::cli_alert_info("{.arg dat_input} converting to reactive")
+      dat <- shiny::reactive(dat_input)
+    } else {
+      dat <- dat_input
+    }
+
+    shiny::observe({
+      shiny::req(dat)
+
+      if (!shiny::is.reactive(dat)) {
+        return()
+      }
+
+      if (is.null(studyids)) {
+        studyids <- unique(dat()$NACCID)
+      }
+
+      shiny::updateSelectizeInput(
+        inputId = "studyid",
+        choices = studyids,
+        server = TRUE
+      )
+    })
+
+    shiny::observe({
+      shiny::req(input$studyid, dat)
+
+      shiny::updateSelectInput(
+        inputId = "test_date",
+        choices = dat()$VISITDATE[dat()$NACCID == input$studyid]
+      )
+    }) |>
+      shiny::bindEvent(input$studyid)
+
+    ## Subset full data to the data specific to input$current_studyid
+    current_studyid_dat <- shiny::reactive({
+      shiny::req(input$studyid)
+
+      # Note: use data.table since `[[` doesn't preserve attributes, which we need
+      # to infer std. methods. Can be replaced by using data.table.
+      dat()[dat()$NACCID == input$studyid]
+    })
+
+    ### Cognitive scores (Plots)
+    ## Get x_range's and y_range's
+
+    # if (FALSE) {
+    ## Get date range
+    x_range <- shiny::reactiveVal()
+
+    shiny::observe({
+      shiny::req(dat())
+
+      x_range(date_range(dat()$VISITDATE))
+    }) |>
+      shiny::bindEvent(
+        dat()
+      )
+
+    ## Get y-range's
+    y_ranges <- shiny::reactiveValues()
+
+    shiny::observe({
+      shiny::req(dat)
+
+      lapply(unique(nacc_var_groups), \(cur_group) {
+        ## Get variables in group corresponding
+        cur_vars <- paste(
+          "std",
+          names(nacc_var_groups[nacc_var_groups == cur_group]),
+          sep = "_"
+        ) |>
+          intersect(
+            colnames(dat())
+          )
+
+        y_ranges[[cur_group]] <- get_y_range(
+          dat = dat()[, cur_vars, with = F]
+        )
+      })
+    }) |>
+      shiny::bindEvent(
+        dat()
+      )
+
+    shiny::observe({
+      cli::cli_alert_info("{.var x_range} updated")
+    }) |>
+      shiny::bindEvent(
+        x_range()
+      )
+
+    shiny::observe({
+      cli::cli_alert_info("{.var y_ranges} updated")
+    }) |>
+      shiny::bindEvent(
+        y_ranges
+      )
+
+    lapply(unique(nacc_var_groups), \(x) {
+      plotServer(
+        x,
+        dat = current_studyid_dat, # Could improve by removing columns not relevant to this group.
+        x_range = x_range,
+        y_range = shiny::reactive(y_ranges[[x]])
+      )
+    })
+
+    mainTableServer(
+      "main_table",
+      dat = shiny::reactive(
+        current_studyid_dat()[
+          current_studyid_dat()$VISITDATE == input$test_date
+        ]
+      ),
+      descriptions = c(
+        "Impaired" = 0.03,
+        "Borderline" = 0.10,
+        "Low Average" = 0.26,
+        "Average" = 0.76,
+        "High Average" = 0.92,
+        "Superior" = 0.97,
+        "Very Superior" = 1
+      ),
+      fill_values = calc_fill_colors(7),
+      methods = "infer",
+      table_font_size = shiny::reactive(80)
+    )
+  }
+
+  shiny::shinyApp(ui, server)
+}

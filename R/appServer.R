@@ -125,14 +125,12 @@ appServer <- function(input, output, session) {
   shiny::observe({
     if (!all(is.na(std_methods())) & !all(is.na(col_sel()))) {
       fin_dat(
-        #data.frame(
         prepare_data(
           dat_obj(),
           selected_cols = col_sel(),
           methods = std_methods(),
           print_messages = F
         )
-        #)
       )
     }
   }) |>
@@ -208,6 +206,8 @@ appServer <- function(input, output, session) {
         cur_select <- cur_choices[1]
       }
 
+      cli::cli_alert_info("Updating study ID selectize")
+
       shiny::updateSelectizeInput(
         session,
         "current_studyid",
@@ -241,8 +241,9 @@ appServer <- function(input, output, session) {
 
     sel_date <- NULL
 
-    if (!is.null(selected_date()) && selected_date() %in% dates)
+    if (!is.null(selected_date()) && selected_date() %in% dates) {
       sel_date <- selected_date()
+    }
 
     shiny::updateSelectizeInput(
       session,
@@ -348,21 +349,8 @@ appServer <- function(input, output, session) {
   )
 
   #### Longitudinal Trends
-
-  ### Cognitive scores (Plots)
-  plotVarServer(
-    "plot_var",
-    dat = fin_dat,
-    studyid = shiny::reactive(input$current_studyid),
-    descriptions = descriptions,
-    fill_values = fill_values,
-    print_updating = F,
-    shade_descriptions = shade_descriptions
-  )
-
-  ### Cognitive scores (Table)
-  ## Subset full data to the data needed for longitudinal and prev diagnoses tables
-  dat_for_long <- shiny::reactive({
+  ## Subset full data to the data specific to input$current_studyid
+  current_studyid_dat <- shiny::reactive({
     shiny::req(input$current_studyid)
 
     # Note: use data.table since `[[` doesn't preserve attributes, which we need
@@ -372,9 +360,71 @@ appServer <- function(input, output, session) {
     ]
   })
 
+  ### Cognitive scores (Plots)
+  ## Get x_range
+  x_range <- shiny::reactiveVal()
+
+  shiny::observe({
+    shiny::req(fin_dat())
+
+    x_range(date_range(fin_dat()$VISITDATE))
+  }) |>
+    shiny::bindEvent(
+      fin_dat()
+    )
+
+  ## Get y-range's
+  y_ranges <- shiny::reactiveValues()
+
+  shiny::observe({
+    lapply(unique(nacc_var_groups), \(cur_group) {
+      ## Get variables in group corresponding
+      cur_vars <- paste(
+        "std",
+        names(nacc_var_groups[nacc_var_groups == cur_group]),
+        sep = "_"
+      ) |>
+        intersect(
+          colnames(fin_dat())
+        )
+
+      y_ranges[[cur_group]] <- get_y_range(
+        dat = fin_dat()[, cur_vars, with = F]
+      )
+    })
+  }) |>
+    shiny::bindEvent(
+      fin_dat()
+    )
+
+  # plotVarServer(
+  #   "plot_var",
+  #   dat = fin_dat,
+  #   studyid = shiny::reactive(input$current_studyid),
+  #   descriptions = descriptions,
+  #   fill_values = fill_values,
+  #   print_updating = T,
+  #   shade_descriptions = shade_descriptions
+  # )
+
+  ## Create all plots
+  lapply(unique(nacc_var_groups), \(x) {
+    plotServer(
+      x,
+      dat = current_studyid_dat,
+      x_range = x_range,
+      y_range = shiny::reactive(y_ranges[[x]]),
+      descriptions = descriptions,
+      fill_values = fill_values,
+      print_updating = T,
+      shade_descriptions = shade_descriptions
+    )
+  })
+
+  ### Cognitive scores (Table)
   longTableServer(
     "long_table",
-    dat = dat_for_long,
+    dat = current_studyid_dat,
     methods = std_methods,
     table_font_size = table_font_size, # shiny::reactive(input$main_table_pct),
     fill_values = fill_values,
@@ -385,7 +435,7 @@ appServer <- function(input, output, session) {
   ## Diagnoses
   prevDiagnosesServer(
     "prev_diagnoses_table",
-    dat = dat_for_long,
+    dat = current_studyid_dat,
     table_font_size = table_font_size, # shiny::reactive(input$main_table_pct),
     print_updating = F
   )

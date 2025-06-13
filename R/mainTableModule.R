@@ -39,11 +39,15 @@ mainTableServer <- function(
   include_caption = F,
   print_updating = F
 ) {
-  if (!shiny::is.reactive(descriptions))
-    descriptions <- shiny::reactive(descriptions)
-
   if (!shiny::is.reactive(fill_values)) {
+    if (is.null(fill_values)) {
+      fill_values <- calc_fill_colors(n = length(descriptions))
+    }
     fill_values <- shiny::reactiveVal(fill_values)
+  }
+
+  if (!shiny::is.reactive(descriptions)) {
+    descriptions <- shiny::reactive(descriptions)
   }
 
   if (!shiny::is.reactive(table_font_size)) {
@@ -56,6 +60,8 @@ mainTableServer <- function(
 
   shiny::moduleServer(id, function(input, output, session) {
     output$mainTable <- gt::render_gt({
+      shiny::req(descriptions, fill_values)
+
       for_table <- dat()
 
       if (is.null(for_table)) {
@@ -79,8 +85,8 @@ mainTableServer <- function(
       summary_dat <- assessment_summary_data(
         dat = for_table,
         id = "NACCID",
-        descriptions = descriptions(),
-        fill_values = fill_values(),
+        # descriptions = descriptions(),
+        # fill_values = fill_values(),
         methods = methods(),
         include_caption = include_caption
       )
@@ -109,13 +115,13 @@ mainTableServer <- function(
 #'
 #' @export
 mainTableApp <- function(dat) {
-  stopifnot(
-    "htmltools must be installed to use this function" = rlang::check_installed(
-      "htmltools"
-    )
-  )
+  # stopifnot(
+  #   "htmltools must be installed to use this function" = rlang::check_installed(
+  #     "htmltools"
+  #   )
+  # )
 
-  shiny::addResourcePath("www", "inst/shiny/www")
+  shiny::addResourcePath("www", "inst/www")
 
   ui <- bslib::page_fluid(
     htmltools::tags$header(
@@ -136,7 +142,7 @@ mainTableApp <- function(dat) {
       "main_table",
       dat = shiny::reactive(dat),
       methods = "infer",
-      table_font_size = 100
+      table_font_size = shiny::reactive(100)
     )
   }
 

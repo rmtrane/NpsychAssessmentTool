@@ -140,7 +140,14 @@ appUI <- function() {
             bslib::navset_card_underline(
               bslib::nav_panel(
                 title = "Cognitive Scores (Plots)",
-                plotVarUI("plot_var")
+                # plotVarUI("plot_var")
+                #do.call(
+                #htmltools::tagList,
+                bslib::accordion(
+                  !!!lapply(unique(nacc_var_groups), \(x) plotUI(id = x)),
+                  id = "plots-accordion",
+                  open = TRUE
+                ) #
               ),
               bslib::nav_panel(
                 title = "Cognitive Scores (Table)",

@@ -2,8 +2,8 @@
 #'
 #' Create a base plot where traces can later be added.
 #'
-#' @param dat data object to get ranges for axes from
-#' @param nacc_vars vector of variables to infer ranges from **without prefix**
+#' @param x_range vector with two elements giving the smallest and largest values to use on x-axis (in order)
+#' @param y_range vector with two elements giving the smallest and largest values to use on y-axis (in order)
 #' @param shade_descriptions logical; should ranges for descriptions be shaded?
 #' @param fill_alpha opacity value for shaded areas
 #' @param source passed to `plotly::plot_ly`
@@ -14,16 +14,8 @@
 #'
 #' @export
 base_plot_z_scores <- function(
-  dat,
-  nacc_vars = c(
-    "TRAILA",
-    "OTRAILA",
-    "OTRLARR",
-    "DIGFORCT",
-    "DIGFORSL",
-    "DIGBACCT",
-    "DIGBACLS"
-  ),
+  x_range,
+  y_range,
   descriptions = c(
     "Impaired" = 0.03,
     "Borderline" = 0.10,
@@ -38,24 +30,6 @@ base_plot_z_scores <- function(
   fill_alpha = 0.2,
   source = "A"
 ) {
-  stopifnot(
-    "'dat' must be a data.table object" = data.table::is.data.table(dat)
-  )
-
-  ## Transform t-scores to normal scale
-  t_score_cols <- names(which(
-    lapply(dat, \(x) attributes(x)$method) == "T-score"
-  ))
-
-  for (col in t_score_cols) {
-    dat[[col]] <- (dat[[col]] - 50) / 10
-  }
-
-  # dat[,
-  #   names(.SD) := lapply(.SD, \(x) (x - 50) / 10),
-  #   .SDcols = names(which(lapply(dat, \(x) attributes(x)$method) == "T-score"))
-  # ]
-
   if (
     shade_descriptions &
       (missing(fill_values) ||
@@ -68,41 +42,17 @@ base_plot_z_scores <- function(
     )
   }
 
-  if (
-    (missing(nacc_vars) || identical(nacc_vars, quote(expr = ))) |
-      is.null(nacc_vars)
-  ) {
-    most_extreme_val <- 2.5
-  } else {
-    if (sum(paste("std", nacc_vars, sep = "_") %in% colnames(dat)) == 0) {
-      most_extreme_val <- 2.5
-    } else {
-      most_extreme_val <- dat[,
-        setNames(
-          nm = names(.SD),
-          object = lapply(.SD, \(x) {
-            if (all(is.na(x))) return(NA)
-
-            max(abs(x), na.rm = T)
-          })
-        ),
-        .SDcols = intersect(paste0("std_", nacc_vars), colnames(dat))
-      ]
-
-      most_extreme_val <- max(most_extreme_val, na.rm = T)
-    }
-  }
   ## Get min and max values for y-axis
-  y_min <- min(-2.5, -most_extreme_val)
-  y_max <- max(2.5, most_extreme_val)
+  y_min <- y_range[1]
+  y_max <- y_range[2]
 
-  z_scores_from_percentiles <- qnorm(descriptions[descriptions < 1]) # c(0.03, 0.10, 0.25, 0.76, 0.92, 0.97))
+  z_scores_from_percentiles <- qnorm(descriptions[descriptions < 1])
 
-  tiles <- data.table::data.table(
-    ymin = c(y_min, z_scores_from_percentiles),
-    ymax = c(z_scores_from_percentiles, y_max),
-    descrs = names(descriptions)
-  )
+  # tiles <- data.table::data.table(
+  #   ymin = c(y_min, z_scores_from_percentiles),
+  #   ymax = c(z_scores_from_percentiles, y_max),
+  #   descrs = names(descriptions)
+  # )
 
   # print(class(dat$VISITDATE))
   # print(date_range(as.Date(dat$VISITDATE)))
@@ -110,7 +60,7 @@ base_plot_z_scores <- function(
   p <- plotly::plot_ly(
     type = "scatter",
     mode = "none",
-    x = date_range(dat$VISITDATE),
+    x = x_range,
     showlegend = FALSE,
     hoverinfo = "none",
     source = source
@@ -118,11 +68,15 @@ base_plot_z_scores <- function(
     plotly::layout(
       xaxis = list(
         title = "Date of Test",
-        range = date_range(dat$VISITDATE)
+        range = x_range,
+        minallowed = x_range[1],
+        maxallowed = x_range[2]
       ),
       yaxis = list(
         title = "z-score",
-        range = list(y_min, y_max),
+        # range = list(y_min, y_max),
+        maxallowed = y_max,
+        minallowed = y_min,
         showgrid = F
       ),
       legend = list(
@@ -184,7 +138,13 @@ date_range <- function(dates) {
   dates <- as.Date(dates)
 
   c(
-    lubridate::floor_date(min(dates, na.rm = T) - months(3), unit = "quarter"),
-    lubridate::ceiling_date(max(dates, na.rm = T) + months(3), unit = "quarter")
+    lubridate::floor_date(
+      min(dates, na.rm = T) - months(3),
+      unit = "quarter"
+    ),
+    lubridate::ceiling_date(
+      max(dates, na.rm = T) + months(3),
+      unit = "quarter"
+    )
   )
 }
