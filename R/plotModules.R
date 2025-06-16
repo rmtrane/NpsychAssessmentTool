@@ -1,9 +1,27 @@
+#' Plot UI
+#'
+#' @description
+#' UI for displaying plots of standardized scores across visits.
+#'
+#' @param id A single string to ID the Shiny module, which also indicates
+#' which group of variables to plot. Should be one of `unique(nacc_var_groups)`.
+#'
+#' @returns
+#' A `shiny::tagList` object containing two `shiny::conditionalPanel`'s:
+#' one with the plot, and one with text for when no standardized scores
+#' were found. Both wrapped in a `bslib::accordion_panel` for inclusion in
+#' main app.
+#'
+#' @export
 plotUI <- function(id) {
   if (!id %in% nacc_var_groups) {
     cli::cli_abort(
       "{.arg id} should be one of {.var {unique(nacc_var_groups)}}, but is {.var {id}}"
     )
   }
+
+  ##################
+  ## CREATE TITLE
 
   tooltip_text <- FALSE
 
@@ -31,6 +49,7 @@ plotUI <- function(id) {
     tooltip_text <- "When both Boston Naming Test and MINT are available, these are plotted as one line, but with different markers. Hover markers to see details."
   }
 
+  ## If the tooltip_text is not still FALSE, we create the `cardtitle` with a tooltip.
   if (!isFALSE(tooltip_text)) {
     cardtitle <- bslib::tooltip(
       shiny::h5(
@@ -44,15 +63,17 @@ plotUI <- function(id) {
       options = list(customClass = "my-tooltip")
     )
   } else {
+    ## If `cardtitle` is still FALSE, we create `cardtitle` with only id, no tooltip.
     cardtitle <- shiny::h5(id, .noWS = "outside") |>
       shiny::tagAppendAttributes(style = "overflow-y: hidden;")
   }
 
+  ## Output. tagList with two `conditionalPanel`'s handling the cases where plot should
+  ## be shown and hidden, respectively.
   shiny::tagList(
     shiny::conditionalPanel(
       "input.showPlot == 'yes'",
       ns = shiny::NS(id),
-      #bslib::card(
       bslib::accordion_panel(
         title = cardtitle,
         bslib::card_body(
@@ -62,7 +83,6 @@ plotUI <- function(id) {
           )
         ),
         value = id
-        # min_height = "475px"
       )
     ),
 
@@ -82,10 +102,27 @@ plotUI <- function(id) {
   )
 }
 
+#' Plot server
+#'
+#' @description
+#' Server logic to handle the creation and updating of plots to show standardized scores across visits.
+#'
+#' @param id A single string. Optional, defaults to `"Attention/Processing"`. Should be one of `nacc_var_groups`.
+#' @param dat A data.table. Should be participant specific.
+#' @param x_range A date range as a character vector with two elements.
+#' @param y_range A numeric vector with two elements. Optional, defaults to `c(-2.5, 2.5)`.
+#' @param descriptions A named numeric vector. Optional, defaults to the vector described in the function definition.
+#' @param fill_values A vector of fill colors. Optional, defaults to `calc_fill_colors(n = 7)`.
+#' @param print_updating A logical value. Optional, defaults to `TRUE`.
+#' @param shade_descriptions A logical value indicating if the plots should be shaded according to the regions given by `descriptions` with colors given by `fill_values`. Optional, defaults to `TRUE`.
+#'
+#' @returns
+#' No return value.
+#'
 #' @export
 plotServer <- function(
-  id = "Attention/Processing", # should be one of nacc_var_groups
-  dat, # should be participant specific
+  id = "Attention/Processing",
+  dat,
   x_range = c("2016-05-01", "2020-08-01"),
   y_range = c(-2.5, 2.5),
   descriptions = c(
@@ -432,6 +469,17 @@ plotServer <- function(
   })
 }
 
+#' Plot app
+#'
+#' @description
+#' Shiny app using the plotUI and plotServer.
+#'
+#' @param dat_input A data frame. Defaults to `prepare_data(demo_data)`.
+#' @param studyids Optional. If `NULL` (default), will use unique values from `dat_input$NACCID`.
+#'
+#' @returns
+#' A shiny app.
+#'
 #' @export
 plotApp <- function(
   dat_input = prepare_data(demo_data),
@@ -453,11 +501,7 @@ plotApp <- function(
         label = "Study ID",
         choices = NULL,
         selected = NULL
-      ) # ,
-      # shiny::checkboxInput(
-      #   inputId = "brighter_colors",
-      #   label = "Use Brighter Colors"
-      # )
+      )
     ),
     shiny::tags$head(
       shiny::tags$script(

@@ -10,8 +10,12 @@
 
 mainTableUI <- function(id) {
   bslib::card(bslib::card_body(
-    # shiny::actionButton(shiny::NS(id, "updateTable"), "Update"),
     shiny::uiOutput(shiny::NS(id, "mainTable")),
+    shiny::actionButton(
+      shiny::NS(id, "genPDF"),
+      label = "Generate PDF for Download"
+    ),
+    shiny::uiOutput(shiny::NS(id, "downloadTable")),
     fillable = F
   ))
 }
@@ -59,22 +63,32 @@ mainTableServer <- function(
   }
 
   shiny::moduleServer(id, function(input, output, session) {
-    output$mainTable <- gt::render_gt({
+    output$mainTable <- gt::render_gt(
+      mainTable()
+    )
+
+    mainTable <- shiny::reactiveVal()
+
+    observe({
       shiny::req(descriptions, fill_values)
 
       for_table <- dat()
 
       if (is.null(for_table)) {
-        return()
-      } else {
-        stopifnot(
-          "'for_table' must be a data.table object" = data.table::is.data.table(
-            for_table
-          )
+        cli::cli_alert_info(
+          "{.arg for_table} is {.code NULL}. Returning empty element."
         )
+        return()
+      }
+
+      if (!data.table::is.data.table(for_table)) {
+        cli::cli_abort("{.arg for_table} must be a {.cls data.table} object.")
       }
 
       if (nrow(data.frame(for_table)) != 1) {
+        cli::cli_alert_info(
+          "{.arg for_table} must have exactly 1 row, but has {nrow(for_table)}. Returning empty element."
+        )
         return()
       }
 
@@ -85,29 +99,78 @@ mainTableServer <- function(
       summary_dat <- assessment_summary_data(
         dat = for_table,
         id = "NACCID",
-        # descriptions = descriptions(),
-        # fill_values = fill_values(),
         methods = methods(),
         include_caption = include_caption
       )
 
-      assessment_summary_table(
-        summary_dat = summary_dat,
-        bar_height = 16 * table_font_size() / 100
-      ) |>
-        gt::tab_options(
-          data_row.padding = gt::px(2),
-          row_group.padding = gt::px(4),
-          table.font.size = gt::pct(table_font_size())
-        )
-    }) |>
-      shiny::bindCache(
-        dat(),
-        table_font_size(),
-        fill_values(),
-        descriptions(),
-        methods()
+      mainTable(
+        assessment_summary_table(
+          summary_dat = summary_dat,
+          bar_height = 16 * table_font_size() / 100
+        ) |>
+          gt::tab_options(
+            data_row.padding = gt::px(2),
+            row_group.padding = gt::px(4),
+            table.font.size = gt::pct(table_font_size())
+          )
       )
+    })
+
+    shiny::observe({
+      output$downloadTable <- shiny::renderUI({
+        tmp_path <- tempdir()
+        tmp_html <- tempfile(tmpdir = tmp_path, fileext = ".html")
+        tmp_pdf <- tempfile(tmpdir = tmp_path, fileext = ".pdf")
+
+        gt::gtsave(
+          data = mainTable(),
+          filename = tmp_html
+        )
+
+        # launch the PDF file generation
+        pagedown::chrome_print(
+          input = tmp_html,
+          output = tmp_pdf,
+          extra_args = chrome_extra_args(),
+          verbose = 1,
+          async = TRUE
+        )$then(
+          onFulfilled = function(value) {
+            showNotification(
+              paste("PDF file succesfully generated"),
+              type = "message"
+            )
+            output$downloadPDF <- downloadHandler(
+              filename = function() {
+                paste0(
+                  paste(dat()$NACCID, dat()$VISITDATE, sep = "-"),
+                  "_created-on-",
+                  Sys.Date(),
+                  "-at-",
+                  format(Sys.time(), "%H:%M%P"),
+                  ".pdf"
+                )
+              },
+              content = function(file) {
+                file.copy(value, file)
+              },
+              contentType = "application/pdf"
+            )
+            # return a download button
+            downloadButton(shiny::NS(id, "downloadPDF"), "Download PDF")
+          },
+          onRejected = function(error) {
+            showNotification(
+              error$message,
+              duration = NULL,
+              type = "error"
+            )
+            HTML("")
+          }
+        )
+      })
+    }) |>
+      shiny::bindEvent(input$genPDF)
   })
 }
 
@@ -115,12 +178,6 @@ mainTableServer <- function(
 #'
 #' @export
 mainTableApp <- function(dat) {
-  # stopifnot(
-  #   "htmltools must be installed to use this function" = rlang::check_installed(
-  #     "htmltools"
-  #   )
-  # )
-
   shiny::addResourcePath("www", "inst/www")
 
   ui <- bslib::page_fluid(
@@ -142,9 +199,33 @@ mainTableApp <- function(dat) {
       "main_table",
       dat = shiny::reactive(dat),
       methods = "infer",
-      table_font_size = shiny::reactive(100)
+      table_font_size = shiny::reactive(100),
+      include_caption = T
     )
   }
 
-  shiny::shinyApp(ui, server)
+  shiny::shinyApp(ui, server, options = list(port = 3229))
+}
+
+
+#' Return Chrome CLI arguments
+#'
+#' This is a helper function which returns arguments to be passed to Chrome.
+#' This function tests whether the code is running on shinyapps and returns the
+#' appropriate Chrome extra arguments.
+#'
+#' @param default_args Arguments to be used in any circumstances.
+#'
+#' @return A character vector with CLI arguments to be passed to Chrome.
+chrome_extra_args <- function(default_args = c("--disable-gpu")) {
+  args <- default_args
+  # Test whether we are in a shinyapps container
+  if (identical(Sys.getenv("R_CONFIG_ACTIVE"), "shinyapps")) {
+    args <- c(
+      args,
+      "--no-sandbox", # required because we are in a container
+      "--disable-dev-shm-usage"
+    ) # in case of low available memory
+  }
+  args
 }

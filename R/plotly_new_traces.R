@@ -1,7 +1,27 @@
+#' New Traces to add to Plot
+#'
+#' @description
+#' A short description...
+#'
+#' @param new_dat A data frame.
+#' @param visibility A named list, where the names correspond to variables in
+#' `new_dat` and the values are one of `"TRUE"`, `"FALSE"`, or `"legendonly"`.
+#' @param legend_names Legend names. Will be returned with added legends if any
+#' new ones were created. This only happens if a pair of crosswalk variables
+#' are both present.
+#' @param vars_colors Named vector. Entries give colors to use for markers and liens
+#' for variable corresponding to the name of the entry.
+#'
+#' @returns
+#' A list containing new traces (a list of lines and markers), legend names, the new
+#' x range, and the new y range. If there are no new traces to add (i.e. no standardized
+#' scores in the data), the return is empty.
+#'
+#' @export
 plotly_new_traces <- function(
   new_dat,
   visibility = visibility_defaults,
-  legend_names = legend_names(),
+  legend_names,
   vars_colors
 ) {
   new_dat <- new_dat[,
@@ -25,7 +45,7 @@ plotly_new_traces <- function(
     new_dat[[col]] <- (new_dat[[col]] - 50) / 10
   }
 
-  ## If any left...
+  ## If nothing left, abort.
   if (any_left == 0) {
     # cli::cli_alert_danger("{.var any_left} is {any_left}")
     return()

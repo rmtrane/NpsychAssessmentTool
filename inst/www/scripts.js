@@ -132,9 +132,7 @@ function addEventListenersToColors(id) {
   })
 }
 
-
-
-// Function to call when base plots are plotted. This includes re-plotting after restyling of relayout.
+// Function to call when base plots are plotted. This includes re-plotting after restyling and relayout.
 // We use this to keep track of visibility of traces
 function afterPlot (x, input) {
   // Array to hold info on all traces
