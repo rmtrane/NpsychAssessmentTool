@@ -11,11 +11,19 @@
 mainTableUI <- function(id) {
   bslib::card(bslib::card_body(
     shiny::uiOutput(shiny::NS(id, "mainTable")),
-    shiny::actionButton(
-      shiny::NS(id, "genPDF"),
-      label = "Generate PDF for Download"
-    ),
-    shiny::uiOutput(shiny::NS(id, "downloadTable")),
+    if (rlang::is_installed("pagedown") & F) {
+      shiny::tagList(
+        shiny::actionButton(
+          shiny::NS(id, "genPDF"),
+          label = "Generate PDF for Download"
+        ),
+        shiny::uiOutput(shiny::NS(id, "downloadTable"))
+      )
+    } else {
+      shiny::p(
+        "To be able to download table, please install 'pagedown' using `install.packages('pagedown')`, and restart app."
+      )
+    },
     fillable = F
   ))
 }
@@ -69,7 +77,7 @@ mainTableServer <- function(
 
     mainTable <- shiny::reactiveVal()
 
-    observe({
+    shiny::observe({
       shiny::req(descriptions, fill_values)
 
       for_table <- dat()
@@ -136,11 +144,11 @@ mainTableServer <- function(
           async = TRUE
         )$then(
           onFulfilled = function(value) {
-            showNotification(
+            shiny::showNotification(
               paste("PDF file succesfully generated"),
               type = "message"
             )
-            output$downloadPDF <- downloadHandler(
+            output$downloadPDF <- shiny::downloadHandler(
               filename = function() {
                 paste0(
                   paste(dat()$NACCID, dat()$VISITDATE, sep = "-"),
@@ -157,15 +165,15 @@ mainTableServer <- function(
               contentType = "application/pdf"
             )
             # return a download button
-            downloadButton(shiny::NS(id, "downloadPDF"), "Download PDF")
+            shiny::downloadButton(shiny::NS(id, "downloadPDF"), "Download PDF")
           },
           onRejected = function(error) {
-            showNotification(
+            shiny::showNotification(
               error$message,
               duration = NULL,
               type = "error"
             )
-            HTML("")
+            shiny::HTML("")
           }
         )
       })
@@ -212,7 +220,7 @@ mainTableApp <- function(dat) {
 #'
 #' This is a helper function which returns arguments to be passed to Chrome.
 #' This function tests whether the code is running on shinyapps and returns the
-#' appropriate Chrome extra arguments.
+#' appropriate Chrome extra arguments. Source: https://github.com/RLesur/chrome_print_shiny
 #'
 #' @param default_args Arguments to be used in any circumstances.
 #'

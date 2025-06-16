@@ -26,7 +26,8 @@ for variable corresponding to the name of the entry.}
 }
 \value{
 A list containing new traces (a list of lines and markers), legend names, the new
-x range, and the new y range.
+x range, and the new y range. If there are no new traces to add (i.e. no standardized
+scores in the data), the return is empty.
 }
 \description{
 A short description...
