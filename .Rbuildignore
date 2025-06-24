@@ -15,3 +15,4 @@
 ^[\.]?air\.toml$
 ^\.vscode$
 ^img/*
+_\.new\.png$

@@ -20,6 +20,10 @@ appServer <- function(input, output, session) {
   data_type <- shiny::reactiveVal()
   allow_col_selections <- shiny::reactiveVal()
 
+  devmode <- shiny::reactiveVal(value = FALSE)
+
+  selected_date <- shiny::reactiveVal()
+
   shiny::observe({
     dat_obj(dat_sel$dat_obj())
     data_source(dat_sel$data_source())
@@ -305,9 +309,6 @@ appServer <- function(input, output, session) {
     value = default_fill_values
   )
 
-  ## Setup reactiveVal for devmode
-  devmode <- shiny::reactiveVal(value = FALSE)
-
   ## Setup reactiveVal for table_font_size
   table_font_size <- shiny::reactiveVal(
     value = 80
@@ -417,7 +418,8 @@ appServer <- function(input, output, session) {
       descriptions = descriptions,
       fill_values = fill_values,
       print_updating = T,
-      shade_descriptions = shade_descriptions
+      shade_descriptions = shade_descriptions,
+      new_id = x
     )
   })
 
@@ -441,8 +443,6 @@ appServer <- function(input, output, session) {
   )
 
   ## Update reactiveVals for values chosen in Options pane.
-  selected_date <- shiny::reactiveVal()
-
   shiny::observe({
     bslib::accordion_panel_close(id = "options", values = TRUE)
 

@@ -12,7 +12,7 @@ $(document).on('shiny:idle', function(event) {
 
 // Custom message handler to click virtual buttons
 Shiny.addCustomMessageHandler("click", (message) => {
-  Shiny.setInputValue(message, "clicked", {priority: "event"});
+  Shiny.setInputValue(message, "click", {priority: "event"});
 })
 
 // Custom Message Handler to set input value

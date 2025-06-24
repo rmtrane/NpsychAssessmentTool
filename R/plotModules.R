@@ -136,7 +136,8 @@ plotServer <- function(
   ),
   fill_values = calc_fill_colors(n = 7),
   print_updating = T,
-  shade_descriptions = TRUE
+  shade_descriptions = TRUE,
+  new_id = NULL
 ) {
   if (!id %in% nacc_var_groups) {
     cli::cli_abort(
@@ -266,7 +267,8 @@ plotServer <- function(
         fill_values = fill_values(),
         shade_descriptions = T,
         fill_alpha = 0.2,
-        source = id
+        source = id,
+        new_id = new_id
       ) |>
         ## Make sure layout is as desired
         plotly::layout(

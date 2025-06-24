@@ -28,7 +28,8 @@ base_plot_z_scores <- function(
   fill_values,
   shade_descriptions = T,
   fill_alpha = 0.2,
-  source = "A"
+  source = "A",
+  new_id = NULL
 ) {
   if (
     shade_descriptions &
@@ -83,6 +84,14 @@ base_plot_z_scores <- function(
         orientation = "h"
       )
     )
+
+  if (!is.null(new_id)) {
+    names(p$x$visdat) <- new_id
+    p$x$cur_data <- new_id
+
+    names(p$x$attrs) <- new_id
+    names(p$x$layoutAttrs) <- new_id
+  }
 
   ## Add horizontal lines and fill colors according to descriptions
   for (i in seq_along(fill_values)) {

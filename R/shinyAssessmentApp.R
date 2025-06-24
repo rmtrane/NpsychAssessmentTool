@@ -3,12 +3,17 @@
 #' @description
 #' Wrapper that runs the Shiny application.
 #'
+#' @param testing Logical: is the app run for testing purposes?
+#'
 #' @returns
 #' Runs the Shiny app.
 #'
 #' @export
-shinyAssessmentApp <- function() {
-  options(shiny.maxRequestSize = 1000 * 1024^2)
+shinyAssessmentApp <- function(testing = FALSE) {
+  options(
+    shiny.maxRequestSize = 1000 * 1024^2,
+    shiny.autoload.r = FALSE
+  )
 
   development <- dir.exists("inst/www") &&
     basename(getwd()) == "NpsychAssessmentTool"
@@ -18,6 +23,8 @@ shinyAssessmentApp <- function() {
     www_path <- "inst/www"
     qmd_path <- "inst/qmd"
   } else {
+    require("NpsychAssessmentTool")
+
     www_path <- system.file("www", package = "NpsychAssessmentTool")
     qmd_path <- system.file("qmd", package = "NpsychAssessmentTool")
   }
@@ -30,7 +37,8 @@ shinyAssessmentApp <- function() {
     server = appServer,
     options = list(
       port = 5556,
-      launch.browser = TRUE
+      launch.browser = TRUE,
+      test.mode = testing
     )
   )
 }

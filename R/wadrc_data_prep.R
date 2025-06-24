@@ -77,7 +77,7 @@ wadrc_data_prep <- function(adrc_data) {
         data.table::patterns("^visit", cols = colnames(out)),
         paste0(
           prefixes,
-          rep(c(nacc_to_wadrc, for_diagnosis), each = length(prefixes)),
+          rep(c(nacc_to_wadrc_uds3, for_diagnosis), each = length(prefixes)),
           suffixes
         )
       ))
@@ -102,7 +102,7 @@ wadrc_data_prep <- function(adrc_data) {
 
   ## Combine columns that all relate to same variables
   for (var in setdiff(
-    c(nacc_to_wadrc, for_diagnosis),
+    c(nacc_to_wadrc_uds3, for_diagnosis),
     c(
       "ptid",
       "redcap_event_name",
@@ -254,7 +254,7 @@ wadrc_data_prep <- function(adrc_data) {
   #     tidyselect::starts_with("visit"),
   #     tidyselect::any_of(paste0(
   #       prefixes,
-  #       rep(c(nacc_to_wadrc, for_diagnosis), each = length(prefixes)),
+  #       rep(c(nacc_to_wadrc_uds3, for_diagnosis), each = length(prefixes)),
   #       suffixes
   #     )),
   #     -tidyselect::contains("_visit")
@@ -268,7 +268,7 @@ wadrc_data_prep <- function(adrc_data) {
   #       "^(",
   #       paste(prefixes, collapse = "|"),
   #       ")(",
-  #       paste(c(nacc_to_wadrc, for_diagnosis), collapse = "|"),
+  #       paste(c(nacc_to_wadrc_uds3, for_diagnosis), collapse = "|"),
   #       ")(_v1_1|)$"
   #     ),
   #     names_to = c("type", ".value", "suffix")
@@ -323,7 +323,7 @@ wadrc_data_prep <- function(adrc_data) {
   #   ) |>
   #   dplyr::mutate(
   #     dplyr::across(dplyr::where(is.logical), \(x) {
-  #       if (dplyr::cur_column() %in% nacc_to_wadrc) {
+  #       if (dplyr::cur_column() %in% nacc_to_wadrc_uds3) {
   #         return(as.numeric(x))
   #       }
 

@@ -58,7 +58,7 @@ dataSelectServer <- function(id) {
           choices = c(
             # "NACC" = "nacc",
             # "WLS" = "wls",
-            "WADRC" = "wadrc"
+            "WADRC" = "wadrc_uds3" 
           ),
           options = list(
             placeholder = "Select an option below",
@@ -74,13 +74,13 @@ dataSelectServer <- function(id) {
         choices = list(
           demo = c("NACC" = "nacc"),
           redcap = c(
-            "WADRC" = "wadrc" #,
+            "WADRC" = "wadrc_uds3" #,
             # "WLS" = "wls"
           ),
           csv_upload = c(
             "NACC" = "nacc",
             "WLS" = "wls",
-            "WADRC" = "wadrc"
+            "WADRC" = "wadrc_uds3"
           )
         )[[input$data_source]],
         selected = if (input$data_source == "demo") "nacc"
@@ -98,7 +98,7 @@ dataSelectServer <- function(id) {
       if (input$data_source == "redcap") {
         uri_and_token <- NULL
 
-        # if (input$data_type == "wadrc") {
+        # if (input$data_type == "wadrc_uds3") {
         #   uri_and_token <- getOption("redcap_adrc_uds3")
         # }
 
@@ -180,7 +180,7 @@ dataSelectServer <- function(id) {
 
     shiny::observe({
       if (input$data_source == "redcap") {
-        if (input$data_type == "wadrc") {
+        if (input$data_type == "wadrc_uds3") {
           shiny::removeNotification(id = "redcap_url_api_found")
 
           shiny::showNotification(
@@ -230,7 +230,7 @@ dataSelectServer <- function(id) {
           )
         )
 
-        if (input$data_type == "wadrc") {
+        if (input$data_type == "wadrc_uds3") {
           dat_obj(
             wadrc_data_prep(dat_obj())
           )

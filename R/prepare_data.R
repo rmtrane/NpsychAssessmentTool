@@ -66,6 +66,7 @@ prepare_data <- function(
     "NACCID",
     "SEX",
     "EDUC",
+    "HANDED",
     "NACCAGE",
     "BIRTHYR",
     "VISITYR",

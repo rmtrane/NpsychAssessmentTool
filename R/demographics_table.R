@@ -38,7 +38,7 @@ demographics_table <- function(
     "Education (years):" = "EDUC",
     "BIRTHYR" = "BIRTHYR",
     "Gender:" = "SEX",
-    "Handedness:" = "HANDEDNESS",
+    "Handedness:" = "HANDED",
     "Race:" = "RACE"
   )
 
@@ -76,7 +76,9 @@ demographics_table <- function(
     measure.vars = colnames(cur_pt_dat),
     variable.name = "name"
   ) |>
-    gt::gt() |>
+    gt::gt(
+      id = "demographics-table"
+    ) |>
     gt::cols_align(
       "right",
       .data$name

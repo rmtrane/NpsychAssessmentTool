@@ -11,7 +11,7 @@
 mainTableUI <- function(id) {
   bslib::card(bslib::card_body(
     shiny::uiOutput(shiny::NS(id, "mainTable")),
-    if (rlang::is_installed("pagedown") & F) {
+    if (rlang::is_installed("pagedown")) {
       shiny::tagList(
         shiny::actionButton(
           shiny::NS(id, "genPDF"),
@@ -155,7 +155,8 @@ mainTableServer <- function(
                   "_created-on-",
                   Sys.Date(),
                   "-at-",
-                  format(Sys.time(), "%H:%M%P"),
+                  format(Sys.time(), "%I-%M_%P"),
+                  # format(Sys.time(), "%r"),
                   ".pdf"
                 )
               },

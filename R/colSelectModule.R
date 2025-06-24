@@ -57,7 +57,7 @@ colSelectServer <- function(
 
     ## Demographics
     names(all_vars)[
-      all_vars %in% c(critical_vars, "RACE", "HANDEDNESS")
+      all_vars %in% c(critical_vars, "RACE", "HANDED")
     ] <- "Demographics"
 
     names(all_vars)[all_vars %in% birth_vars] <- "Age/Birthdate"
@@ -165,9 +165,9 @@ colSelectServer <- function(
               }
             }
 
-            if (data_type() == "wadrc") {
-              if (nacc_to_wadrc[x] %in% col_names()) {
-                out <- unname(nacc_to_wadrc[x])
+            if (data_type() == "wadrc_uds3") {
+              if (nacc_to_wadrc_uds3[x] %in% col_names()) {
+                out <- unname(nacc_to_wadrc_uds3[x])
               } else {
                 if (x %in% c("REYTOTAL", "REYAREC")) {
                   out <- "(CALCULATED)"
