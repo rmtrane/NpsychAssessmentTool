@@ -1,0 +1,32 @@
+{
+  "input": {
+    "Attention/Processing-showPlot": "yes",
+    "Executive Functioning-showPlot": "yes",
+    "General Cognition-showPlot": "yes",
+    "Language-showPlot": "yes",
+    "Memory-showPlot": "yes",
+    "Mood-showPlot": "yes",
+    "Visuospatial-showPlot": "yes",
+    "colSelect-assign": 0,
+    "current_date": "",
+    "current_studyid": "",
+    "dataSelect-data_source": "redcap",
+    "desc-add_row": 0,
+    "desc-reset": 0,
+    "devmode": false,
+    "main-plot_full_screen": false,
+    "main-table_full_screen": false,
+    "main_navbar": "Introduction",
+    "main_table_pct": 80,
+    "options": null,
+    "plots-accordion": null,
+    "shade_descriptions": true,
+    "update_colors": 0
+  },
+  "output": {
+
+  },
+  "export": {
+
+  }
+}
