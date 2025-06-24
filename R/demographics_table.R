@@ -11,27 +11,47 @@
 demographics_table <- function(
   dat
 ) {
-  stopifnot(
-    "'dat' must be a data.table object" = data.table::is.data.table(dat)
-  )
-  stopifnot("More than one study ID in data" = length(unique(dat$NACCID)) == 1)
+  if (!data.table::is.data.table(dat)) {
+    cli::cli_abort(
+      c(
+        "The {.var dat} argument must be a {.cls data.table} object.",
+        "i" = "Instead, it is a {.obj_type_friendly {dat}}."
+      )
+    )
+  }
 
-  # print(paste("Updating demographics with", unique(dat$NACCID)))
-  # stopifnot("Study ID not in data set" = studyid %in% dat$NACCID)
+  if (length(unique(dat$NACCID)) != 1) {
+    cli::cli_abort(
+      "There should only be one study ID in data, not {length(unique(dat$NACCID))}."
+    )
+  }
 
-  dat$SEX <- unlist(lapply(
-    dat$SEX,
-    \(x) {
-      if (is.numeric(x)) NpsychBatteryNorms::values_to_labels(x, "SEX") else x
-    }
-  ))
+  for (cur_var in c("SEX", "RACE", "HANDED")) {
+    dat[[cur_var]] <- unlist(lapply(dat[[cur_var]], \(x) {
+      if (is.numeric(x)) NpsychBatteryNorms::values_to_labels(x, cur_var) else x
+    }))
+  }
 
-  dat$RACE <- unlist(lapply(
-    dat$RACE,
-    \(x) {
-      if (is.numeric(x)) NpsychBatteryNorms::values_to_labels(x, "RACE") else x
-    }
-  ))
+  # dat$SEX <- unlist(lapply(
+  #   dat$SEX,
+  #   \(x) {
+  #     if (is.numeric(x)) NpsychBatteryNorms::values_to_labels(x, "SEX") else x
+  #   }
+  # ))
+
+  # dat$RACE <- unlist(lapply(
+  #   dat$RACE,
+  #   \(x) {
+  #     if (is.numeric(x)) NpsychBatteryNorms::values_to_labels(x, "RACE") else x
+  #   }
+  # ))
+
+  # dat$RACE <- unlist(lapply(
+  #   dat$RACE,
+  #   \(x) {
+  #     if (is.numeric(x)) NpsychBatteryNorms::values_to_labels(x, "RACE") else x
+  #   }
+  # ))
 
   cols_selected <- c(
     "Study ID:" = "NACCID",
