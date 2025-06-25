@@ -58,7 +58,7 @@ dataSelectServer <- function(id) {
           choices = c(
             # "NACC" = "nacc",
             # "WLS" = "wls",
-            "WADRC" = "wadrc_uds3" 
+            "WADRC" = "wadrc_uds3"
           ),
           options = list(
             placeholder = "Select an option below",
@@ -194,7 +194,7 @@ dataSelectServer <- function(id) {
             REDCapR::redcap_read_oneshot(
               redcap_uri = input$redcap_uri,
               token = input$api_token,
-              fields = wadrc_redcap_fields
+              fields = wadrc_uds3_redcap_fields
             )$data
           )
 
@@ -208,7 +208,8 @@ dataSelectServer <- function(id) {
           )
 
           from_redcap <- wadrc_data_prep(
-            adrc_data = from_redcap
+            adrc_data = from_redcap,
+            uds = "uds3"
           )
 
           shiny::removeNotification(id = "preparing_from_redcap")
@@ -232,7 +233,7 @@ dataSelectServer <- function(id) {
 
         if (input$data_type == "wadrc_uds3") {
           dat_obj(
-            wadrc_data_prep(dat_obj())
+            wadrc_data_prep(dat_obj(), uds = "uds3")
           )
         }
       }
@@ -259,7 +260,9 @@ dataSelectServer <- function(id) {
 dataSelectApp <- function() {
   development <- dir.exists("inst/shiny/www")
 
-  if (development) print("Development...")
+  if (development) {
+    print("Development...")
+  }
 
   shiny::addResourcePath(
     "www",

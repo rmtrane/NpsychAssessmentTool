@@ -87,6 +87,10 @@ prepare_data <- function(
   print_messages = F,
   with_diags = T
 ) {
+  if (is.null(selected_cols)) {
+    selected_cols <- colnames(dat)
+  }
+
   if (is.null(names(selected_cols))) {
     names(selected_cols) <- selected_cols
   }

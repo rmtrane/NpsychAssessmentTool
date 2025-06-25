@@ -28,7 +28,16 @@ appServer <- function(input, output, session) {
     dat_obj(dat_sel$dat_obj())
     data_source(dat_sel$data_source())
     data_type(dat_sel$data_type())
-    allow_col_selections(data_source() == "csv_upload")
+
+    if (data_source() == "csv_upload") {
+      allow_col_selections("enable")
+    }
+
+    if (data_source() == "redcap") {
+      allow_col_selections("hide")
+    }
+
+    # allow_col_selections(data_source() == "csv_upload")
   })
 
   ## Reactive object with available columns to use to select from
@@ -98,7 +107,7 @@ appServer <- function(input, output, session) {
       DIGIB = c(method = "regression", version = "nacc"),
       DIGIBLEN = c(method = "regression", version = "nacc")
     ),
-    allow_col_selection = allow_col_selections()
+    col_selection = allow_col_selections()
   )
 
   shiny::observe({

@@ -656,7 +656,6 @@
     "colSelect-OTRAILBmethod": "regression (updated)",
     "colSelect-REY6RECmethod": "T-score (NA)",
     "colSelect-REYARECmethod": "T-score (NA)",
-    "colSelect-REYDLISTmethod": "T-score (NA)",
     "colSelect-REYDRECmethod": "T-score (NA)",
     "colSelect-REYTOTALmethod": "T-score (NA)",
     "colSelect-TRAILAmethod": "regression (nacc)",
@@ -839,14 +838,7 @@
       158,
       159,
       160,
-      161,
-      162,
-      163,
-      164,
-      165,
-      166,
-      167,
-      168
+      161
     ],
     "colSelect-vars_table_output_rows_current": [
       1,
@@ -1009,14 +1001,7 @@
       158,
       159,
       160,
-      161,
-      162,
-      163,
-      164,
-      165,
-      166,
-      167,
-      168
+      161
     ],
     "colSelect-vars_table_output_rows_selected": null,
     "colSelect-vars_table_output_search": "",
@@ -1061,7 +1046,7 @@
           }
         },
         {
-          "visible": true,
+          "visible": false,
           "search": {
             "search": "",
             "smart": true,
@@ -1079,7 +1064,7 @@
           }
         },
         {
-          "visible": true,
+          "visible": false,
           "search": {
             "search": "",
             "smart": true,
@@ -1099,8 +1084,8 @@
       ]
     },
     "colSelect-varstableDrawn": "on",
-    "current_date": "2017-11-05",
-    "current_studyid": "NACC000460",
+    "current_date": "",
+    "current_studyid": "",
     "dataSelect-data_source": "demo",
     "dataSelect-data_type": "nacc",
     "dataSelect-fetch_data_button": 0,
@@ -1111,6 +1096,7 @@
     "main-plot_full_screen": false,
     "main-table_full_screen": false,
     "main_navbar": "tables-and-figures",
+    "main_table-genPDF": 0,
     "main_table_pct": 80,
     "moveToTables": "click",
     "options": null,
@@ -1145,8 +1131,8 @@
           "Attention/Processing": {
             "mode": "none",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -1164,8 +1150,8 @@
           "Attention/Processing.1": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -1197,8 +1183,8 @@
           "Attention/Processing.2": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -1212,7 +1198,7 @@
               20
             ],
             "type": "scatter",
-            "y": -11.141592484482844,
+            "y": -11.597326188796796,
             "fill": "tonexty",
             "fillcolor": "#D7302733",
             "name": "Impaired",
@@ -1225,8 +1211,8 @@
           "Attention/Processing.3": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -1258,8 +1244,8 @@
           "Attention/Processing.4": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -1286,8 +1272,8 @@
           "Attention/Processing.5": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -1319,8 +1305,8 @@
           "Attention/Processing.6": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -1347,8 +1333,8 @@
           "Attention/Processing.7": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -1380,8 +1366,8 @@
           "Attention/Processing.8": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -1408,8 +1394,8 @@
           "Attention/Processing.9": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -1441,8 +1427,8 @@
           "Attention/Processing.10": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -1469,8 +1455,8 @@
           "Attention/Processing.11": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -1502,8 +1488,8 @@
           "Attention/Processing.12": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -1530,8 +1516,8 @@
           "Attention/Processing.13": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -1563,8 +1549,8 @@
           "Attention/Processing.14": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -1578,7 +1564,7 @@
               20
             ],
             "type": "scatter",
-            "y": 11.141592484482844,
+            "y": 11.597326188796796,
             "fill": "tonexty",
             "fillcolor": "#1A985033",
             "name": "Very Superior",
@@ -1604,11 +1590,11 @@
             "automargin": true,
             "title": "",
             "range": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
-            "minallowed": "2005-04-01",
-            "maxallowed": "2024-10-01"
+            "minallowed": "2004-10-01",
+            "maxallowed": "2025-04-01"
           },
           "yaxis": {
             "domain": [
@@ -1617,8 +1603,8 @@
             ],
             "automargin": true,
             "title": "z-score",
-            "maxallowed": 11.141592484482844,
-            "minallowed": -11.141592484482844,
+            "maxallowed": 11.597326188796796,
+            "minallowed": -11.597326188796796,
             "showgrid": false
           },
           "legend": {
@@ -1658,8 +1644,8 @@
           {
             "mode": "none",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -1689,8 +1675,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -1731,8 +1717,8 @@
             "fillcolor": "#D7302733",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -1741,8 +1727,8 @@
             ],
             "type": "scatter",
             "y": [
-              -11.141592484482844,
-              -11.141592484482844
+              -11.597326188796796,
+              -11.597326188796796
             ],
             "fill": "tonexty",
             "name": "Impaired",
@@ -1770,8 +1756,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -1812,8 +1798,8 @@
             "fillcolor": "#FC8D5933",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -1851,8 +1837,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -1893,8 +1879,8 @@
             "fillcolor": "#FEE08B33",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -1932,8 +1918,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -1974,8 +1960,8 @@
             "fillcolor": "#FFFFBF33",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -2013,8 +1999,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -2055,8 +2041,8 @@
             "fillcolor": "#D9EF8B33",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -2094,8 +2080,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -2136,8 +2122,8 @@
             "fillcolor": "#91CF6033",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -2175,8 +2161,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -2217,8 +2203,8 @@
             "fillcolor": "#1A985033",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -2227,8 +2213,8 @@
             ],
             "type": "scatter",
             "y": [
-              11.141592484482844,
-              11.141592484482844
+              11.597326188796796,
+              11.597326188796796
             ],
             "fill": "tonexty",
             "name": "Very Superior",
@@ -2375,8 +2361,8 @@
           "Executive Functioning": {
             "mode": "none",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -2394,8 +2380,8 @@
           "Executive Functioning.1": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -2427,8 +2413,8 @@
           "Executive Functioning.2": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -2442,7 +2428,7 @@
               20
             ],
             "type": "scatter",
-            "y": -5.6798465582431881,
+            "y": -6.5386492862047936,
             "fill": "tonexty",
             "fillcolor": "#D7302733",
             "name": "Impaired",
@@ -2455,8 +2441,8 @@
           "Executive Functioning.3": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -2488,8 +2474,8 @@
           "Executive Functioning.4": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -2516,8 +2502,8 @@
           "Executive Functioning.5": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -2549,8 +2535,8 @@
           "Executive Functioning.6": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -2577,8 +2563,8 @@
           "Executive Functioning.7": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -2610,8 +2596,8 @@
           "Executive Functioning.8": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -2638,8 +2624,8 @@
           "Executive Functioning.9": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -2671,8 +2657,8 @@
           "Executive Functioning.10": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -2699,8 +2685,8 @@
           "Executive Functioning.11": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -2732,8 +2718,8 @@
           "Executive Functioning.12": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -2760,8 +2746,8 @@
           "Executive Functioning.13": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -2793,8 +2779,8 @@
           "Executive Functioning.14": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -2808,7 +2794,7 @@
               20
             ],
             "type": "scatter",
-            "y": 5.6798465582431881,
+            "y": 6.5386492862047936,
             "fill": "tonexty",
             "fillcolor": "#1A985033",
             "name": "Very Superior",
@@ -2834,11 +2820,11 @@
             "automargin": true,
             "title": "",
             "range": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
-            "minallowed": "2005-04-01",
-            "maxallowed": "2024-10-01"
+            "minallowed": "2004-10-01",
+            "maxallowed": "2025-04-01"
           },
           "yaxis": {
             "domain": [
@@ -2847,8 +2833,8 @@
             ],
             "automargin": true,
             "title": "z-score",
-            "maxallowed": 5.6798465582431881,
-            "minallowed": -5.6798465582431881,
+            "maxallowed": 6.5386492862047936,
+            "minallowed": -6.5386492862047936,
             "showgrid": false
           },
           "legend": {
@@ -2888,8 +2874,8 @@
           {
             "mode": "none",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -2919,8 +2905,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -2961,8 +2947,8 @@
             "fillcolor": "#D7302733",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -2971,8 +2957,8 @@
             ],
             "type": "scatter",
             "y": [
-              -5.6798465582431881,
-              -5.6798465582431881
+              -6.5386492862047936,
+              -6.5386492862047936
             ],
             "fill": "tonexty",
             "name": "Impaired",
@@ -3000,8 +2986,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -3042,8 +3028,8 @@
             "fillcolor": "#FC8D5933",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -3081,8 +3067,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -3123,8 +3109,8 @@
             "fillcolor": "#FEE08B33",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -3162,8 +3148,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -3204,8 +3190,8 @@
             "fillcolor": "#FFFFBF33",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -3243,8 +3229,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -3285,8 +3271,8 @@
             "fillcolor": "#D9EF8B33",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -3324,8 +3310,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -3366,8 +3352,8 @@
             "fillcolor": "#91CF6033",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -3405,8 +3391,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -3447,8 +3433,8 @@
             "fillcolor": "#1A985033",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -3457,8 +3443,8 @@
             ],
             "type": "scatter",
             "y": [
-              5.6798465582431881,
-              5.6798465582431881
+              6.5386492862047936,
+              6.5386492862047936
             ],
             "fill": "tonexty",
             "name": "Very Superior",
@@ -3605,8 +3591,8 @@
           "General Cognition": {
             "mode": "none",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -3624,8 +3610,8 @@
           "General Cognition.1": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -3657,8 +3643,8 @@
           "General Cognition.2": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -3672,7 +3658,7 @@
               20
             ],
             "type": "scatter",
-            "y": -20.33601882261425,
+            "y": -21.977373258428056,
             "fill": "tonexty",
             "fillcolor": "#D7302733",
             "name": "Impaired",
@@ -3685,8 +3671,8 @@
           "General Cognition.3": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -3718,8 +3704,8 @@
           "General Cognition.4": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -3746,8 +3732,8 @@
           "General Cognition.5": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -3779,8 +3765,8 @@
           "General Cognition.6": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -3807,8 +3793,8 @@
           "General Cognition.7": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -3840,8 +3826,8 @@
           "General Cognition.8": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -3868,8 +3854,8 @@
           "General Cognition.9": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -3901,8 +3887,8 @@
           "General Cognition.10": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -3929,8 +3915,8 @@
           "General Cognition.11": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -3962,8 +3948,8 @@
           "General Cognition.12": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -3990,8 +3976,8 @@
           "General Cognition.13": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -4023,8 +4009,8 @@
           "General Cognition.14": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -4038,7 +4024,7 @@
               20
             ],
             "type": "scatter",
-            "y": 20.33601882261425,
+            "y": 21.977373258428056,
             "fill": "tonexty",
             "fillcolor": "#1A985033",
             "name": "Very Superior",
@@ -4064,11 +4050,11 @@
             "automargin": true,
             "title": "",
             "range": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
-            "minallowed": "2005-04-01",
-            "maxallowed": "2024-10-01"
+            "minallowed": "2004-10-01",
+            "maxallowed": "2025-04-01"
           },
           "yaxis": {
             "domain": [
@@ -4077,8 +4063,8 @@
             ],
             "automargin": true,
             "title": "z-score",
-            "maxallowed": 20.33601882261425,
-            "minallowed": -20.33601882261425,
+            "maxallowed": 21.977373258428056,
+            "minallowed": -21.977373258428056,
             "showgrid": false
           },
           "legend": {
@@ -4118,8 +4104,8 @@
           {
             "mode": "none",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -4149,8 +4135,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -4191,8 +4177,8 @@
             "fillcolor": "#D7302733",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -4201,8 +4187,8 @@
             ],
             "type": "scatter",
             "y": [
-              -20.33601882261425,
-              -20.33601882261425
+              -21.977373258428056,
+              -21.977373258428056
             ],
             "fill": "tonexty",
             "name": "Impaired",
@@ -4230,8 +4216,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -4272,8 +4258,8 @@
             "fillcolor": "#FC8D5933",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -4311,8 +4297,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -4353,8 +4339,8 @@
             "fillcolor": "#FEE08B33",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -4392,8 +4378,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -4434,8 +4420,8 @@
             "fillcolor": "#FFFFBF33",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -4473,8 +4459,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -4515,8 +4501,8 @@
             "fillcolor": "#D9EF8B33",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -4554,8 +4540,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -4596,8 +4582,8 @@
             "fillcolor": "#91CF6033",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -4635,8 +4621,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -4677,8 +4663,8 @@
             "fillcolor": "#1A985033",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -4687,8 +4673,8 @@
             ],
             "type": "scatter",
             "y": [
-              20.33601882261425,
-              20.33601882261425
+              21.977373258428056,
+              21.977373258428056
             ],
             "fill": "tonexty",
             "name": "Very Superior",
@@ -4835,8 +4821,8 @@
           "Language": {
             "mode": "none",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -4854,8 +4840,8 @@
           "Language.1": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -4887,8 +4873,8 @@
           "Language.2": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -4902,7 +4888,7 @@
               20
             ],
             "type": "scatter",
-            "y": -13.361273175352625,
+            "y": -8.8558358446017955,
             "fill": "tonexty",
             "fillcolor": "#D7302733",
             "name": "Impaired",
@@ -4915,8 +4901,8 @@
           "Language.3": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -4948,8 +4934,8 @@
           "Language.4": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -4976,8 +4962,8 @@
           "Language.5": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -5009,8 +4995,8 @@
           "Language.6": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -5037,8 +5023,8 @@
           "Language.7": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -5070,8 +5056,8 @@
           "Language.8": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -5098,8 +5084,8 @@
           "Language.9": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -5131,8 +5117,8 @@
           "Language.10": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -5159,8 +5145,8 @@
           "Language.11": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -5192,8 +5178,8 @@
           "Language.12": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -5220,8 +5206,8 @@
           "Language.13": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -5253,8 +5239,8 @@
           "Language.14": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -5268,7 +5254,7 @@
               20
             ],
             "type": "scatter",
-            "y": 13.361273175352625,
+            "y": 8.8558358446017955,
             "fill": "tonexty",
             "fillcolor": "#1A985033",
             "name": "Very Superior",
@@ -5294,11 +5280,11 @@
             "automargin": true,
             "title": "",
             "range": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
-            "minallowed": "2005-04-01",
-            "maxallowed": "2024-10-01"
+            "minallowed": "2004-10-01",
+            "maxallowed": "2025-04-01"
           },
           "yaxis": {
             "domain": [
@@ -5307,8 +5293,8 @@
             ],
             "automargin": true,
             "title": "z-score",
-            "maxallowed": 13.361273175352625,
-            "minallowed": -13.361273175352625,
+            "maxallowed": 8.8558358446017955,
+            "minallowed": -8.8558358446017955,
             "showgrid": false
           },
           "legend": {
@@ -5348,8 +5334,8 @@
           {
             "mode": "none",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -5379,8 +5365,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -5421,8 +5407,8 @@
             "fillcolor": "#D7302733",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -5431,8 +5417,8 @@
             ],
             "type": "scatter",
             "y": [
-              -13.361273175352625,
-              -13.361273175352625
+              -8.8558358446017955,
+              -8.8558358446017955
             ],
             "fill": "tonexty",
             "name": "Impaired",
@@ -5460,8 +5446,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -5502,8 +5488,8 @@
             "fillcolor": "#FC8D5933",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -5541,8 +5527,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -5583,8 +5569,8 @@
             "fillcolor": "#FEE08B33",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -5622,8 +5608,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -5664,8 +5650,8 @@
             "fillcolor": "#FFFFBF33",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -5703,8 +5689,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -5745,8 +5731,8 @@
             "fillcolor": "#D9EF8B33",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -5784,8 +5770,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -5826,8 +5812,8 @@
             "fillcolor": "#91CF6033",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -5865,8 +5851,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -5907,8 +5893,8 @@
             "fillcolor": "#1A985033",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -5917,8 +5903,8 @@
             ],
             "type": "scatter",
             "y": [
-              13.361273175352625,
-              13.361273175352625
+              8.8558358446017955,
+              8.8558358446017955
             ],
             "fill": "tonexty",
             "name": "Very Superior",
@@ -6065,8 +6051,8 @@
           "Memory": {
             "mode": "none",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -6084,8 +6070,8 @@
           "Memory.1": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -6117,8 +6103,8 @@
           "Memory.2": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -6132,7 +6118,7 @@
               20
             ],
             "type": "scatter",
-            "y": -4.4349647461568171,
+            "y": -4.362600596975307,
             "fill": "tonexty",
             "fillcolor": "#D7302733",
             "name": "Impaired",
@@ -6145,8 +6131,8 @@
           "Memory.3": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -6178,8 +6164,8 @@
           "Memory.4": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -6206,8 +6192,8 @@
           "Memory.5": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -6239,8 +6225,8 @@
           "Memory.6": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -6267,8 +6253,8 @@
           "Memory.7": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -6300,8 +6286,8 @@
           "Memory.8": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -6328,8 +6314,8 @@
           "Memory.9": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -6361,8 +6347,8 @@
           "Memory.10": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -6389,8 +6375,8 @@
           "Memory.11": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -6422,8 +6408,8 @@
           "Memory.12": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -6450,8 +6436,8 @@
           "Memory.13": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -6483,8 +6469,8 @@
           "Memory.14": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -6498,7 +6484,7 @@
               20
             ],
             "type": "scatter",
-            "y": 4.4349647461568171,
+            "y": 4.362600596975307,
             "fill": "tonexty",
             "fillcolor": "#1A985033",
             "name": "Very Superior",
@@ -6524,11 +6510,11 @@
             "automargin": true,
             "title": "",
             "range": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
-            "minallowed": "2005-04-01",
-            "maxallowed": "2024-10-01"
+            "minallowed": "2004-10-01",
+            "maxallowed": "2025-04-01"
           },
           "yaxis": {
             "domain": [
@@ -6537,8 +6523,8 @@
             ],
             "automargin": true,
             "title": "z-score",
-            "maxallowed": 4.4349647461568171,
-            "minallowed": -4.4349647461568171,
+            "maxallowed": 4.362600596975307,
+            "minallowed": -4.362600596975307,
             "showgrid": false
           },
           "legend": {
@@ -6578,8 +6564,8 @@
           {
             "mode": "none",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -6609,8 +6595,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -6651,8 +6637,8 @@
             "fillcolor": "#D7302733",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -6661,8 +6647,8 @@
             ],
             "type": "scatter",
             "y": [
-              -4.4349647461568171,
-              -4.4349647461568171
+              -4.362600596975307,
+              -4.362600596975307
             ],
             "fill": "tonexty",
             "name": "Impaired",
@@ -6690,8 +6676,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -6732,8 +6718,8 @@
             "fillcolor": "#FC8D5933",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -6771,8 +6757,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -6813,8 +6799,8 @@
             "fillcolor": "#FEE08B33",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -6852,8 +6838,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -6894,8 +6880,8 @@
             "fillcolor": "#FFFFBF33",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -6933,8 +6919,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -6975,8 +6961,8 @@
             "fillcolor": "#D9EF8B33",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -7014,8 +7000,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -7056,8 +7042,8 @@
             "fillcolor": "#91CF6033",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -7095,8 +7081,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -7137,8 +7123,8 @@
             "fillcolor": "#1A985033",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -7147,8 +7133,8 @@
             ],
             "type": "scatter",
             "y": [
-              4.4349647461568171,
-              4.4349647461568171
+              4.362600596975307,
+              4.362600596975307
             ],
             "fill": "tonexty",
             "name": "Very Superior",
@@ -7295,8 +7281,8 @@
           "Mood": {
             "mode": "none",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -7314,8 +7300,8 @@
           "Mood.1": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -7347,8 +7333,8 @@
           "Mood.2": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -7375,8 +7361,8 @@
           "Mood.3": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -7408,8 +7394,8 @@
           "Mood.4": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -7436,8 +7422,8 @@
           "Mood.5": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -7469,8 +7455,8 @@
           "Mood.6": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -7497,8 +7483,8 @@
           "Mood.7": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -7530,8 +7516,8 @@
           "Mood.8": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -7558,8 +7544,8 @@
           "Mood.9": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -7591,8 +7577,8 @@
           "Mood.10": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -7619,8 +7605,8 @@
           "Mood.11": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -7652,8 +7638,8 @@
           "Mood.12": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -7680,8 +7666,8 @@
           "Mood.13": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -7713,8 +7699,8 @@
           "Mood.14": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -7754,11 +7740,11 @@
             "automargin": true,
             "title": "",
             "range": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
-            "minallowed": "2005-04-01",
-            "maxallowed": "2024-10-01"
+            "minallowed": "2004-10-01",
+            "maxallowed": "2025-04-01"
           },
           "yaxis": {
             "domain": [
@@ -7808,8 +7794,8 @@
           {
             "mode": "none",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -7839,8 +7825,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -7881,8 +7867,8 @@
             "fillcolor": "#D7302733",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -7920,8 +7906,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -7962,8 +7948,8 @@
             "fillcolor": "#FC8D5933",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -8001,8 +7987,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -8043,8 +8029,8 @@
             "fillcolor": "#FEE08B33",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -8082,8 +8068,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -8124,8 +8110,8 @@
             "fillcolor": "#FFFFBF33",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -8163,8 +8149,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -8205,8 +8191,8 @@
             "fillcolor": "#D9EF8B33",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -8244,8 +8230,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -8286,8 +8272,8 @@
             "fillcolor": "#91CF6033",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -8325,8 +8311,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -8367,8 +8353,8 @@
             "fillcolor": "#1A985033",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -8525,8 +8511,8 @@
           "Visuospatial": {
             "mode": "none",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -8544,8 +8530,8 @@
           "Visuospatial.1": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -8577,8 +8563,8 @@
           "Visuospatial.2": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -8592,7 +8578,7 @@
               20
             ],
             "type": "scatter",
-            "y": -11.81291099230906,
+            "y": -11.815183434308224,
             "fill": "tonexty",
             "fillcolor": "#D7302733",
             "name": "Impaired",
@@ -8605,8 +8591,8 @@
           "Visuospatial.3": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -8638,8 +8624,8 @@
           "Visuospatial.4": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -8666,8 +8652,8 @@
           "Visuospatial.5": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -8699,8 +8685,8 @@
           "Visuospatial.6": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -8727,8 +8713,8 @@
           "Visuospatial.7": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -8760,8 +8746,8 @@
           "Visuospatial.8": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -8788,8 +8774,8 @@
           "Visuospatial.9": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -8821,8 +8807,8 @@
           "Visuospatial.10": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -8849,8 +8835,8 @@
           "Visuospatial.11": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -8882,8 +8868,8 @@
           "Visuospatial.12": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -8910,8 +8896,8 @@
           "Visuospatial.13": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -8943,8 +8929,8 @@
           "Visuospatial.14": {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": "none",
@@ -8958,7 +8944,7 @@
               20
             ],
             "type": "scatter",
-            "y": 11.81291099230906,
+            "y": 11.815183434308224,
             "fill": "tonexty",
             "fillcolor": "#1A985033",
             "name": "Very Superior",
@@ -8984,11 +8970,11 @@
             "automargin": true,
             "title": "",
             "range": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
-            "minallowed": "2005-04-01",
-            "maxallowed": "2024-10-01"
+            "minallowed": "2004-10-01",
+            "maxallowed": "2025-04-01"
           },
           "yaxis": {
             "domain": [
@@ -8997,8 +8983,8 @@
             ],
             "automargin": true,
             "title": "z-score",
-            "maxallowed": 11.81291099230906,
-            "minallowed": -11.81291099230906,
+            "maxallowed": 11.815183434308224,
+            "minallowed": -11.815183434308224,
             "showgrid": false
           },
           "legend": {
@@ -9038,8 +9024,8 @@
           {
             "mode": "none",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -9069,8 +9055,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -9111,8 +9097,8 @@
             "fillcolor": "#D7302733",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -9121,8 +9107,8 @@
             ],
             "type": "scatter",
             "y": [
-              -11.81291099230906,
-              -11.81291099230906
+              -11.815183434308224,
+              -11.815183434308224
             ],
             "fill": "tonexty",
             "name": "Impaired",
@@ -9150,8 +9136,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -9192,8 +9178,8 @@
             "fillcolor": "#FC8D5933",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -9231,8 +9217,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -9273,8 +9259,8 @@
             "fillcolor": "#FEE08B33",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -9312,8 +9298,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -9354,8 +9340,8 @@
             "fillcolor": "#FFFFBF33",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -9393,8 +9379,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -9435,8 +9421,8 @@
             "fillcolor": "#D9EF8B33",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -9474,8 +9460,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -9516,8 +9502,8 @@
             "fillcolor": "#91CF6033",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -9555,8 +9541,8 @@
           {
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -9597,8 +9583,8 @@
             "fillcolor": "#1A985033",
             "mode": "lines",
             "x": [
-              "2005-04-01",
-              "2024-10-01"
+              "2004-10-01",
+              "2025-04-01"
             ],
             "showlegend": false,
             "hoverinfo": [
@@ -9607,8 +9593,8 @@
             ],
             "type": "scatter",
             "y": [
-              11.81291099230906,
-              11.81291099230906
+              11.815183434308224,
+              11.815183434308224
             ],
             "fill": "tonexty",
             "name": "Very Superior",
@@ -9765,6 +9751,11 @@
               "targets": 0
             },
             {
+              "visible": false,
+              "targets": 3
+            },
+            {
+              "visible": false,
               "targets": 5,
               "render": "function (data, type, row, meta) {\n                  return `<div style=\"font-size: 0.9375rem; background:rgb(226, 226, 226); position: relative; border-radius: 3px; border-style: solid; border-width: 1px; border-color: #8D959E; padding: 0.375rem; padding-left: 0.75rem; padding-right: 0.75rem;\">`+data+`<\/div>`\n                }"
             },
@@ -9827,7 +9818,7 @@
         }
       },
       "evals": [
-        "options.columnDefs.2.render",
+        "options.columnDefs.3.render",
         "options.preDrawCallback",
         "options.drawCallback",
         "options.ajax.data"
@@ -9932,7 +9923,7 @@
       ]
     },
     "dataSelect-data_type_ui": {
-      "html": "<div class=\"form-group shiny-input-container\">\n  <label class=\"control-label\" id=\"dataSelect-data_type-label\" for=\"dataSelect-data_type\">Source of data<\/label>\n  <div>\n    <select class=\"shiny-input-select form-control\" id=\"dataSelect-data_type\"><option value=\"wadrc\" selected>WADRC<\/option><\/select>\n    <script type=\"application/json\" data-for=\"dataSelect-data_type\" data-eval=\"[&quot;onInitialize&quot;]\">{\"placeholder\":\"Select an option below\",\"onInitialize\":\"function() { this.setValue(\\\"\\\"); }\",\"plugins\":[\"selectize-plugin-a11y\"]}<\/script>\n  <\/div>\n<\/div>",
+      "html": "<div class=\"form-group shiny-input-container\">\n  <label class=\"control-label\" id=\"dataSelect-data_type-label\" for=\"dataSelect-data_type\">Source of data<\/label>\n  <div>\n    <select class=\"shiny-input-select form-control\" id=\"dataSelect-data_type\"><option value=\"wadrc_uds3\" selected>WADRC<\/option><\/select>\n    <script type=\"application/json\" data-for=\"dataSelect-data_type\" data-eval=\"[&quot;onInitialize&quot;]\">{\"placeholder\":\"Select an option below\",\"onInitialize\":\"function() { this.setValue(\\\"\\\"); }\",\"plugins\":[\"selectize-plugin-a11y\"]}<\/script>\n  <\/div>\n<\/div>",
       "deps": [
         {
           "name": "selectize",
@@ -10015,25 +10006,15 @@
       ]
     },
     "demographics_table_output": {
-      "html": "<div id=\"demographics-table\" style=\"padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;\">\n  <style>#demographics-table table {\n  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n}\n\n#demographics-table thead, #demographics-table tbody, #demographics-table tfoot, #demographics-table tr, #demographics-table td, #demographics-table th {\n  border-style: none;\n}\n\n#demographics-table p {\n  margin: 0;\n  padding: 0;\n}\n\n#demographics-table .gt_table {\n  display: table;\n  border-collapse: collapse;\n  line-height: normal;\n  margin-left: auto;\n  margin-right: auto;\n  color: #333333;\n  font-size: 16px;\n  font-weight: normal;\n  font-style: normal;\n  background-color: #FFFFFF;\n  width: auto;\n  border-top-style: solid;\n  border-top-width: 2px;\n  border-top-color: #A8A8A8;\n  border-right-style: solid;\n  border-right-width: 2px;\n  border-right-color: #D3D3D3;\n  border-bottom-style: solid;\n  border-bottom-width: 2px;\n  border-bottom-color: #A8A8A8;\n  border-left-style: solid;\n  border-left-width: 2px;\n  border-left-color: #D3D3D3;\n}\n\n#demographics-table .gt_caption {\n  padding-top: 4px;\n  padding-bottom: 4px;\n}\n\n#demographics-table .gt_title {\n  color: #333333;\n  font-size: 125%;\n  font-weight: initial;\n  padding-top: 4px;\n  padding-bottom: 4px;\n  padding-left: 5px;\n  padding-right: 5px;\n  border-bottom-color: #FFFFFF;\n  border-bottom-width: 0;\n}\n\n#demographics-table .gt_subtitle {\n  color: #333333;\n  font-size: 85%;\n  font-weight: initial;\n  padding-top: 3px;\n  padding-bottom: 5px;\n  padding-left: 5px;\n  padding-right: 5px;\n  border-top-color: #FFFFFF;\n  border-top-width: 0;\n}\n\n#demographics-table .gt_heading {\n  background-color: #FFFFFF;\n  text-align: center;\n  border-bottom-color: #FFFFFF;\n  border-left-style: none;\n  border-left-width: 1px;\n  border-left-color: #D3D3D3;\n  border-right-style: none;\n  border-right-width: 1px;\n  border-right-color: #D3D3D3;\n}\n\n#demographics-table .gt_bottom_border {\n  border-bottom-style: solid;\n  border-bottom-width: 2px;\n  border-bottom-color: #D3D3D3;\n}\n\n#demographics-table .gt_col_headings {\n  border-top-style: solid;\n  border-top-width: 2px;\n  border-top-color: #D3D3D3;\n  border-bottom-style: solid;\n  border-bottom-width: 2px;\n  border-bottom-color: #D3D3D3;\n  border-left-style: none;\n  border-left-width: 1px;\n  border-left-color: #D3D3D3;\n  border-right-style: none;\n  border-right-width: 1px;\n  border-right-color: #D3D3D3;\n}\n\n#demographics-table .gt_col_heading {\n  color: #333333;\n  background-color: #FFFFFF;\n  font-size: 100%;\n  font-weight: normal;\n  text-transform: inherit;\n  border-left-style: none;\n  border-left-width: 1px;\n  border-left-color: #D3D3D3;\n  border-right-style: none;\n  border-right-width: 1px;\n  border-right-color: #D3D3D3;\n  vertical-align: bottom;\n  padding-top: 5px;\n  padding-bottom: 6px;\n  padding-left: 5px;\n  padding-right: 5px;\n  overflow-x: hidden;\n}\n\n#demographics-table .gt_column_spanner_outer {\n  color: #333333;\n  background-color: #FFFFFF;\n  font-size: 100%;\n  font-weight: normal;\n  text-transform: inherit;\n  padding-top: 0;\n  padding-bottom: 0;\n  padding-left: 4px;\n  padding-right: 4px;\n}\n\n#demographics-table .gt_column_spanner_outer:first-child {\n  padding-left: 0;\n}\n\n#demographics-table .gt_column_spanner_outer:last-child {\n  padding-right: 0;\n}\n\n#demographics-table .gt_column_spanner {\n  border-bottom-style: solid;\n  border-bottom-width: 2px;\n  border-bottom-color: #D3D3D3;\n  vertical-align: bottom;\n  padding-top: 5px;\n  padding-bottom: 5px;\n  overflow-x: hidden;\n  display: inline-block;\n  width: 100%;\n}\n\n#demographics-table .gt_spanner_row {\n  border-bottom-style: hidden;\n}\n\n#demographics-table .gt_group_heading {\n  padding-top: 8px;\n  padding-bottom: 8px;\n  padding-left: 5px;\n  padding-right: 5px;\n  color: #333333;\n  background-color: #FFFFFF;\n  font-size: 100%;\n  font-weight: initial;\n  text-transform: inherit;\n  border-top-style: solid;\n  border-top-width: 2px;\n  border-top-color: #D3D3D3;\n  border-bottom-style: solid;\n  border-bottom-width: 2px;\n  border-bottom-color: #D3D3D3;\n  border-left-style: none;\n  border-left-width: 1px;\n  border-left-color: #D3D3D3;\n  border-right-style: none;\n  border-right-width: 1px;\n  border-right-color: #D3D3D3;\n  vertical-align: middle;\n  text-align: left;\n}\n\n#demographics-table .gt_empty_group_heading {\n  padding: 0.5px;\n  color: #333333;\n  background-color: #FFFFFF;\n  font-size: 100%;\n  font-weight: initial;\n  border-top-style: solid;\n  border-top-width: 2px;\n  border-top-color: #D3D3D3;\n  border-bottom-style: solid;\n  border-bottom-width: 2px;\n  border-bottom-color: #D3D3D3;\n  vertical-align: middle;\n}\n\n#demographics-table .gt_from_md > :first-child {\n  margin-top: 0;\n}\n\n#demographics-table .gt_from_md > :last-child {\n  margin-bottom: 0;\n}\n\n#demographics-table .gt_row {\n  padding-top: 8px;\n  padding-bottom: 8px;\n  padding-left: 5px;\n  padding-right: 5px;\n  margin: 10px;\n  border-top-style: solid;\n  border-top-width: 1px;\n  border-top-color: #D3D3D3;\n  border-left-style: none;\n  border-left-width: 1px;\n  border-left-color: #D3D3D3;\n  border-right-style: none;\n  border-right-width: 1px;\n  border-right-color: #D3D3D3;\n  vertical-align: middle;\n  overflow-x: hidden;\n}\n\n#demographics-table .gt_stub {\n  color: #333333;\n  background-color: #FFFFFF;\n  font-size: 100%;\n  font-weight: initial;\n  text-transform: inherit;\n  border-right-style: solid;\n  border-right-width: 2px;\n  border-right-color: #D3D3D3;\n  padding-left: 5px;\n  padding-right: 5px;\n}\n\n#demographics-table .gt_stub_row_group {\n  color: #333333;\n  background-color: #FFFFFF;\n  font-size: 100%;\n  font-weight: initial;\n  text-transform: inherit;\n  border-right-style: solid;\n  border-right-width: 2px;\n  border-right-color: #D3D3D3;\n  padding-left: 5px;\n  padding-right: 5px;\n  vertical-align: top;\n}\n\n#demographics-table .gt_row_group_first td {\n  border-top-width: 2px;\n}\n\n#demographics-table .gt_row_group_first th {\n  border-top-width: 2px;\n}\n\n#demographics-table .gt_summary_row {\n  color: #333333;\n  background-color: #FFFFFF;\n  text-transform: inherit;\n  padding-top: 8px;\n  padding-bottom: 8px;\n  padding-left: 5px;\n  padding-right: 5px;\n}\n\n#demographics-table .gt_first_summary_row {\n  border-top-style: solid;\n  border-top-color: #D3D3D3;\n}\n\n#demographics-table .gt_first_summary_row.thick {\n  border-top-width: 2px;\n}\n\n#demographics-table .gt_last_summary_row {\n  padding-top: 8px;\n  padding-bottom: 8px;\n  padding-left: 5px;\n  padding-right: 5px;\n  border-bottom-style: solid;\n  border-bottom-width: 2px;\n  border-bottom-color: #D3D3D3;\n}\n\n#demographics-table .gt_grand_summary_row {\n  color: #333333;\n  background-color: #FFFFFF;\n  text-transform: inherit;\n  padding-top: 8px;\n  padding-bottom: 8px;\n  padding-left: 5px;\n  padding-right: 5px;\n}\n\n#demographics-table .gt_first_grand_summary_row {\n  padding-top: 8px;\n  padding-bottom: 8px;\n  padding-left: 5px;\n  padding-right: 5px;\n  border-top-style: double;\n  border-top-width: 6px;\n  border-top-color: #D3D3D3;\n}\n\n#demographics-table .gt_last_grand_summary_row_top {\n  padding-top: 8px;\n  padding-bottom: 8px;\n  padding-left: 5px;\n  padding-right: 5px;\n  border-bottom-style: double;\n  border-bottom-width: 6px;\n  border-bottom-color: #D3D3D3;\n}\n\n#demographics-table .gt_striped {\n  background-color: rgba(128, 128, 128, 0.05);\n}\n\n#demographics-table .gt_table_body {\n  border-top-style: solid;\n  border-top-width: 2px;\n  border-top-color: #D3D3D3;\n  border-bottom-style: solid;\n  border-bottom-width: 2px;\n  border-bottom-color: #D3D3D3;\n}\n\n#demographics-table .gt_footnotes {\n  color: #333333;\n  background-color: #FFFFFF;\n  border-bottom-style: none;\n  border-bottom-width: 2px;\n  border-bottom-color: #D3D3D3;\n  border-left-style: none;\n  border-left-width: 2px;\n  border-left-color: #D3D3D3;\n  border-right-style: none;\n  border-right-width: 2px;\n  border-right-color: #D3D3D3;\n}\n\n#demographics-table .gt_footnote {\n  margin: 0px;\n  font-size: 90%;\n  padding-top: 4px;\n  padding-bottom: 4px;\n  padding-left: 5px;\n  padding-right: 5px;\n}\n\n#demographics-table .gt_sourcenotes {\n  color: #333333;\n  background-color: #FFFFFF;\n  border-bottom-style: none;\n  border-bottom-width: 2px;\n  border-bottom-color: #D3D3D3;\n  border-left-style: none;\n  border-left-width: 2px;\n  border-left-color: #D3D3D3;\n  border-right-style: none;\n  border-right-width: 2px;\n  border-right-color: #D3D3D3;\n}\n\n#demographics-table .gt_sourcenote {\n  font-size: 90%;\n  padding-top: 4px;\n  padding-bottom: 4px;\n  padding-left: 5px;\n  padding-right: 5px;\n}\n\n#demographics-table .gt_left {\n  text-align: left;\n}\n\n#demographics-table .gt_center {\n  text-align: center;\n}\n\n#demographics-table .gt_right {\n  text-align: right;\n  font-variant-numeric: tabular-nums;\n}\n\n#demographics-table .gt_font_normal {\n  font-weight: normal;\n}\n\n#demographics-table .gt_font_bold {\n  font-weight: bold;\n}\n\n#demographics-table .gt_font_italic {\n  font-style: italic;\n}\n\n#demographics-table .gt_super {\n  font-size: 65%;\n}\n\n#demographics-table .gt_footnote_marks {\n  font-size: 75%;\n  vertical-align: 0.4em;\n  position: initial;\n}\n\n#demographics-table .gt_asterisk {\n  font-size: 100%;\n  vertical-align: 0;\n}\n\n#demographics-table .gt_indent_1 {\n  text-indent: 5px;\n}\n\n#demographics-table .gt_indent_2 {\n  text-indent: 10px;\n}\n\n#demographics-table .gt_indent_3 {\n  text-indent: 15px;\n}\n\n#demographics-table .gt_indent_4 {\n  text-indent: 20px;\n}\n\n#demographics-table .gt_indent_5 {\n  text-indent: 25px;\n}\n\n#demographics-table .katex-display {\n  display: inline-flex !important;\n  margin-bottom: 0.75em !important;\n}\n\n#demographics-table div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {\n  height: 0px !important;\n}\n<\/style>\n  <table class=\"gt_table\" data-quarto-disable-processing=\"false\" data-quarto-bootstrap=\"false\">\n  \n  <tbody class=\"gt_table_body\">\n    <tr><td headers=\"name\" class=\"gt_row gt_right\" style=\"white-space: nowrap; font-weight: bold;\">Study ID:<\/td>\n<td headers=\"value\" class=\"gt_row gt_left\" style=\"white-space: nowrap; font-weight: bold;\">NACC000460<\/td><\/tr>\n    <tr><td headers=\"name\" class=\"gt_row gt_right\" style=\"white-space: nowrap;\">Education (years):<\/td>\n<td headers=\"value\" class=\"gt_row gt_left\" style=\"white-space: nowrap;\">18<\/td><\/tr>\n    <tr><td headers=\"name\" class=\"gt_row gt_right\" style=\"white-space: nowrap;\">Year of Birth:<\/td>\n<td headers=\"value\" class=\"gt_row gt_left\" style=\"white-space: nowrap;\">1941<\/td><\/tr>\n    <tr><td headers=\"name\" class=\"gt_row gt_right\" style=\"white-space: nowrap;\">Gender:<\/td>\n<td headers=\"value\" class=\"gt_row gt_left\" style=\"white-space: nowrap;\">Female<\/td><\/tr>\n    <tr><td headers=\"name\" class=\"gt_row gt_right\" style=\"white-space: nowrap;\">Race:<\/td>\n<td headers=\"value\" class=\"gt_row gt_left\" style=\"white-space: nowrap;\">White<\/td><\/tr>\n  <\/tbody>\n  \n  \n<\/table>\n<\/div>\n<script>gtShinyBinding.initialize('demographics_table_output');<\/script>",
-      "deps": [
-        {
-          "name": "gtShiny",
-          "version": "1.0.0",
-          "src": {
-            "href": "gtShiny-1.0.0"
-          },
-          "meta": null,
-          "script": "gtShiny.js",
-          "stylesheet": null,
-          "head": null,
-          "attachment": null,
-          "all_files": true
-        }
+      "message": "",
+      "call": "NULL",
+      "type": [
+        "shiny.silent.error",
+        "validation"
       ]
     },
     "main_table-mainTable": {
-      "html": "<div id=\"assessment-summary-table\" style=\"padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;\">\n  <style>#assessment-summary-table table {\n  font-family: Arial;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n}\n\n#assessment-summary-table thead, #assessment-summary-table tbody, #assessment-summary-table tfoot, #assessment-summary-table tr, #assessment-summary-table td, #assessment-summary-table th {\n  border-style: none;\n}\n\n#assessment-summary-table p {\n  margin: 0;\n  padding: 0;\n}\n\n#assessment-summary-table .gt_table {\n  display: table;\n  border-collapse: collapse;\n  line-height: normal;\n  margin-left: auto;\n  margin-right: auto;\n  color: #333333;\n  font-size: 80%;\n  font-weight: normal;\n  font-style: normal;\n  background-color: #FFFFFF;\n  width: auto;\n  border-top-style: solid;\n  border-top-width: 2px;\n  border-top-color: #A8A8A8;\n  border-right-style: none;\n  border-right-width: 2px;\n  border-right-color: #D3D3D3;\n  border-bottom-style: solid;\n  border-bottom-width: 2px;\n  border-bottom-color: #A8A8A8;\n  border-left-style: none;\n  border-left-width: 2px;\n  border-left-color: #D3D3D3;\n}\n\n#assessment-summary-table .gt_caption {\n  padding-top: 4px;\n  padding-bottom: 4px;\n}\n\n#assessment-summary-table .gt_title {\n  color: #333333;\n  font-size: 125%;\n  font-weight: initial;\n  padding-top: 4px;\n  padding-bottom: 4px;\n  padding-left: 5px;\n  padding-right: 5px;\n  border-bottom-color: #FFFFFF;\n  border-bottom-width: 0;\n}\n\n#assessment-summary-table .gt_subtitle {\n  color: #333333;\n  font-size: 85%;\n  font-weight: initial;\n  padding-top: 3px;\n  padding-bottom: 5px;\n  padding-left: 5px;\n  padding-right: 5px;\n  border-top-color: #FFFFFF;\n  border-top-width: 0;\n}\n\n#assessment-summary-table .gt_heading {\n  background-color: #FFFFFF;\n  text-align: center;\n  border-bottom-color: #FFFFFF;\n  border-left-style: none;\n  border-left-width: 1px;\n  border-left-color: #D3D3D3;\n  border-right-style: none;\n  border-right-width: 1px;\n  border-right-color: #D3D3D3;\n}\n\n#assessment-summary-table .gt_bottom_border {\n  border-bottom-style: solid;\n  border-bottom-width: 2px;\n  border-bottom-color: #D3D3D3;\n}\n\n#assessment-summary-table .gt_col_headings {\n  border-top-style: solid;\n  border-top-width: 2px;\n  border-top-color: #D3D3D3;\n  border-bottom-style: solid;\n  border-bottom-width: 2px;\n  border-bottom-color: #D3D3D3;\n  border-left-style: none;\n  border-left-width: 1px;\n  border-left-color: #D3D3D3;\n  border-right-style: none;\n  border-right-width: 1px;\n  border-right-color: #D3D3D3;\n}\n\n#assessment-summary-table .gt_col_heading {\n  color: #333333;\n  background-color: #FFFFFF;\n  font-size: 100%;\n  font-weight: bold;\n  text-transform: inherit;\n  border-left-style: none;\n  border-left-width: 1px;\n  border-left-color: #D3D3D3;\n  border-right-style: none;\n  border-right-width: 1px;\n  border-right-color: #D3D3D3;\n  vertical-align: bottom;\n  padding-top: 5px;\n  padding-bottom: 6px;\n  padding-left: 5px;\n  padding-right: 5px;\n  overflow-x: hidden;\n}\n\n#assessment-summary-table .gt_column_spanner_outer {\n  color: #333333;\n  background-color: #FFFFFF;\n  font-size: 100%;\n  font-weight: bold;\n  text-transform: inherit;\n  padding-top: 0;\n  padding-bottom: 0;\n  padding-left: 4px;\n  padding-right: 4px;\n}\n\n#assessment-summary-table .gt_column_spanner_outer:first-child {\n  padding-left: 0;\n}\n\n#assessment-summary-table .gt_column_spanner_outer:last-child {\n  padding-right: 0;\n}\n\n#assessment-summary-table .gt_column_spanner {\n  border-bottom-style: solid;\n  border-bottom-width: 2px;\n  border-bottom-color: #D3D3D3;\n  vertical-align: bottom;\n  padding-top: 5px;\n  padding-bottom: 5px;\n  overflow-x: hidden;\n  display: inline-block;\n  width: 100%;\n}\n\n#assessment-summary-table .gt_spanner_row {\n  border-bottom-style: hidden;\n}\n\n#assessment-summary-table .gt_group_heading {\n  padding-top: 4px;\n  padding-bottom: 4px;\n  padding-left: 5px;\n  padding-right: 5px;\n  color: #333333;\n  background-color: #FFFFFF;\n  font-size: 100%;\n  font-weight: bold;\n  text-transform: inherit;\n  border-top-style: solid;\n  border-top-width: 2px;\n  border-top-color: #D3D3D3;\n  border-bottom-style: solid;\n  border-bottom-width: 2px;\n  border-bottom-color: #D3D3D3;\n  border-left-style: none;\n  border-left-width: 1px;\n  border-left-color: #D3D3D3;\n  border-right-style: none;\n  border-right-width: 1px;\n  border-right-color: #D3D3D3;\n  vertical-align: middle;\n  text-align: left;\n}\n\n#assessment-summary-table .gt_empty_group_heading {\n  padding: 0.5px;\n  color: #333333;\n  background-color: #FFFFFF;\n  font-size: 100%;\n  font-weight: bold;\n  border-top-style: solid;\n  border-top-width: 2px;\n  border-top-color: #D3D3D3;\n  border-bottom-style: solid;\n  border-bottom-width: 2px;\n  border-bottom-color: #D3D3D3;\n  vertical-align: middle;\n}\n\n#assessment-summary-table .gt_from_md > :first-child {\n  margin-top: 0;\n}\n\n#assessment-summary-table .gt_from_md > :last-child {\n  margin-bottom: 0;\n}\n\n#assessment-summary-table .gt_row {\n  padding-top: 2px;\n  padding-bottom: 2px;\n  padding-left: 5px;\n  padding-right: 5px;\n  margin: 10px;\n  border-top-style: solid;\n  border-top-width: 1px;\n  border-top-color: #D3D3D3;\n  border-left-style: none;\n  border-left-width: 1px;\n  border-left-color: #D3D3D3;\n  border-right-style: none;\n  border-right-width: 1px;\n  border-right-color: #D3D3D3;\n  vertical-align: middle;\n  overflow-x: hidden;\n}\n\n#assessment-summary-table .gt_stub {\n  color: #333333;\n  background-color: #FFFFFF;\n  font-size: 100%;\n  font-weight: initial;\n  text-transform: inherit;\n  border-right-style: solid;\n  border-right-width: 2px;\n  border-right-color: #D3D3D3;\n  padding-left: 5px;\n  padding-right: 5px;\n}\n\n#assessment-summary-table .gt_stub_row_group {\n  color: #333333;\n  background-color: #FFFFFF;\n  font-size: 100%;\n  font-weight: initial;\n  text-transform: inherit;\n  border-right-style: solid;\n  border-right-width: 2px;\n  border-right-color: #D3D3D3;\n  padding-left: 5px;\n  padding-right: 5px;\n  vertical-align: top;\n}\n\n#assessment-summary-table .gt_row_group_first td {\n  border-top-width: 2px;\n}\n\n#assessment-summary-table .gt_row_group_first th {\n  border-top-width: 2px;\n}\n\n#assessment-summary-table .gt_summary_row {\n  color: #333333;\n  background-color: #FFFFFF;\n  text-transform: inherit;\n  padding-top: 8px;\n  padding-bottom: 8px;\n  padding-left: 5px;\n  padding-right: 5px;\n}\n\n#assessment-summary-table .gt_first_summary_row {\n  border-top-style: solid;\n  border-top-color: #D3D3D3;\n}\n\n#assessment-summary-table .gt_first_summary_row.thick {\n  border-top-width: 2px;\n}\n\n#assessment-summary-table .gt_last_summary_row {\n  padding-top: 8px;\n  padding-bottom: 8px;\n  padding-left: 5px;\n  padding-right: 5px;\n  border-bottom-style: solid;\n  border-bottom-width: 2px;\n  border-bottom-color: #D3D3D3;\n}\n\n#assessment-summary-table .gt_grand_summary_row {\n  color: #333333;\n  background-color: #FFFFFF;\n  text-transform: inherit;\n  padding-top: 8px;\n  padding-bottom: 8px;\n  padding-left: 5px;\n  padding-right: 5px;\n}\n\n#assessment-summary-table .gt_first_grand_summary_row {\n  padding-top: 8px;\n  padding-bottom: 8px;\n  padding-left: 5px;\n  padding-right: 5px;\n  border-top-style: double;\n  border-top-width: 6px;\n  border-top-color: #D3D3D3;\n}\n\n#assessment-summary-table .gt_last_grand_summary_row_top {\n  padding-top: 8px;\n  padding-bottom: 8px;\n  padding-left: 5px;\n  padding-right: 5px;\n  border-bottom-style: double;\n  border-bottom-width: 6px;\n  border-bottom-color: #D3D3D3;\n}\n\n#assessment-summary-table .gt_striped {\n  background-color: rgba(128, 128, 128, 0.05);\n}\n\n#assessment-summary-table .gt_table_body {\n  border-top-style: solid;\n  border-top-width: 2px;\n  border-top-color: #D3D3D3;\n  border-bottom-style: solid;\n  border-bottom-width: 2px;\n  border-bottom-color: #D3D3D3;\n}\n\n#assessment-summary-table .gt_footnotes {\n  color: #333333;\n  background-color: #FFFFFF;\n  border-bottom-style: none;\n  border-bottom-width: 2px;\n  border-bottom-color: #D3D3D3;\n  border-left-style: none;\n  border-left-width: 2px;\n  border-left-color: #D3D3D3;\n  border-right-style: none;\n  border-right-width: 2px;\n  border-right-color: #D3D3D3;\n}\n\n#assessment-summary-table .gt_footnote {\n  margin: 0px;\n  font-size: 90%;\n  padding-top: 4px;\n  padding-bottom: 4px;\n  padding-left: 5px;\n  padding-right: 5px;\n}\n\n#assessment-summary-table .gt_sourcenotes {\n  color: #333333;\n  background-color: #FFFFFF;\n  border-bottom-style: none;\n  border-bottom-width: 2px;\n  border-bottom-color: #D3D3D3;\n  border-left-style: none;\n  border-left-width: 2px;\n  border-left-color: #D3D3D3;\n  border-right-style: none;\n  border-right-width: 2px;\n  border-right-color: #D3D3D3;\n}\n\n#assessment-summary-table .gt_sourcenote {\n  font-size: 90%;\n  padding-top: 4px;\n  padding-bottom: 4px;\n  padding-left: 5px;\n  padding-right: 5px;\n}\n\n#assessment-summary-table .gt_left {\n  text-align: left;\n}\n\n#assessment-summary-table .gt_center {\n  text-align: center;\n}\n\n#assessment-summary-table .gt_right {\n  text-align: right;\n  font-variant-numeric: tabular-nums;\n}\n\n#assessment-summary-table .gt_font_normal {\n  font-weight: normal;\n}\n\n#assessment-summary-table .gt_font_bold {\n  font-weight: bold;\n}\n\n#assessment-summary-table .gt_font_italic {\n  font-style: italic;\n}\n\n#assessment-summary-table .gt_super {\n  font-size: 65%;\n}\n\n#assessment-summary-table .gt_footnote_marks {\n  font-size: 75%;\n  vertical-align: 0.4em;\n  position: initial;\n}\n\n#assessment-summary-table .gt_asterisk {\n  font-size: 100%;\n  vertical-align: 0;\n}\n\n#assessment-summary-table .gt_indent_1 {\n  text-indent: 5px;\n}\n\n#assessment-summary-table .gt_indent_2 {\n  text-indent: 10px;\n}\n\n#assessment-summary-table .gt_indent_3 {\n  text-indent: 15px;\n}\n\n#assessment-summary-table .gt_indent_4 {\n  text-indent: 20px;\n}\n\n#assessment-summary-table .gt_indent_5 {\n  text-indent: 25px;\n}\n\n#assessment-summary-table .katex-display {\n  display: inline-flex !important;\n  margin-bottom: 0.75em !important;\n}\n\n#assessment-summary-table div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {\n  height: 0px !important;\n}\n<\/style>\n  <table class=\"gt_table\" style=\"table-layout:fixed;\" data-quarto-disable-processing=\"false\" data-quarto-bootstrap=\"false\">\n  <colgroup>\n    <col/>\n    <col/>\n    <col/>\n    <col/>\n    <col/>\n    <col style=\"width:100px;\"/>\n    <col/>\n  <\/colgroup>\n  <thead>\n    <tr class=\"gt_heading\">\n      <td colspan=\"7\" class=\"gt_heading gt_title gt_font_normal gt_bottom_border\" style=\"text-align: left; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000;\"><div id=\"summary-table-caption\" style=\"padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;\">\n  \n  <table class=\"gt_table\" data-quarto-disable-processing=\"false\" data-quarto-bootstrap=\"false\" style=\"-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: 0px; margin-right: 0px; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;\" bgcolor=\"#FFFFFF\">\n  \n  <tbody class=\"gt_table_body\" style=\"border-style: none; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3;\">\n    <tr style=\"border-style: none;\"><td headers=\"X1\" class=\"gt_row gt_left\" style=\"border-style: none; padding-top: 3px; padding-bottom: 3px; padding-left: 5px; padding-right: 5px; margin: 10px; overflow-x: hidden; text-align: left; vertical-align: top; border-left-width: 1px; border-left-style: hidden; border-left-color: #000000; border-right-width: 1px; border-right-style: hidden; border-right-color: #000000; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: hidden; border-bottom-color: #000000;\" valign=\"top\" align=\"left\"><span class=\"gt_from_md\"><strong style=\"margin-top: 0; margin-bottom: 0;\">Age<\/strong>:<\/span><\/td>\n<td headers=\"X2\" class=\"gt_row gt_left\" style=\"border-style: none; padding-top: 3px; padding-bottom: 3px; padding-left: 5px; padding-right: 5px; margin: 10px; overflow-x: hidden; text-align: left; vertical-align: top; border-left-width: 1px; border-left-style: hidden; border-left-color: #000000; border-right-width: 1px; border-right-style: hidden; border-right-color: #000000; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: hidden; border-bottom-color: #000000;\" valign=\"top\" align=\"left\"><span class=\"gt_from_md\"><u style=\"margin-top: 0; margin-bottom: 0;\">  77  <\/u> .<\/span><\/td>\n<td headers=\"X3\" class=\"gt_row gt_left\" style=\"border-style: none; padding-top: 3px; padding-bottom: 3px; padding-left: 5px; padding-right: 5px; margin: 10px; overflow-x: hidden; text-align: left; vertical-align: top; border-left-width: 1px; border-left-style: hidden; border-left-color: #000000; border-right-width: 1px; border-right-style: hidden; border-right-color: #000000; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: hidden; border-bottom-color: #000000;\" valign=\"top\" align=\"left\"><span class=\"gt_from_md\"><strong style=\"margin-top: 0; margin-bottom: 0;\">FAS<\/strong>:<\/span><\/td>\n<td headers=\"X4\" class=\"gt_row gt_left\" style=\"border-style: none; padding-top: 3px; padding-bottom: 3px; padding-left: 5px; padding-right: 5px; margin: 10px; overflow-x: hidden; text-align: left; vertical-align: top; border-left-width: 1px; border-left-style: hidden; border-left-color: #000000; border-right-width: 1px; border-right-style: hidden; border-right-color: #000000; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: hidden; border-bottom-color: #000000;\" valign=\"top\" align=\"left\"><span class=\"gt_from_md\"><u style=\"margin-top: 0; margin-bottom: 0;\">  0  <\/u> .<\/span><\/td>\n<td headers=\"X5\" class=\"gt_row gt_left\" style=\"border-style: none; padding-top: 3px; padding-bottom: 3px; padding-left: 5px; padding-right: 5px; margin: 10px; overflow-x: hidden; text-align: left; vertical-align: top; border-left-width: 1px; border-left-style: hidden; border-left-color: #000000; border-right-width: 1px; border-right-style: hidden; border-right-color: #000000; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: hidden; border-bottom-color: #000000;\" valign=\"top\" align=\"left\"><span class=\"gt_from_md\"><strong style=\"margin-top: 0; margin-bottom: 0;\">IQCODE<\/strong> (self/informant):<\/span><\/td>\n<td headers=\"X6\" class=\"gt_row gt_left\" style=\"border-style: none; padding-top: 3px; padding-bottom: 3px; padding-left: 5px; padding-right: 5px; margin: 10px; overflow-x: hidden; text-align: left; vertical-align: top; border-left-width: 1px; border-left-style: hidden; border-left-color: #000000; border-right-width: 1px; border-right-style: hidden; border-right-color: #000000; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: hidden; border-bottom-color: #000000;\" valign=\"top\" align=\"left\"><span class=\"gt_from_md\"><u style=\"margin-top: 0; margin-bottom: 0;\">  — / —  <\/u> .<\/span><\/td><\/tr>\n  <\/tbody>\n  \n  \n<\/table>\n<\/div><\/td>\n    <\/tr>\n    \n    <tr class=\"gt_col_headings gt_spanner_row\">\n      <th class=\"gt_col_heading gt_columns_bottom_border gt_left\" rowspan=\"2\" colspan=\"1\" scope=\"col\" id=\"a::stub\"><\/th>\n      <th class=\"gt_center gt_columns_top_border gt_column_spanner_outer\" rowspan=\"1\" colspan=\"4\" scope=\"colgroup\" id=\"Scores\">\n        <div class=\"gt_column_spanner\">Scores<\/div>\n      <\/th>\n      <th class=\"gt_col_heading gt_columns_bottom_border gt_center\" rowspan=\"2\" colspan=\"1\" scope=\"col\" id=\"Percentile\">Percentile<\/th>\n      <th class=\"gt_col_heading gt_columns_bottom_border gt_left\" rowspan=\"2\" colspan=\"1\" scope=\"col\" id=\"Description\">Description<\/th>\n    <\/tr>\n    <tr class=\"gt_col_headings\">\n      <th class=\"gt_col_heading gt_columns_bottom_border gt_right\" rowspan=\"1\" colspan=\"1\" style=\"padding-right:0px; padding-left:0px;\" scope=\"col\" id=\"raw\">R<\/th>\n      <th class=\"gt_col_heading gt_columns_bottom_border gt_left\" rowspan=\"1\" colspan=\"1\" style=\"padding-right:0px; padding-left:0px;\" scope=\"col\" id=\"raw_suffix\">aw<\/th>\n      <th class=\"gt_col_heading gt_columns_bottom_border gt_left\" rowspan=\"1\" colspan=\"1\" style=\"padding-left:0px;\" scope=\"col\" id=\"units\"><\/th>\n      <th class=\"gt_col_heading gt_columns_bottom_border gt_right\" rowspan=\"1\" colspan=\"1\" style=\"text-decoration-line:underline;text-decoration-style:dashed;\" scope=\"col\" id=\"std\"><bslib-tooltip placement=\"auto\" bsOptions=\"[]\" data-require-bs-version=\"5\" data-require-bs-caller=\"tooltip()\">\n  <template>Results of standardizing raw scores<\/template>\n  Std.\n<\/bslib-tooltip><\/th>\n    <\/tr>\n  <\/thead>\n  <tbody class=\"gt_table_body\">\n    <tr class=\"gt_group_heading_row\">\n      <th colspan=\"7\" class=\"gt_group_heading\" scope=\"colgroup\" id=\"General Cognition\">General Cognition<\/th>\n    <\/tr>\n    <tr class=\"gt_row_group_first\"><td headers=\"General Cognition stub_1_1 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">CDR Global (0 SOB)<\/td>\n<td headers=\"General Cognition stub_1_1 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">1.0<\/td>\n<td headers=\"General Cognition stub_1_1 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\"><\/td>\n<td headers=\"General Cognition stub_1_1 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"General Cognition stub_1_1 std\" class=\"gt_row gt_right\">—<\/td>\n<td headers=\"General Cognition stub_1_1 Percentile\" class=\"gt_row gt_center\">&mdash;<\/td>\n<td headers=\"General Cognition stub_1_1 Description\" class=\"gt_row gt_left\">—<\/td><\/tr>\n    <tr><td headers=\"General Cognition stub_1_2 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">MoCA<\/td>\n<td headers=\"General Cognition stub_1_2 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">22<\/td>\n<td headers=\"General Cognition stub_1_2 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/30<\/td>\n<td headers=\"General Cognition stub_1_2 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"General Cognition stub_1_2 std\" class=\"gt_row gt_right\">−2.27<span class=\"gt_footnote_marks gt_asterisk\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>*<\/sup><\/span><\/td>\n<td headers=\"General Cognition stub_1_2 Percentile\" class=\"gt_row gt_center\"><div style='flex-grow:1;margin-left:8px;background:#e1e1e1;'><div style='background:purple;width:1.15213100438809%;height:12.8px;display:flex;align-items:center;justify-content:center;color:#000000;font-weight:bold;font-size:10px;position:relative;'><span style='color:#000000;position:absolute;left:0%;margin-left:1.15213100438809px;font-weight:bold;font-size:10px;'>1.2%<\/span><\/div><\/div><\/td>\n<td headers=\"General Cognition stub_1_2 Description\" class=\"gt_row gt_left\" style=\"background-color: #D73027;\">Impaired<\/td><\/tr>\n    <tr class=\"gt_group_heading_row\">\n      <th colspan=\"7\" class=\"gt_group_heading\" scope=\"colgroup\" id=\"Attention/Processing\">Attention/Processing<\/th>\n    <\/tr>\n    <tr class=\"gt_row_group_first\"><td headers=\"Attention/Processing stub_1_3 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">Trailmaking Part A (0 errors; 24/24 CL)<\/td>\n<td headers=\"Attention/Processing stub_1_3 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">44<\/td>\n<td headers=\"Attention/Processing stub_1_3 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/150<\/td>\n<td headers=\"Attention/Processing stub_1_3 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\">&nbspsec<\/td>\n<td headers=\"Attention/Processing stub_1_3 std\" class=\"gt_row gt_right\">−1.16<span class=\"gt_footnote_marks\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>†<\/sup><\/span><\/td>\n<td headers=\"Attention/Processing stub_1_3 Percentile\" class=\"gt_row gt_center\"><div style='flex-grow:1;margin-left:8px;background:#e1e1e1;'><div style='background:purple;width:12.254033775358%;height:12.8px;display:flex;align-items:center;justify-content:center;color:#000000;font-weight:bold;font-size:10px;position:relative;'><span style='color:#000000;position:absolute;left:0%;margin-left:12.254033775358px;font-weight:bold;font-size:10px;'>12.3%<\/span><\/div><\/div><\/td>\n<td headers=\"Attention/Processing stub_1_3 Description\" class=\"gt_row gt_left\" style=\"background-color: #FEE08B;\">Low Average<\/td><\/tr>\n    <tr><td headers=\"Attention/Processing stub_1_4 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">Number Span Forward - Total<\/td>\n<td headers=\"Attention/Processing stub_1_4 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">4<\/td>\n<td headers=\"Attention/Processing stub_1_4 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/14<\/td>\n<td headers=\"Attention/Processing stub_1_4 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"Attention/Processing stub_1_4 std\" class=\"gt_row gt_right\">−1.90<span class=\"gt_footnote_marks\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>†<\/sup><\/span><\/td>\n<td headers=\"Attention/Processing stub_1_4 Percentile\" class=\"gt_row gt_center\"><div style='flex-grow:1;margin-left:8px;background:#e1e1e1;'><div style='background:purple;width:2.84698637527928%;height:12.8px;display:flex;align-items:center;justify-content:center;color:#000000;font-weight:bold;font-size:10px;position:relative;'><span style='color:#000000;position:absolute;left:0%;margin-left:2.84698637527928px;font-weight:bold;font-size:10px;'>2.8%<\/span><\/div><\/div><\/td>\n<td headers=\"Attention/Processing stub_1_4 Description\" class=\"gt_row gt_left\" style=\"background-color: #D73027;\">Impaired<\/td><\/tr>\n    <tr><td headers=\"Attention/Processing stub_1_5 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">Number Span Forward - Span Length<\/td>\n<td headers=\"Attention/Processing stub_1_5 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">6<\/td>\n<td headers=\"Attention/Processing stub_1_5 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/9<\/td>\n<td headers=\"Attention/Processing stub_1_5 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"Attention/Processing stub_1_5 std\" class=\"gt_row gt_right\">−0.51<span class=\"gt_footnote_marks\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>†<\/sup><\/span><\/td>\n<td headers=\"Attention/Processing stub_1_5 Percentile\" class=\"gt_row gt_center\"><div style='flex-grow:1;margin-left:8px;background:#e1e1e1;'><div style='background:purple;width:30.3499863021376%;height:12.8px;display:flex;align-items:center;justify-content:center;color:#000000;font-weight:bold;font-size:10px;position:relative;'><span style='color:#000000;position:absolute;left:0%;margin-left:30.3499863021376px;font-weight:bold;font-size:10px;'>30.3%<\/span><\/div><\/div><\/td>\n<td headers=\"Attention/Processing stub_1_5 Description\" class=\"gt_row gt_left\" style=\"background-color: #FFFFBF;\">Average<\/td><\/tr>\n    <tr><td headers=\"Attention/Processing stub_1_6 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">Number Span Backward - Total<\/td>\n<td headers=\"Attention/Processing stub_1_6 raw\" class=\"gt_row gt_right\" style=\"padding-left:0px;padding-right:0px;color:#CC0000BF;text-decoration-line:underline;text-decoration-style:dotted;\"><bslib-tooltip placement=\"auto\" bsOptions=\"[]\" data-require-bs-version=\"5\" data-require-bs-caller=\"tooltip()\">\n  <template>Other problem<\/template>\n  97\n<\/bslib-tooltip><\/td>\n<td headers=\"Attention/Processing stub_1_6 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px;padding-right:0px;color:black;\"><\/td>\n<td headers=\"Attention/Processing stub_1_6 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"Attention/Processing stub_1_6 std\" class=\"gt_row gt_right\">—<\/td>\n<td headers=\"Attention/Processing stub_1_6 Percentile\" class=\"gt_row gt_center\">&mdash;<\/td>\n<td headers=\"Attention/Processing stub_1_6 Description\" class=\"gt_row gt_left\">—<\/td><\/tr>\n    <tr><td headers=\"Attention/Processing stub_1_7 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">Number Span Backward - Span Length<\/td>\n<td headers=\"Attention/Processing stub_1_7 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">4<\/td>\n<td headers=\"Attention/Processing stub_1_7 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/8<\/td>\n<td headers=\"Attention/Processing stub_1_7 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"Attention/Processing stub_1_7 std\" class=\"gt_row gt_right\">−0.90<span class=\"gt_footnote_marks\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>†<\/sup><\/span><\/td>\n<td headers=\"Attention/Processing stub_1_7 Percentile\" class=\"gt_row gt_center\"><div style='flex-grow:1;margin-left:8px;background:#e1e1e1;'><div style='background:purple;width:18.3387261451983%;height:12.8px;display:flex;align-items:center;justify-content:center;color:#000000;font-weight:bold;font-size:10px;position:relative;'><span style='color:#000000;position:absolute;left:0%;margin-left:18.3387261451983px;font-weight:bold;font-size:10px;'>18.3%<\/span><\/div><\/div><\/td>\n<td headers=\"Attention/Processing stub_1_7 Description\" class=\"gt_row gt_left\" style=\"background-color: #FEE08B;\">Low Average<\/td><\/tr>\n    <tr class=\"gt_group_heading_row\">\n      <th colspan=\"7\" class=\"gt_group_heading\" scope=\"colgroup\" id=\"Language\">Language<\/th>\n    <\/tr>\n    <tr class=\"gt_row_group_first\"><td headers=\"Language stub_1_8 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">MINT<\/td>\n<td headers=\"Language stub_1_8 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">28<\/td>\n<td headers=\"Language stub_1_8 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/32<\/td>\n<td headers=\"Language stub_1_8 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"Language stub_1_8 std\" class=\"gt_row gt_right\">−0.90<span class=\"gt_footnote_marks\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>†<\/sup><\/span><\/td>\n<td headers=\"Language stub_1_8 Percentile\" class=\"gt_row gt_center\"><div style='flex-grow:1;margin-left:8px;background:#e1e1e1;'><div style='background:purple;width:18.3202146728688%;height:12.8px;display:flex;align-items:center;justify-content:center;color:#000000;font-weight:bold;font-size:10px;position:relative;'><span style='color:#000000;position:absolute;left:0%;margin-left:18.3202146728688px;font-weight:bold;font-size:10px;'>18.3%<\/span><\/div><\/div><\/td>\n<td headers=\"Language stub_1_8 Description\" class=\"gt_row gt_left\" style=\"background-color: #FEE08B;\">Low Average<\/td><\/tr>\n    <tr><td headers=\"Language stub_1_9 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">Animal Fluency<\/td>\n<td headers=\"Language stub_1_9 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">18<\/td>\n<td headers=\"Language stub_1_9 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/77<\/td>\n<td headers=\"Language stub_1_9 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"Language stub_1_9 std\" class=\"gt_row gt_right\">−0.72<span class=\"gt_footnote_marks\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>†<\/sup><\/span><\/td>\n<td headers=\"Language stub_1_9 Percentile\" class=\"gt_row gt_center\"><div style='flex-grow:1;margin-left:8px;background:#e1e1e1;'><div style='background:purple;width:23.6805766255978%;height:12.8px;display:flex;align-items:center;justify-content:center;color:#000000;font-weight:bold;font-size:10px;position:relative;'><span style='color:#000000;position:absolute;left:0%;margin-left:23.6805766255978px;font-weight:bold;font-size:10px;'>23.7%<\/span><\/div><\/div><\/td>\n<td headers=\"Language stub_1_9 Description\" class=\"gt_row gt_left\" style=\"background-color: #FEE08B;\">Low Average<\/td><\/tr>\n    <tr><td headers=\"Language stub_1_10 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">Vegetable Fluency<\/td>\n<td headers=\"Language stub_1_10 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">12<\/td>\n<td headers=\"Language stub_1_10 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/77<\/td>\n<td headers=\"Language stub_1_10 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"Language stub_1_10 std\" class=\"gt_row gt_right\">−1.03<span class=\"gt_footnote_marks\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>†<\/sup><\/span><\/td>\n<td headers=\"Language stub_1_10 Percentile\" class=\"gt_row gt_center\"><div style='flex-grow:1;margin-left:8px;background:#e1e1e1;'><div style='background:purple;width:15.0532446965848%;height:12.8px;display:flex;align-items:center;justify-content:center;color:#000000;font-weight:bold;font-size:10px;position:relative;'><span style='color:#000000;position:absolute;left:0%;margin-left:15.0532446965848px;font-weight:bold;font-size:10px;'>15.1%<\/span><\/div><\/div><\/td>\n<td headers=\"Language stub_1_10 Description\" class=\"gt_row gt_left\" style=\"background-color: #FEE08B;\">Low Average<\/td><\/tr>\n    <tr><td headers=\"Language stub_1_11 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">F+L Words<\/td>\n<td headers=\"Language stub_1_11 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">22<\/td>\n<td headers=\"Language stub_1_11 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/80<\/td>\n<td headers=\"Language stub_1_11 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"Language stub_1_11 std\" class=\"gt_row gt_right\">−1.04<span class=\"gt_footnote_marks\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>†<\/sup><\/span><\/td>\n<td headers=\"Language stub_1_11 Percentile\" class=\"gt_row gt_center\"><div style='flex-grow:1;margin-left:8px;background:#e1e1e1;'><div style='background:purple;width:14.8208613703373%;height:12.8px;display:flex;align-items:center;justify-content:center;color:#000000;font-weight:bold;font-size:10px;position:relative;'><span style='color:#000000;position:absolute;left:0%;margin-left:14.8208613703373px;font-weight:bold;font-size:10px;'>14.8%<\/span><\/div><\/div><\/td>\n<td headers=\"Language stub_1_11 Description\" class=\"gt_row gt_left\" style=\"background-color: #FEE08B;\">Low Average<\/td><\/tr>\n    <tr><td headers=\"Language stub_1_12 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">F Words<\/td>\n<td headers=\"Language stub_1_12 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">13<\/td>\n<td headers=\"Language stub_1_12 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/40<\/td>\n<td headers=\"Language stub_1_12 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"Language stub_1_12 std\" class=\"gt_row gt_right\">−0.60<span class=\"gt_footnote_marks\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>†<\/sup><\/span><\/td>\n<td headers=\"Language stub_1_12 Percentile\" class=\"gt_row gt_center\"><div style='flex-grow:1;margin-left:8px;background:#e1e1e1;'><div style='background:purple;width:27.5316321331481%;height:12.8px;display:flex;align-items:center;justify-content:center;color:#000000;font-weight:bold;font-size:10px;position:relative;'><span style='color:#000000;position:absolute;left:0%;margin-left:27.5316321331481px;font-weight:bold;font-size:10px;'>27.5%<\/span><\/div><\/div><\/td>\n<td headers=\"Language stub_1_12 Description\" class=\"gt_row gt_left\" style=\"background-color: #FFFFBF;\">Average<\/td><\/tr>\n    <tr><td headers=\"Language stub_1_13 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">L Words<\/td>\n<td headers=\"Language stub_1_13 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">13<\/td>\n<td headers=\"Language stub_1_13 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/40<\/td>\n<td headers=\"Language stub_1_13 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"Language stub_1_13 std\" class=\"gt_row gt_right\">−0.47<span class=\"gt_footnote_marks\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>†<\/sup><\/span><\/td>\n<td headers=\"Language stub_1_13 Percentile\" class=\"gt_row gt_center\"><div style='flex-grow:1;margin-left:8px;background:#e1e1e1;'><div style='background:purple;width:31.9782068384069%;height:12.8px;display:flex;align-items:center;justify-content:center;color:#000000;font-weight:bold;font-size:10px;position:relative;'><span style='color:#000000;position:absolute;left:0%;margin-left:31.9782068384068px;font-weight:bold;font-size:10px;'>32%<\/span><\/div><\/div><\/td>\n<td headers=\"Language stub_1_13 Description\" class=\"gt_row gt_left\" style=\"background-color: #FFFFBF;\">Average<\/td><\/tr>\n    <tr class=\"gt_group_heading_row\">\n      <th colspan=\"7\" class=\"gt_group_heading\" scope=\"colgroup\" id=\"Visuospatial\">Visuospatial<\/th>\n    <\/tr>\n    <tr class=\"gt_row_group_first\"><td headers=\"Visuospatial stub_1_14 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">Benson Figure Copy<\/td>\n<td headers=\"Visuospatial stub_1_14 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">17<\/td>\n<td headers=\"Visuospatial stub_1_14 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/17<\/td>\n<td headers=\"Visuospatial stub_1_14 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"Visuospatial stub_1_14 std\" class=\"gt_row gt_right\">1.00<span class=\"gt_footnote_marks\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>†<\/sup><\/span><\/td>\n<td headers=\"Visuospatial stub_1_14 Percentile\" class=\"gt_row gt_center\"><div style='flex-grow:1;margin-left:8px;background:#e1e1e1;'><div style='background:purple;width:84.1130991337133%;height:12.8px;display:flex;align-items:center;justify-content:flex-start;position:relative;'><span style='color:#FFFFFF;position:absolute;left:0px;margin-left:5px;font-weight:bold;font-size:10px;'>84.1%<\/span><\/div><\/div><\/td>\n<td headers=\"Visuospatial stub_1_14 Description\" class=\"gt_row gt_left\" style=\"background-color: #D9EF8B;\">High Average<\/td><\/tr>\n    <tr class=\"gt_group_heading_row\">\n      <th colspan=\"7\" class=\"gt_group_heading\" scope=\"colgroup\" id=\"Memory\">Memory<\/th>\n    <\/tr>\n    <tr class=\"gt_row_group_first\"><td headers=\"Memory stub_1_15 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">Benson Delay (35% retained; Recog = Yes)<\/td>\n<td headers=\"Memory stub_1_15 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">6<\/td>\n<td headers=\"Memory stub_1_15 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/17<\/td>\n<td headers=\"Memory stub_1_15 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"Memory stub_1_15 std\" class=\"gt_row gt_right\">−1.68<span class=\"gt_footnote_marks\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>†<\/sup><\/span><\/td>\n<td headers=\"Memory stub_1_15 Percentile\" class=\"gt_row gt_center\"><div style='flex-grow:1;margin-left:8px;background:#e1e1e1;'><div style='background:purple;width:4.67218256637824%;height:12.8px;display:flex;align-items:center;justify-content:center;color:#000000;font-weight:bold;font-size:10px;position:relative;'><span style='color:#000000;position:absolute;left:0%;margin-left:4.67218256637824px;font-weight:bold;font-size:10px;'>4.7%<\/span><\/div><\/div><\/td>\n<td headers=\"Memory stub_1_15 Description\" class=\"gt_row gt_left\" style=\"background-color: #FC8D59;\">Borderline<\/td><\/tr>\n    <tr><td headers=\"Memory stub_1_16 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">Craft Immediate - Verbatim<\/td>\n<td headers=\"Memory stub_1_16 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">14<\/td>\n<td headers=\"Memory stub_1_16 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/44<\/td>\n<td headers=\"Memory stub_1_16 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"Memory stub_1_16 std\" class=\"gt_row gt_right\">−1.31<span class=\"gt_footnote_marks\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>†<\/sup><\/span><\/td>\n<td headers=\"Memory stub_1_16 Percentile\" class=\"gt_row gt_center\"><div style='flex-grow:1;margin-left:8px;background:#e1e1e1;'><div style='background:purple;width:9.58940915442021%;height:12.8px;display:flex;align-items:center;justify-content:center;color:#000000;font-weight:bold;font-size:10px;position:relative;'><span style='color:#000000;position:absolute;left:0%;margin-left:9.58940915442021px;font-weight:bold;font-size:10px;'>9.6%<\/span><\/div><\/div><\/td>\n<td headers=\"Memory stub_1_16 Description\" class=\"gt_row gt_left\" style=\"background-color: #FC8D59;\">Borderline<\/td><\/tr>\n    <tr><td headers=\"Memory stub_1_17 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">Craft Immediate - Paraphrase<\/td>\n<td headers=\"Memory stub_1_17 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">13<\/td>\n<td headers=\"Memory stub_1_17 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/25<\/td>\n<td headers=\"Memory stub_1_17 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"Memory stub_1_17 std\" class=\"gt_row gt_right\">−0.87<span class=\"gt_footnote_marks\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>†<\/sup><\/span><\/td>\n<td headers=\"Memory stub_1_17 Percentile\" class=\"gt_row gt_center\"><div style='flex-grow:1;margin-left:8px;background:#e1e1e1;'><div style='background:purple;width:19.1279122030364%;height:12.8px;display:flex;align-items:center;justify-content:center;color:#000000;font-weight:bold;font-size:10px;position:relative;'><span style='color:#000000;position:absolute;left:0%;margin-left:19.1279122030364px;font-weight:bold;font-size:10px;'>19.1%<\/span><\/div><\/div><\/td>\n<td headers=\"Memory stub_1_17 Description\" class=\"gt_row gt_left\" style=\"background-color: #FEE08B;\">Low Average<\/td><\/tr>\n    <tr><td headers=\"Memory stub_1_18 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">Craft Delay - Verbatim (150% retained)<\/td>\n<td headers=\"Memory stub_1_18 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">21<\/td>\n<td headers=\"Memory stub_1_18 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/44<\/td>\n<td headers=\"Memory stub_1_18 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"Memory stub_1_18 std\" class=\"gt_row gt_right\">0.25<span class=\"gt_footnote_marks\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>†<\/sup><\/span><\/td>\n<td headers=\"Memory stub_1_18 Percentile\" class=\"gt_row gt_center\"><div style='flex-grow:1;margin-left:8px;background:#e1e1e1;'><div style='background:purple;width:60.0609557566252%;height:12.8px;display:flex;align-items:center;justify-content:flex-start;position:relative;'><span style='color:#FFFFFF;position:absolute;left:0px;margin-left:5px;font-weight:bold;font-size:10px;'>60.1%<\/span><\/div><\/div><\/td>\n<td headers=\"Memory stub_1_18 Description\" class=\"gt_row gt_left\" style=\"background-color: #FFFFBF;\">Average<\/td><\/tr>\n    <tr><td headers=\"Memory stub_1_19 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">Craft Delay - Paraphrase (123% retained)<\/td>\n<td headers=\"Memory stub_1_19 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">16<\/td>\n<td headers=\"Memory stub_1_19 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/25<\/td>\n<td headers=\"Memory stub_1_19 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"Memory stub_1_19 std\" class=\"gt_row gt_right\">0.17<span class=\"gt_footnote_marks\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>†<\/sup><\/span><\/td>\n<td headers=\"Memory stub_1_19 Percentile\" class=\"gt_row gt_center\"><div style='flex-grow:1;margin-left:8px;background:#e1e1e1;'><div style='background:purple;width:56.5583152635976%;height:12.8px;display:flex;align-items:center;justify-content:flex-start;position:relative;'><span style='color:#FFFFFF;position:absolute;left:0px;margin-left:5px;font-weight:bold;font-size:10px;'>56.6%<\/span><\/div><\/div><\/td>\n<td headers=\"Memory stub_1_19 Description\" class=\"gt_row gt_left\" style=\"background-color: #FFFFBF;\">Average<\/td><\/tr>\n    <tr class=\"gt_group_heading_row\">\n      <th colspan=\"7\" class=\"gt_group_heading\" scope=\"colgroup\" id=\"Executive Functioning\">Executive Functioning<\/th>\n    <\/tr>\n    <tr class=\"gt_row_group_first\"><td headers=\"Executive Functioning stub_1_20 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">Trailmaking Part B (1 errors; 13/24 CL)<\/td>\n<td headers=\"Executive Functioning stub_1_20 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">76<\/td>\n<td headers=\"Executive Functioning stub_1_20 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/300<\/td>\n<td headers=\"Executive Functioning stub_1_20 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\">&nbspsec<\/td>\n<td headers=\"Executive Functioning stub_1_20 std\" class=\"gt_row gt_right\">0.17<span class=\"gt_footnote_marks\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>†<\/sup><\/span><\/td>\n<td headers=\"Executive Functioning stub_1_20 Percentile\" class=\"gt_row gt_center\"><div style='flex-grow:1;margin-left:8px;background:#e1e1e1;'><div style='background:purple;width:56.5991673768668%;height:12.8px;display:flex;align-items:center;justify-content:flex-start;position:relative;'><span style='color:#FFFFFF;position:absolute;left:0px;margin-left:5px;font-weight:bold;font-size:10px;'>56.6%<\/span><\/div><\/div><\/td>\n<td headers=\"Executive Functioning stub_1_20 Description\" class=\"gt_row gt_left\" style=\"background-color: #FFFFBF;\">Average<\/td><\/tr>\n    <tr><td headers=\"Executive Functioning stub_1_21 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">Clock Drawing Test<\/td>\n<td headers=\"Executive Functioning stub_1_21 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">2<\/td>\n<td headers=\"Executive Functioning stub_1_21 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/3<\/td>\n<td headers=\"Executive Functioning stub_1_21 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"Executive Functioning stub_1_21 std\" class=\"gt_row gt_right\">—<\/td>\n<td headers=\"Executive Functioning stub_1_21 Percentile\" class=\"gt_row gt_center\">&mdash;<\/td>\n<td headers=\"Executive Functioning stub_1_21 Description\" class=\"gt_row gt_left\">—<\/td><\/tr>\n    <tr class=\"gt_group_heading_row\">\n      <th colspan=\"7\" class=\"gt_group_heading\" scope=\"colgroup\" id=\"Mood\">Mood<\/th>\n    <\/tr>\n    <tr class=\"gt_row_group_first\"><td headers=\"Mood stub_1_22 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">GDS-15 (Depression Symptoms)<\/td>\n<td headers=\"Mood stub_1_22 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">0<\/td>\n<td headers=\"Mood stub_1_22 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/15<\/td>\n<td headers=\"Mood stub_1_22 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"Mood stub_1_22 std\" class=\"gt_row gt_right\">—<\/td>\n<td headers=\"Mood stub_1_22 Percentile\" class=\"gt_row gt_center\">&mdash;<\/td>\n<td headers=\"Mood stub_1_22 Description\" class=\"gt_row gt_left\">—<\/td><\/tr>\n  <\/tbody>\n  \n  <tfoot class=\"gt_footnotes\">\n    <tr>\n      <td class=\"gt_footnote\" colspan=\"7\"> Raw scores highlighted in red are not valid scores, but error codes. Hover for details.<\/td>\n    <\/tr>\n    <tr>\n      <td class=\"gt_footnote\" colspan=\"7\"><span class=\"gt_footnote_marks gt_asterisk\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>*<\/sup><\/span> Z-scores obtained from standardizing using group specific means and standard deviations. Groups based on age, sex, and years of education.<\/td>\n    <\/tr>\n    <tr>\n      <td class=\"gt_footnote\" colspan=\"7\"><span class=\"gt_footnote_marks\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>†<\/sup><\/span> Z-scores based on regression models adjusting for age, sex, and years of education.<\/td>\n    <\/tr>\n  <\/tfoot>\n<\/table>\n<\/div>\n<script>gtShinyBinding.initialize('main_table-mainTable');<\/script>",
+      "html": "<div id=\"assessment-summary-table\" style=\"padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;\">\n  <style>#assessment-summary-table table {\n  font-family: Arial;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n}\n\n#assessment-summary-table thead, #assessment-summary-table tbody, #assessment-summary-table tfoot, #assessment-summary-table tr, #assessment-summary-table td, #assessment-summary-table th {\n  border-style: none;\n}\n\n#assessment-summary-table p {\n  margin: 0;\n  padding: 0;\n}\n\n#assessment-summary-table .gt_table {\n  display: table;\n  border-collapse: collapse;\n  line-height: normal;\n  margin-left: auto;\n  margin-right: auto;\n  color: #333333;\n  font-size: 80%;\n  font-weight: normal;\n  font-style: normal;\n  background-color: #FFFFFF;\n  width: auto;\n  border-top-style: solid;\n  border-top-width: 2px;\n  border-top-color: #A8A8A8;\n  border-right-style: none;\n  border-right-width: 2px;\n  border-right-color: #D3D3D3;\n  border-bottom-style: solid;\n  border-bottom-width: 2px;\n  border-bottom-color: #A8A8A8;\n  border-left-style: none;\n  border-left-width: 2px;\n  border-left-color: #D3D3D3;\n}\n\n#assessment-summary-table .gt_caption {\n  padding-top: 4px;\n  padding-bottom: 4px;\n}\n\n#assessment-summary-table .gt_title {\n  color: #333333;\n  font-size: 125%;\n  font-weight: initial;\n  padding-top: 4px;\n  padding-bottom: 4px;\n  padding-left: 5px;\n  padding-right: 5px;\n  border-bottom-color: #FFFFFF;\n  border-bottom-width: 0;\n}\n\n#assessment-summary-table .gt_subtitle {\n  color: #333333;\n  font-size: 85%;\n  font-weight: initial;\n  padding-top: 3px;\n  padding-bottom: 5px;\n  padding-left: 5px;\n  padding-right: 5px;\n  border-top-color: #FFFFFF;\n  border-top-width: 0;\n}\n\n#assessment-summary-table .gt_heading {\n  background-color: #FFFFFF;\n  text-align: center;\n  border-bottom-color: #FFFFFF;\n  border-left-style: none;\n  border-left-width: 1px;\n  border-left-color: #D3D3D3;\n  border-right-style: none;\n  border-right-width: 1px;\n  border-right-color: #D3D3D3;\n}\n\n#assessment-summary-table .gt_bottom_border {\n  border-bottom-style: solid;\n  border-bottom-width: 2px;\n  border-bottom-color: #D3D3D3;\n}\n\n#assessment-summary-table .gt_col_headings {\n  border-top-style: solid;\n  border-top-width: 2px;\n  border-top-color: #D3D3D3;\n  border-bottom-style: solid;\n  border-bottom-width: 2px;\n  border-bottom-color: #D3D3D3;\n  border-left-style: none;\n  border-left-width: 1px;\n  border-left-color: #D3D3D3;\n  border-right-style: none;\n  border-right-width: 1px;\n  border-right-color: #D3D3D3;\n}\n\n#assessment-summary-table .gt_col_heading {\n  color: #333333;\n  background-color: #FFFFFF;\n  font-size: 100%;\n  font-weight: bold;\n  text-transform: inherit;\n  border-left-style: none;\n  border-left-width: 1px;\n  border-left-color: #D3D3D3;\n  border-right-style: none;\n  border-right-width: 1px;\n  border-right-color: #D3D3D3;\n  vertical-align: bottom;\n  padding-top: 5px;\n  padding-bottom: 6px;\n  padding-left: 5px;\n  padding-right: 5px;\n  overflow-x: hidden;\n}\n\n#assessment-summary-table .gt_column_spanner_outer {\n  color: #333333;\n  background-color: #FFFFFF;\n  font-size: 100%;\n  font-weight: bold;\n  text-transform: inherit;\n  padding-top: 0;\n  padding-bottom: 0;\n  padding-left: 4px;\n  padding-right: 4px;\n}\n\n#assessment-summary-table .gt_column_spanner_outer:first-child {\n  padding-left: 0;\n}\n\n#assessment-summary-table .gt_column_spanner_outer:last-child {\n  padding-right: 0;\n}\n\n#assessment-summary-table .gt_column_spanner {\n  border-bottom-style: solid;\n  border-bottom-width: 2px;\n  border-bottom-color: #D3D3D3;\n  vertical-align: bottom;\n  padding-top: 5px;\n  padding-bottom: 5px;\n  overflow-x: hidden;\n  display: inline-block;\n  width: 100%;\n}\n\n#assessment-summary-table .gt_spanner_row {\n  border-bottom-style: hidden;\n}\n\n#assessment-summary-table .gt_group_heading {\n  padding-top: 4px;\n  padding-bottom: 4px;\n  padding-left: 5px;\n  padding-right: 5px;\n  color: #333333;\n  background-color: #FFFFFF;\n  font-size: 100%;\n  font-weight: bold;\n  text-transform: inherit;\n  border-top-style: solid;\n  border-top-width: 2px;\n  border-top-color: #D3D3D3;\n  border-bottom-style: solid;\n  border-bottom-width: 2px;\n  border-bottom-color: #D3D3D3;\n  border-left-style: none;\n  border-left-width: 1px;\n  border-left-color: #D3D3D3;\n  border-right-style: none;\n  border-right-width: 1px;\n  border-right-color: #D3D3D3;\n  vertical-align: middle;\n  text-align: left;\n}\n\n#assessment-summary-table .gt_empty_group_heading {\n  padding: 0.5px;\n  color: #333333;\n  background-color: #FFFFFF;\n  font-size: 100%;\n  font-weight: bold;\n  border-top-style: solid;\n  border-top-width: 2px;\n  border-top-color: #D3D3D3;\n  border-bottom-style: solid;\n  border-bottom-width: 2px;\n  border-bottom-color: #D3D3D3;\n  vertical-align: middle;\n}\n\n#assessment-summary-table .gt_from_md > :first-child {\n  margin-top: 0;\n}\n\n#assessment-summary-table .gt_from_md > :last-child {\n  margin-bottom: 0;\n}\n\n#assessment-summary-table .gt_row {\n  padding-top: 2px;\n  padding-bottom: 2px;\n  padding-left: 5px;\n  padding-right: 5px;\n  margin: 10px;\n  border-top-style: solid;\n  border-top-width: 1px;\n  border-top-color: #D3D3D3;\n  border-left-style: none;\n  border-left-width: 1px;\n  border-left-color: #D3D3D3;\n  border-right-style: none;\n  border-right-width: 1px;\n  border-right-color: #D3D3D3;\n  vertical-align: middle;\n  overflow-x: hidden;\n}\n\n#assessment-summary-table .gt_stub {\n  color: #333333;\n  background-color: #FFFFFF;\n  font-size: 100%;\n  font-weight: initial;\n  text-transform: inherit;\n  border-right-style: solid;\n  border-right-width: 2px;\n  border-right-color: #D3D3D3;\n  padding-left: 5px;\n  padding-right: 5px;\n}\n\n#assessment-summary-table .gt_stub_row_group {\n  color: #333333;\n  background-color: #FFFFFF;\n  font-size: 100%;\n  font-weight: initial;\n  text-transform: inherit;\n  border-right-style: solid;\n  border-right-width: 2px;\n  border-right-color: #D3D3D3;\n  padding-left: 5px;\n  padding-right: 5px;\n  vertical-align: top;\n}\n\n#assessment-summary-table .gt_row_group_first td {\n  border-top-width: 2px;\n}\n\n#assessment-summary-table .gt_row_group_first th {\n  border-top-width: 2px;\n}\n\n#assessment-summary-table .gt_summary_row {\n  color: #333333;\n  background-color: #FFFFFF;\n  text-transform: inherit;\n  padding-top: 8px;\n  padding-bottom: 8px;\n  padding-left: 5px;\n  padding-right: 5px;\n}\n\n#assessment-summary-table .gt_first_summary_row {\n  border-top-style: solid;\n  border-top-color: #D3D3D3;\n}\n\n#assessment-summary-table .gt_first_summary_row.thick {\n  border-top-width: 2px;\n}\n\n#assessment-summary-table .gt_last_summary_row {\n  padding-top: 8px;\n  padding-bottom: 8px;\n  padding-left: 5px;\n  padding-right: 5px;\n  border-bottom-style: solid;\n  border-bottom-width: 2px;\n  border-bottom-color: #D3D3D3;\n}\n\n#assessment-summary-table .gt_grand_summary_row {\n  color: #333333;\n  background-color: #FFFFFF;\n  text-transform: inherit;\n  padding-top: 8px;\n  padding-bottom: 8px;\n  padding-left: 5px;\n  padding-right: 5px;\n}\n\n#assessment-summary-table .gt_first_grand_summary_row {\n  padding-top: 8px;\n  padding-bottom: 8px;\n  padding-left: 5px;\n  padding-right: 5px;\n  border-top-style: double;\n  border-top-width: 6px;\n  border-top-color: #D3D3D3;\n}\n\n#assessment-summary-table .gt_last_grand_summary_row_top {\n  padding-top: 8px;\n  padding-bottom: 8px;\n  padding-left: 5px;\n  padding-right: 5px;\n  border-bottom-style: double;\n  border-bottom-width: 6px;\n  border-bottom-color: #D3D3D3;\n}\n\n#assessment-summary-table .gt_striped {\n  background-color: rgba(128, 128, 128, 0.05);\n}\n\n#assessment-summary-table .gt_table_body {\n  border-top-style: solid;\n  border-top-width: 2px;\n  border-top-color: #D3D3D3;\n  border-bottom-style: solid;\n  border-bottom-width: 2px;\n  border-bottom-color: #D3D3D3;\n}\n\n#assessment-summary-table .gt_footnotes {\n  color: #333333;\n  background-color: #FFFFFF;\n  border-bottom-style: none;\n  border-bottom-width: 2px;\n  border-bottom-color: #D3D3D3;\n  border-left-style: none;\n  border-left-width: 2px;\n  border-left-color: #D3D3D3;\n  border-right-style: none;\n  border-right-width: 2px;\n  border-right-color: #D3D3D3;\n}\n\n#assessment-summary-table .gt_footnote {\n  margin: 0px;\n  font-size: 90%;\n  padding-top: 4px;\n  padding-bottom: 4px;\n  padding-left: 5px;\n  padding-right: 5px;\n}\n\n#assessment-summary-table .gt_sourcenotes {\n  color: #333333;\n  background-color: #FFFFFF;\n  border-bottom-style: none;\n  border-bottom-width: 2px;\n  border-bottom-color: #D3D3D3;\n  border-left-style: none;\n  border-left-width: 2px;\n  border-left-color: #D3D3D3;\n  border-right-style: none;\n  border-right-width: 2px;\n  border-right-color: #D3D3D3;\n}\n\n#assessment-summary-table .gt_sourcenote {\n  font-size: 90%;\n  padding-top: 4px;\n  padding-bottom: 4px;\n  padding-left: 5px;\n  padding-right: 5px;\n}\n\n#assessment-summary-table .gt_left {\n  text-align: left;\n}\n\n#assessment-summary-table .gt_center {\n  text-align: center;\n}\n\n#assessment-summary-table .gt_right {\n  text-align: right;\n  font-variant-numeric: tabular-nums;\n}\n\n#assessment-summary-table .gt_font_normal {\n  font-weight: normal;\n}\n\n#assessment-summary-table .gt_font_bold {\n  font-weight: bold;\n}\n\n#assessment-summary-table .gt_font_italic {\n  font-style: italic;\n}\n\n#assessment-summary-table .gt_super {\n  font-size: 65%;\n}\n\n#assessment-summary-table .gt_footnote_marks {\n  font-size: 75%;\n  vertical-align: 0.4em;\n  position: initial;\n}\n\n#assessment-summary-table .gt_asterisk {\n  font-size: 100%;\n  vertical-align: 0;\n}\n\n#assessment-summary-table .gt_indent_1 {\n  text-indent: 5px;\n}\n\n#assessment-summary-table .gt_indent_2 {\n  text-indent: 10px;\n}\n\n#assessment-summary-table .gt_indent_3 {\n  text-indent: 15px;\n}\n\n#assessment-summary-table .gt_indent_4 {\n  text-indent: 20px;\n}\n\n#assessment-summary-table .gt_indent_5 {\n  text-indent: 25px;\n}\n\n#assessment-summary-table .katex-display {\n  display: inline-flex !important;\n  margin-bottom: 0.75em !important;\n}\n\n#assessment-summary-table div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {\n  height: 0px !important;\n}\n<\/style>\n  <table class=\"gt_table\" style=\"table-layout:fixed;\" data-quarto-disable-processing=\"false\" data-quarto-bootstrap=\"false\">\n  <colgroup>\n    <col/>\n    <col/>\n    <col/>\n    <col/>\n    <col/>\n    <col style=\"width:100px;\"/>\n    <col/>\n  <\/colgroup>\n  <thead>\n    <tr class=\"gt_heading\">\n      <td colspan=\"7\" class=\"gt_heading gt_title gt_font_normal gt_bottom_border\" style=\"text-align: left; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000;\"><div id=\"summary-table-caption\" style=\"padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;\">\n  \n  <table class=\"gt_table\" data-quarto-disable-processing=\"false\" data-quarto-bootstrap=\"false\" style=\"-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: 0px; margin-right: 0px; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;\" bgcolor=\"#FFFFFF\">\n  \n  <tbody class=\"gt_table_body\" style=\"border-style: none; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3;\">\n    <tr style=\"border-style: none;\"><td headers=\"X1\" class=\"gt_row gt_left\" style=\"border-style: none; padding-top: 3px; padding-bottom: 3px; padding-left: 5px; padding-right: 5px; margin: 10px; overflow-x: hidden; text-align: left; vertical-align: top; border-left-width: 1px; border-left-style: hidden; border-left-color: #000000; border-right-width: 1px; border-right-style: hidden; border-right-color: #000000; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: hidden; border-bottom-color: #000000;\" valign=\"top\" align=\"left\"><span class=\"gt_from_md\"><strong style=\"margin-top: 0; margin-bottom: 0;\">Age<\/strong>:<\/span><\/td>\n<td headers=\"X2\" class=\"gt_row gt_left\" style=\"border-style: none; padding-top: 3px; padding-bottom: 3px; padding-left: 5px; padding-right: 5px; margin: 10px; overflow-x: hidden; text-align: left; vertical-align: top; border-left-width: 1px; border-left-style: hidden; border-left-color: #000000; border-right-width: 1px; border-right-style: hidden; border-right-color: #000000; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: hidden; border-bottom-color: #000000;\" valign=\"top\" align=\"left\"><span class=\"gt_from_md\"><u style=\"margin-top: 0; margin-bottom: 0;\">  77  <\/u> .<\/span><\/td>\n<td headers=\"X3\" class=\"gt_row gt_left\" style=\"border-style: none; padding-top: 3px; padding-bottom: 3px; padding-left: 5px; padding-right: 5px; margin: 10px; overflow-x: hidden; text-align: left; vertical-align: top; border-left-width: 1px; border-left-style: hidden; border-left-color: #000000; border-right-width: 1px; border-right-style: hidden; border-right-color: #000000; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: hidden; border-bottom-color: #000000;\" valign=\"top\" align=\"left\"><span class=\"gt_from_md\"><strong style=\"margin-top: 0; margin-bottom: 0;\">FAS<\/strong>:<\/span><\/td>\n<td headers=\"X4\" class=\"gt_row gt_left\" style=\"border-style: none; padding-top: 3px; padding-bottom: 3px; padding-left: 5px; padding-right: 5px; margin: 10px; overflow-x: hidden; text-align: left; vertical-align: top; border-left-width: 1px; border-left-style: hidden; border-left-color: #000000; border-right-width: 1px; border-right-style: hidden; border-right-color: #000000; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: hidden; border-bottom-color: #000000;\" valign=\"top\" align=\"left\"><span class=\"gt_from_md\"><u style=\"margin-top: 0; margin-bottom: 0;\">  2  <\/u> .<\/span><\/td>\n<td headers=\"X5\" class=\"gt_row gt_left\" style=\"border-style: none; padding-top: 3px; padding-bottom: 3px; padding-left: 5px; padding-right: 5px; margin: 10px; overflow-x: hidden; text-align: left; vertical-align: top; border-left-width: 1px; border-left-style: hidden; border-left-color: #000000; border-right-width: 1px; border-right-style: hidden; border-right-color: #000000; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: hidden; border-bottom-color: #000000;\" valign=\"top\" align=\"left\"><span class=\"gt_from_md\"><strong style=\"margin-top: 0; margin-bottom: 0;\">IQCODE<\/strong> (self/informant):<\/span><\/td>\n<td headers=\"X6\" class=\"gt_row gt_left\" style=\"border-style: none; padding-top: 3px; padding-bottom: 3px; padding-left: 5px; padding-right: 5px; margin: 10px; overflow-x: hidden; text-align: left; vertical-align: top; border-left-width: 1px; border-left-style: hidden; border-left-color: #000000; border-right-width: 1px; border-right-style: hidden; border-right-color: #000000; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: hidden; border-bottom-color: #000000;\" valign=\"top\" align=\"left\"><span class=\"gt_from_md\"><u style=\"margin-top: 0; margin-bottom: 0;\">  — / —  <\/u> .<\/span><\/td><\/tr>\n  <\/tbody>\n  \n  \n<\/table>\n<\/div><\/td>\n    <\/tr>\n    \n    <tr class=\"gt_col_headings gt_spanner_row\">\n      <th class=\"gt_col_heading gt_columns_bottom_border gt_left\" rowspan=\"2\" colspan=\"1\" scope=\"col\" id=\"a::stub\"><\/th>\n      <th class=\"gt_center gt_columns_top_border gt_column_spanner_outer\" rowspan=\"1\" colspan=\"4\" scope=\"colgroup\" id=\"Scores\">\n        <div class=\"gt_column_spanner\">Scores<\/div>\n      <\/th>\n      <th class=\"gt_col_heading gt_columns_bottom_border gt_center\" rowspan=\"2\" colspan=\"1\" scope=\"col\" id=\"Percentile\">Percentile<\/th>\n      <th class=\"gt_col_heading gt_columns_bottom_border gt_left\" rowspan=\"2\" colspan=\"1\" scope=\"col\" id=\"Description\">Description<\/th>\n    <\/tr>\n    <tr class=\"gt_col_headings\">\n      <th class=\"gt_col_heading gt_columns_bottom_border gt_right\" rowspan=\"1\" colspan=\"1\" style=\"padding-right:0px; padding-left:0px;\" scope=\"col\" id=\"raw\">R<\/th>\n      <th class=\"gt_col_heading gt_columns_bottom_border gt_left\" rowspan=\"1\" colspan=\"1\" style=\"padding-right:0px; padding-left:0px;\" scope=\"col\" id=\"raw_suffix\">aw<\/th>\n      <th class=\"gt_col_heading gt_columns_bottom_border gt_left\" rowspan=\"1\" colspan=\"1\" style=\"padding-left:0px;\" scope=\"col\" id=\"units\"><\/th>\n      <th class=\"gt_col_heading gt_columns_bottom_border gt_right\" rowspan=\"1\" colspan=\"1\" style=\"text-decoration-line:underline;text-decoration-style:dashed;\" scope=\"col\" id=\"std\"><bslib-tooltip placement=\"auto\" bsOptions=\"[]\" data-require-bs-version=\"5\" data-require-bs-caller=\"tooltip()\">\n  <template>Results of standardizing raw scores<\/template>\n  Std.\n<\/bslib-tooltip><\/th>\n    <\/tr>\n  <\/thead>\n  <tbody class=\"gt_table_body\">\n    <tr class=\"gt_group_heading_row\">\n      <th colspan=\"7\" class=\"gt_group_heading\" scope=\"colgroup\" id=\"General Cognition\">General Cognition<\/th>\n    <\/tr>\n    <tr class=\"gt_row_group_first\"><td headers=\"General Cognition stub_1_1 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">CDR Global (0 SOB)<\/td>\n<td headers=\"General Cognition stub_1_1 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">0.0<\/td>\n<td headers=\"General Cognition stub_1_1 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\"><\/td>\n<td headers=\"General Cognition stub_1_1 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"General Cognition stub_1_1 std\" class=\"gt_row gt_right\">—<\/td>\n<td headers=\"General Cognition stub_1_1 Percentile\" class=\"gt_row gt_center\">&mdash;<\/td>\n<td headers=\"General Cognition stub_1_1 Description\" class=\"gt_row gt_left\">—<\/td><\/tr>\n    <tr><td headers=\"General Cognition stub_1_2 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">MoCA<\/td>\n<td headers=\"General Cognition stub_1_2 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">16<\/td>\n<td headers=\"General Cognition stub_1_2 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/30<\/td>\n<td headers=\"General Cognition stub_1_2 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"General Cognition stub_1_2 std\" class=\"gt_row gt_right\">−4.12<span class=\"gt_footnote_marks gt_asterisk\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>*<\/sup><\/span><\/td>\n<td headers=\"General Cognition stub_1_2 Percentile\" class=\"gt_row gt_center\"><div style='flex-grow:1;margin-left:8px;background:#e1e1e1;'><div style='background:purple;width:0.00191597739008374%;height:12.8px;display:flex;align-items:center;justify-content:center;color:#000000;font-weight:bold;font-size:10px;position:relative;'><span style='color:#000000;position:absolute;left:0%;margin-left:0.00191597739008374px;font-weight:bold;font-size:10px;'>0%<\/span><\/div><\/div><\/td>\n<td headers=\"General Cognition stub_1_2 Description\" class=\"gt_row gt_left\" style=\"background-color: #D73027;\">Impaired<\/td><\/tr>\n    <tr class=\"gt_group_heading_row\">\n      <th colspan=\"7\" class=\"gt_group_heading\" scope=\"colgroup\" id=\"Attention/Processing\">Attention/Processing<\/th>\n    <\/tr>\n    <tr class=\"gt_row_group_first\"><td headers=\"Attention/Processing stub_1_3 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">Trailmaking Part A (0 errors; 24/24 CL)<\/td>\n<td headers=\"Attention/Processing stub_1_3 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">43<\/td>\n<td headers=\"Attention/Processing stub_1_3 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/150<\/td>\n<td headers=\"Attention/Processing stub_1_3 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\">&nbspsec<\/td>\n<td headers=\"Attention/Processing stub_1_3 std\" class=\"gt_row gt_right\">−1.07<span class=\"gt_footnote_marks gt_asterisk\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>*<\/sup><\/span><\/td>\n<td headers=\"Attention/Processing stub_1_3 Percentile\" class=\"gt_row gt_center\"><div style='flex-grow:1;margin-left:8px;background:#e1e1e1;'><div style='background:purple;width:14.182742421127%;height:12.8px;display:flex;align-items:center;justify-content:center;color:#000000;font-weight:bold;font-size:10px;position:relative;'><span style='color:#000000;position:absolute;left:0%;margin-left:14.182742421127px;font-weight:bold;font-size:10px;'>14.2%<\/span><\/div><\/div><\/td>\n<td headers=\"Attention/Processing stub_1_3 Description\" class=\"gt_row gt_left\" style=\"background-color: #FEE08B;\">Low Average<\/td><\/tr>\n    <tr><td headers=\"Attention/Processing stub_1_4 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">Number Span Forward - Total<\/td>\n<td headers=\"Attention/Processing stub_1_4 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">7<\/td>\n<td headers=\"Attention/Processing stub_1_4 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/14<\/td>\n<td headers=\"Attention/Processing stub_1_4 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"Attention/Processing stub_1_4 std\" class=\"gt_row gt_right\">−0.70<span class=\"gt_footnote_marks gt_asterisk\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>*<\/sup><\/span><\/td>\n<td headers=\"Attention/Processing stub_1_4 Percentile\" class=\"gt_row gt_center\"><div style='flex-grow:1;margin-left:8px;background:#e1e1e1;'><div style='background:purple;width:24.1260038618486%;height:12.8px;display:flex;align-items:center;justify-content:center;color:#000000;font-weight:bold;font-size:10px;position:relative;'><span style='color:#000000;position:absolute;left:0%;margin-left:24.1260038618486px;font-weight:bold;font-size:10px;'>24.1%<\/span><\/div><\/div><\/td>\n<td headers=\"Attention/Processing stub_1_4 Description\" class=\"gt_row gt_left\" style=\"background-color: #FEE08B;\">Low Average<\/td><\/tr>\n    <tr><td headers=\"Attention/Processing stub_1_5 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">Number Span Forward - Span Length<\/td>\n<td headers=\"Attention/Processing stub_1_5 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">5<\/td>\n<td headers=\"Attention/Processing stub_1_5 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/9<\/td>\n<td headers=\"Attention/Processing stub_1_5 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"Attention/Processing stub_1_5 std\" class=\"gt_row gt_right\">−1.42<span class=\"gt_footnote_marks gt_asterisk\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>*<\/sup><\/span><\/td>\n<td headers=\"Attention/Processing stub_1_5 Percentile\" class=\"gt_row gt_center\"><div style='flex-grow:1;margin-left:8px;background:#e1e1e1;'><div style='background:purple;width:7.81523770422611%;height:12.8px;display:flex;align-items:center;justify-content:center;color:#000000;font-weight:bold;font-size:10px;position:relative;'><span style='color:#000000;position:absolute;left:0%;margin-left:7.81523770422612px;font-weight:bold;font-size:10px;'>7.8%<\/span><\/div><\/div><\/td>\n<td headers=\"Attention/Processing stub_1_5 Description\" class=\"gt_row gt_left\" style=\"background-color: #FC8D59;\">Borderline<\/td><\/tr>\n    <tr><td headers=\"Attention/Processing stub_1_6 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">Number Span Backward - Total<\/td>\n<td headers=\"Attention/Processing stub_1_6 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">7<\/td>\n<td headers=\"Attention/Processing stub_1_6 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/14<\/td>\n<td headers=\"Attention/Processing stub_1_6 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"Attention/Processing stub_1_6 std\" class=\"gt_row gt_right\">−0.15<span class=\"gt_footnote_marks gt_asterisk\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>*<\/sup><\/span><\/td>\n<td headers=\"Attention/Processing stub_1_6 Percentile\" class=\"gt_row gt_center\"><div style='flex-grow:1;margin-left:8px;background:#e1e1e1;'><div style='background:purple;width:43.9304696288163%;height:12.8px;display:flex;align-items:center;justify-content:flex-start;position:relative;'><span style='color:#FFFFFF;position:absolute;left:0px;margin-left:5px;font-weight:bold;font-size:10px;'>43.9%<\/span><\/div><\/div><\/td>\n<td headers=\"Attention/Processing stub_1_6 Description\" class=\"gt_row gt_left\" style=\"background-color: #FFFFBF;\">Average<\/td><\/tr>\n    <tr><td headers=\"Attention/Processing stub_1_7 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">Number Span Backward - Span Length<\/td>\n<td headers=\"Attention/Processing stub_1_7 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">4<\/td>\n<td headers=\"Attention/Processing stub_1_7 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/8<\/td>\n<td headers=\"Attention/Processing stub_1_7 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"Attention/Processing stub_1_7 std\" class=\"gt_row gt_right\">−0.95<span class=\"gt_footnote_marks gt_asterisk\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>*<\/sup><\/span><\/td>\n<td headers=\"Attention/Processing stub_1_7 Percentile\" class=\"gt_row gt_center\"><div style='flex-grow:1;margin-left:8px;background:#e1e1e1;'><div style='background:purple;width:17.1121324272161%;height:12.8px;display:flex;align-items:center;justify-content:center;color:#000000;font-weight:bold;font-size:10px;position:relative;'><span style='color:#000000;position:absolute;left:0%;margin-left:17.1121324272161px;font-weight:bold;font-size:10px;'>17.1%<\/span><\/div><\/div><\/td>\n<td headers=\"Attention/Processing stub_1_7 Description\" class=\"gt_row gt_left\" style=\"background-color: #FEE08B;\">Low Average<\/td><\/tr>\n    <tr class=\"gt_group_heading_row\">\n      <th colspan=\"7\" class=\"gt_group_heading\" scope=\"colgroup\" id=\"Language\">Language<\/th>\n    <\/tr>\n    <tr class=\"gt_row_group_first\"><td headers=\"Language stub_1_8 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">MINT<\/td>\n<td headers=\"Language stub_1_8 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">29<\/td>\n<td headers=\"Language stub_1_8 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/32<\/td>\n<td headers=\"Language stub_1_8 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"Language stub_1_8 std\" class=\"gt_row gt_right\">−0.82<span class=\"gt_footnote_marks gt_asterisk\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>*<\/sup><\/span><\/td>\n<td headers=\"Language stub_1_8 Percentile\" class=\"gt_row gt_center\"><div style='flex-grow:1;margin-left:8px;background:#e1e1e1;'><div style='background:purple;width:20.7202799150424%;height:12.8px;display:flex;align-items:center;justify-content:center;color:#000000;font-weight:bold;font-size:10px;position:relative;'><span style='color:#000000;position:absolute;left:0%;margin-left:20.7202799150424px;font-weight:bold;font-size:10px;'>20.7%<\/span><\/div><\/div><\/td>\n<td headers=\"Language stub_1_8 Description\" class=\"gt_row gt_left\" style=\"background-color: #FEE08B;\">Low Average<\/td><\/tr>\n    <tr><td headers=\"Language stub_1_9 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">Animal Fluency<\/td>\n<td headers=\"Language stub_1_9 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">17<\/td>\n<td headers=\"Language stub_1_9 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/77<\/td>\n<td headers=\"Language stub_1_9 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"Language stub_1_9 std\" class=\"gt_row gt_right\">−0.84<span class=\"gt_footnote_marks gt_asterisk\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>*<\/sup><\/span><\/td>\n<td headers=\"Language stub_1_9 Percentile\" class=\"gt_row gt_center\"><div style='flex-grow:1;margin-left:8px;background:#e1e1e1;'><div style='background:purple;width:20.000107976635%;height:12.8px;display:flex;align-items:center;justify-content:center;color:#000000;font-weight:bold;font-size:10px;position:relative;'><span style='color:#000000;position:absolute;left:0%;margin-left:20.000107976635px;font-weight:bold;font-size:10px;'>20%<\/span><\/div><\/div><\/td>\n<td headers=\"Language stub_1_9 Description\" class=\"gt_row gt_left\" style=\"background-color: #FEE08B;\">Low Average<\/td><\/tr>\n    <tr><td headers=\"Language stub_1_10 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">Vegetable Fluency<\/td>\n<td headers=\"Language stub_1_10 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">23<\/td>\n<td headers=\"Language stub_1_10 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/77<\/td>\n<td headers=\"Language stub_1_10 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"Language stub_1_10 std\" class=\"gt_row gt_right\">2.32<span class=\"gt_footnote_marks gt_asterisk\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>*<\/sup><\/span><\/td>\n<td headers=\"Language stub_1_10 Percentile\" class=\"gt_row gt_center\"><div style='flex-grow:1;margin-left:8px;background:#e1e1e1;'><div style='background:purple;width:98.995506582224%;height:12.8px;display:flex;align-items:center;justify-content:flex-start;position:relative;'><span style='color:#FFFFFF;position:absolute;left:0px;margin-left:5px;font-weight:bold;font-size:10px;'>99%<\/span><\/div><\/div><\/td>\n<td headers=\"Language stub_1_10 Description\" class=\"gt_row gt_left\" style=\"background-color: #1A9850;\">Very Superior<\/td><\/tr>\n    <tr><td headers=\"Language stub_1_11 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">F+L Words<\/td>\n<td headers=\"Language stub_1_11 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">27<\/td>\n<td headers=\"Language stub_1_11 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/80<\/td>\n<td headers=\"Language stub_1_11 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"Language stub_1_11 std\" class=\"gt_row gt_right\">−0.29<span class=\"gt_footnote_marks gt_asterisk\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>*<\/sup><\/span><\/td>\n<td headers=\"Language stub_1_11 Percentile\" class=\"gt_row gt_center\"><div style='flex-grow:1;margin-left:8px;background:#e1e1e1;'><div style='background:purple;width:38.4054879819263%;height:12.8px;display:flex;align-items:center;justify-content:center;color:#000000;font-weight:bold;font-size:10px;position:relative;'><span style='color:#000000;position:absolute;left:0%;margin-left:38.4054879819263px;font-weight:bold;font-size:10px;'>38.4%<\/span><\/div><\/div><\/td>\n<td headers=\"Language stub_1_11 Description\" class=\"gt_row gt_left\" style=\"background-color: #FFFFBF;\">Average<\/td><\/tr>\n    <tr><td headers=\"Language stub_1_12 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">F Words<\/td>\n<td headers=\"Language stub_1_12 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">16<\/td>\n<td headers=\"Language stub_1_12 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/40<\/td>\n<td headers=\"Language stub_1_12 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"Language stub_1_12 std\" class=\"gt_row gt_right\">0.18<span class=\"gt_footnote_marks gt_asterisk\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>*<\/sup><\/span><\/td>\n<td headers=\"Language stub_1_12 Percentile\" class=\"gt_row gt_center\"><div style='flex-grow:1;margin-left:8px;background:#e1e1e1;'><div style='background:purple;width:57.2876584008703%;height:12.8px;display:flex;align-items:center;justify-content:flex-start;position:relative;'><span style='color:#FFFFFF;position:absolute;left:0px;margin-left:5px;font-weight:bold;font-size:10px;'>57.3%<\/span><\/div><\/div><\/td>\n<td headers=\"Language stub_1_12 Description\" class=\"gt_row gt_left\" style=\"background-color: #FFFFBF;\">Average<\/td><\/tr>\n    <tr><td headers=\"Language stub_1_13 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">L Words<\/td>\n<td headers=\"Language stub_1_13 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">17<\/td>\n<td headers=\"Language stub_1_13 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/40<\/td>\n<td headers=\"Language stub_1_13 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"Language stub_1_13 std\" class=\"gt_row gt_right\">0.62<span class=\"gt_footnote_marks gt_asterisk\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>*<\/sup><\/span><\/td>\n<td headers=\"Language stub_1_13 Percentile\" class=\"gt_row gt_center\"><div style='flex-grow:1;margin-left:8px;background:#e1e1e1;'><div style='background:purple;width:73.2018194531886%;height:12.8px;display:flex;align-items:center;justify-content:flex-start;position:relative;'><span style='color:#FFFFFF;position:absolute;left:0px;margin-left:5px;font-weight:bold;font-size:10px;'>73.2%<\/span><\/div><\/div><\/td>\n<td headers=\"Language stub_1_13 Description\" class=\"gt_row gt_left\" style=\"background-color: #FFFFBF;\">Average<\/td><\/tr>\n    <tr class=\"gt_group_heading_row\">\n      <th colspan=\"7\" class=\"gt_group_heading\" scope=\"colgroup\" id=\"Visuospatial\">Visuospatial<\/th>\n    <\/tr>\n    <tr class=\"gt_row_group_first\"><td headers=\"Visuospatial stub_1_14 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">Benson Figure Copy<\/td>\n<td headers=\"Visuospatial stub_1_14 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">15<\/td>\n<td headers=\"Visuospatial stub_1_14 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/17<\/td>\n<td headers=\"Visuospatial stub_1_14 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"Visuospatial stub_1_14 std\" class=\"gt_row gt_right\">−0.48<span class=\"gt_footnote_marks gt_asterisk\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>*<\/sup><\/span><\/td>\n<td headers=\"Visuospatial stub_1_14 Percentile\" class=\"gt_row gt_center\"><div style='flex-grow:1;margin-left:8px;background:#e1e1e1;'><div style='background:purple;width:31.4720007136888%;height:12.8px;display:flex;align-items:center;justify-content:center;color:#000000;font-weight:bold;font-size:10px;position:relative;'><span style='color:#000000;position:absolute;left:0%;margin-left:31.4720007136888px;font-weight:bold;font-size:10px;'>31.5%<\/span><\/div><\/div><\/td>\n<td headers=\"Visuospatial stub_1_14 Description\" class=\"gt_row gt_left\" style=\"background-color: #FFFFBF;\">Average<\/td><\/tr>\n    <tr class=\"gt_group_heading_row\">\n      <th colspan=\"7\" class=\"gt_group_heading\" scope=\"colgroup\" id=\"Memory\">Memory<\/th>\n    <\/tr>\n    <tr class=\"gt_row_group_first\"><td headers=\"Memory stub_1_15 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">Benson Delay (60% retained; Recog = Yes)<\/td>\n<td headers=\"Memory stub_1_15 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">9<\/td>\n<td headers=\"Memory stub_1_15 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/17<\/td>\n<td headers=\"Memory stub_1_15 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"Memory stub_1_15 std\" class=\"gt_row gt_right\">−0.82<span class=\"gt_footnote_marks gt_asterisk\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>*<\/sup><\/span><\/td>\n<td headers=\"Memory stub_1_15 Percentile\" class=\"gt_row gt_center\"><div style='flex-grow:1;margin-left:8px;background:#e1e1e1;'><div style='background:purple;width:20.671241066077%;height:12.8px;display:flex;align-items:center;justify-content:center;color:#000000;font-weight:bold;font-size:10px;position:relative;'><span style='color:#000000;position:absolute;left:0%;margin-left:20.671241066077px;font-weight:bold;font-size:10px;'>20.7%<\/span><\/div><\/div><\/td>\n<td headers=\"Memory stub_1_15 Description\" class=\"gt_row gt_left\" style=\"background-color: #FEE08B;\">Low Average<\/td><\/tr>\n    <tr><td headers=\"Memory stub_1_16 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">Craft Immediate - Verbatim<\/td>\n<td headers=\"Memory stub_1_16 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">20<\/td>\n<td headers=\"Memory stub_1_16 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/44<\/td>\n<td headers=\"Memory stub_1_16 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"Memory stub_1_16 std\" class=\"gt_row gt_right\">−0.22<span class=\"gt_footnote_marks gt_asterisk\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>*<\/sup><\/span><\/td>\n<td headers=\"Memory stub_1_16 Percentile\" class=\"gt_row gt_center\"><div style='flex-grow:1;margin-left:8px;background:#e1e1e1;'><div style='background:purple;width:41.3858933594781%;height:12.8px;display:flex;align-items:center;justify-content:flex-start;position:relative;'><span style='color:#FFFFFF;position:absolute;left:0px;margin-left:5px;font-weight:bold;font-size:10px;'>41.4%<\/span><\/div><\/div><\/td>\n<td headers=\"Memory stub_1_16 Description\" class=\"gt_row gt_left\" style=\"background-color: #FFFFBF;\">Average<\/td><\/tr>\n    <tr><td headers=\"Memory stub_1_17 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">Craft Immediate - Paraphrase<\/td>\n<td headers=\"Memory stub_1_17 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">7<\/td>\n<td headers=\"Memory stub_1_17 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/25<\/td>\n<td headers=\"Memory stub_1_17 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"Memory stub_1_17 std\" class=\"gt_row gt_right\">−2.24<span class=\"gt_footnote_marks gt_asterisk\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>*<\/sup><\/span><\/td>\n<td headers=\"Memory stub_1_17 Percentile\" class=\"gt_row gt_center\"><div style='flex-grow:1;margin-left:8px;background:#e1e1e1;'><div style='background:purple;width:1.2461392908614%;height:12.8px;display:flex;align-items:center;justify-content:center;color:#000000;font-weight:bold;font-size:10px;position:relative;'><span style='color:#000000;position:absolute;left:0%;margin-left:1.2461392908614px;font-weight:bold;font-size:10px;'>1.2%<\/span><\/div><\/div><\/td>\n<td headers=\"Memory stub_1_17 Description\" class=\"gt_row gt_left\" style=\"background-color: #D73027;\">Impaired<\/td><\/tr>\n    <tr><td headers=\"Memory stub_1_18 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">Craft Delay - Verbatim (100% retained)<\/td>\n<td headers=\"Memory stub_1_18 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">20<\/td>\n<td headers=\"Memory stub_1_18 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/44<\/td>\n<td headers=\"Memory stub_1_18 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"Memory stub_1_18 std\" class=\"gt_row gt_right\">0.22<span class=\"gt_footnote_marks gt_asterisk\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>*<\/sup><\/span><\/td>\n<td headers=\"Memory stub_1_18 Percentile\" class=\"gt_row gt_center\"><div style='flex-grow:1;margin-left:8px;background:#e1e1e1;'><div style='background:purple;width:58.7581937012577%;height:12.8px;display:flex;align-items:center;justify-content:flex-start;position:relative;'><span style='color:#FFFFFF;position:absolute;left:0px;margin-left:5px;font-weight:bold;font-size:10px;'>58.8%<\/span><\/div><\/div><\/td>\n<td headers=\"Memory stub_1_18 Description\" class=\"gt_row gt_left\" style=\"background-color: #FFFFBF;\">Average<\/td><\/tr>\n    <tr><td headers=\"Memory stub_1_19 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">Craft Delay - Paraphrase (185% retained)<\/td>\n<td headers=\"Memory stub_1_19 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">13<\/td>\n<td headers=\"Memory stub_1_19 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/25<\/td>\n<td headers=\"Memory stub_1_19 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"Memory stub_1_19 std\" class=\"gt_row gt_right\">−0.44<span class=\"gt_footnote_marks gt_asterisk\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>*<\/sup><\/span><\/td>\n<td headers=\"Memory stub_1_19 Percentile\" class=\"gt_row gt_center\"><div style='flex-grow:1;margin-left:8px;background:#e1e1e1;'><div style='background:purple;width:33.1270710824653%;height:12.8px;display:flex;align-items:center;justify-content:center;color:#000000;font-weight:bold;font-size:10px;position:relative;'><span style='color:#000000;position:absolute;left:0%;margin-left:33.1270710824653px;font-weight:bold;font-size:10px;'>33.1%<\/span><\/div><\/div><\/td>\n<td headers=\"Memory stub_1_19 Description\" class=\"gt_row gt_left\" style=\"background-color: #FFFFBF;\">Average<\/td><\/tr>\n    <tr class=\"gt_group_heading_row\">\n      <th colspan=\"7\" class=\"gt_group_heading\" scope=\"colgroup\" id=\"Executive Functioning\">Executive Functioning<\/th>\n    <\/tr>\n    <tr class=\"gt_row_group_first\"><td headers=\"Executive Functioning stub_1_20 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">Trailmaking Part B (2 errors; 24/24 CL)<\/td>\n<td headers=\"Executive Functioning stub_1_20 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">79<\/td>\n<td headers=\"Executive Functioning stub_1_20 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/300<\/td>\n<td headers=\"Executive Functioning stub_1_20 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\">&nbspsec<\/td>\n<td headers=\"Executive Functioning stub_1_20 std\" class=\"gt_row gt_right\">0.05<span class=\"gt_footnote_marks gt_asterisk\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>*<\/sup><\/span><\/td>\n<td headers=\"Executive Functioning stub_1_20 Percentile\" class=\"gt_row gt_center\"><div style='flex-grow:1;margin-left:8px;background:#e1e1e1;'><div style='background:purple;width:52.1861043102262%;height:12.8px;display:flex;align-items:center;justify-content:flex-start;position:relative;'><span style='color:#FFFFFF;position:absolute;left:0px;margin-left:5px;font-weight:bold;font-size:10px;'>52.2%<\/span><\/div><\/div><\/td>\n<td headers=\"Executive Functioning stub_1_20 Description\" class=\"gt_row gt_left\" style=\"background-color: #FFFFBF;\">Average<\/td><\/tr>\n    <tr><td headers=\"Executive Functioning stub_1_21 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">Clock Drawing Test<\/td>\n<td headers=\"Executive Functioning stub_1_21 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">2<\/td>\n<td headers=\"Executive Functioning stub_1_21 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/3<\/td>\n<td headers=\"Executive Functioning stub_1_21 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"Executive Functioning stub_1_21 std\" class=\"gt_row gt_right\">—<\/td>\n<td headers=\"Executive Functioning stub_1_21 Percentile\" class=\"gt_row gt_center\">&mdash;<\/td>\n<td headers=\"Executive Functioning stub_1_21 Description\" class=\"gt_row gt_left\">—<\/td><\/tr>\n    <tr class=\"gt_group_heading_row\">\n      <th colspan=\"7\" class=\"gt_group_heading\" scope=\"colgroup\" id=\"Mood\">Mood<\/th>\n    <\/tr>\n    <tr class=\"gt_row_group_first\"><td headers=\"Mood stub_1_22 stub_1\" class=\"gt_row gt_left gt_stub gt_indent_5\" style=\"white-space:nowrap;\">GDS-15 (Depression Symptoms)<\/td>\n<td headers=\"Mood stub_1_22 raw\" class=\"gt_row gt_right\" style=\"padding-right:0px;\">0<\/td>\n<td headers=\"Mood stub_1_22 raw_suffix\" class=\"gt_row gt_left\" style=\"padding-left:0px; padding-right:0px; color:#0000004D;\">/15<\/td>\n<td headers=\"Mood stub_1_22 units\" class=\"gt_row gt_left\" style=\"padding-left:0px;\"><\/td>\n<td headers=\"Mood stub_1_22 std\" class=\"gt_row gt_right\">—<\/td>\n<td headers=\"Mood stub_1_22 Percentile\" class=\"gt_row gt_center\">&mdash;<\/td>\n<td headers=\"Mood stub_1_22 Description\" class=\"gt_row gt_left\">—<\/td><\/tr>\n  <\/tbody>\n  \n  <tfoot class=\"gt_footnotes\">\n    <tr>\n      <td class=\"gt_footnote\" colspan=\"7\"><span class=\"gt_footnote_marks gt_asterisk\" style=\"white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;\"><sup>*<\/sup><\/span> Z-scores based on regression models adjusting for age, sex, and years of education.<\/td>\n    <\/tr>\n  <\/tfoot>\n<\/table>\n<\/div>\n<script>gtShinyBinding.initialize('main_table-mainTable');<\/script>",
       "deps": [
         {
           "name": "gtShiny",

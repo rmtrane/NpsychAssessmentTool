@@ -17,6 +17,7 @@
     "main-plot_full_screen": false,
     "main-table_full_screen": false,
     "main_navbar": "Introduction",
+    "main_table-genPDF": 0,
     "main_table_pct": 80,
     "options": null,
     "plots-accordion": null,
