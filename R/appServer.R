@@ -25,15 +25,23 @@ appServer <- function(input, output, session) {
   selected_date <- shiny::reactiveVal()
 
   shiny::observe({
+    # shiny::req(
+    #   dat_sel$dat_obj(),
+    #   dat_sel$data_source(),
+    #   dat_sel$data_type()
+    # )
+
     dat_obj(dat_sel$dat_obj())
     data_source(dat_sel$data_source())
     data_type(dat_sel$data_type())
 
-    if (data_source() == "csv_upload") {
+    allow_col_selections("disable")
+
+    if (!is.null(data_source()) && data_source() == "csv_upload") {
       allow_col_selections("enable")
     }
 
-    if (data_source() == "redcap") {
+    if (!is.null(data_source()) && data_source() == "redcap") {
       allow_col_selections("hide")
     }
 

@@ -125,17 +125,19 @@ wadrc_data_prep <- function(adrc_data, uds = c("uds3", "uds4")) {
   if (uds == "uds4") {
     # Keep only visits related to uds4
     out <- out[
-      !grepl(pattern = "biomarker", x = out$redcap_event_name)
+      # !grepl(pattern = "biomarker", x = out$redcap_event_name)
+      !grepl(pattern = "uds3", x = out$redcap_event_name)
     ]
     # Create visityr, visitmo, visitday
-    out[, `:=`(
-      visityr = lubridate::year(visitdate),
-      visitmo = lubridate::month(visitdate),
-      visitday = lubridate::day(visitdate)
-    )]
+    out$visityr = lubridate::year(out$visitdate)
+    out$visitmo = lubridate::month(out$visitdate)
+    out$visitday = lubridate::day(out$visitdate)
 
     # Rename 'birthsex' to 'sex'
     colnames(out)[colnames(out) == "birthsex"] <- "sex"
+
+    # Create 'race' column
+    out$race <- NA
 
     out$visitdate <- NULL
   }
@@ -166,6 +168,97 @@ wadrc_data_prep <- function(adrc_data, uds = c("uds3", "uds4")) {
     out$udsd[out$impnomci == 1] <- 2
     out$udsd[out$mci == 1] <- 3
     out$udsd[out$demented == 1] <- 4
+  }
+
+  out <- fill_data_downup(out)
+
+  ## Rename all columns to match NACC naming scheme. To do so, create
+  ## character vector of the form c("new_name" = "old_name", ...)
+
+  ## For UDS3, this is exactly nacc_to_wadrc_uds3
+  if (uds == "uds3") {
+    cols_wanted <- nacc_to_wadrc_uds3
+  }
+
+  ## For UDS4, need to add visityr, visitmo, visitday, and sex, while removing
+  ## visitdate and birthsex.
+  if (uds == "uds4") {
+    cols_wanted <- c(
+      "VISITYR" = "visityr",
+      "VISITMO" = "visitmo",
+      "VISITDAY" = "visitday",
+      "SEX" = "sex",
+      nacc_to_wadrc_uds4[!nacc_to_wadrc_uds4 %in% c("birthsex", "visitdate")]
+    )
+  }
+
+  out <- setNames(
+    out[, cols_wanted, with = F],
+    nm = names(cols_wanted)
+  )
+
+  out
+}
+
+collapse_vals <- \(x) {
+  no_nas <- na.omit(unique(x))
+
+  if (length(no_nas) == 0) {
+    return(NA)
+  }
+
+  if (length(no_nas) > 1) {
+    return(x)
+  }
+
+  no_nas
+}
+
+
+return_single <- function(x, if_multiple = NA) {
+  if (all(is.na(x))) {
+    return(NA)
+  }
+
+  x <- unique(na.omit(x))
+
+  if (length(x) > 1) {
+    return(if_multiple)
+  }
+
+  x
+}
+
+
+fill_data_downup <- function(
+  out,
+  ptid = "ptid",
+  visityr = "visityr",
+  visitmo = "visitmo",
+  visitday = "visitday",
+  educ = "educ",
+  constant_across_visits = c("sex", "race", "birthyr", "birthmo", "handed")
+) {
+  remove_after <- c()
+  if (ptid != "ptid") {
+    out$ptid <- out[[ptid]]
+    remove_after <- c(remove_after, "ptid")
+  }
+  if (visityr != "visityr") {
+    out$visityr <- out[[visityr]]
+    remove_after <- c(remove_after, "visityr")
+  }
+  if (visitmo != "visitmo") {
+    out$visitmo <- out[[visitmo]]
+    remove_after <- c(remove_after, "visitmo")
+  }
+  if (visitday != "visitday") {
+    out$visitday <- out[[visitday]]
+    remove_after <- c(remove_after, "visitday")
+  }
+  if (educ != "educ") {
+    out$educ <- out[[educ]]
+    remove_after <- c(remove_after, "educ")
   }
 
   out <- out[order(ptid, visityr, visitmo, visitday)]
@@ -242,7 +335,7 @@ wadrc_data_prep <- function(adrc_data, uds = c("uds3", "uds4")) {
       data.table::nafill(x, type = "locf") |>
         data.table::nafill(type = "nocb")
     }),
-    .SDcols = c("sex", "race", "birthyr", "birthmo", "handed"),
+    .SDcols = constant_across_visits,
     # .SDcols = data.table::patterns(
     #   c("sex", "race", "birthyr", "birthmo", "handed"),
     #   cols = colnames(out)
@@ -273,57 +366,9 @@ wadrc_data_prep <- function(adrc_data, uds = c("uds3", "uds4")) {
     by = "ptid"
   ]
 
-  ## Rename all columns to match NACC naming scheme. To do so, create
-  ## character vector of the form c("new_name" = "old_name", ...)
-
-  ## For UDS3, this is exactly nacc_to_wadrc_uds3
-  if (uds == "uds3") {
-    cols_wanted <- nacc_to_wadrc_uds3
+  for (rm_var in remove_after) {
+    out[[rm_var]] <- NULL
   }
 
-  ## For UDS4, need to add visityr, visitmo, visitday, and rename birthsex to sex
-  if (uds == "uds4") {
-    cols_wanted <- c(
-      "VISITYR" = "visityr",
-      "VISITMO" = "visitmo",
-      "VISITDAY" = "visitday",
-      nacc_to_wadrc_uds4[nacc_to_wadrc_uds4 %notin% "visitdate"]
-    )
-  }
-
-  out <- setNames(
-    out[, cols_wanted, with = F],
-    nm = names(cols_wanted)
-  )
-
-  out
-}
-
-collapse_vals <- \(x) {
-  no_nas <- na.omit(unique(x))
-
-  if (length(no_nas) == 0) {
-    return(NA)
-  }
-
-  if (length(no_nas) > 1) {
-    return(x)
-  }
-
-  no_nas
-}
-
-
-return_single <- function(x, if_multiple = NA) {
-  if (all(is.na(x))) {
-    return(NA)
-  }
-
-  x <- unique(na.omit(x))
-
-  if (length(x) > 1) {
-    return(if_multiple)
-  }
-
-  x
+  return(out)
 }
