@@ -2,15 +2,15 @@
 % Please edit documentation in R/wadrc_data_prep.R
 \name{wadrc_data_prep}
 \alias{wadrc_data_prep}
-\title{Function to Prepare WADRC Data}
+\title{Function to Prepare WADRC UDS-3 Data}
 \usage{
-wadrc_data_prep(adrc_data)
+wadrc_data_prep(adrc_data, uds = c("uds3", "uds4"))
 }
 \arguments{
-\item{adrc_data}{Data as gotten from WADRC REDCap.
+\item{adrc_data}{Data as gotten from WADRC UDS-3 REDCap.
 Could be a complete download to .csv file, then read into R,
 or pulled directly from REDCap using the \code{REDCapR} package.}
 }
 \description{
-Function to Prepare WADRC Data
+Function to Prepare WADRC UDS-3 Data
 }

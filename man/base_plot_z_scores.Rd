@@ -12,7 +12,8 @@ base_plot_z_scores(
   fill_values,
   shade_descriptions = T,
   fill_alpha = 0.2,
-  source = "A"
+  source = "A",
+  new_id = NULL
 )
 }
 \arguments{

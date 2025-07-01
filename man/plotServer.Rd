@@ -13,7 +13,8 @@ plotServer(
     0.76, `High Average` = 0.92, Superior = 0.97, `Very Superior` = 1),
   fill_values = calc_fill_colors(n = 7),
   print_updating = T,
-  shade_descriptions = TRUE
+  shade_descriptions = TRUE,
+  new_id = NULL
 )
 }
 \arguments{

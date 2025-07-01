@@ -4,7 +4,10 @@
 \alias{shinyAssessmentApp}
 \title{Run Shiny App}
 \usage{
-shinyAssessmentApp()
+shinyAssessmentApp(testing = FALSE)
+}
+\arguments{
+\item{testing}{Logical: is the app run for testing purposes?}
 }
 \value{
 Runs the Shiny app.

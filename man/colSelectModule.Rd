@@ -13,14 +13,14 @@ colSelectServer(
   col_names,
   default_methods,
   data_type,
-  allow_col_selection = T
+  col_selection = c("enable", "disable", "hide")
 )
 
 colSelectApp(
   col_names,
   default_methods,
   data_type = c("nacc", "wls", "wadrc"),
-  allow_col_selection = T
+  col_selection = "enable"
 )
 }
 \arguments{
@@ -32,8 +32,7 @@ colSelectApp(
 
 \item{data_type}{One of \code{"nacc"}, \code{"wls"}, or \code{"wadrc"}.}
 
-\item{allow_col_selection}{A logical; whether column selection is allowed. If
-\code{TRUE},}
+\item{col_selection}{string; one of 'enable', 'disable', or 'hide'. If 'enable', allow user to select which columns should be used for each variable. If 'disable', show columns used, but without the option to select. If 'hide', hide the column.}
 }
 \value{
 A shiny app.

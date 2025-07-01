@@ -15,7 +15,7 @@ dataSelectUI <- function(id) {
         width = 400,
         bslib::card_body(
           gt::gt_output(ns("data_sources_table")),
-          shiny::uiOutput(ns("submit"))
+          shiny::uiOutput(ns("submit_button"))
         )
       ),
 
@@ -286,7 +286,7 @@ dataSelectServer <- function(id) {
             data.table::rbindlist(idcol = TRUE)
         }
 
-        out <- gt::gt(for_out) |>
+        out <- gt::gt(for_out, id = "gt_data_sources") |>
           gt::sub_missing(missing_text = "") |>
           gt::cols_hide(".id") |>
           gt::cols_label(
@@ -322,7 +322,7 @@ dataSelectServer <- function(id) {
       }
     )
 
-    output$submit <- shiny::renderUI({
+    output$submit_button <- shiny::renderUI({
       if (length(shiny::reactiveValuesToList(data_sources)) == 0) {
         return()
       }
