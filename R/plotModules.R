@@ -52,7 +52,7 @@ plotUI <- function(id) {
   ## If the tooltip_text is not still FALSE, we create the `cardtitle` with a tooltip.
   if (!isFALSE(tooltip_text)) {
     cardtitle <- bslib::tooltip(
-      shiny::h5(
+      shiny::strong(
         id,
         .noWS = "outside"
       ) |>
@@ -64,7 +64,7 @@ plotUI <- function(id) {
     )
   } else {
     ## If `cardtitle` is still FALSE, we create `cardtitle` with only id, no tooltip.
-    cardtitle <- shiny::h5(id, .noWS = "outside") |>
+    cardtitle <- shiny::strong(id, .noWS = "outside") |>
       shiny::tagAppendAttributes(style = "overflow-y: hidden;")
   }
 

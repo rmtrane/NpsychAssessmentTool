@@ -17,7 +17,6 @@ Shiny.addCustomMessageHandler("click", (message) => {
 
 // Custom Message Handler to set input value
 Shiny.addCustomMessageHandler("setInputValue", (message) => {
-  // console.log("setInputValue!!!");
   console.log("Setting input " + message.inputId + " to " + message.inputValue);
   if (message.priority) {
     Shiny.setInputValue(message.inputId, message.inputValue, {priority: message.priority});
@@ -107,6 +106,19 @@ function removeRawSuffix() {
 // Custom Message Handler to run the function above. 
 Shiny.addCustomMessageHandler("removeRawSuffix", (message) => {
   removeRawSuffix();
+})
+
+// Custom Message Handler to show/hide API token 
+Shiny.addCustomMessageHandler("showHidePassword", (message) => {
+  console.log(message);
+
+  var x = document.getElementsByClassName("shiny-input-password");
+
+  if (message.show) {
+    x[0].type = "text";
+  } else {
+    x[0].type = "password";
+  }
 })
 
 

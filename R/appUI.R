@@ -1,25 +1,12 @@
 #' UI for shinyAssessmentApp
 #'
 #' @keywords internal
-#'
 #' @export
+#'
 appUI <- function() {
   bslib::page_navbar(
     ## Header: add JS scripts, CSS, and spinner elements to be shown/hidden later.
-    header = shiny::tagList(
-      shiny::tags$head(
-        shiny::tags$script(
-          src = "www/scripts.js"
-        ),
-        shiny::tags$link(
-          rel = "stylesheet",
-          type = "text/css",
-          href = "www/styles.css"
-        )
-      ),
-      shiny::tags$div(id = "spinner", class = "loader"),
-      shiny::tags$div(id = "spinner_overlay", class = "loader_overlay")
-    ),
+    header = shinyApp_header(),
     theme = bslib::bs_theme(version = 5),
     title = "Npsych Scoring Application",
     id = "main_navbar",
@@ -138,6 +125,7 @@ appUI <- function() {
             full_screen = T,
             bslib::card_header("Longitudinal Trends"),
             bslib::navset_card_underline(
+              id = "long-trends",
               bslib::nav_panel(
                 title = "Cognitive Scores (Plots)",
                 # plotVarUI("plot_var")
@@ -159,7 +147,8 @@ appUI <- function() {
               ),
               bslib::nav_panel(
                 title = "Biomarkers",
-                shiny::h6("Coming soon...")
+                value = "biomarkers",
+                biomarkerUI("biomarker-tables")
               )
             )
           )

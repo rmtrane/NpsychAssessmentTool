@@ -7,6 +7,7 @@ appServer <- function(input, output, session) {
   ## Hide 'Participant Data' on startup
   bslib::nav_hide(id = "main_navbar", target = "colSelect")
   bslib::nav_hide(id = "main_navbar", target = "tables-and-figures")
+  bslib::nav_hide(id = "long-trends", target = "biomarkers")
 
   ## Setup data select module
   dat_sel <- dataSelectServer("dataSelect")
@@ -18,6 +19,7 @@ appServer <- function(input, output, session) {
   dat_obj <- shiny::reactiveVal()
   data_source <- shiny::reactiveVal()
   data_type <- shiny::reactiveVal()
+  biomarker_api <- shiny::reactiveVal()
   allow_col_selections <- shiny::reactiveVal()
 
   devmode <- shiny::reactiveVal(value = FALSE)
@@ -34,6 +36,11 @@ appServer <- function(input, output, session) {
     dat_obj(dat_sel$dat_obj())
     data_source(dat_sel$data_source())
     data_type(dat_sel$data_type())
+    biomarker_api(dat_sel$biomarker_api())
+
+    if (!is.null(dat_sel$biomarker_api())) {
+      bslib::nav_show(id = "long-trends", target = "biomarkers")
+    }
 
     allow_col_selections("disable")
 
@@ -458,6 +465,36 @@ appServer <- function(input, output, session) {
     table_font_size = table_font_size, # shiny::reactive(input$main_table_pct),
     print_updating = F
   )
+
+  ## Biomarkers
+  biomarkerServer(
+    "biomarker-tables",
+    adrc_ptid = reactive(input$current_studyid),
+    biomarker_api = biomarker_api,
+    use_mirai = rlang::is_installed("mirai")
+  )
+  # } else {
+  #   # If mirai is not installed, use simple reactiveValues
+  #   biomarker_dat <- shiny::reactiveVal()
+  #   biomarker_status <- shiny::reactiveVal("initiated")
+
+  #   shiny::observe({
+  #     biomarker_dat(
+  #       get_biomarker_data(
+  #         adrc_ptid = input$current_studyid,
+  #         api_key = biomarker_api()
+  #       )
+  #     )
+
+  #     biomarker_status("done")
+  #   })
+
+  #   biomarkerServer(
+  #     "biomarker-tables",
+  #     biomarker_data = biomarker_dat,
+  #     biomarker_status = biomarker_status
+  #   )
+  # }
 
   ## Update reactiveVals for values chosen in Options pane.
   shiny::observe({

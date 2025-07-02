@@ -9,7 +9,10 @@
 #' Runs the Shiny app.
 #'
 #' @export
-shinyAssessmentApp <- function(testing = FALSE) {
+shinyAssessmentApp <- function(
+  testing = FALSE,
+  use_mirai = rlang::is_installed("mirai")
+) {
   options(
     shiny.maxRequestSize = 1000 * 1024^2,
     shiny.autoload.r = FALSE
@@ -31,6 +34,12 @@ shinyAssessmentApp <- function(testing = FALSE) {
 
   shiny::addResourcePath("www", www_path)
   shiny::addResourcePath("qmd", qmd_path)
+
+  if (rlang::is_installed("mirai") & use_mirai) {
+    mirai::daemons(1)
+
+    shiny::onStop(\(x) mirai::daemons(0))
+  }
 
   shiny::shinyApp(
     ui = appUI,
