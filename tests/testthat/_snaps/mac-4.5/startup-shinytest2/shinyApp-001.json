@@ -7,6 +7,10 @@
     "Memory-showPlot": "yes",
     "Mood-showPlot": "yes",
     "Visuospatial-showPlot": "yes",
+    "biomarker-accordion": [
+      "<strong>LP Visits<\/strong>",
+      "<strong>PET Visits<\/strong>"
+    ],
     "colSelect-assign": 0,
     "current_date": "",
     "current_studyid": "",
@@ -14,6 +18,7 @@
     "desc-add_row": 0,
     "desc-reset": 0,
     "devmode": false,
+    "long-trends": "Cognitive Scores (Plots)",
     "main-plot_full_screen": false,
     "main-table_full_screen": false,
     "main_navbar": "Introduction",

@@ -25,6 +25,12 @@ Shiny.addCustomMessageHandler("setInputValue", (message) => {
   }
 })
 
+// Custom Message Handler to show/hide accordion panels
+Shiny.addCustomMessageHandler("accordionPanelToggle", (message) => {
+  console.log("accordionPanelToggle with id " + message.id + " and action " + message.action);
+  $("[data-value='"+message.id+"']").find('.accordion-collapse').collapse(message.action);
+})
+
 // Function to resize dropdown menu so that the width is determined by the longest 
 // element in the list.
 function resizeSelectize(id) {

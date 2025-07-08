@@ -633,6 +633,10 @@
     "Visuospatial-UDSBENTC_visibility": true,
     "Visuospatial-base_plot_drawn": 1,
     "Visuospatial-showPlot": "yes",
+    "biomarker-accordion": [
+      "<strong>LP Visits<\/strong>",
+      "<strong>PET Visits<\/strong>"
+    ],
     "colSelect-ANIMALSmethod": "regression (nacc)",
     "colSelect-BOSTONmethod": "regression (nacc_legacy)",
     "colSelect-CRAFTDREmethod": "regression (nacc)",
@@ -656,6 +660,7 @@
     "colSelect-OTRAILBmethod": "regression (updated)",
     "colSelect-REY6RECmethod": "T-score (NA)",
     "colSelect-REYARECmethod": "T-score (NA)",
+    "colSelect-REYDLISTmethod": "T-score (NA)",
     "colSelect-REYDRECmethod": "T-score (NA)",
     "colSelect-REYTOTALmethod": "T-score (NA)",
     "colSelect-TRAILAmethod": "regression (nacc)",
@@ -1067,10 +1072,12 @@
     "dataSelect-data_source": "demo",
     "dataSelect-data_type": "nacc",
     "dataSelect-fetch_data_button": 0,
+    "dataSelect-submit": 1,
     "desc-add_row": 0,
     "desc-reset": 0,
     "devmode": false,
     "goToColSelect": 1,
+    "long-trends": "Cognitive Scores (Plots)",
     "main-plot_full_screen": false,
     "main-table_full_screen": false,
     "main_navbar": "colSelect",
@@ -9900,8 +9907,26 @@
         }
       ]
     },
+    "dataSelect-data_sources_table": {
+      "html": "<div id=\"gt_data_sources\" style=\"padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;\">\n  <style>#gt_data_sources table {\n  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n}\n\n#gt_data_sources thead, #gt_data_sources tbody, #gt_data_sources tfoot, #gt_data_sources tr, #gt_data_sources td, #gt_data_sources th {\n  border-style: none;\n}\n\n#gt_data_sources p {\n  margin: 0;\n  padding: 0;\n}\n\n#gt_data_sources .gt_table {\n  display: table;\n  border-collapse: collapse;\n  line-height: normal;\n  margin-left: auto;\n  margin-right: auto;\n  color: #333333;\n  font-size: 16px;\n  font-weight: normal;\n  font-style: normal;\n  background-color: #FFFFFF;\n  width: 100%;\n  border-top-style: solid;\n  border-top-width: 2px;\n  border-top-color: #A8A8A8;\n  border-right-style: none;\n  border-right-width: 2px;\n  border-right-color: #D3D3D3;\n  border-bottom-style: solid;\n  border-bottom-width: 2px;\n  border-bottom-color: #A8A8A8;\n  border-left-style: none;\n  border-left-width: 2px;\n  border-left-color: #D3D3D3;\n}\n\n#gt_data_sources .gt_caption {\n  padding-top: 4px;\n  padding-bottom: 4px;\n}\n\n#gt_data_sources .gt_title {\n  color: #333333;\n  font-size: 125%;\n  font-weight: initial;\n  padding-top: 4px;\n  padding-bottom: 4px;\n  padding-left: 5px;\n  padding-right: 5px;\n  border-bottom-color: #FFFFFF;\n  border-bottom-width: 0;\n}\n\n#gt_data_sources .gt_subtitle {\n  color: #333333;\n  font-size: 85%;\n  font-weight: initial;\n  padding-top: 3px;\n  padding-bottom: 5px;\n  padding-left: 5px;\n  padding-right: 5px;\n  border-top-color: #FFFFFF;\n  border-top-width: 0;\n}\n\n#gt_data_sources .gt_heading {\n  background-color: #FFFFFF;\n  text-align: center;\n  border-bottom-color: #FFFFFF;\n  border-left-style: none;\n  border-left-width: 1px;\n  border-left-color: #D3D3D3;\n  border-right-style: none;\n  border-right-width: 1px;\n  border-right-color: #D3D3D3;\n}\n\n#gt_data_sources .gt_bottom_border {\n  border-bottom-style: solid;\n  border-bottom-width: 2px;\n  border-bottom-color: #D3D3D3;\n}\n\n#gt_data_sources .gt_col_headings {\n  border-top-style: solid;\n  border-top-width: 2px;\n  border-top-color: #D3D3D3;\n  border-bottom-style: solid;\n  border-bottom-width: 2px;\n  border-bottom-color: #D3D3D3;\n  border-left-style: none;\n  border-left-width: 1px;\n  border-left-color: #D3D3D3;\n  border-right-style: none;\n  border-right-width: 1px;\n  border-right-color: #D3D3D3;\n}\n\n#gt_data_sources .gt_col_heading {\n  color: #333333;\n  background-color: #FFFFFF;\n  font-size: 100%;\n  font-weight: normal;\n  text-transform: inherit;\n  border-left-style: none;\n  border-left-width: 1px;\n  border-left-color: #D3D3D3;\n  border-right-style: none;\n  border-right-width: 1px;\n  border-right-color: #D3D3D3;\n  vertical-align: bottom;\n  padding-top: 5px;\n  padding-bottom: 6px;\n  padding-left: 5px;\n  padding-right: 5px;\n  overflow-x: hidden;\n}\n\n#gt_data_sources .gt_column_spanner_outer {\n  color: #333333;\n  background-color: #FFFFFF;\n  font-size: 100%;\n  font-weight: normal;\n  text-transform: inherit;\n  padding-top: 0;\n  padding-bottom: 0;\n  padding-left: 4px;\n  padding-right: 4px;\n}\n\n#gt_data_sources .gt_column_spanner_outer:first-child {\n  padding-left: 0;\n}\n\n#gt_data_sources .gt_column_spanner_outer:last-child {\n  padding-right: 0;\n}\n\n#gt_data_sources .gt_column_spanner {\n  border-bottom-style: solid;\n  border-bottom-width: 2px;\n  border-bottom-color: #D3D3D3;\n  vertical-align: bottom;\n  padding-top: 5px;\n  padding-bottom: 5px;\n  overflow-x: hidden;\n  display: inline-block;\n  width: 100%;\n}\n\n#gt_data_sources .gt_spanner_row {\n  border-bottom-style: hidden;\n}\n\n#gt_data_sources .gt_group_heading {\n  padding-top: 8px;\n  padding-bottom: 8px;\n  padding-left: 5px;\n  padding-right: 5px;\n  color: #333333;\n  background-color: #FFFFFF;\n  font-size: 100%;\n  font-weight: initial;\n  text-transform: inherit;\n  border-top-style: solid;\n  border-top-width: 2px;\n  border-top-color: #D3D3D3;\n  border-bottom-style: solid;\n  border-bottom-width: 2px;\n  border-bottom-color: #D3D3D3;\n  border-left-style: none;\n  border-left-width: 1px;\n  border-left-color: #D3D3D3;\n  border-right-style: none;\n  border-right-width: 1px;\n  border-right-color: #D3D3D3;\n  vertical-align: middle;\n  text-align: left;\n}\n\n#gt_data_sources .gt_empty_group_heading {\n  padding: 0.5px;\n  color: #333333;\n  background-color: #FFFFFF;\n  font-size: 100%;\n  font-weight: initial;\n  border-top-style: solid;\n  border-top-width: 2px;\n  border-top-color: #D3D3D3;\n  border-bottom-style: solid;\n  border-bottom-width: 2px;\n  border-bottom-color: #D3D3D3;\n  vertical-align: middle;\n}\n\n#gt_data_sources .gt_from_md > :first-child {\n  margin-top: 0;\n}\n\n#gt_data_sources .gt_from_md > :last-child {\n  margin-bottom: 0;\n}\n\n#gt_data_sources .gt_row {\n  padding-top: 8px;\n  padding-bottom: 8px;\n  padding-left: 5px;\n  padding-right: 5px;\n  margin: 10px;\n  border-top-style: solid;\n  border-top-width: 1px;\n  border-top-color: #D3D3D3;\n  border-left-style: none;\n  border-left-width: 1px;\n  border-left-color: #D3D3D3;\n  border-right-style: none;\n  border-right-width: 1px;\n  border-right-color: #D3D3D3;\n  vertical-align: middle;\n  overflow-x: hidden;\n}\n\n#gt_data_sources .gt_stub {\n  color: #333333;\n  background-color: #FFFFFF;\n  font-size: 100%;\n  font-weight: initial;\n  text-transform: inherit;\n  border-right-style: solid;\n  border-right-width: 2px;\n  border-right-color: #D3D3D3;\n  padding-left: 5px;\n  padding-right: 5px;\n}\n\n#gt_data_sources .gt_stub_row_group {\n  color: #333333;\n  background-color: #FFFFFF;\n  font-size: 100%;\n  font-weight: initial;\n  text-transform: inherit;\n  border-right-style: solid;\n  border-right-width: 2px;\n  border-right-color: #D3D3D3;\n  padding-left: 5px;\n  padding-right: 5px;\n  vertical-align: top;\n}\n\n#gt_data_sources .gt_row_group_first td {\n  border-top-width: 2px;\n}\n\n#gt_data_sources .gt_row_group_first th {\n  border-top-width: 2px;\n}\n\n#gt_data_sources .gt_summary_row {\n  color: #333333;\n  background-color: #FFFFFF;\n  text-transform: inherit;\n  padding-top: 8px;\n  padding-bottom: 8px;\n  padding-left: 5px;\n  padding-right: 5px;\n}\n\n#gt_data_sources .gt_first_summary_row {\n  border-top-style: solid;\n  border-top-color: #D3D3D3;\n}\n\n#gt_data_sources .gt_first_summary_row.thick {\n  border-top-width: 2px;\n}\n\n#gt_data_sources .gt_last_summary_row {\n  padding-top: 8px;\n  padding-bottom: 8px;\n  padding-left: 5px;\n  padding-right: 5px;\n  border-bottom-style: solid;\n  border-bottom-width: 2px;\n  border-bottom-color: #D3D3D3;\n}\n\n#gt_data_sources .gt_grand_summary_row {\n  color: #333333;\n  background-color: #FFFFFF;\n  text-transform: inherit;\n  padding-top: 8px;\n  padding-bottom: 8px;\n  padding-left: 5px;\n  padding-right: 5px;\n}\n\n#gt_data_sources .gt_first_grand_summary_row {\n  padding-top: 8px;\n  padding-bottom: 8px;\n  padding-left: 5px;\n  padding-right: 5px;\n  border-top-style: double;\n  border-top-width: 6px;\n  border-top-color: #D3D3D3;\n}\n\n#gt_data_sources .gt_last_grand_summary_row_top {\n  padding-top: 8px;\n  padding-bottom: 8px;\n  padding-left: 5px;\n  padding-right: 5px;\n  border-bottom-style: double;\n  border-bottom-width: 6px;\n  border-bottom-color: #D3D3D3;\n}\n\n#gt_data_sources .gt_striped {\n  background-color: rgba(128, 128, 128, 0.05);\n}\n\n#gt_data_sources .gt_table_body {\n  border-top-style: solid;\n  border-top-width: 2px;\n  border-top-color: #D3D3D3;\n  border-bottom-style: solid;\n  border-bottom-width: 2px;\n  border-bottom-color: #D3D3D3;\n}\n\n#gt_data_sources .gt_footnotes {\n  color: #333333;\n  background-color: #FFFFFF;\n  border-bottom-style: none;\n  border-bottom-width: 2px;\n  border-bottom-color: #D3D3D3;\n  border-left-style: none;\n  border-left-width: 2px;\n  border-left-color: #D3D3D3;\n  border-right-style: none;\n  border-right-width: 2px;\n  border-right-color: #D3D3D3;\n}\n\n#gt_data_sources .gt_footnote {\n  margin: 0px;\n  font-size: 90%;\n  padding-top: 4px;\n  padding-bottom: 4px;\n  padding-left: 5px;\n  padding-right: 5px;\n}\n\n#gt_data_sources .gt_sourcenotes {\n  color: #333333;\n  background-color: #FFFFFF;\n  border-bottom-style: none;\n  border-bottom-width: 2px;\n  border-bottom-color: #D3D3D3;\n  border-left-style: none;\n  border-left-width: 2px;\n  border-left-color: #D3D3D3;\n  border-right-style: none;\n  border-right-width: 2px;\n  border-right-color: #D3D3D3;\n}\n\n#gt_data_sources .gt_sourcenote {\n  font-size: 90%;\n  padding-top: 4px;\n  padding-bottom: 4px;\n  padding-left: 5px;\n  padding-right: 5px;\n}\n\n#gt_data_sources .gt_left {\n  text-align: left;\n}\n\n#gt_data_sources .gt_center {\n  text-align: center;\n}\n\n#gt_data_sources .gt_right {\n  text-align: right;\n  font-variant-numeric: tabular-nums;\n}\n\n#gt_data_sources .gt_font_normal {\n  font-weight: normal;\n}\n\n#gt_data_sources .gt_font_bold {\n  font-weight: bold;\n}\n\n#gt_data_sources .gt_font_italic {\n  font-style: italic;\n}\n\n#gt_data_sources .gt_super {\n  font-size: 65%;\n}\n\n#gt_data_sources .gt_footnote_marks {\n  font-size: 75%;\n  vertical-align: 0.4em;\n  position: initial;\n}\n\n#gt_data_sources .gt_asterisk {\n  font-size: 100%;\n  vertical-align: 0;\n}\n\n#gt_data_sources .gt_indent_1 {\n  text-indent: 5px;\n}\n\n#gt_data_sources .gt_indent_2 {\n  text-indent: 10px;\n}\n\n#gt_data_sources .gt_indent_3 {\n  text-indent: 15px;\n}\n\n#gt_data_sources .gt_indent_4 {\n  text-indent: 20px;\n}\n\n#gt_data_sources .gt_indent_5 {\n  text-indent: 25px;\n}\n\n#gt_data_sources .katex-display {\n  display: inline-flex !important;\n  margin-bottom: 0.75em !important;\n}\n\n#gt_data_sources div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {\n  height: 0px !important;\n}\n<\/style>\n  <table class=\"gt_table\" data-quarto-disable-processing=\"false\" data-quarto-bootstrap=\"false\">\n  <thead>\n    <tr class=\"gt_heading\">\n      <td colspan=\"2\" class=\"gt_heading gt_title gt_font_normal gt_bottom_border\" style=\"border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; text-align: left;\"><span class='gt_from_md'><strong>Data Sources<\/strong><\/span><\/td>\n    <\/tr>\n    \n    <tr class=\"gt_col_headings\">\n      <th class=\"gt_col_heading gt_columns_bottom_border gt_left\" rowspan=\"1\" colspan=\"1\" style=\"border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; text-align: left;\" scope=\"col\" id=\"data_source\"><span class='gt_from_md'><em>Source<\/em><\/span><\/th>\n      <th class=\"gt_col_heading gt_columns_bottom_border gt_left\" rowspan=\"1\" colspan=\"1\" style=\"border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; text-align: left;\" scope=\"col\" id=\"data_type\"><span class='gt_from_md'><em>Type<\/em><\/span><\/th>\n    <\/tr>\n  <\/thead>\n  <tbody class=\"gt_table_body\">\n    <tr><td headers=\"data_source\" class=\"gt_row gt_left\">demo<\/td>\n<td headers=\"data_type\" class=\"gt_row gt_left\">nacc<\/td><\/tr>\n  <\/tbody>\n  \n  \n<\/table>\n<\/div>\n<script>gtShinyBinding.initialize('dataSelect-data_sources_table');<\/script>",
+      "deps": [
+        {
+          "name": "gtShiny",
+          "version": "1.0.0",
+          "src": {
+            "href": "gtShiny-1.0.0"
+          },
+          "meta": null,
+          "script": "gtShiny.js",
+          "stylesheet": null,
+          "head": null,
+          "attachment": null,
+          "all_files": true
+        }
+      ]
+    },
     "dataSelect-data_type_ui": {
-      "html": "<div class=\"form-group shiny-input-container\">\n  <label class=\"control-label\" id=\"dataSelect-data_type-label\" for=\"dataSelect-data_type\">Source of data<\/label>\n  <div>\n    <select class=\"shiny-input-select form-control\" id=\"dataSelect-data_type\"><option value=\"wadrc_uds3\" selected>WADRC<\/option><\/select>\n    <script type=\"application/json\" data-for=\"dataSelect-data_type\" data-eval=\"[&quot;onInitialize&quot;]\">{\"placeholder\":\"Select an option below\",\"onInitialize\":\"function() { this.setValue(\\\"\\\"); }\",\"plugins\":[\"selectize-plugin-a11y\"]}<\/script>\n  <\/div>\n<\/div>",
+      "html": "<div class=\"form-group shiny-input-container\">\n  <label class=\"control-label\" id=\"dataSelect-data_type-label\" for=\"dataSelect-data_type\">Data Type<\/label>\n  <div>\n    <select class=\"shiny-input-select form-control\" id=\"dataSelect-data_type\"><option value=\"wadrc_uds3\" selected>WADRC (UDS-3)<\/option>\n<option value=\"wadrc_uds4\">WADRC (UDS-4)<\/option><\/select>\n    <script type=\"application/json\" data-for=\"dataSelect-data_type\" data-eval=\"[&quot;onInitialize&quot;]\">{\"placeholder\":\"Select an option below\",\"onInitialize\":\"function() { this.setValue(\\\"\\\"); }\",\"plugins\":[\"selectize-plugin-a11y\"]}<\/script>\n  <\/div>\n<\/div>",
       "deps": [
         {
           "name": "selectize",
@@ -9929,7 +9954,7 @@
       ]
     },
     "dataSelect-fetch_data": {
-      "html": "<button class=\"btn btn-primary bslib-task-button\" data-auto-reset id=\"dataSelect-fetch_data_button\" type=\"button\" width=\"300px\">\n  <bslib-switch-inline case=\"ready\">\n    <span slot=\"ready\">Go<\/span>\n    <span slot=\"busy\">\n      <i class=\"fas fa-arrows-rotate fa-spin\" role=\"presentation\" aria-label=\"arrows-rotate icon\" aria-hidden=\"true\"><\/i>\n      Processing...\n    <\/span>\n  <\/bslib-switch-inline>\n<\/button>",
+      "html": "<button class=\"btn btn-primary bslib-task-button\" data-auto-reset id=\"dataSelect-fetch_data_button\" type=\"button\">\n  <bslib-switch-inline case=\"ready\">\n    <span slot=\"ready\">Add<\/span>\n    <span slot=\"busy\">\n      <i class=\"fas fa-arrows-rotate fa-spin\" role=\"presentation\" aria-label=\"arrows-rotate icon\" aria-hidden=\"true\"><\/i>\n      Processing...\n    <\/span>\n  <\/bslib-switch-inline>\n<\/button>",
       "deps": [
         {
           "name": "bslib-component-js",
@@ -9981,6 +10006,12 @@
           "attachment": null,
           "all_files": true
         }
+      ]
+    },
+    "dataSelect-submit_button": {
+      "html": "<p>When all needed data sources have been added, click the 'Load Data' button below to continue.<\/p>\n<button id=\"dataSelect-submit\" type=\"button\" class=\"btn btn-default action-button\">Load Data<\/button>",
+      "deps": [
+
       ]
     },
     "demographics_table_output": {

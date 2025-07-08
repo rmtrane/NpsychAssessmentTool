@@ -7,6 +7,7 @@
 #' @keywords internal
 shinyApp_header <- function() {
   shiny::tagList(
+    # shiny::useBusyIndicators(),
     shiny::tags$head(
       shiny::tags$script(
         src = "www/scripts.js"

@@ -14,6 +14,7 @@ LazyData: true
 Suggests: 
     htmltools,
     httr2,
+    jsonlite,
     mirai,
     pagedown,
     REDCapR,

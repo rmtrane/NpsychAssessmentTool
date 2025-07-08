@@ -633,6 +633,10 @@
     "Visuospatial-UDSBENTC_visibility": true,
     "Visuospatial-base_plot_drawn": 1,
     "Visuospatial-showPlot": "yes",
+    "biomarker-accordion": [
+      "<strong>LP Visits<\/strong>",
+      "<strong>PET Visits<\/strong>"
+    ],
     "colSelect-ANIMALSmethod": "regression (nacc)",
     "colSelect-BOSTONmethod": "regression (nacc_legacy)",
     "colSelect-CRAFTDREmethod": "regression (nacc)",
@@ -1094,6 +1098,7 @@
     "desc-reset": 0,
     "devmode": false,
     "goToColSelect": 0,
+    "long-trends": "Cognitive Scores (Plots)",
     "main-plot_full_screen": false,
     "main-table_full_screen": false,
     "main_navbar": "tables-and-figures",

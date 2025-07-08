@@ -27,11 +27,7 @@ appUI <- function() {
     bslib::nav_panel(
       title = "Data Selection",
       value = "dataSelect",
-      #bslib::layout_columns(
-      # max_height = 500,
-      # col_widths = c(-3, 6, -3),
       dataSelectUI("dataSelect")
-      #)
     ),
     ## Main Panels
     bslib::nav_panel(

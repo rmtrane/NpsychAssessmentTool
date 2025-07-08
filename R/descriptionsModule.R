@@ -6,6 +6,8 @@
 #'
 #' @param id A string used to namespace the module.
 #'
+#' @rdname descriptionsModule
+#'
 #' @returns
 #' A UI definition.
 #'
@@ -234,8 +236,9 @@ descriptionsServer <- function(
         tmp <- descriptions()
         tmp <- tmp[-row, ]
 
-        if (max(tmp$Upper_Bound) < 100)
+        if (max(tmp$Upper_Bound) < 100) {
           tmp$Upper_Bound[which.max(tmp$Upper_Bound)] <- 100
+        }
 
         DT::replaceData(descriptions_proxy, data = tmp, rownames = F)
 
@@ -328,6 +331,7 @@ descriptionsServer <- function(
 #' Descriptions App
 #'
 #' @rdname descriptionsModule
+#'
 #' @export
 descriptionsApp <- function(
   default_descriptions = c(

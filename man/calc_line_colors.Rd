@@ -12,3 +12,4 @@ calc_line_colors(n)
 \description{
 Equivalent to \code{RColorBrewer::brewer.pal(n, "Paired")}
 }
+\keyword{internal}

@@ -4,10 +4,13 @@
 \alias{shinyAssessmentApp}
 \title{Run Shiny App}
 \usage{
-shinyAssessmentApp(testing = FALSE)
+shinyAssessmentApp(testing = FALSE, use_mirai = rlang::is_installed("mirai"))
 }
 \arguments{
 \item{testing}{Logical: is the app run for testing purposes?}
+
+\item{use_mirai}{Logical: should \code{"mirai"} be used for asynchronously
+pulling biomarker data. Defaults to \code{rlang::is_installed("mirai")}.}
 }
 \value{
 Runs the Shiny app.

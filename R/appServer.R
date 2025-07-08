@@ -234,13 +234,11 @@ appServer <- function(input, output, session) {
         cur_select <- cur_choices[1]
       }
 
-      cli::cli_alert_info("Updating study ID selectize")
-
       shiny::updateSelectizeInput(
         session,
         "current_studyid",
         choices = cur_choices,
-        selected = cur_select, #cur_choices[1],
+        selected = cur_select,
         server = TRUE
       )
     }
@@ -300,7 +298,7 @@ appServer <- function(input, output, session) {
     )
   })
 
-  ## Get default descriptions if saved as option, other set defaults
+  ## Get default descriptions if saved as option, otherwise set defaults
   default_descriptions <- getOption("NpsychAssessmentTool.default_descriptions")
   if (is.null(default_descriptions)) {
     default_descriptions <- c(
@@ -314,7 +312,7 @@ appServer <- function(input, output, session) {
     )
   }
 
-  ## Get default colors if saved as option, other set defaults
+  ## Get default colors if saved as option, otherwise set defaults
   default_fill_values <- getOption("NpsychAssessmentTool.default_fill_values")
   if (is.null(default_fill_values)) {
     default_fill_values <- setNames(
@@ -469,10 +467,12 @@ appServer <- function(input, output, session) {
   ## Biomarkers
   biomarkerServer(
     "biomarker-tables",
-    adrc_ptid = reactive(input$current_studyid),
+    adrc_ptid = shiny::reactive(input$current_studyid),
     biomarker_api = biomarker_api,
-    use_mirai = rlang::is_installed("mirai")
+    use_mirai = rlang::is_installed("mirai") &&
+      !shiny::getShinyOption("testmode")
   )
+
   # } else {
   #   # If mirai is not installed, use simple reactiveValues
   #   biomarker_dat <- shiny::reactiveVal()

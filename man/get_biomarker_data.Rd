@@ -7,7 +7,7 @@
 get_biomarker_data(
   adrc_ptid = "adrc00006",
   api_key,
-  base_query_file = system.file("jsons/panda_template.json", package =
+  base_query_file = system.file("json/panda_template.json", package =
     "NpsychAssessmentTool")
 )
 }

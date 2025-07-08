@@ -4,7 +4,7 @@ test_that("{shinytest2} Testing changes to std_methods using demo_data", {
   skip_on_cran()
 
   app <- AppDriver$new(
-    app_dir = shinyAssessmentApp(testing = T),
+    app_dir = shinyAssessmentApp(testing = T, use_mirai = FALSE),
     variant = platform_variant(),
     name = "shinyApp",
     height = 968,
@@ -60,7 +60,7 @@ test_that("{shinytest2} Testing changes to std_methods using demo_data", {
     allow_no_input_binding_ = TRUE,
     wait_ = F
   )
-  app$wait_for_idle()
+  app$wait_for_idle(timeout = 5000)
   app$set_inputs(`colSelect-MOCATOTSmethod` = "regression (nacc)", wait_ = F)
   app$set_inputs(
     `colSelect-NACCMMSEmethod` = "regression (nacc_legacy)",

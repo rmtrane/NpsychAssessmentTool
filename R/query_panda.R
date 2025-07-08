@@ -257,6 +257,8 @@ bio_tab_for_gt <- function(tab) {
   colnames(tab)[grepl(pattern = "date", colnames(tab))] <- "date"
   colnames(tab)[grepl(pattern = "age", colnames(tab))] <- "Age_raw"
 
+  # To avoid "no visible binding for global variable" in devtools::check()
+  name <- value.name <- bin <- variable <- value <- NULL
   tab[, date := as.Date(date)]
 
   if (!"date" %in% colnames(tab)) {

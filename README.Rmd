@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/rmtrane/NpsychAssessmentTool/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rmtrane/NpsychAssessmentTool/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-This package provides an [R Shiny](https://shiny.posit.co) application used for diagnosis cognitive status based on neuropsychological scores. 
+This package provides an [R Shiny](https://shiny.posit.co) application used for diagnosis of cognitive status based on neuropsychological scores. 
 
 ## Installation
 
@@ -28,6 +28,20 @@ You can install the development version of NpsychAssessmentTool from [GitHub](ht
 ``` r
 # install.packages("pak")
 pak::pak("rmtrane/NpsychAssessmentTool")
+```
+or 
+``` r
+# install.packages("remotes")
+remotes::install_github("rmtrane/NpsychAssessmentTool")
+```
+
+Note that some features of the application mean additional resources. For example, the R package [`REDCapR`](https://ouhscbbmc.github.io/REDCapR/) is necessary to be able to pull data straight from REDCap. To install the packages needed to enable all features, use
+``` r
+pak::pak("rmtrane/NpsychAssessmentTool", dependencies = TRUE)
+```
+or
+``` r
+remotes::install_github("rmtrane/NpsychAssessmentTool", dependencies = TRUE)
 ```
 
 ## Example
@@ -41,4 +55,4 @@ shinyAssessmentApp()
 
 Alternatively, the app is also available as an RStudio add-in. I.e., once the package is installed, you should be able to launch it from the RStudio add-in dropdown menu:
 
-![Screenshot showing the RStudio add-in.](img/rstudio-addin.png)
+![Screenshot showing the RStudio add-in.](man/figures/rstudio-addin.png)

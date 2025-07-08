@@ -4,6 +4,8 @@
 #'
 #' @param n number of lines we need colors for
 #'
+#' @keywords internal
+#'
 #' @export
 calc_line_colors <- function(n) {
   stopifnot("n must be at least 3" = n >= 3)

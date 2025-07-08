@@ -3,6 +3,7 @@
 \name{longTableUI}
 \alias{longTableUI}
 \alias{longTableServer}
+\alias{longTableApp}
 \title{Shiny Module to Display Longitudinal Trends in Table}
 \usage{
 longTableUI(id)
@@ -17,11 +18,13 @@ longTableServer(
   table_font_size = 100,
   print_updating = F
 )
+
+longTableApp(dat)
 }
 \arguments{
 \item{id}{string to tie UI to Server}
 
-\item{dat}{A data.table object.}
+\item{dat}{A data frame.}
 
 \item{descriptions}{A named numeric vector. Default has names \code{"Impaired"}, \code{"Borderline"}, \code{"Low Average"}, \code{"Average"}, \code{"High Average"}, \code{"Superior"}, and \code{"Very Superior"} with corresponding values \code{0.03}, \code{0.10}, \code{0.26}, \code{0.76}, \code{0.92}, \code{0.97}, and \code{1}.}
 
@@ -33,6 +36,11 @@ longTableServer(
 
 \item{print_updating}{logical (default \code{FALSE}); should message be printed to let user know the table is updating. For debugging.}
 }
+\value{
+A shiny app.
+}
 \description{
 Table version of the plotCogVarModule.
+
+A short description...
 }

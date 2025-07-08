@@ -76,7 +76,8 @@
     75% { clip-path: inset(0 0 0 0); }
 }
 
-/* Accordian header */
+/* Accordian header 
 .accordion-header {
   background-color:rgb(200, 200, 200) !important;
 }
+*/

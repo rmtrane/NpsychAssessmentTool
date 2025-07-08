@@ -41,16 +41,21 @@ longTableServer <- function(
   table_font_size = 100,
   print_updating = F
 ) {
-  if (!shiny::is.reactive(descriptions))
+  if (!shiny::is.reactive(descriptions)) {
     descriptions <- shiny::reactiveVal(descriptions)
+  }
 
-  if (!shiny::is.reactive(fill_values))
+  if (!shiny::is.reactive(fill_values)) {
     fill_values <- shiny::reactiveVal(fill_values)
+  }
 
-  if (!shiny::is.reactive(table_font_size))
+  if (!shiny::is.reactive(table_font_size)) {
     table_font_size <- shiny::reactiveVal(table_font_size)
+  }
 
-  if (!shiny::is.reactive(methods)) methods <- shiny::reactiveVal(methods)
+  if (!shiny::is.reactive(methods)) {
+    methods <- shiny::reactiveVal(methods)
+  }
 
   shiny::moduleServer(id, function(input, output, session) {
     all_visits <- shiny::reactiveVal(value = TRUE)
@@ -102,6 +107,20 @@ longTableServer <- function(
   })
 }
 
+
+#' Long table app
+#'
+#' @description
+#' A short description...
+#'
+#' @param dat A data frame.
+#'
+#' @returns
+#' A shiny app.
+#'
+#' @rdname longTableModule
+#'
+#' @export
 longTableApp <- function(dat) {
   ui <- bslib::page_fillable(
     longTableUI("long_table")

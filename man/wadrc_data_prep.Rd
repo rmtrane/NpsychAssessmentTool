@@ -10,7 +10,10 @@ wadrc_data_prep(adrc_data, uds = c("uds3", "uds4"))
 \item{adrc_data}{Data as gotten from WADRC UDS-3 REDCap.
 Could be a complete download to .csv file, then read into R,
 or pulled directly from REDCap using the \code{REDCapR} package.}
+
+\item{uds}{Spefify if data are from UDS-3 or UDS-4 database.}
 }
 \description{
 Function to Prepare WADRC UDS-3 Data
 }
+\keyword{internal}

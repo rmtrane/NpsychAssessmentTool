@@ -2,9 +2,16 @@
 #'
 #' @rdname dataSelectModule
 #'
-#' @param id id to link shiny modules
+#' @description
+#' A short description...
+#'
+#' @param id A string used to namespace the module.
+#'
+#' @returns
+#' A UI definition.
 #'
 #' @export
+
 dataSelectUI <- function(id) {
   ns <- shiny::NS(id)
 
@@ -19,7 +26,6 @@ dataSelectUI <- function(id) {
         )
       ),
 
-      # class = "align-items-center",
       shiny::selectizeInput(
         inputId = ns("data_source"),
         label = "Data Source",
@@ -28,14 +34,29 @@ dataSelectUI <- function(id) {
           "Panda (biomarker)" = "panda",
           "Upload CSV File" = "csv_upload",
           "Demo" = "demo"
-        )[
-          c(
-            rlang::is_installed("REDCapR"),
-            rlang::is_installed("httr2") && rlang::is_installed("jsonlite"),
-            T,
-            T
+        ),
+        options = list(
+          disabledField = "disabled",
+          options = list(
+            list(
+              disabled = !rlang::is_installed("REDCapR")
+            ),
+            list(
+              disabled = !rlang::is_installed("httr2") &&
+                !rlang::is_installed("jsonlite")
+            ),
+            list(disabled = FALSE),
+            list(disabled = FALSE)
           )
-        ]
+        )
+        # [
+        #   c(
+        #     rlang::is_installed("REDCapR"),
+        #     rlang::is_installed("httr2") && rlang::is_installed("jsonlite"),
+        #     T,
+        #     T
+        #   )
+        # ]
       ),
       shiny::uiOutput(ns("data_type_ui")),
       shiny::uiOutput(ns("data_upload_or_password")),
@@ -47,6 +68,15 @@ dataSelectUI <- function(id) {
 }
 
 #' @rdname dataSelectModule
+#'
+#' @description
+#' Server logic for dataSelectModule.
+#'
+#' @param id A string used to create a namespace within the shiny app.
+#'
+#' @returns
+#' A list containing reactive values for the data object (`dat_obj`),
+#'  the data source, the data type, and the biomarker API.
 #'
 #' @export
 dataSelectServer <- function(id) {
@@ -226,12 +256,11 @@ dataSelectServer <- function(id) {
       shiny::bindEvent(input$show_password)
 
     output$fetch_data <- shiny::renderUI({
-      redcap_uri_and_token <- # shiny::reactive(
+      redcap_uri_and_token <-
         !is.null(input$api_token) &&
         input$api_token != "" &&
         !is.null(input$redcap_uri) &&
         input$redcap_uri != ""
-      #)
 
       redcap_data_ready <- (input$data_source == "redcap" &
         redcap_uri_and_token &
@@ -265,20 +294,41 @@ dataSelectServer <- function(id) {
       i <- length(shiny::reactiveValuesToList(data_sources)) + 1
 
       new_source <- list(
-        # dat_obj = dat_obj,
         data_source = input$data_source,
-        data_type = input$data_type,
-        redcap_auth = if (input$data_source == "redcap") {
+        data_type = input$data_type
+      )
+
+      if (input$data_source == "redcap") {
+        new_source$redcap_auth <-
           list(
             redcap_uri = input$redcap_uri,
             token = input$api_token
           )
-        },
-        panda_auth = if (input$data_source == "panda") input$panda_api_token,
-        data_file = if (input$data_source == "csv") input$input_file$datapath
-      )
+      }
 
-      new_source <- new_source[!unlist(lapply(new_source, is.null))]
+      if (input$data_source == "panda") {
+        req_panda <- try(
+          expr = {
+            httr2::request("https://panda.medicine.wisc.edu") |>
+              httr2::req_perform()
+          },
+          TRUE
+        )
+
+        if (inherits(req_panda, "try-error")) {
+          shiny::showNotification(
+            type = "error",
+            "Could not access https://panda.medicine.wisc.edu. Make sure you are connected to the campus network, either directly or via VPN."
+          )
+          new_source <- NULL
+        } else {
+          new_source$panda_auth <- input$panda_api_token
+        }
+      }
+
+      if (input$data_source == "csv") {
+        new_source$input <- input_file$datapath
+      }
 
       if (
         !is.null(new_source$redcap_auth$redcap_uri) &&
@@ -344,7 +394,7 @@ dataSelectServer <- function(id) {
 
     output$data_sources_table <- gt::render_gt(
       {
-        tmp <- reactiveValuesToList(data_sources)
+        tmp <- shiny::reactiveValuesToList(data_sources)
 
         if (length(tmp) == 0) {
           for_out <- data.frame(
@@ -404,7 +454,10 @@ dataSelectServer <- function(id) {
         shiny::p(
           "When all needed data sources have been added, click the 'Load Data' button below to continue."
         ),
-        actionButton(inputId = shiny::NS(id, "submit"), label = "Load Data")
+        shiny::actionButton(
+          inputId = shiny::NS(id, "submit"),
+          label = "Load Data"
+        )
       )
     })
 
@@ -452,12 +505,18 @@ dataSelectServer <- function(id) {
         ) |>
         unique()
 
+      uds <- NULL # for R check
+
       ## For the handfull of visits that are present in both UDS-3 and UDS-4, choose UDS-4
       tmp <- tmp[
         tmp[,
-          .(
+          list(
             uds = uds,
-            keep = ifelse(length(uds) > 1 & uds == "wadrc_uds3", FALSE, TRUE)
+            keep = ifelse(
+              length(uds) > 1 & uds == "wadrc_uds3",
+              FALSE,
+              TRUE
+            )
           ),
           by = c("NACCID", "VISITYR", "VISITMO", "VISITDAY")
         ],
@@ -539,7 +598,7 @@ dataSelectApp <- function() {
   server <- function(input, output, session) {
     options(shiny.maxRequestSize = 1000 * 1024^2)
 
-    dat_obj <- reactiveVal()
+    dat_obj <- shiny::reactiveVal()
 
     data_input <- dataSelectServer("dat_select")
 

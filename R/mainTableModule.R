@@ -131,7 +131,15 @@ mainTableServer <- function(
         tmp_pdf <- tempfile(tmpdir = tmp_path, fileext = ".pdf")
 
         gt::gtsave(
-          data = mainTable(),
+          data = mainTable() |>
+            gt::tab_caption(
+              caption = paste(
+                "ID:",
+                unique(dat()$NACCID),
+                ". Visit Date:",
+                unique(dat()$VISITDATE)
+              )
+            ),
           filename = tmp_html
         )
 

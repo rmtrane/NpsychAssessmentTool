@@ -8,6 +8,8 @@
 #' @returns
 #' A UI definition.
 #'
+#' @rdname biomarkerModule
+#'
 #' @keywords internal
 biomarkerUI <- function(id) {
   bslib::accordion(
@@ -37,6 +39,8 @@ biomarkerUI <- function(id) {
 #' @returns
 #' NULL.
 #'
+#' @rdname biomarkerModule
+#'
 #' @export
 biomarkerServer <- function(
   id,
@@ -53,9 +57,13 @@ biomarkerServer <- function(
   ###################
   ## START SERVER
   shiny::moduleServer(id, function(input, output, session) {
-    # If mirai is installed, we use ExtendedTask to get biomarker_dat in the background.
+    # reactiveValues object to hold biomarker tables. This approach
+    # lets us retrieve previously generated tables without fetching
+    # the data from Panda again.
+    biomarker_dat_tables <- shiny::reactiveValues()
 
-    if (rlang::is_installed("mirai") & use_mirai) {
+    # If mirai is installed, we use ExtendedTask to get biomarker_dat in the background.
+    if (rlang::is_installed("mirai") && use_mirai) {
       # Prepare to hold mirai object
       m <- NULL
 
@@ -102,24 +110,32 @@ biomarkerServer <- function(
           adrc_ptid(),
           biomarker_api()
         )
+
+      shiny::observe({
+        # If ExtendedTask successfully ran...
+        if (biomarker_dat$status() == "success") {
+          # ... and the table for the adrc_ptid has not already been saved
+          if (!adrc_ptid() %in% names(biomarker_dat_tables)) {
+            biomarker_dat_tables[[adrc_ptid()]] <- biomarker_dat$result()
+          }
+        }
+      })
     } else {
       # If mirai is not installed, or we ask not to use mirai...
-    }
-
-    # reactiveValues object to hold biomarker tables. This approach
-    # lets us retrieve previously generated tables without fetching
-    # the data from Panda again.
-    biomarker_dat_tables <- shiny::reactiveValues()
-
-    shiny::observe({
-      # If ExtendedTask successfully ran...
-      if (biomarker_dat$status() == "success") {
-        # ... and the table for the adrc_ptid has not already been saved
-        if (!adrc_ptid() %in% names(biomarker_dat_tables)) {
-          biomarker_dat_tables[[adrc_ptid()]] <- biomarker_dat$result()
-        }
+      if (FALSE) {
+        # need to check if this works.
+        shiny::observe({
+          # If ExtendedTask successfully ran...
+          # ... and the table for the adrc_ptid has not already been saved
+          if (!adrc_ptid() %in% names(biomarker_dat_tables)) {
+            biomarker_dat_tables[[adrc_ptid()]] <- get_biomarker_data(
+              adrc_ptid = adrc_ptid(),
+              api_key = biomarker_api()
+            )
+          }
+        })
       }
-    })
+    }
 
     # Table to present while getting biomarker data.
     loading_gt <- gt::gt(
@@ -188,6 +204,8 @@ biomarkerServer <- function(
 #' @returns
 #' A `shinyApp` object.
 #'
+#' @rdname biomarkerModule
+#'
 #' @export
 biomarkerApp <- function(
   adrc_ptid,
@@ -206,7 +224,7 @@ biomarkerApp <- function(
   server <- function(input, output, session) {
     biomarkerServer(
       "biomarker-module",
-      adrc_ptid = reactive(input$current_studyid),
+      adrc_ptid = shiny::reactive(input$current_studyid),
       biomarker_api
     )
   }

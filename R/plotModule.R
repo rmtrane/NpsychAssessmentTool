@@ -1,4 +1,4 @@
-#' Plot UI
+#' Plot Module
 #'
 #' @description
 #' UI for displaying plots of standardized scores across visits.
@@ -11,6 +11,8 @@
 #' one with the plot, and one with text for when no standardized scores
 #' were found. Both wrapped in a `bslib::accordion_panel` for inclusion in
 #' main app.
+#'
+#' @rdname plotModule
 #'
 #' @export
 plotUI <- function(id) {
@@ -85,7 +87,6 @@ plotUI <- function(id) {
         value = id
       )
     ),
-
     shiny::conditionalPanel(
       "input.showPlot == 'no'",
       ns = shiny::NS(id),
@@ -95,15 +96,12 @@ plotUI <- function(id) {
         bslib::card_body(
           shiny::p("No standardized scores found")
         ),
-        value = id #,
-        #min_height = "100px"
+        value = id
       )
     )
   )
 }
 
-#' Plot server
-#'
 #' @description
 #' Server logic to handle the creation and updating of plots to show standardized scores across visits.
 #'
@@ -115,9 +113,12 @@ plotUI <- function(id) {
 #' @param fill_values A vector of fill colors. Optional, defaults to `calc_fill_colors(n = 7)`.
 #' @param print_updating A logical value. Optional, defaults to `TRUE`.
 #' @param shade_descriptions A logical value indicating if the plots should be shaded according to the regions given by `descriptions` with colors given by `fill_values`. Optional, defaults to `TRUE`.
+#' @param new_id Optional. String to be used for table ID. If `NULL` (default), random string assigned.
 #'
 #' @returns
 #' No return value.
+#'
+#' @rdname plotModule
 #'
 #' @export
 plotServer <- function(
@@ -397,11 +398,11 @@ plotServer <- function(
           )
         )
 
-        ## Note: could not get this to work. Wonder if there's some namespacing going on...
-        # bslib::accordion_panel_close(
-        #   id = "plots-accordion",
-        #   values = id
-        # )
+        ## Hide accordion_panel
+        session$sendCustomMessage(
+          "accordionPanelToggle",
+          message = list(id = id, action = "hide")
+        )
       } else {
         ## Update legend_names
         legend_names(new_traces$legend_names)
@@ -422,11 +423,11 @@ plotServer <- function(
           )
         )
 
-        ## Note: could not get this to work. Wonder if there's some namespacing going on...
-        # bslib::accordion_panel_open(
-        #   id = "plots-accordion",
-        #   values = id
-        # )
+        ## Show accordion_panel
+        session$sendCustomMessage(
+          "accordionPanelToggle",
+          message = list(id = id, action = "show")
+        )
 
         ## Relayout: update axes, and set showlegend = TRUE in case
         # all traces are hidden.
@@ -481,6 +482,8 @@ plotServer <- function(
 #'
 #' @returns
 #' A shiny app.
+#'
+#' @rdname plotModule
 #'
 #' @export
 plotApp <- function(
@@ -538,7 +541,8 @@ plotApp <- function(
         # htmltools::tagList,
         bslib::accordion(
           !!!lapply(unique(nacc_var_groups), \(x) plotUI(id = x)),
-          open = TRUE
+          open = TRUE,
+          id = "plots-accordion"
         )
         # )
       )

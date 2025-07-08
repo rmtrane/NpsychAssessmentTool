@@ -3,7 +3,9 @@
 #' @param adrc_data Data as gotten from WADRC UDS-3 REDCap.
 #'  Could be a complete download to .csv file, then read into R,
 #'  or pulled directly from REDCap using the `REDCapR` package.
-#' @export
+#' @param uds Spefify if data are from UDS-3 or UDS-4 database.
+#'
+#' @keywords internal
 wadrc_data_prep <- function(adrc_data, uds = c("uds3", "uds4")) {
   ## Due to NSE notes in R CMD check:
   NACCID <-
@@ -335,7 +337,7 @@ fill_data_downup <- function(
       data.table::nafill(x, type = "locf") |>
         data.table::nafill(type = "nocb")
     }),
-    .SDcols = constant_across_visits,
+    .SDcols = intersect(colnames(out), constant_across_visits),
     # .SDcols = data.table::patterns(
     #   c("sex", "race", "birthyr", "birthmo", "handed"),
     #   cols = colnames(out)
