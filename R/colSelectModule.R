@@ -36,8 +36,23 @@ colSelectServer <- function(
   data_type,
   col_selection = c("enable", "disable", "hide")
 ) {
-  stopifnot("data_type must be reactive" = shiny::is.reactive(data_type))
-  stopifnot("col_names must be reactive" = shiny::is.reactive(col_names))
+  if (!shiny::is.reactive(col_names)) {
+    shiny::stopApp()
+    cli::cli_abort("{.arg col_names} must be a reactive")
+  }
+
+  if (!shiny::is.reactive(data_type)) {
+    shiny::stopApp()
+    cli::cli_abort("{.arg data_type} must be a reactive")
+  }
+
+  # if (shiny::is.reactive(default_methods)) {
+  #   cli::cli_abort("{.arg default_methods} should NOT be a reactive")
+  # }
+
+  # if (shiny::is.reactive(col_selection)) {
+  #   cli::cli_abort("{.arg col_selection} should NOT be a reactive")
+  # }
 
   shiny::moduleServer(id, function(input, output, session) {
     ## All variables
@@ -588,6 +603,7 @@ colSelectServer <- function(
 #' @param default_methods Default methods.
 #' @param data_type One of `"nacc"`, `"wls"`, or `"wadrc"`.
 #' @param col_selection string; one of 'enable', 'disable', or 'hide'. If 'enable', allow user to select which columns should be used for each variable. If 'disable', show columns used, but without the option to select. If 'hide', hide the column.
+#' @param testing logical; passed to `shiny::shinyApp(..., options = list(test.mode))`
 #'
 #' @rdname colSelectModule
 #'
@@ -600,7 +616,8 @@ colSelectApp <- function(
   col_names,
   default_methods,
   data_type = c("nacc", "wls", "wadrc"),
-  col_selection = "enable"
+  col_selection = "enable",
+  testing = FALSE
 ) {
   ui <- bslib::page_fluid(
     shiny::selectizeInput(
@@ -620,10 +637,9 @@ colSelectApp <- function(
       col_selection = col_selection
     )
 
-    shiny::observe({
-      print(var_cols$var_cols())
-    })
+    shiny::exportTestValues(var_cols = var_cols$var_cols())
+    shiny::exportTestValues(std_methods = var_cols$std_methods())
   }
 
-  shiny::shinyApp(ui, server)
+  shiny::shinyApp(ui, server, options = list(test.mode = testing))
 }

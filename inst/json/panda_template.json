@@ -568,6 +568,46 @@
                     "show": true,
                     "constraints": []
                 }]
+            },
+            {
+                "name": "HDX Plasma - pTau217",
+                "id": 1347,
+                "class": "cg_tn",
+                "join": "left",
+                "columns": [{
+                        "name": "enumber",
+                        "id": 53619,
+                        "class": "cg_tn_cn",
+                        "show": true,
+                        "constraints": [{
+                            "operator": "=",
+                            "values": [
+                                "adrc_ptid"
+                            ]
+                        }]
+                    },
+                    {
+                        "name": "age_at_appointment",
+                        "id": 53614,
+                        "class": "cg_tn_cn",
+                        "show": true,
+                        "constraints": []
+                    },
+                    {
+                        "name": "obtained_date",
+                        "id": 53622,
+                        "class": "cg_tn_cn",
+                        "show": true,
+                        "constraints": []
+                    },
+                    {
+                        "name": "mean_conc",
+                        "id": 53637,
+                        "class": "cg_tn_cn",
+                        "show": true,
+                        "constraints": []
+                    }
+                ]
             }
         ],
         "offset": 0,

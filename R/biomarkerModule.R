@@ -100,11 +100,13 @@ biomarkerServer <- function(
           mirai::stop_mirai(m)
         }
 
-        # Invoke, i.e. evaluate the ExtendedTask
-        biomarker_dat$invoke(
-          cur_id = adrc_ptid(),
-          api = biomarker_api()
-        )
+        if (adrc_ptid() != "") {
+          # Invoke, i.e. evaluate the ExtendedTask
+          biomarker_dat$invoke(
+            cur_id = adrc_ptid(),
+            api = biomarker_api()
+          )
+        }
       }) |>
         shiny::bindEvent(
           adrc_ptid(),
@@ -119,7 +121,8 @@ biomarkerServer <- function(
             biomarker_dat_tables[[adrc_ptid()]] <- biomarker_dat$result()
           }
         }
-      })
+      }) |>
+        shiny::bindEvent(biomarker_dat$status())
     } else {
       # If mirai is not installed, or we ask not to use mirai...
       if (FALSE) {
@@ -154,6 +157,7 @@ biomarkerServer <- function(
         if (adrc_ptid() %in% names(biomarker_dat_tables)) {
           lapply(
             biomarker_dat_tables[[adrc_ptid()]][c(
+              "HDX Plasma - pTau217",
               "Local Roche CSF - Sarstedt freeze, cleaned",
               "Local Roche CSF - Sarstedt freeze 2, cleaned",
               "Local Roche CSF - Sarstedt freeze 3",
@@ -213,7 +217,7 @@ biomarkerApp <- function(
 ) {
   ui <- bslib::page_fluid(
     shinyApp_header(),
-    shiny::selectInput(
+    shiny::selectizeInput(
       inputId = "current_studyid",
       label = "ADRC ptid",
       choices = adrc_ptid
@@ -225,7 +229,7 @@ biomarkerApp <- function(
     biomarkerServer(
       "biomarker-module",
       adrc_ptid = shiny::reactive(input$current_studyid),
-      biomarker_api
+      biomarker_api = biomarker_api
     )
   }
 

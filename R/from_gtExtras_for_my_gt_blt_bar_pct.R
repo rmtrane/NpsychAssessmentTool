@@ -1,4 +1,5 @@
 #' Helpers from gtExtras used in `my_gt_blt_bar_pct`
+#'
 #' @rdname from_gtExtras_for_my_gt_blt_bar_pct
 #' @keywords internal
 
@@ -72,14 +73,18 @@ html_color <- function(colors, alpha = NULL) {
 }
 
 
-is_rgba_col <- function(colors)
+is_rgba_col <- function(colors) {
   grepl("^rgba\\(\\s*(?:[0-9]+?\\s*,\\s*){3}[0-9\\.]+?\\s*\\)$", colors)
-is_short_hex <- function(colors)
+}
+is_short_hex <- function(colors) {
   grepl("^#[0-9a-fA-F]{3}([0-9a-fA-F])?$", colors)
-expand_short_hex <- function(colors)
+}
+expand_short_hex <- function(colors) {
   gsub("^#(.)(.)(.)(.?)$", "#\\1\\1\\2\\2\\3\\3\\4\\4", toupper(colors))
-is_hex_col <- function(colors)
+}
+is_hex_col <- function(colors) {
   grepl("^#[0-9a-fA-F]{6}([0-9a-fA-F]{2})?$", colors)
+}
 
 check_named_colors <- function(named_colors) {
   named_colors <- tolower(named_colors)
@@ -98,8 +103,9 @@ check_named_colors <- function(named_colors) {
 }
 
 
-valid_color_names <- function()
+valid_color_names <- function() {
   c(tolower(grDevices::colors()), names(css_exclusive_colors()), "transparent")
+}
 css_exclusive_colors <- function() {
   color_tbl_subset <- css_colors[!css_colors$is_x11_color, ]
   color_values <- color_tbl_subset[["hexadecimal"]]

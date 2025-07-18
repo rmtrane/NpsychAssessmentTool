@@ -50,6 +50,12 @@ read_data <- function(
           "{.arg redcap_auth} must have entries named {.val redcap_uri} and {.val token}."
         )
       }
+
+      if (is.null(redcap_auth$redcap_uri) | is.null(redcap_auth$token)) {
+        cli::cli_abort(
+          "{.arg redcap_auth$redcap_uri} and {.arg redcap_auth$token} must be strings, not NULL."
+        )
+      }
     }
 
     if (!data_type %in% c("wadrc_uds3", "wadrc_uds4")) {
@@ -75,17 +81,20 @@ read_data <- function(
       "wadrc_uds4" = wadrc_uds4_redcap_fields
     )
 
-    from_redcap <- REDCapR::redcap_read_oneshot(
-      redcap_uri = redcap_auth$redcap_uri,
-      token = redcap_auth$token,
-      fields = redcap_fields
+    from_redcap <- try(
+      REDCapR::redcap_read_oneshot(
+        redcap_uri = redcap_auth$redcap_uri,
+        token = redcap_auth$token,
+        fields = redcap_fields
+      ),
+      TRUE
     )
 
     if (!is.null(shiny::getDefaultReactiveDomain())) {
       shiny::removeNotification(id = "pulling_from_redcap")
     }
 
-    if (from_redcap$success) {
+    if (!inherits(from_redcap, "try-error") && from_redcap$success) {
       from_redcap <- data.table::data.table(from_redcap$data)
     } else {
       if (!is.null(shiny::getDefaultReactiveDomain())) {
@@ -93,8 +102,15 @@ read_data <- function(
           "Unable to access REDCap",
           type = "error"
         )
+        return()
+      } else {
+        cli::cli_abort(
+          message = c(
+            "Unable to access REDCap. {.fn REDCapR::redcap_read_oneshot} returned the error:",
+            from_redcap
+          )
+        )
       }
-      return()
     }
 
     if (!is.null(shiny::getDefaultReactiveDomain())) {
@@ -127,10 +143,7 @@ read_data <- function(
     from_csv <- data.table::fread(
       file = data_file,
       na.strings = c("", "NA")
-    ) |>
-      wadrc_data_prep(
-        uds = switch(data_type, "wadrc_uds3" = "uds3", "wadrc_uds4" = "uds4")
-      )
+    )
 
     return(from_csv)
   }

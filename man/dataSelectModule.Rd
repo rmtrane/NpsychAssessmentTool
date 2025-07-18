@@ -13,8 +13,16 @@ dataSelectServer(id)
 dataSelectApp()
 }
 \arguments{
-\item{id}{id to link shiny modules}
+\item{id}{A string used to create a namespace within the shiny app.}
+}
+\value{
+A UI definition.
+
+A list containing reactive values for the data object (\code{dat_obj}),
+the data source, the data type, and the biomarker API.
 }
 \description{
-Shiny module to select data for assessment table
+A short description...
+
+Server logic for dataSelectModule.
 }

@@ -12,14 +12,14 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Suggests: 
-    htmltools,
     httr2,
     jsonlite,
     mirai,
     pagedown,
     REDCapR,
     shinytest2,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    rvest
 Config/testthat/edition: 3
 RoxygenNote: 7.3.2
 Depends: 

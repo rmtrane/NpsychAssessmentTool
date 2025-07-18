@@ -198,8 +198,8 @@ mainTableApp <- function(dat) {
   shiny::addResourcePath("www", "inst/www")
 
   ui <- bslib::page_fluid(
-    htmltools::tags$header(
-      htmltools::tags$script(src = "www/scripts.js"),
+    shiny::tags$header(
+      shiny::tags$script(src = "www/scripts.js"),
       shiny::tags$link(
         rel = "stylesheet",
         type = "text/css",

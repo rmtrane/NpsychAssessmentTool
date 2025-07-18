@@ -327,7 +327,7 @@ dataSelectServer <- function(id) {
       }
 
       if (input$data_source == "csv") {
-        new_source$input <- input_file$datapath
+        new_source$input <- input$input_file$datapath
       }
 
       if (

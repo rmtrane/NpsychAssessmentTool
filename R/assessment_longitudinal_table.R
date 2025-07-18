@@ -50,6 +50,7 @@ assessment_longitudinal_table <- function(
     ) &&
       date %in% colnames(dat)
   )
+
   stopifnot(
     "'dat' must be a data.table object" = data.table::is.data.table(dat)
   )
@@ -143,27 +144,27 @@ assessment_longitudinal_table <- function(
 
   # for_table_orig <- for_table
 
-  invisible({
-    lapply(crosswalk_pairs, \(x) {
-      if (all(x %in% colnames(for_table))) {
-        for_table[paste(x, collapse = "--")] <<- ifelse(
-          !is.na(for_table[[x[1]]]),
-          sprintf(fmt = "%.2f", for_table[[x[1]]]),
-          ifelse(
-            !is.na(for_table[[x[2]]]),
-            paste0(
-              "<u><i>",
-              sprintf(fmt = "%.2f", for_table[[x[2]]]),
-              "</i></u>"
-            ),
-            NA
-          )
+  # invisible({
+  #   lapply(crosswalk_pairs, \(x) {
+  for (x in crosswalk_pairs) {
+    if (all(x %in% colnames(for_table))) {
+      for_table[[paste(x, collapse = "--")]] <- ifelse(
+        !is.na(for_table[[x[1]]]),
+        sprintf(fmt = "%.2f", for_table[[x[1]]]),
+        ifelse(
+          !is.na(for_table[[x[2]]]),
+          paste0(
+            "<u><i>",
+            sprintf(fmt = "%.2f", for_table[[x[2]]]),
+            "</i></u>"
+          ),
+          NA
         )
+      )
 
-        for_table <<- for_table[, -which(colnames(for_table) %in% x)]
-      }
-    })
-  })
+      for_table <- for_table[, -which(colnames(for_table) %in% x), with = F]
+    }
+  }
 
   ## Format scores not in crosswalks
   for_table[,
@@ -208,12 +209,12 @@ assessment_longitudinal_table <- function(
 
       to_combine[2] <- paste0(" <u><i>", to_combine[2], "</i></u>")
 
-      if (grepl(pattern = "Logical", x = to_combine[2])) {
-        to_combine[2] <- paste0(
-          "</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          to_combine[2]
-        )
-      }
+      # if (grepl(pattern = "Logical", x = to_combine[2])) {
+      #   to_combine[2] <- paste0(
+      #     "</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
+      #     to_combine[2]
+      #   )
+      # }
 
       paste(to_combine, collapse = " /")
     }

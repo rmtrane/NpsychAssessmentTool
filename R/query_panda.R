@@ -32,19 +32,19 @@ get_biomarker_data <- function(
     )
   }
 
-  col_prefixes <- c(
-    "PET Appointments" = "view_petscan_appts",
-    "LP Appointments" = "view_lp_appts",
-    "Participants" = "view_participants",
-    "Local Roche CSF - Sarstedt freeze 2, cleaned" = "cg_csf_local_roche_sarstedt_freeze_2",
-    "Local Roche CSF - Sarstedt freeze 3" = "cg_csf_local_roche_sarstedt_freeze_3",
-    "Local Roche CSF - Sarstedt freeze, cleaned" = "cg_csf_local_roche_sarstedt_freeze",
-    "NTK MultiObs - CSF analytes" = "cg_ntk_multiobs_for_sharing_20200310",
-    "NTK2 MultiObs - CSF, 20230311" = "cg_ntk2",
-    "MK6240_NFT_Rating" = "view_cg_mk6240_braak",
-    "NAV4694 Visual Ratings" = "cg_nav4694_visual_ratings",
-    "PIB Visual Rating 20180126" = "cg_pib_visual_ratings_20180126"
-  )
+  # col_prefixes <- c(
+  #   "PET Appointments" = "view_petscan_appts",
+  #   "LP Appointments" = "view_lp_appts",
+  #   "Participants" = "view_participants",
+  #   "Local Roche CSF - Sarstedt freeze 2, cleaned" = "cg_csf_local_roche_sarstedt_freeze_2",
+  #   "Local Roche CSF - Sarstedt freeze 3" = "cg_csf_local_roche_sarstedt_freeze_3",
+  #   "Local Roche CSF - Sarstedt freeze, cleaned" = "cg_csf_local_roche_sarstedt_freeze",
+  #   "NTK MultiObs - CSF analytes" = "cg_ntk_multiobs_for_sharing_20200310",
+  #   "NTK2 MultiObs - CSF, 20230311" = "cg_ntk2",
+  #   "MK6240_NFT_Rating" = "view_cg_mk6240_braak",
+  #   "NAV4694 Visual Ratings" = "cg_nav4694_visual_ratings",
+  #   "PIB Visual Rating 20180126" = "cg_pib_visual_ratings_20180126"
+  # )
 
   replace_in_colnames <- c(
     "_1_[^2]" = "_",
@@ -176,21 +176,24 @@ get_biomarker_data <- function(
       .SDcols = is.character
     ]
 
-    ## Fix column names
+    ## Fix column names. Get columns from query
+    table_cols <- subset(my_query$query$tables, name == idx)$columns[[1]]$name
+    ## Find prefix that we want to remove
+    col_prefix <- table(gsub(
+      pattern = paste0("_", table_cols, "$", collapse = "|"),
+      replacement = "",
+      x = names(as_df)
+    ))
+
+    col_prefix <- names(which.max(col_prefix))
+
     data.table::setnames(
       as_df,
       names(as_df),
       new = gsub(
-        pattern = paste(
-          c(
-            paste0("^", col_prefixes[idx], "_"),
-            "view_petscan_appts_",
-            "view_lp_appts_"
-          ),
-          collapse = "|"
-        ),
+        pattern = paste0(col_prefix, "_"),
         replacement = "",
-        colnames(as_df)
+        x = names(as_df)
       )
     )
 
@@ -221,6 +224,19 @@ get_biomarker_data <- function(
       }
     }
 
+    ## If we are dealing with the plasma biomarker, a few extra adjustments
+    if (grepl(pattern = "Plasma", x = idx)) {
+      data.table::setnames(
+        as_df,
+        old = "mean_conc",
+        new = "pTau217_plasma_raw"
+      )
+
+      as_df$pTau217_plasma_cat <- findInterval(
+        as_df$pTau217_plasma_raw,
+        vec = c(0.4, 0.63)
+      )
+    }
     as_df
   })
 }
@@ -391,6 +407,42 @@ bio_tab_for_gt <- function(tab) {
       "variable",
       "name"
     )
+  }
+
+  if (any(grepl("_cat$", x = names(tab)))) {
+    tab <- data.table::melt(
+      tab,
+      id.vars = c("date"),
+      measure.vars = data.table::measure(
+        name,
+        value.name,
+        pattern = "(.*)_(raw|cat)"
+      )
+    )
+
+    tab[,
+      c("name", "raw", "cat") := list(
+        factor(name, levels = unique(name)),
+        ifelse(
+          name == "Age",
+          raw,
+          c(
+            '<i class="glyphicon glyphicon-minus-sign" style="color: green;"></i> Low',
+            'Medium',
+            '<i class="glyphicon glyphicon-plus-sign" style="color: red;"></i> High'
+          )[cat + 1]
+        ),
+        NULL
+      )
+    ]
+
+    tab <- data.table::dcast(
+      tab,
+      name ~ date,
+      value.var = "raw"
+    )
+
+    tab$name <- as.character(tab$name)
   }
 
   tab

@@ -4,11 +4,12 @@ if (FALSE) {
   ## Create tibble to use for diagnoses
   short_descs <- map(
     rdd,
-    \(x)
+    \(x) {
       tibble(
         short_descriptor = pluck(x, "short_descriptor"),
         codes = list(pluck(x, "codes"))
       )
+    }
   ) |>
     bind_rows(.id = "nacc_name")
 
@@ -161,9 +162,9 @@ prev_diagnoses_table <- function(dat, table_font_size = 100) {
     val <-
       for_tab <- NULL
 
-  stopifnot(
-    "'dat' must be a data.table object" = data.table::is.data.table(dat)
-  )
+  if (!data.table::is.data.table(dat)) {
+    cli::cli_abort("The {.var dat} object must be a {.cls data.table}.")
+  }
 
   diagnosis_table <- dat[,
     .SD,
@@ -252,10 +253,8 @@ prev_diagnoses_table <- function(dat, table_font_size = 100) {
     paste0(CDRGLOB, " (", CDRSUM, ")")
   )
 
-  for (x in intersect(
-    c("raw_MOCATOTS", "raw_NACCMMSE"),
-    colnames(diagnosis_table)
-  )) {
+  # fmt: skip
+  for (x in intersect(c("raw_MOCATOTS", "raw_NACCMMSE"), colnames(diagnosis_table))) {
     diagnosis_table[[x]] <- NpsychBatteryNorms::valid_values_only(
       raw_score = diagnosis_table[[x]],
       var_name = gsub("^raw_", "", x)
@@ -319,7 +318,22 @@ prev_diagnoses_table <- function(dat, table_font_size = 100) {
     diagnosis_table$NACCUDSD %in%
       1:4 |
       !is.na(diagnosis_table$contribution_character)
-  ][,
+  ]
+
+  if (nrow(for_out) == 0) {
+    cli::cli_alert_info("No diagnoses to display.")
+
+    out <- gt::gt(data = data.frame(x = "No previous diagnoses found.")) |>
+      gt::cols_label(x = "") |>
+      gt::tab_style(
+        style = gt::cell_borders(style = "hidden"),
+        locations = list(gt::cells_column_labels(), gt::cells_body())
+      )
+
+    return(out)
+  }
+
+  for_out <- for_out[,
     list(
       "for_tab" = list(
         # data.table::data.table(.SD)
@@ -417,7 +431,7 @@ prev_diagnoses_table <- function(dat, table_font_size = 100) {
       )),
       lapply(
         .SD,
-        \(x)
+        \(x) {
           lapply(x, \(y) {
             if (length(y) == 0 | all(is.na(y))) {
               return(NA)
@@ -429,6 +443,7 @@ prev_diagnoses_table <- function(dat, table_font_size = 100) {
               collapse = '<p style="margin:7px;"></p>'
             )
           })
+        }
       )
     ),
     .SDcols = is.list #setdiff("VISITDATE", colnames(for_out))
