@@ -344,7 +344,7 @@ plotServer <- function(
         cli::cli_alert_info("Updating plots.")
       }
 
-      # Remove old trace if any. We can tell by checking input$TraceMapping. This is
+      # Remove old traces if any. We can tell by checking input$TraceMapping. This is
       # set every time plot is rerendered. See the javascript in 'onRender' for the plot.
       if (!is.null(input$TraceMapping)) {
         ## Create matrix from input$TraceMapping
@@ -354,9 +354,11 @@ plotServer <- function(
           byrow = TRUE
         )
 
-        ## Get trace indices corresponding to traces in legend or with tracename "no_values"
+        ## Get trace indices corresponding to traces in legend or with tracename "no_values" or including "/" (which indicates combined scores)
         indices <- as.integer(traces[
-          traces[, 1] %in% c(legend_names(), "no_values"),
+          traces[, 1] %in%
+            c(legend_names(), "no_values") |
+            grepl(pattern = "/", x = traces[, 1]),
           2
         ])
 
@@ -488,7 +490,8 @@ plotServer <- function(
 #' @export
 plotApp <- function(
   dat_input = prepare_data(demo_data),
-  studyids = NULL
+  studyids = NULL,
+  testing = FALSE
 ) {
   ui <- bslib::page_sidebar(
     theme = bslib::bs_theme(
@@ -597,7 +600,6 @@ plotApp <- function(
     ### Cognitive scores (Plots)
     ## Get x_range's and y_range's
 
-    # if (FALSE) {
     ## Get date range
     x_range <- shiny::reactiveVal()
 
@@ -614,8 +616,6 @@ plotApp <- function(
     y_ranges <- shiny::reactiveValues()
 
     shiny::observe({
-      shiny::req(dat)
-
       lapply(unique(nacc_var_groups), \(cur_group) {
         ## Get variables in group corresponding
         cur_vars <- paste(
@@ -650,23 +650,123 @@ plotApp <- function(
         y_ranges
       )
 
+    descriptions <- shiny::reactiveVal(c(
+      "Impaired" = 0.03,
+      "Borderline" = 0.10,
+      "Low Average" = 0.26,
+      "Average" = 0.76,
+      "High Average" = 0.92,
+      "Superior" = 0.97,
+      "Very Superior" = 1
+    ))
+
+    fill_values <- shiny::reactiveVal(calc_fill_colors(7))
+
+    shade_descriptions <- shiny::reactiveVal(TRUE)
+
     lapply(unique(nacc_var_groups), \(x) {
       plotServer(
         x,
-        dat = current_studyid_dat, # Could improve by removing columns not relevant to this group.
+        dat = current_studyid_dat,
         x_range = x_range,
-        y_range = shiny::reactive(y_ranges[[x]])
+        y_range = shiny::reactive(y_ranges[[x]]),
+        descriptions = descriptions,
+        fill_values = fill_values,
+        print_updating = T,
+        shade_descriptions = shade_descriptions,
+        new_id = x
+        # x,
+        # dat = current_studyid_dat, # Could improve by removing columns not relevant to this group.
+        # x_range = x_range,
+        # y_range = shiny::reactive(y_ranges[[x]]),
+        # descriptions = shiny::reactiveVal(c(
+        #   "Impaired" = 0.03,
+        #   "Borderline" = 0.10,
+        #   "Low Average" = 0.26,
+        #   "Average" = 0.76,
+        #   "High Average" = 0.92,
+        #   "Superior" = 0.97,
+        #   "Very Superior" = 1
+        # )),
+        # fill_values = shiny::reactiveVal(calc_fill_colors(7)),
+        # shade_descriptions = shiny::reactiveVal(TRUE),
+        # print_updating = T,
+        # new_id = x
       )
     })
 
-    mainTableServer(
-      "main_table",
-      dat = shiny::reactive(
-        current_studyid_dat()[
-          current_studyid_dat()$VISITDATE == input$test_date
-        ]
+    # mainTableServer(
+    #   "main_table",
+    #   dat = shiny::reactive(
+    #     current_studyid_dat()[
+    #       current_studyid_dat()$VISITDATE == input$test_date
+    #     ]
+    #   ),
+    #   descriptions = c(
+    #     "Impaired" = 0.03,
+    #     "Borderline" = 0.10,
+    #     "Low Average" = 0.26,
+    #     "Average" = 0.76,
+    #     "High Average" = 0.92,
+    #     "Superior" = 0.97,
+    #     "Very Superior" = 1
+    #   ),
+    #   fill_values = calc_fill_colors(7),
+    #   methods = "infer",
+    #   table_font_size = shiny::reactive(80)
+    # )
+  }
+
+  shiny::shinyApp(ui, server, options = list(test.mode = testing))
+}
+
+
+singlePlotApp <- function(
+  dat_input = prepare_data(demo_data),
+  studyid = "NACC097622",
+  nacc_var_group = "Attention/Processing",
+  testing = FALSE
+) {
+  development <- dir.exists("inst/www")
+
+  if (development) {
+    print("Development...")
+  }
+
+  shiny::addResourcePath(
+    "www",
+    ifelse(
+      development,
+      "inst/shiny/www",
+      system.file("www", package = "NpsychAssessmentTool")
+    )
+  )
+
+  ui <- bslib::page_fluid(
+    shiny::tagList(
+      shiny::tags$head(
+        shiny::tags$script(
+          src = "www/scripts.js"
+        ),
+        shiny::tags$link(
+          rel = "stylesheet",
+          type = "text/css",
+          href = "www/styles.css"
+        )
       ),
-      descriptions = c(
+      shiny::tags$div(id = "spinner", class = "loader"),
+      shiny::tags$div(id = "spinner_overlay", class = "loader_overlay")
+    ),
+    plotUI(id = nacc_var_group)
+  )
+
+  server <- function(input, output, session) {
+    plotServer(
+      id = nacc_var_group,
+      dat = shiny::reactive(dat_input[dat_input$NACCID == studyid]),
+      x_range = shiny::reactive(date_range(dat_input$VISITDATE)),
+      y_range = shiny::reactive(c(-2.5, 2.5)),
+      descriptions = shiny::reactiveVal(c(
         "Impaired" = 0.03,
         "Borderline" = 0.10,
         "Low Average" = 0.26,
@@ -674,12 +774,13 @@ plotApp <- function(
         "High Average" = 0.92,
         "Superior" = 0.97,
         "Very Superior" = 1
-      ),
-      fill_values = calc_fill_colors(7),
-      methods = "infer",
-      table_font_size = shiny::reactive(80)
+      )),
+      fill_values = shiny::reactiveVal(calc_fill_colors(n = 7)),
+      print_updating = T,
+      shade_descriptions = shiny::reactiveVal(TRUE),
+      new_id = nacc_var_group
     )
   }
 
-  shiny::shinyApp(ui, server)
+  shiny::shinyApp(ui, server, options = list(test.mode = testing))
 }

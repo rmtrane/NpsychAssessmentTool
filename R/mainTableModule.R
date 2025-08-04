@@ -194,8 +194,24 @@ mainTableServer <- function(
 #' @rdname mainTableModule
 #'
 #' @export
-mainTableApp <- function(dat) {
-  shiny::addResourcePath("www", "inst/www")
+mainTableApp <- function(
+  dat,
+  testing = FALSE
+) {
+  development <- dir.exists("inst/shiny/www")
+
+  if (development) {
+    print("Development...")
+  }
+
+  shiny::addResourcePath(
+    "www",
+    ifelse(
+      development,
+      "inst/shiny/www",
+      system.file("www", package = "NpsychAssessmentTool")
+    )
+  )
 
   ui <- bslib::page_fluid(
     shiny::tags$header(
@@ -221,7 +237,7 @@ mainTableApp <- function(dat) {
     )
   }
 
-  shiny::shinyApp(ui, server, options = list(port = 3229))
+  shiny::shinyApp(ui, server, options = list(port = 3229, test.mode = testing))
 }
 
 

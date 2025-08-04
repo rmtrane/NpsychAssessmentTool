@@ -8,14 +8,9 @@
 \usage{
 biomarkerUI(id)
 
-biomarkerServer(
-  id,
-  adrc_ptid,
-  biomarker_api,
-  use_mirai = rlang::is_installed("mirai")
-)
+biomarkerServer(id, adrc_ptid, biomarker_api)
 
-biomarkerApp(adrc_ptid, biomarker_api)
+biomarkerApp(adrc_ptid, biomarker_api, testing = FALSE)
 }
 \arguments{
 \item{id}{A string used to namespace the module.}
@@ -23,8 +18,6 @@ biomarkerApp(adrc_ptid, biomarker_api)
 \item{adrc_ptid}{ADRC ptid. A character vector with patient ID's that can be chosen.}
 
 \item{biomarker_api}{Panda API key.}
-
-\item{use_mirai}{A logical value specifying if \code{"mirai"} should be . Optional; defaults to \code{TRUE} if \code{"mirai"} is installed.}
 }
 \value{
 A UI definition.

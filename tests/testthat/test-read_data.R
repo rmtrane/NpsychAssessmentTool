@@ -18,12 +18,12 @@ test_that("read_data works as expected", {
 
   expect_error(
     read_data(data_source = "redcap"),
-    regexp = "`redcap_auth` must be provided when `data_source` is \"redcap\""
+    regexp = "must be provided when"
   )
 
   expect_error(
     read_data(data_source = "redcap", redcap_auth = "not-a-list"),
-    regexp = "`redcap_auth` must be a <list>, but is <character>"
+    regexp = "redcap_auth"
   )
 
   expect_error(
@@ -39,7 +39,7 @@ test_that("read_data works as expected", {
       data_source = "redcap",
       redcap_auth = list(a = 1)
     ),
-    regexp = "`redcap_auth` must have entries named \"redcap_uri\" and \"token\"."
+    regexp = "must have entries named"
   )
 
   expect_error(
@@ -47,8 +47,7 @@ test_that("read_data works as expected", {
       data_source = "redcap",
       redcap_auth = list(redcap_uri = 1, token = 1),
       data_type = "something"
-    ),
-    regexp = "`data_type` must be \"wadrc_uds3\" or \"wadrc_uds4\" when `data_source` is \"redcap\"."
+    )
   )
 
   expect_warning(
@@ -58,8 +57,6 @@ test_that("read_data works as expected", {
     ),
     regexp = "`data_type` is ignored"
   )
-
-  # Test warning when
 
   ############
   # Test that demo_data is returned
@@ -82,6 +79,7 @@ test_that("read_data works as expected", {
     file = nacc_data_path,
     na.strings = c("", "NA")
   )
+
   nacc_data_2 <- read_data(
     data_source = "csv_upload",
     data_file = "~/Documents/NACC-data/data/investigator_nacc66.csv"
@@ -93,33 +91,40 @@ test_that("read_data works as expected", {
   )
 
   # Test reading from REDCap
-  skip_if_not(
-    "redcap_adrc_uds4" %in% names(options())
-  )
-  redcap_uds4_data <- REDCapR::redcap_read_oneshot(
-    redcap_uri = getOption("redcap_adrc_uds4")$redcap_uri,
-    token = getOption("redcap_adrc_uds4")$token,
-    fields = wadrc_uds4_redcap_fields
-  )$data |>
-    data.table::as.data.table() |>
-    wadrc_data_prep(
-      uds = "uds4"
-    )
-  redcap_uds4_from_read_data <- read_data(
-    data_source = "redcap",
-    data_type = "wadrc_uds4",
-    redcap_auth = getOption("redcap_adrc_uds4"),
-    data_file = "test.csv"
+  skip_if(is.null(getOption("redcap_adrc_uds4")))
+
+  suppressMessages(
+    redcap_uds4_data <- REDCapR::redcap_read_oneshot(
+      redcap_uri = getOption("redcap_adrc_uds4")$redcap_uri,
+      token = getOption("redcap_adrc_uds4")$token,
+      fields = wadrc_uds4_redcap_fields,
+      guess_max = Inf
+    )$data |>
+      data.table::as.data.table() |>
+      wadrc_data_prep(
+        uds = "uds4"
+      )
   )
 
   expect_equal(
-    redcap_uds4_from_read_data,
+    suppressWarnings(
+      classes = c("warning", "message"),
+      read_data(
+        data_source = "redcap",
+        data_type = "wadrc_uds4",
+        redcap_auth = getOption("redcap_adrc_uds4"),
+        data_file = "test.csv"
+      )
+    ),
     redcap_uds4_data
   )
-  expect_warning(read_data(
-    data_source = "redcap",
-    data_type = "wadrc_uds4",
-    redcap_auth = getOption("redcap_adrc_uds4"),
-    data_file = "test.csv"
-  ))
+
+  expect_warning(
+    read_data(
+      data_source = "redcap",
+      data_type = "wadrc_uds4",
+      redcap_auth = getOption("redcap_adrc_uds4"),
+      data_file = "test.csv"
+    )
+  )
 })

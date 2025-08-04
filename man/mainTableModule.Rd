@@ -20,7 +20,7 @@ mainTableServer(
   print_updating = F
 )
 
-mainTableApp(dat)
+mainTableApp(dat, testing = FALSE)
 }
 \arguments{
 \item{id}{An ID string to match module UI and server UI}

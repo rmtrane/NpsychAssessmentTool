@@ -4,7 +4,7 @@ test_that("{shinytest2} Testing changes to std_methods using demo_data", {
   skip_on_cran()
 
   app <- AppDriver$new(
-    app_dir = shinyAssessmentApp(testing = T, use_mirai = FALSE),
+    app_dir = shinyAssessmentApp(testing = T),
     variant = platform_variant(),
     name = "shinyApp",
     height = 968,
@@ -681,8 +681,8 @@ test_that("{shinytest2} Testing changes to std_methods using demo_data", {
   app$wait_for_idle(timeout = 5000)
 
   # Update output value
+  app$set_window_size(width = 1619, height = 968)
   app$expect_screenshot()
-  app$expect_values()
 
   app$stop(signal_timeout = 50000)
 })

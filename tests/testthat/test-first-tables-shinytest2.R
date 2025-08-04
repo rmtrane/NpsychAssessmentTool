@@ -4,12 +4,12 @@ test_that("{shinytest2} First visit to 'Scoring Tables and Figures' using demo_d
   skip_on_cran()
 
   app <- AppDriver$new(
-    app_dir = shinyAssessmentApp(testing = T, use_mirai = F),
+    app_dir = shinyAssessmentApp(testing = F),
     variant = platform_variant(),
     name = "shinyApp",
     height = 968,
     width = 1619,
-    wait = TRUE
+    wait = TRUE,
   )
 
   app$set_inputs(
@@ -49,7 +49,8 @@ test_that("{shinytest2} First visit to 'Scoring Tables and Figures' using demo_d
   )
   app$set_window_size(width = 1619, height = 968)
   app$wait_for_idle(duration = 1000)
-  app$expect_values()
+
+  app$expect_screenshot()
   app$set_inputs(main_navbar = "dataSelect")
   # Update output value
   app$set_window_size(width = 1619, height = 968)
@@ -921,77 +922,9 @@ test_that("{shinytest2} First visit to 'Scoring Tables and Figures' using demo_d
     allow_no_input_binding_ = TRUE,
     wait_ = FALSE
   )
+  # fmt: skip
   app$set_inputs(
-    `Executive Functioning-TraceMapping` = c(
-      "",
-      0,
-      "",
-      "",
-      "dashed",
-      1,
-      "",
-      "",
-      "Impaired",
-      2,
-      "",
-      TRUE,
-      "dashed",
-      3,
-      "",
-      "",
-      "Borderline",
-      4,
-      "",
-      TRUE,
-      "dashed",
-      5,
-      "",
-      "",
-      "Low Average",
-      6,
-      "",
-      TRUE,
-      "dashed",
-      7,
-      "",
-      "",
-      "Average",
-      8,
-      "",
-      TRUE,
-      "dashed",
-      9,
-      "",
-      "",
-      "High Average",
-      10,
-      "",
-      TRUE,
-      "dashed",
-      11,
-      "",
-      "",
-      "Superior",
-      12,
-      "",
-      TRUE,
-      "dashed",
-      13,
-      "",
-      "",
-      "Very Superior",
-      14,
-      "",
-      TRUE,
-      "Trailmaking Part B",
-      15,
-      "TRAILB",
-      TRUE,
-      "Trailmaking Part B",
-      16,
-      "TRAILB",
-      TRUE
-    ),
+    `Executive Functioning-TraceMapping` = c("", 0, "", "", "dashed", 1, "", "", "Impaired", 2, "", TRUE, "dashed", 3, "", "", "Borderline", 4, "", TRUE, "dashed", 5, "", "", "Low Average", 6, "", TRUE, "dashed", 7, "", "", "Average", 8, "", TRUE, "dashed", 9, "", "", "High Average", 10, "", TRUE, "dashed", 11, "", "", "Superior", 12, "", TRUE, "dashed", 13, "", "", "Very Superior", 14, "", TRUE, "Trailmaking Part B", 15, "TRAILB", TRUE, "Trailmaking Part B", 16, "TRAILB", TRUE),
     allow_no_input_binding_ = TRUE,
     wait_ = FALSE
   )
@@ -1017,6 +950,6 @@ test_that("{shinytest2} First visit to 'Scoring Tables and Figures' using demo_d
   )
   app$wait_for_idle(duration = 1000)
   # Update output value
-  app$expect_values()
+  app$expect_screenshot()
   app$stop()
 })

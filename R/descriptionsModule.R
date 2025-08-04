@@ -60,49 +60,49 @@ descriptionsServer <- function(
   ),
   default_fill_values = NULL
 ) {
+  if (!is.numeric(default_descriptions)) {
+    cli::cli_abort(
+      "{.arg default_descriptions} must be of class `numeric` (got {class(default_descriptions)})"
+    )
+  }
+
+  if (is.null(names(default_descriptions))) {
+    cli::cli_abort(
+      "{.arg default_descriptions} must be named."
+    )
+  }
+
+  if (is.null(default_fill_values)) {
+    default_fill_values <- setNames(
+      calc_fill_colors(n = length(default_descriptions)),
+      nm = names(default_descriptions)
+    )
+  }
+
+  if (!check_colors(default_fill_values)) {
+    cli::cli_abort(
+      "{.arg default_fill_values} contains entries that are not recognized as hex values."
+    )
+  }
+
+  if (length(default_fill_values) != length(default_descriptions)) {
+    cli::cli_abort(
+      "Length of {.arg default_descriptions} ({length(default_descriptions)}) must be the same as length of {.arg default_fill_values} ({length(default_fill_values)})"
+    )
+  }
+
+  if (
+    !identical(
+      sort(names(default_fill_values)),
+      sort(names(default_descriptions))
+    )
+  ) {
+    cli::cli_abort(
+      "The names of {.arg default_descriptions} ({names(default_descriptions)}) must be the same as the names of {.arg default_fill_values} ({names(default_fill_values)})"
+    )
+  }
+
   shiny::moduleServer(id, function(input, output, session) {
-    if (!is.numeric(default_descriptions)) {
-      cli::cli_abort(
-        "{.arg default_descriptions} must be of class `numeric` (got {class(default_descriptions)})"
-      )
-    }
-
-    if (is.null(names(default_descriptions))) {
-      cli::cli_abort(
-        "{.arg default_descriptions} must be named."
-      )
-    }
-
-    if (is.null(default_fill_values)) {
-      default_fill_values <- setNames(
-        calc_fill_colors(n = length(default_descriptions)),
-        nm = names(default_descriptions)
-      )
-    }
-
-    if (!check_colors(default_fill_values)) {
-      cli::cli_abort(
-        "{.arg default_fill_values} contains entries that are not recognized as hex values."
-      )
-    }
-
-    if (length(default_fill_values) != length(default_descriptions)) {
-      cli::cli_abort(
-        "Length of {.arg default_descriptions} ({length(default_descriptions)}) must be the same as length of {.arg default_fill_values} ({length(default_fill_values)})"
-      )
-    }
-
-    if (
-      !identical(
-        sort(names(default_fill_values)),
-        sort(names(default_descriptions))
-      )
-    ) {
-      cli::cli_abort(
-        "The names of {.arg default_descriptions} ({names(default_descriptions)}) must be the same as the names of {.arg default_fill_values} ({names(default_fill_values)})"
-      )
-    }
-
     init_n <- length(default_fill_values)
 
     default_descriptions <- data.frame(
@@ -227,8 +227,9 @@ descriptionsServer <- function(
     shiny::observe({
       shiny::req(input$descriptions_cell_clicked$col)
 
-      row <- input$descriptions_cell_clicked$row
-      col <- input$descriptions_cell_clicked$col
+      ## as.numeric necessary for the shinytest2 tests to work
+      row <- as.numeric(input$descriptions_cell_clicked[["row"]])
+      col <- as.numeric(input$descriptions_cell_clicked[["col"]])
 
       remove_col <- which(colnames(descriptions()) == "Remove")
 
@@ -250,9 +251,14 @@ descriptionsServer <- function(
       )
 
     shiny::observe({
+      ## This is for the shinytest2 tests to work
+      desc_cell_edit <- input$descriptions_cell_edit
+      desc_cell_edit$row <- as.numeric(desc_cell_edit$row)
+      desc_cell_edit$col <- as.numeric(desc_cell_edit$col)
+
       tmp <- DT::editData(
-        descriptions(),
-        input$descriptions_cell_edit,
+        data = descriptions(),
+        info = desc_cell_edit,
         rownames = F
       )
 
@@ -342,8 +348,26 @@ descriptionsApp <- function(
     "High Average" = 0.92,
     "Superior" = 0.97,
     "Very Superior" = 1
-  )
+  ),
+  testing = FALSE
 ) {
+  development <- dir.exists("inst/www") &&
+    basename(getwd()) == "NpsychAssessmentTool"
+
+  if (development) {
+    print("Development...")
+    www_path <- "inst/www"
+    qmd_path <- "inst/qmd"
+  } else {
+    require("NpsychAssessmentTool")
+
+    www_path <- system.file("www", package = "NpsychAssessmentTool")
+    qmd_path <- system.file("qmd", package = "NpsychAssessmentTool")
+  }
+
+  shiny::addResourcePath("www", www_path)
+  shiny::addResourcePath("qmd", qmd_path)
+
   ui <- bslib::page_fluid(
     shiny::tags$head(
       shiny::tags$script(
@@ -359,21 +383,14 @@ descriptionsApp <- function(
     shiny::tags$div(id = "spinner_overlay", class = "loader_overlay"),
     descriptionsUI("desc"),
     shiny::verbatimTextOutput("fill_out"),
-    shiny::verbatimTextOutput("cur_fill_out")
+    shiny::verbatimTextOutput("cur_fill_out"),
+    shiny::tableOutput("cur_desc")
   )
 
   server <- function(input, output, session) {
     desc <- descriptionsServer(
       "desc",
-      default_descriptions = c(
-        "Impaired" = 0.03,
-        "Borderline" = 0.10,
-        "Low Average" = 0.26,
-        "Average" = 0.76,
-        "High Average" = 0.92,
-        "Superior" = 0.97,
-        "Very Superior" = 1
-      )
+      default_descriptions = default_descriptions
     )
 
     fill_values <- shiny::reactiveVal()
@@ -392,7 +409,20 @@ descriptionsApp <- function(
     output$cur_fill_out <- shiny::renderText({
       paste("Current colors:", paste(fill_values(), collapse = ", "))
     })
+
+    output$cur_desc <- shiny::renderTable(
+      data.frame(
+        labels = names(desc$descriptions()),
+        values = desc$descriptions()
+      ),
+      rownames = FALSE
+    )
+
+    shiny::exportTestValues(
+      fill_values = fill_values(),
+      descriptions = desc$descriptions()
+    )
   }
 
-  shiny::shinyApp(ui, server)
+  shiny::shinyApp(ui, server, options = list(test.mode = testing))
 }

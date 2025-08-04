@@ -1,12 +1,12 @@
 #' Function to Prepare WADRC UDS-3 Data
 #'
-#' @param adrc_data Data as gotten from WADRC UDS-3 REDCap.
+#' @param adrc_data Data as gotten from WADRC REDCap database.
 #'  Could be a complete download to .csv file, then read into R,
 #'  or pulled directly from REDCap using the `REDCapR` package.
-#' @param uds Spefify if data are from UDS-3 or UDS-4 database.
+#' @param uds Spefify if data are from UDS-2, UDS-3 or UDS-4 database.
 #'
 #' @keywords internal
-wadrc_data_prep <- function(adrc_data, uds = c("uds3", "uds4")) {
+wadrc_data_prep <- function(adrc_data, uds = c("uds2", "uds3", "uds4")) {
   ## Due to NSE notes in R CMD check:
   NACCID <-
     VISITDATE <-
@@ -26,9 +26,21 @@ wadrc_data_prep <- function(adrc_data, uds = c("uds3", "uds4")) {
     )
   }
 
-  out <- adrc_data[
-    !grepl(pattern = "biomarker", x = adrc_data$redcap_event_name)
-  ]
+  if ("redcap_event_name" %in% colnames(adrc_data)) {
+    out <- adrc_data[
+      !grepl(pattern = "biomarker", x = adrc_data$redcap_event_name)
+    ]
+  } else {
+    out <- adrc_data
+  }
+
+  if (uds == "uds2") {
+    data.table::setnames(
+      out,
+      old = nacc_to_wadrc_uds2[c("NACCID", "VISITDAY", "VISITMO", "VISITYR")],
+      new = c("ptid", "visitday", "visitmo", "visityr")
+    )
+  }
 
   if (uds == "uds3") {
     prefixes <- c(
@@ -65,11 +77,11 @@ wadrc_data_prep <- function(adrc_data, uds = c("uds3", "uds4")) {
       "impnomci"
     )
 
-    colnames(out)[grepl("education", colnames(out))] <- gsub(
-      pattern = "education",
-      replacement = "educ",
-      x = colnames(out)[grepl("education", colnames(out))]
-    )
+    # colnames(out)[grepl("education", colnames(out))] <- gsub(
+    #   pattern = "education",
+    #   replacement = "educ",
+    #   x = colnames(out)[grepl("education", colnames(out))]
+    # )
 
     out <- out[,
       intersect(
@@ -80,9 +92,21 @@ wadrc_data_prep <- function(adrc_data, uds = c("uds3", "uds4")) {
           data.table::patterns("^visit", cols = colnames(out)),
           paste0(
             prefixes,
-            rep(c(nacc_to_wadrc_uds3, for_diagnosis), each = length(prefixes)),
+            rep(
+              c(
+                nacc_to_wadrc_uds3[
+                  -which(names(nacc_to_wadrc_uds3) %in% c("EDUC", "RACE"))
+                ], # Treat EDUC and RACE separately
+                for_diagnosis
+              ),
+              each = length(prefixes)
+            ),
             suffixes
-          )
+          ),
+          "educ",
+          "tip_educ",
+          "race",
+          "tip_race"
         ))
       ),
       with = F
@@ -144,8 +168,6 @@ wadrc_data_prep <- function(adrc_data, uds = c("uds3", "uds4")) {
     out$visitdate <- NULL
   }
 
-  out <- out[!(is.na(visityr) & is.na(visitmo) & is.na(visitday))]
-
   ## Remove redcap_event_name
   out$redcap_event_name <- NULL # out[, redcap_event_name := NULL]
   out <- unique(out)
@@ -153,7 +175,7 @@ wadrc_data_prep <- function(adrc_data, uds = c("uds3", "uds4")) {
   ## Create diagnosis variable udsd
   out$udsd <- NA
 
-  if (uds == "uds3") {
+  if (uds %in% c("uds2", "uds3")) {
     out$udsd[out$normcog == 1] <- 1
     out$udsd[out$impnomci == 1] <- 2
     out$udsd[
@@ -176,6 +198,20 @@ wadrc_data_prep <- function(adrc_data, uds = c("uds3", "uds4")) {
 
   ## Rename all columns to match NACC naming scheme. To do so, create
   ## character vector of the form c("new_name" = "old_name", ...)
+
+  ## For UDS2, exactly nacc_to_wadrc_uds2
+  if (uds == "uds2") {
+    cols_wanted <- c(
+      "NACCID" = "ptid",
+      "VISITYR" = "visityr",
+      "VISITMO" = "visitmo",
+      "VISITDAY" = "visitday",
+      nacc_to_wadrc_uds2[
+        !names(nacc_to_wadrc_uds2) %in%
+          c("NACCID", "VISITYR", "VISITMO", "VISITDAY")
+      ]
+    )
+  }
 
   ## For UDS3, this is exactly nacc_to_wadrc_uds3
   if (uds == "uds3") {
@@ -222,13 +258,17 @@ return_single <- function(x, if_multiple = NA) {
     return(NA)
   }
 
-  x <- unique(na.omit(x))
+  no_nas <- unique(na.omit(x))
 
-  if (length(x) > 1) {
-    return(if_multiple)
+  if (length(no_nas) > 1) {
+    if (!is.null(if_multiple)) {
+      return(if_multiple)
+    }
+
+    return(x)
   }
 
-  x
+  no_nas
 }
 
 
@@ -241,34 +281,42 @@ fill_data_downup <- function(
   educ = "educ",
   constant_across_visits = c("sex", "race", "birthyr", "birthmo", "handed")
 ) {
-  remove_after <- c()
-  if (ptid != "ptid") {
-    out$ptid <- out[[ptid]]
-    remove_after <- c(remove_after, "ptid")
-  }
-  if (visityr != "visityr") {
-    out$visityr <- out[[visityr]]
-    remove_after <- c(remove_after, "visityr")
-  }
-  if (visitmo != "visitmo") {
-    out$visitmo <- out[[visitmo]]
-    remove_after <- c(remove_after, "visitmo")
-  }
-  if (visitday != "visitday") {
-    out$visitday <- out[[visitday]]
-    remove_after <- c(remove_after, "visitday")
-  }
-  if (educ != "educ") {
-    out$educ <- out[[educ]]
-    remove_after <- c(remove_after, "educ")
-  }
+  data.table::setnames(
+    out,
+    old = c(ptid, visityr, visitmo, visitday, educ),
+    new = c("ptid", "visityr", "visitmo", "visitday", "educ")
+  )
+  # remove_after <- c()
+  # if (ptid != "ptid") {
+  #   out$ptid <- out[[ptid]]
+  #   remove_after <- c(remove_after, "ptid")
+  # }
+  # if (visityr != "visityr") {
+  #   out$visityr <- out[[visityr]]
+  #   remove_after <- c(remove_after, "visityr")
+  # }
+  # if (visitmo != "visitmo") {
+  #   out$visitmo <- out[[visitmo]]
+  #   remove_after <- c(remove_after, "visitmo")
+  # }
+  # if (visitday != "visitday") {
+  #   out$visitday <- out[[visitday]]
+  #   remove_after <- c(remove_after, "visitday")
+  # }
+  # if (educ != "educ") {
+  #   out$educ <- out[[educ]]
+  #   remove_after <- c(remove_after, "educ")
+  # }
 
   out <- out[order(ptid, visityr, visitmo, visitday)]
 
   out[, names(.SD) := lapply(.SD, as.numeric), .SDcols = is.logical]
 
   ## Fill NA within visits downup (i.e. first fill down, then fill up).
-  ## For numeric values, use data.table::nafill directly
+  ## For numeric values, use data.table::nafill directly. However, only
+  ## do this for columns with missing data.
+  num_cols <- lapply(out, \(x) is.numeric(x) && sum(is.na(x) > 0))
+
   out[,
     names(.SD) := lapply(
       .SD,
@@ -282,7 +330,7 @@ fill_data_downup <- function(
           data.table::nafill(type = "nocb")
       }
     ),
-    .SDcols = is.numeric,
+    .SDcols = names(num_cols[unlist(num_cols)]),
     by = c("ptid", "visityr", "visitmo", "visitday")
   ]
 
@@ -368,9 +416,12 @@ fill_data_downup <- function(
     by = "ptid"
   ]
 
-  for (rm_var in remove_after) {
-    out[[rm_var]] <- NULL
-  }
+  ## Rename columns back to original names
+  data.table::setnames(
+    out,
+    old = c("ptid", "visityr", "visitmo", "visitday", "educ"),
+    new = c(ptid, visityr, visitmo, visitday, educ)
+  )
 
   return(out)
 }

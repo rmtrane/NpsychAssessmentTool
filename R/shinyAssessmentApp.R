@@ -4,16 +4,13 @@
 #' Wrapper that runs the Shiny application.
 #'
 #' @param testing Logical: is the app run for testing purposes?
-#' @param use_mirai Logical: should `"mirai"` be used for asynchronously
-#' pulling biomarker data. Defaults to `rlang::is_installed("mirai")`.
 #'
 #' @returns
 #' Runs the Shiny app.
 #'
 #' @export
 shinyAssessmentApp <- function(
-  testing = FALSE,
-  use_mirai = rlang::is_installed("mirai")
+  testing = FALSE
 ) {
   options(
     shiny.maxRequestSize = 1000 * 1024^2,
@@ -37,11 +34,12 @@ shinyAssessmentApp <- function(
   shiny::addResourcePath("www", www_path)
   shiny::addResourcePath("qmd", qmd_path)
 
-  if (rlang::is_installed("mirai") && use_mirai) {
-    mirai::daemons(1)
-
-    shiny::onStop(\(x) mirai::daemons(0))
+  if (mirai::daemons_set()) {
+    mirai::daemons(0)
   }
+
+  mirai::daemons(1)
+  shiny::onStop(\(x) mirai::daemons(0))
 
   shiny::shinyApp(
     ui = appUI,

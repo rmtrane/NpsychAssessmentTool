@@ -321,22 +321,7 @@ colSelectServer <- function(
             )
           )
         )
-      ) #|>
-      # DT::formatStyle(
-      #  columns = which(colnames(tmp) == "Column"),
-      # cursor = "pointer" # ,
-      # border = "1px", # solid #8D959E;",
-      # "border-style" = "solid",
-      # "border-width" = "1px",
-      # "border-color" = "#8D959E",
-      # "padding-top" = "0.375rem",
-      # "padding-bottom" = "0.375rem",
-      # "border-radius" = "3px",
-      # margin = "5px",
-      # position = "relative",
-      # target = "cell" ,
-      # color = "red"
-      # )
+      )
     })
 
     vars_table_output_proxy <- DT::dataTableProxy("vars_table_output")
@@ -365,8 +350,10 @@ colSelectServer <- function(
     shiny::observe({
       shiny::req(input$vars_table_output_cells_selected)
 
-      row_clicked <- input$vars_table_output_cells_selected[1, 1]
-      col_clicked <- input$vars_table_output_cells_selected[1, 2]
+      print(input$vars_table_output_cells_selected)
+
+      row_clicked <- as.numeric(input$vars_table_output_cells_selected[1, 1])
+      col_clicked <- as.numeric(input$vars_table_output_cells_selected[1, 2])
 
       if (
         col_clicked == 5 &
@@ -619,7 +606,25 @@ colSelectApp <- function(
   col_selection = "enable",
   testing = FALSE
 ) {
+  development <- dir.exists("inst/www") &&
+    basename(getwd()) == "NpsychAssessmentTool"
+
+  if (development) {
+    print("Development...")
+    www_path <- "inst/www"
+    qmd_path <- "inst/qmd"
+  } else {
+    require("NpsychAssessmentTool")
+
+    www_path <- system.file("www", package = "NpsychAssessmentTool")
+    qmd_path <- system.file("qmd", package = "NpsychAssessmentTool")
+  }
+
+  shiny::addResourcePath("www", www_path)
+  shiny::addResourcePath("qmd", qmd_path)
+
   ui <- bslib::page_fluid(
+    shinyApp_header(),
     shiny::selectizeInput(
       inputId = "whatever",
       label = NULL,

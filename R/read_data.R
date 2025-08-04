@@ -58,7 +58,10 @@ read_data <- function(
       }
     }
 
-    if (!data_type %in% c("wadrc_uds3", "wadrc_uds4")) {
+    if (
+      !is.null(data_type) &&
+        !data_type %in% c("wadrc_uds2", "wadrc_uds3", "wadrc_uds4")
+    ) {
       cli::cli_abort(
         "{.arg data_type} must be {.val wadrc_uds3} or {.val wadrc_uds4} 
         when {.arg data_source} is {.val redcap}."
@@ -85,7 +88,8 @@ read_data <- function(
       REDCapR::redcap_read_oneshot(
         redcap_uri = redcap_auth$redcap_uri,
         token = redcap_auth$token,
-        fields = redcap_fields
+        fields = redcap_fields,
+        guess_max = Inf
       ),
       TRUE
     )
@@ -124,7 +128,12 @@ read_data <- function(
 
     from_redcap <- wadrc_data_prep(
       adrc_data = from_redcap,
-      uds = switch(data_type, "wadrc_uds3" = "uds3", "wadrc_uds4" = "uds4")
+      uds = switch(
+        data_type,
+        "wadrc_uds2" = "uds2",
+        "wadrc_uds3" = "uds3",
+        "wadrc_uds4" = "uds4"
+      )
     )
 
     if (!is.null(shiny::getDefaultReactiveDomain())) {
@@ -144,6 +153,21 @@ read_data <- function(
       file = data_file,
       na.strings = c("", "NA")
     )
+
+    if (
+      !is.null(data_type) &&
+        data_type %in% c("wadrc_uds2", "wadrc_uds3", "wadrc_uds4")
+    ) {
+      from_csv <- wadrc_data_prep(
+        adrc_data = from_csv,
+        uds = switch(
+          data_type,
+          "wadrc_uds2" = "uds2",
+          "wadrc_uds3" = "uds3",
+          "wadrc_uds4" = "uds4"
+        )
+      )
+    }
 
     return(from_csv)
   }

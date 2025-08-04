@@ -10,7 +10,7 @@ dataSelectUI(id)
 
 dataSelectServer(id)
 
-dataSelectApp()
+dataSelectApp(testing = FALSE)
 }
 \arguments{
 \item{id}{A string used to create a namespace within the shiny app.}

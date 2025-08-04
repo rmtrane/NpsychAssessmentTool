@@ -1,135 +1,41 @@
-panda_access <- !inherits(
-  try(
-    httr2::req_perform(httr2::request("https://panda.medicine.wisc.edu")),
-    silent = TRUE
-  ),
-  "try-error"
-)
-
-check_table_names <- function(panda_returns) {
-  expect_equal(
-    names(panda_returns),
-    c(
-      "Local Roche CSF - Sarstedt freeze 2, cleaned",
-      "Local Roche CSF - Sarstedt freeze 3",
-      "Local Roche CSF - Sarstedt freeze, cleaned",
-      "NTK MultiObs - CSF analytes",
-      "NTK2 MultiObs - CSF, 20230311",
-      "MK6240_NFT_Rating",
-      "NAV4694 Visual Ratings",
-      "PIB Visual Rating 20180126",
-      "HDX Plasma - pTau217"
-    )
-  )
-}
-
-check_table_colnames <- \(table, table_name) {
-  expected_colnames <- switch(
-    table_name,
-    "Local Roche CSF - Sarstedt freeze 2, cleaned" = c(
-      "age_lp",
-      "sample_date",
-      "pTau_raw",
-      "tTau_raw",
-      "pTau_bin",
-      "tTau_bin",
-      "ABeta42_raw",
-      "ABeta42_bin",
-      "pTau_ABeta42_raw",
-      "pTau_ABeta42_bin"
+test_that("adrc_ptid not string", {
+  expect_error(
+    get_biomarker_data(
+      adrc_ptid = 12345,
+      api_key = "NOT-A-REAL-API-KEY"
     ),
-    "Local Roche CSF - Sarstedt freeze 3" = c(
-      "age_lp",
-      "sample_date",
-      "pTau_raw",
-      "tTau_raw",
-      "pTau_bin",
-      "tTau_bin",
-      "ABeta42_raw",
-      "ABeta42_bin",
-      "pTau_ABeta42_raw",
-      "pTau_ABeta42_bin",
-      "ABeta42_gen1_raw",
-      "ABeta42_gen1_bin",
-      "pTau_ABeta42_gen1_raw",
-      "pTau_ABeta42_gen1_bin",
-      "ABeta42_gen2_raw",
-      "ABeta42_gen2_bin",
-      "pTau_ABeta42_gen2_raw",
-      "pTau_ABeta42_gen2_bin"
-    ),
-    "Local Roche CSF - Sarstedt freeze, cleaned" = c(
-      "age_lp",
-      "sample_date",
-      "ABeta42_raw",
-      "pTau_raw",
-      "tTau_raw",
-      "pTau_ABeta42_raw",
-      "ABeta42_bin",
-      "pTau_bin",
-      "tTau_bin",
-      "pTau_ABeta42_bin"
-    ),
-    "NTK MultiObs - CSF analytes" = c(
-      "view_lp_appts_lp_date",
-      "age_lp",
-      "pTau_raw",
-      "ABeta42_40_raw",
-      "pTau_ABeta42_raw",
-      "ABeta42_40_bin",
-      "pTau_ABeta42_bin",
-      "pTau_bin"
-    ),
-    "NTK2 MultiObs - CSF, 20230311" = c(
-      "LPdate",
-      "age_lp",
-      "pTau_raw",
-      "ABeta42_40_raw",
-      "pTau_ABeta42_raw",
-      "ABeta42_40_bin",
-      "pTau_ABeta42_bin",
-      "pTau_bin"
-    ),
-    "MK6240_NFT_Rating" = c(
-      "view_petscan_appts_petscan_date",
-      "view_petscan_appts_age_at_appointment",
-      "comment",
-      "braak_1",
-      "braak_2",
-      "braak_3",
-      "braak_4",
-      "braak_5",
-      "braak_6"
-    ),
-    "NAV4694 Visual Ratings" = c(
-      "view_petscan_appts_petscan_date",
-      "view_petscan_appts_age_at_appointment",
-      "rating_0_1_2_3"
-    ),
-    "PIB Visual Rating 20180126" = c(
-      "view_petscan_appts_petscan_date",
-      "view_petscan_appts_age_at_appointment",
-      "rating_0_1_2_3"
-    ),
-    "HDX Plasma - pTau217" = c(
-      "enumber",
-      "age_at_appointment",
-      "obtained_date",
-      "pTau217_plasma_raw",
-      "pTau217_plasma_cat"
-    )
+    regexp = "`adrc_ptid` must be a string"
   )
 
-  expect_equal(
-    colnames(table),
-    expected_colnames,
-    label = paste(
-      "Column names for",
-      table_name,
-      "do not match expected values."
-    )
+  expect_error(
+    get_biomarker_data(
+      adrc_ptid = c("adrc00031", "adrc00032"),
+      api_key = "NOT-A-REAL-API-KEY"
+    ),
+    regexp = "`adrc_ptid` must be a string"
   )
-}
+})
+
+test_that("packages missing", {
+  with_mocked_bindings(
+    {
+      expect_error(
+        get_biomarker_data(
+          adrc_ptid = "adrc00031",
+          api_key = "NOT-A-REAL-API-KEY"
+        ),
+        regexp = "Please install "
+      )
+    },
+    is_installed = function(pkg, quietly = TRUE) {
+      if (pkg %in% c("httr2", "jsonlite")) {
+        return(FALSE)
+      }
+      rlang::is_installed(pkg)
+    },
+    .package = "rlang"
+  )
+})
 
 test_that("Quering Panda when server unaccessible", {
   ## Skip if panda access
@@ -156,20 +62,36 @@ test_that("Quering Panda when server unaccessible", {
   )
 })
 
-test_that("Querying Panda with wrong API key", {
+test_that("Querying Panda when accessible", {
   ## Skip if no panda access
   skip_if_not(panda_access)
+  skip_if(is.null(getOption("panda_api_key")))
 
   bio_dat <- get_biomarker_data(
     adrc_ptid = "adrc00031",
     api_key = getOption("panda_api_key")
   )
 
-  check_table_names(bio_dat)
+  expect_equal(
+    names(bio_dat),
+    c(
+      "Local Roche CSF - Sarstedt freeze 2, cleaned",
+      "Local Roche CSF - Sarstedt freeze 3",
+      "Local Roche CSF - Sarstedt freeze, cleaned",
+      "NTK MultiObs - CSF analytes",
+      "NTK2 MultiObs - CSF, 20230311",
+      "MK6240_NFT_Rating",
+      "NAV4694 Visual Ratings",
+      "PIB Visual Rating 20180126",
+      "HDX Plasma - pTau217"
+    )
+  )
 
   ## Check that all returns are data.table's or NULL
   expect_true(
-    all(purrr::map_lgl(bio_dat, \(x) is.null(x) | data.table::is.data.table(x)))
+    all(purrr::map_lgl(bio_dat, \(x) {
+      is.null(x) || data.table::is.data.table(x)
+    }))
   )
 
   ## Check that all tables have expected column names
@@ -177,20 +99,51 @@ test_that("Querying Panda with wrong API key", {
     purrr::discard(is.null) |>
     purrr::iwalk(check_table_colnames)
 
+  for_gt <- bio_dat |>
+    lapply(bio_tab_for_gt)
+
+  ## Make sure all tables are data.tables
+  purrr::walk(
+    for_gt,
+    \(x) expect_true(data.table::is.data.table(x))
+  )
+
+  ## Snapshot all tables
+  purrr::walk(
+    for_gt,
+    \(x) expect_snapshot_value(as.list(x), style = "json2")
+  )
+
+  ## Snapshot the HTML output
+  expect_snapshot(bslib::page(bio_tab_to_gt(for_gt)))
+
   ## We perform the same checks for a different patient ID to make sure we hit all tables
   bio_dat <- get_biomarker_data(
     adrc_ptid = "adrc01261",
     api_key = getOption("panda_api_key")
   )
 
-  check_table_names(bio_dat)
+  expect_equal(
+    names(bio_dat),
+    c(
+      "Local Roche CSF - Sarstedt freeze 2, cleaned",
+      "Local Roche CSF - Sarstedt freeze 3",
+      "Local Roche CSF - Sarstedt freeze, cleaned",
+      "NTK MultiObs - CSF analytes",
+      "NTK2 MultiObs - CSF, 20230311",
+      "MK6240_NFT_Rating",
+      "NAV4694 Visual Ratings",
+      "PIB Visual Rating 20180126",
+      "HDX Plasma - pTau217"
+    )
+  )
 
-  ## Check that all returns are data.table's or NULL
+  # Check that all returns are data.table's or NULL
   expect_true(
     all(purrr::map_lgl(bio_dat, \(x) is.null(x) | data.table::is.data.table(x)))
   )
 
-  ## Check that all tables have expected column names
+  # Check that all tables have expected column names
   bio_dat |>
     purrr::discard(is.null) |>
     purrr::iwalk(check_table_colnames)

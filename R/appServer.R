@@ -420,16 +420,6 @@ appServer <- function(input, output, session) {
       fin_dat()
     )
 
-  # plotVarServer(
-  #   "plot_var",
-  #   dat = fin_dat,
-  #   studyid = shiny::reactive(input$current_studyid),
-  #   descriptions = descriptions,
-  #   fill_values = fill_values,
-  #   print_updating = T,
-  #   shade_descriptions = shade_descriptions
-  # )
-
   ## Create all plots
   lapply(unique(nacc_var_groups), \(x) {
     plotServer(
@@ -468,9 +458,7 @@ appServer <- function(input, output, session) {
   biomarkerServer(
     "biomarker-tables",
     adrc_ptid = shiny::reactive(input$current_studyid),
-    biomarker_api = biomarker_api,
-    use_mirai = rlang::is_installed("mirai") &&
-      !shiny::getShinyOption("testmode")
+    biomarker_api = biomarker_api
   )
 
   # } else {

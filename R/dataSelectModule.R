@@ -122,6 +122,7 @@ dataSelectServer <- function(id) {
           choices = c(
             # "NACC" = "nacc",
             # "WLS" = "wls",
+            "WADRC (UDS-2)" = "wadrc_uds2",
             "WADRC (UDS-3)" = "wadrc_uds3",
             "WADRC (UDS-4)" = "wadrc_uds4"
           ),
@@ -141,6 +142,7 @@ dataSelectServer <- function(id) {
           input$data_source, # list(
           demo = c("NACC" = "nacc"),
           redcap = c(
+            "WADRC (UDS-2)" = "wadrc_uds2",
             "WADRC (UDS-3)" = "wadrc_uds3",
             "WADRC (UDS-4)" = "wadrc_uds4"
             # "WLS" = "wls"
@@ -148,6 +150,7 @@ dataSelectServer <- function(id) {
           csv_upload = c(
             "NACC" = "nacc",
             "WLS" = "wls",
+            "WADRC (UDS-2)" = "wadrc_uds2",
             "WADRC (UDS-3)" = "wadrc_uds3",
             "WADRC (UDS-4)" = "wadrc_uds4"
           ),
@@ -177,7 +180,7 @@ dataSelectServer <- function(id) {
           shiny::passwordInput(
             inputId = shiny::NS(id, "panda_api_token"),
             label = "Panda API Token",
-            value = NULL #uri_and_token$token
+            value = NULL
           ),
           .cssSelector = "input",
           autocomplete = "current-password"
@@ -187,29 +190,12 @@ dataSelectServer <- function(id) {
       if (input$data_source == "redcap") {
         uri_and_token <- NULL
 
-        # if (input$data_type == "wadrc_uds3") {
-        #   uri_and_token <- getOption("redcap_adrc_uds3")
-        # }
-
-        # if (input$data_type == "wls") {
-        #   uri_and_token <- getOption("redcap_wls")
-        # }
-
-        if (!is.null(uri_and_token)) {
-          shiny::showNotification(
-            "Locally stored REDCap URL and API token found and loaded.",
-            duration = 5,
-            type = "message",
-            id = "redcap_url_api_found"
-          )
-        }
-
         out <- shiny::tagList(
           shiny::tagAppendAttributes(
             shiny::textInput(
               inputId = shiny::NS(id, "redcap_uri"),
               label = "REDCap URL",
-              value = NULL #uri_and_token$redcap_uri
+              value = NULL
             ),
             .cssSelector = "input",
             autocomplete = "username"
@@ -218,7 +204,7 @@ dataSelectServer <- function(id) {
             shiny::passwordInput(
               inputId = shiny::NS(id, "api_token"),
               label = "REDCap API Token",
-              value = NULL #uri_and_token$token
+              value = NULL
             ),
             .cssSelector = "input",
             autocomplete = "current-password"
@@ -326,8 +312,8 @@ dataSelectServer <- function(id) {
         }
       }
 
-      if (input$data_source == "csv") {
-        new_source$input <- input$input_file$datapath
+      if (input$data_source == "csv_upload") {
+        new_source$data_file <- input$input_file$datapath
       }
 
       if (
@@ -367,6 +353,7 @@ dataSelectServer <- function(id) {
             input$data_source, # list(
             demo = c("NACC" = "nacc"),
             redcap = c(
+              "WADRC (UDS-2)" = "wadrc_uds2",
               "WADRC (UDS-3)" = "wadrc_uds3",
               "WADRC (UDS-4)" = "wadrc_uds4"
               # "WLS" = "wls"
@@ -374,6 +361,7 @@ dataSelectServer <- function(id) {
             csv_upload = c(
               "NACC" = "nacc",
               "WLS" = "wls",
+              "WADRC (UDS-2)" = "wadrc_uds2",
               "WADRC (UDS-3)" = "wadrc_uds3",
               "WADRC (UDS-4)" = "wadrc_uds4"
             ),
@@ -499,33 +487,40 @@ dataSelectServer <- function(id) {
             "SEX",
             "RACE",
             "BIRTHYR",
-            "BIRTHMO",
-            "HANDED"
+            "BIRTHMO"
           )
-        ) |>
-        unique()
+        )
 
       uds <- NULL # for R check
 
-      ## For the handfull of visits that are present in both UDS-3 and UDS-4, choose UDS-4
-      tmp <- tmp[
-        tmp[,
-          list(
-            uds = uds,
-            keep = ifelse(
-              length(uds) > 1 & uds == "wadrc_uds3",
-              FALSE,
-              TRUE
-            )
-          ),
-          by = c("NACCID", "VISITYR", "VISITMO", "VISITDAY")
-        ],
-        on = c("NACCID", "VISITYR", "VISITMO", "VISITDAY", "uds")
+      ## Set uds to NA if there is only one value for a visit
+      tmp[,
+        uds := ifelse(nrow(unique(.SD)) == 1, NA, uds),
+        .SDcols = setdiff(colnames(tmp), "uds"),
+        by = c("NACCID", "VISITYR", "VISITMO", "VISITDAY")
       ]
 
-      tmp <- tmp[tmp$keep]
-      tmp$keep <- NULL
+      ## For those visits with entries in both UDS-3 and UDS-4, keep only the UDS-4 data
+      tmp <- tmp[
+        is.na(uds) | uds == "wadrc_uds4"
+      ] |>
+        unique()
+
+      ## Remove the uds column
       tmp$uds <- NULL
+
+      ## Remove rows with missing VISITYR
+      tmp <- tmp[!is.na(VISITYR)]
+
+      tmp <- fill_data_downup(
+        out = tmp,
+        ptid = "NACCID",
+        visityr = "VISITYR",
+        visitmo = "VISITMO",
+        visitday = "VISITDAY",
+        educ = "EDUC",
+        constant_across_visits = c("BIRTHYR", "BIRTHMO", "SEX", "RACE")
+      )
 
       dat_obj(tmp)
 
@@ -560,8 +555,8 @@ dataSelectServer <- function(id) {
 #' @rdname dataSelectModule
 #'
 #' @export
-dataSelectApp <- function() {
-  development <- dir.exists("inst/shiny/www")
+dataSelectApp <- function(testing = FALSE) {
+  development <- dir.exists("inst/www")
 
   if (development) {
     print("Development...")
@@ -609,5 +604,5 @@ dataSelectApp <- function() {
     })
   }
 
-  shiny::shinyApp(ui, server)
+  shiny::shinyApp(ui, server, options = list(test.mode = testing))
 }

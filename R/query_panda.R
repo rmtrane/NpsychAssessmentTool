@@ -21,6 +21,14 @@ get_biomarker_data <- function(
     package = "NpsychAssessmentTool"
   )
 ) {
+  name <- NULL # for devtools::check()
+
+  if (!is.character(adrc_ptid) || length(adrc_ptid) != 1) {
+    cli::cli_abort(
+      "{.arg adrc_ptid} must be a string, but is of class {.cls {class(adrc_ptid)}}"
+    )
+  }
+
   missing_pkgs <- c("httr2", "jsonlite")[c(
     !rlang::is_installed("httr2"),
     !rlang::is_installed("jsonlite")
@@ -32,20 +40,7 @@ get_biomarker_data <- function(
     )
   }
 
-  # col_prefixes <- c(
-  #   "PET Appointments" = "view_petscan_appts",
-  #   "LP Appointments" = "view_lp_appts",
-  #   "Participants" = "view_participants",
-  #   "Local Roche CSF - Sarstedt freeze 2, cleaned" = "cg_csf_local_roche_sarstedt_freeze_2",
-  #   "Local Roche CSF - Sarstedt freeze 3" = "cg_csf_local_roche_sarstedt_freeze_3",
-  #   "Local Roche CSF - Sarstedt freeze, cleaned" = "cg_csf_local_roche_sarstedt_freeze",
-  #   "NTK MultiObs - CSF analytes" = "cg_ntk_multiobs_for_sharing_20200310",
-  #   "NTK2 MultiObs - CSF, 20230311" = "cg_ntk2",
-  #   "MK6240_NFT_Rating" = "view_cg_mk6240_braak",
-  #   "NAV4694 Visual Ratings" = "cg_nav4694_visual_ratings",
-  #   "PIB Visual Rating 20180126" = "cg_pib_visual_ratings_20180126"
-  # )
-
+  ## Patterns to replace in column names
   replace_in_colnames <- c(
     "_1_[^2]" = "_",
     "_xw" = "",
@@ -54,6 +49,7 @@ get_biomarker_data <- function(
     "ABeta_42" = "ABeta42"
   )
 
+  ## Read the base query file and replace the participant id
   my_query <- gsub(
     x = readLines(base_query_file),
     pattern = "adrc_ptid",
@@ -523,6 +519,7 @@ bio_tab_to_gt <- function(tab_for_gt) {
   }
 
   gt::gt(
+    id = "biomarker-table",
     tab_for_gt,
     rowname_col = "name",
     groupname_col = group

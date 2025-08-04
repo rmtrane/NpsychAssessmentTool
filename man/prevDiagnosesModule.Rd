@@ -15,7 +15,11 @@ prevDiagnosesServer(
   table_font_size = shiny::reactive(100)
 )
 
-prevDiagnosesApp(dat)
+prevDiagnosesApp(
+  dat,
+  print_updating = F,
+  table_font_size = shiny::reactive(100)
+)
 }
 \arguments{
 \item{id}{An ID string to match module UI and module server}

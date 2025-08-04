@@ -17,7 +17,8 @@ descriptionsServer(
 
 descriptionsApp(
   default_descriptions = c(Impaired = 0.03, Borderline = 0.1, `Low Average` = 0.26,
-    Average = 0.76, `High Average` = 0.92, Superior = 0.97, `Very Superior` = 1)
+    Average = 0.76, `High Average` = 0.92, Superior = 0.97, `Very Superior` = 1),
+  testing = FALSE
 )
 }
 \arguments{

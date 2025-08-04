@@ -2,63 +2,34 @@ if (FALSE) {
   library(tidyverse)
 
   ## Create tibble to use for diagnoses
-  short_descs <- map(
+  short_descs <- purrr::map(
     rdd,
     \(x) {
-      tibble(
+      dplyr::tibble(
         short_descriptor = pluck(x, "short_descriptor"),
         codes = list(pluck(x, "codes"))
       )
     }
   ) |>
-    bind_rows(.id = "nacc_name")
+    dplyr::bind_rows(.id = "nacc_name")
 
-  diag_contr_pairs <- tribble(
-    ~presump_etio_diag,
-    ~contribution,
-    ~other,
-    "ALCDEM",
-    "ALCDEMIF",
-    NA,
-    "ANXIET",
-    "ANXIETIF",
-    NA,
-    "BIPOLDX",
-    "BIPOLDIF",
-    NA,
-    "BRNINJ",
-    "BRNINJIF",
-    NA,
-    "COGOTH",
-    "COGOTHIF",
-    "COGOTHX",
-    "COGOTH2",
-    "COGOTH2F",
-    "COGOTH2X",
-    "COGOTH3",
-    "COGOTH3F",
-    "COGOTH3X",
-    "CORT",
-    "CORTIF",
-    NA,
-    "CVD",
-    "CVDIF",
-    NA,
-    "DELIR",
-    "DELIRIF",
-    NA,
-    "DEMUN",
-    "DEMUNIF",
-    NA,
-    "DEP",
-    "DEPIF",
-    NA,
-    "DOWNS",
-    "DOWNSIF",
-    NA,
-    "DYSILL",
-    "DYSILLIF",
-    NA,
+  # fmt: skip
+  diag_contr_pairs <- tibble::tribble(
+  ~presump_etio_diag, ~contribution, ~other,
+    "ALCDEM", "ALCDEMIF", NA,
+    "ANXIET", "ANXIETIF", NA,
+    "BIPOLDX", "BIPOLDIF", NA,
+    "BRNINJ", "BRNINJIF", NA,
+    "COGOTH", "COGOTHIF", "COGOTHX",
+    "COGOTH2", "COGOTH2F", "COGOTH2X", 
+    "COGOTH3", "COGOTH3F", "COGOTH3X",
+    "CORT", "CORTIF", NA,
+    "CVD", "CVDIF", NA,
+    "DELIR", "DELIRIF", NA,
+    "DEMUN", "DEMUNIF", NA,
+    "DEP", "DEPIF", NA,
+    "DOWNS", "DOWNSIF", NA,
+    "DYSILL", "DYSILLIF", NA,
     "EPILEP",
     "EPILEPIF",
     NA,
@@ -135,7 +106,7 @@ if (FALSE) {
     "VASCPSIF",
     NA
   ) |>
-    mutate(
+    dplyr::mutate(
       disease = map_chr(presump_etio_diag, \(x) {
         str_split(rdd[[x]]$short_descriptor, " - ", simplify = T)[, 2]
       }) |>
@@ -156,6 +127,8 @@ if (FALSE) {
 #'
 #' @param dat Data to use. Should only refer to a single participant
 #' @param table_font_size Table font size as a percent. Default: 100
+#'
+#' @export
 prev_diagnoses_table <- function(dat, table_font_size = 100) {
   # due to NSE notes in R CMD check:
   var <-
@@ -192,8 +165,6 @@ prev_diagnoses_table <- function(dat, table_font_size = 100) {
       cols = colnames(dat)
     ))
   ]
-
-  # diagnosis_table <-
 
   diagnosis_table <- data.table::melt(
     diagnosis_table,
@@ -301,22 +272,24 @@ prev_diagnoses_table <- function(dat, table_font_size = 100) {
   diagnosis_table$MOCATOTS <- with(
     diagnosis_table,
     ifelse(
-      !is.na(MOCATOTS),
+      !is.na(MOCATOTS) & MOCATOTS > 0,
       MOCATOTS,
       NACCMMSE
     )
   )
 
-  which_mmse <- diagnosis_table[!is.na(diagnosis_table$NACCMMSE)]$VISITDATE
+  which_mmse <- diagnosis_table[
+    !is.na(diagnosis_table$NACCMMSE) & diagnosis_table$NACCMMSE > 0
+  ]$VISITDATE
 
   diagnosis_table <- diagnosis_table[,
     which(!colnames(diagnosis_table) %in% "NACCMMSE"),
     with = F
   ]
 
+  # fmt: skip
   for_out <- diagnosis_table[
-    diagnosis_table$NACCUDSD %in%
-      1:4 |
+    diagnosis_table$NACCUDSD %in% 1:4 | 
       !is.na(diagnosis_table$contribution_character)
   ]
 
@@ -336,7 +309,6 @@ prev_diagnoses_table <- function(dat, table_font_size = 100) {
   for_out <- for_out[,
     list(
       "for_tab" = list(
-        # data.table::data.table(.SD)
         data.table::setDT(data.table::data.table(
           "var" = factor(
             c(
@@ -438,7 +410,6 @@ prev_diagnoses_table <- function(dat, table_font_size = 100) {
             }
 
             paste(
-              # stringr::str_replace_all(y, " ", "&nbsp;"),
               gsub(pattern = "\\ ", "&nbsp;", y),
               collapse = '<p style="margin:7px;"></p>'
             )
@@ -576,7 +547,7 @@ prev_diagnoses_table <- function(dat, table_font_size = 100) {
           paste(
             "<td",
             colspan_expr,
-            "style=\"border-top-style: solid; border-top-color: #D3D3D3; border-top-width: 2px;\"</td>"
+            "style=\"border-top-style: solid; border-top-color: #D3D3D3; border-top-width: 2px;\"></td>"
           )
         )
       }

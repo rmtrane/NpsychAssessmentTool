@@ -7,7 +7,7 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
-
+library(shinytest2)
 library(NpsychAssessmentTool)
 
 test_check("NpsychAssessmentTool")

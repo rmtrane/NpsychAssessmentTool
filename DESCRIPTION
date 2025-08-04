@@ -21,6 +21,7 @@ Suggests:
     testthat (>= 3.0.0),
     rvest
 Config/testthat/edition: 3
+Config/testthat/load-all: list(export_all = TRUE, helpers = TRUE)
 RoxygenNote: 7.3.2
 Depends: 
     R (>= 4.2.0)

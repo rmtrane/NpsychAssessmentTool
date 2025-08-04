@@ -34,7 +34,6 @@ biomarkerUI <- function(id) {
 #' @param id A string used to namespace the module.
 #' @param adrc_ptid A reactive value specifying the ADRC patient ID.
 #' @param biomarker_api A reactive value giving the Panda API token.
-#' @param use_mirai A logical value specifying if `"mirai"` should be . Optional; defaults to `TRUE` if `"mirai"` is installed.
 #'
 #' @returns
 #' NULL.
@@ -45,8 +44,7 @@ biomarkerUI <- function(id) {
 biomarkerServer <- function(
   id,
   adrc_ptid,
-  biomarker_api,
-  use_mirai = rlang::is_installed("mirai")
+  biomarker_api
 ) {
   ###################
   ## BEFORE SERVER
@@ -62,83 +60,65 @@ biomarkerServer <- function(
     # the data from Panda again.
     biomarker_dat_tables <- shiny::reactiveValues()
 
-    # If mirai is installed, we use ExtendedTask to get biomarker_dat in the background.
-    if (rlang::is_installed("mirai") && use_mirai) {
-      # Prepare to hold mirai object
-      m <- NULL
+    # Prepare to hold mirai object
+    m <- NULL
 
-      # Create ExtendedTask that will evaluate get_biomarker_data
-      biomarker_dat <- shiny::ExtendedTask$new(
-        \(cur_id, api) {
-          m <<- mirai::mirai(
-            {
-              get_biomarker_data(
-                adrc_ptid = cur_id,
-                api_key = api
-              )
-            },
-            .args = list(
-              get_biomarker_data = get_biomarker_data,
-              cur_id = cur_id,
-              api = api
+    # Create ExtendedTask that will evaluate get_biomarker_data
+    biomarker_dat <- shiny::ExtendedTask$new(
+      \(cur_id, api) {
+        m <<- mirai::mirai(
+          {
+            get_biomarker_data(
+              adrc_ptid = cur_id,
+              api_key = api
             )
+          },
+          .args = list(
+            get_biomarker_data = get_biomarker_data,
+            cur_id = cur_id,
+            api = api
           )
+        )
 
-          m
-        }
+        m
+      }
+    )
+
+    shiny::exportTestValues(biomarker_dat = biomarker_dat)
+
+    # When adrc_ptid or biomarker_api is updated, invoke the ExtendedTask
+    shiny::observe({
+      shiny::req(biomarker_api(), adrc_ptid())
+
+      # If the ExtendedTask is already running, stop it.
+      if (biomarker_dat$status() == "running") {
+        shiny::showNotification(ui = "Restarting biomarker pull")
+        mirai::stop_mirai(m)
+      }
+
+      if (adrc_ptid() != "") {
+        # Invoke, i.e. evaluate the ExtendedTask
+        biomarker_dat$invoke(
+          cur_id = adrc_ptid(),
+          api = biomarker_api()
+        )
+      }
+    }) |>
+      shiny::bindEvent(
+        adrc_ptid(),
+        biomarker_api()
       )
 
-      # When adrc_ptid or biomarker_api is updated, invoke the ExtendedTask
-      shiny::observe({
-        shiny::req(
-          biomarker_api(),
-          adrc_ptid()
-        )
-
-        # If the ExtendedTask is already running, stop it.
-        if (biomarker_dat$status() == "running") {
-          mirai::stop_mirai(m)
+    shiny::observe({
+      # If ExtendedTask successfully ran...
+      if (biomarker_dat$status() == "success") {
+        # ... and the table for the adrc_ptid has not already been saved
+        if (!adrc_ptid() %in% names(biomarker_dat_tables)) {
+          biomarker_dat_tables[[adrc_ptid()]] <- biomarker_dat$result()
         }
-
-        if (adrc_ptid() != "") {
-          # Invoke, i.e. evaluate the ExtendedTask
-          biomarker_dat$invoke(
-            cur_id = adrc_ptid(),
-            api = biomarker_api()
-          )
-        }
-      }) |>
-        shiny::bindEvent(
-          adrc_ptid(),
-          biomarker_api()
-        )
-
-      shiny::observe({
-        # If ExtendedTask successfully ran...
-        if (biomarker_dat$status() == "success") {
-          # ... and the table for the adrc_ptid has not already been saved
-          if (!adrc_ptid() %in% names(biomarker_dat_tables)) {
-            biomarker_dat_tables[[adrc_ptid()]] <- biomarker_dat$result()
-          }
-        }
-      }) |>
-        shiny::bindEvent(biomarker_dat$status())
-    } else {
-      # If mirai is not installed, or we ask not to use mirai...
-      if (FALSE) {
-        # need to check if this works.
-        shiny::observe({
-          # If ExtendedTask successfully ran...
-          # ... and the table for the adrc_ptid has not already been saved
-          if (!adrc_ptid() %in% names(biomarker_dat_tables)) {
-            biomarker_dat_tables[[adrc_ptid()]] <- get_biomarker_data(
-              adrc_ptid = adrc_ptid(),
-              api_key = biomarker_api()
-            )
-          }
-        })
       }
-    }
+    }) |>
+      shiny::bindEvent(biomarker_dat$status())
 
     # Table to present while getting biomarker data.
     loading_gt <- gt::gt(
@@ -213,8 +193,35 @@ biomarkerServer <- function(
 #' @export
 biomarkerApp <- function(
   adrc_ptid,
-  biomarker_api
+  biomarker_api,
+  testing = FALSE
 ) {
+  if (!shiny::is.reactive(biomarker_api)) {
+    cli::cli_abort(
+      "The `biomarker_api` argument must be a reactive value, such as `shiny::reactive()`."
+    )
+  }
+
+  development <- dir.exists("inst/shiny/www")
+
+  if (development) {
+    print("Development...")
+  }
+
+  shiny::addResourcePath(
+    "www",
+    ifelse(
+      development,
+      "inst/shiny/www",
+      system.file("www", package = "NpsychAssessmentTool")
+    )
+  )
+
+  if (!mirai::daemons_set()) {
+    mirai::daemons(1)
+  }
+  shiny::onStop(\(x) mirai::daemons(0))
+
   ui <- bslib::page_fluid(
     shinyApp_header(),
     shiny::selectizeInput(
@@ -233,5 +240,5 @@ biomarkerApp <- function(
     )
   }
 
-  shiny::shinyApp(ui, server)
+  shiny::shinyApp(ui, server, options = list(test.mode = testing))
 }
