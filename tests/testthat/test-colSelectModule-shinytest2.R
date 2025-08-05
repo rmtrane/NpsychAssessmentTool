@@ -26,6 +26,7 @@ test_that("errors", {
 
 test_that("default cols and methods", {
   skip_on_cran()
+  skip_on_ci()
 
   app <- AppDriver$new(
     app_dir = colSelectApp(

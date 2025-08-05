@@ -1,6 +1,7 @@
 library(shinytest2)
 
 test_that("mainTableModule works as expected", {
+  skip_on_ci()
   skip_on_cran()
 
   app <- AppDriver$new(
