@@ -20,7 +20,7 @@ test_that("dataSelectModule works", {
 
   app$set_inputs(`dat_select-data_type` = "wadrc_uds3")
   # Update output value
-  app$wait_for_idle(timeout = 1000)
+  app$wait_for_idle(timeout = 3000)
   app$expect_screenshot()
   app$set_inputs(
     `dat_select-redcap_uri` = getOption("redcap_adrc_uds3")$redcap_uri
@@ -42,7 +42,7 @@ test_that("dataSelectModule works", {
 
   app$click("dat_select-submit", timeout_ = 20000)
 
-  app$wait_for_idle(timeout = 10000)
+  app$wait_for_idle(timeout = 5000)
 
   app$expect_values()
   app$stop()
@@ -80,13 +80,13 @@ test_that("dataSelectModule works", {
     `dat_select-fetch_data_button` = "click",
     wait_ = FALSE
   )
-  app$wait_for_idle()
+  app$wait_for_idle(timeout = 3000)
 
   app$set_window_size(width = 1619, height = 968)
   app$expect_screenshot()
   app$set_inputs(`dat_select-data_type` = "wadrc_uds4")
   # Update output value
-  app$wait_for_idle(timeout = 1000)
+  app$wait_for_idle(timeout = 3000)
 
   app$set_window_size(width = 1619, height = 968)
   app$expect_screenshot()

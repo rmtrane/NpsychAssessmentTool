@@ -510,7 +510,7 @@ dataSelectServer <- function(id) {
       tmp$uds <- NULL
 
       ## Remove rows with missing VISITYR
-      tmp <- tmp[!is.na(VISITYR)]
+      tmp <- tmp[!is.na(tmp$VISITYR)]
 
       tmp <- fill_data_downup(
         out = tmp,
@@ -553,6 +553,8 @@ dataSelectServer <- function(id) {
 }
 
 #' @rdname dataSelectModule
+#'
+#' @param testing Logical, whether to run the app in testing mode.
 #'
 #' @export
 dataSelectApp <- function(testing = FALSE) {
@@ -600,7 +602,10 @@ dataSelectApp <- function(testing = FALSE) {
     shiny::observe({
       dat_obj(data_input$dat_obj())
 
-      shiny::showNotification(ui = paste(dim(dat_obj()), collapse = "; "))
+      shiny::showNotification(
+        ui = paste(dim(dat_obj()), collapse = "; "),
+        duration = 2
+      )
     })
   }
 

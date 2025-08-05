@@ -4,14 +4,14 @@
 \alias{wadrc_data_prep}
 \title{Function to Prepare WADRC UDS-3 Data}
 \usage{
-wadrc_data_prep(adrc_data, uds = c("uds3", "uds4"))
+wadrc_data_prep(adrc_data, uds = c("uds2", "uds3", "uds4"))
 }
 \arguments{
-\item{adrc_data}{Data as gotten from WADRC UDS-3 REDCap.
+\item{adrc_data}{Data as gotten from WADRC REDCap database.
 Could be a complete download to .csv file, then read into R,
 or pulled directly from REDCap using the \code{REDCapR} package.}
 
-\item{uds}{Spefify if data are from UDS-3 or UDS-4 database.}
+\item{uds}{Spefify if data are from UDS-2, UDS-3 or UDS-4 database.}
 }
 \description{
 Function to Prepare WADRC UDS-3 Data

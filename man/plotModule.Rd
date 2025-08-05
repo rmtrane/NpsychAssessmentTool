@@ -21,7 +21,7 @@ plotServer(
   new_id = NULL
 )
 
-plotApp(dat_input = prepare_data(demo_data), studyids = NULL)
+plotApp(dat_input = prepare_data(demo_data), studyids = NULL, testing = FALSE)
 }
 \arguments{
 \item{id}{A single string. Optional, defaults to \code{"Attention/Processing"}. Should be one of \code{nacc_var_groups}.}
@@ -45,6 +45,8 @@ plotApp(dat_input = prepare_data(demo_data), studyids = NULL)
 \item{dat_input}{A data frame. Defaults to \code{prepare_data(demo_data)}.}
 
 \item{studyids}{Optional. If \code{NULL} (default), will use unique values from \code{dat_input$NACCID}.}
+
+\item{testing}{Logical, whether to run the app in testing mode.}
 }
 \value{
 A \code{shiny::tagList} object containing two \code{shiny::conditionalPanel}'s:

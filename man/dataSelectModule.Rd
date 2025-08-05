@@ -14,6 +14,8 @@ dataSelectApp(testing = FALSE)
 }
 \arguments{
 \item{id}{A string used to create a namespace within the shiny app.}
+
+\item{testing}{Logical, whether to run the app in testing mode.}
 }
 \value{
 A UI definition.

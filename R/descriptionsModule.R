@@ -338,6 +338,8 @@ descriptionsServer <- function(
 #'
 #' @rdname descriptionsModule
 #'
+#' @param testing Logical, whether to run the app in testing mode.
+#'
 #' @export
 descriptionsApp <- function(
   default_descriptions = c(

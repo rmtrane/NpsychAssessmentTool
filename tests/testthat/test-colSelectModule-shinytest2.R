@@ -36,7 +36,7 @@ test_that("default cols and methods", {
       testing = TRUE
     ),
     variant = platform_variant(),
-    name = "col_selection_defaults",
+    name = "sel_defaults",
     height = 968,
     width = 1619
   )
@@ -60,7 +60,7 @@ test_that("col_selection='disable'", {
       testing = TRUE
     ),
     variant = platform_variant(),
-    name = "col_selection_disabled",
+    name = "sel_disabled",
     height = 968,
     width = 1619
   )
@@ -250,7 +250,7 @@ test_that("col_selection='enable'", {
       testing = TRUE
     ),
     variant = platform_variant(),
-    name = "col_selection_enabled",
+    name = "sel_enabled",
     height = 968,
     width = 1619,
     clean_logs = FALSE,
@@ -554,7 +554,7 @@ test_that("col_selection='hide'", {
       testing = TRUE
     ),
     variant = platform_variant(),
-    name = "col_selection_hidden",
+    name = "sel_hidden",
     height = 968,
     width = 1619
   )

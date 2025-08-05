@@ -27,6 +27,8 @@ descriptionsApp(
 \item{default_descriptions}{Optional. A named numeric vector with names for \code{Label} and values for \code{Upper_Bound}.}
 
 \item{default_fill_values}{Optional. A named character vector with names for \code{Label} and values for colors (as HEX values)}
+
+\item{testing}{Logical, whether to run the app in testing mode.}
 }
 \value{
 A UI definition.

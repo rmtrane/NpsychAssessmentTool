@@ -193,6 +193,10 @@ mainTableServer <- function(
 
 #' @rdname mainTableModule
 #'
+#' @param testing logical (default `FALSE`); should the app be run in testing mode?
+#'
+#' @return a Shiny app object.
+#'
 #' @export
 mainTableApp <- function(
   dat,
