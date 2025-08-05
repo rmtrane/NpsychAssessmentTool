@@ -10,11 +10,21 @@ dataSelectUI(id)
 
 dataSelectServer(id)
 
-dataSelectApp()
+dataSelectApp(testing = FALSE)
 }
 \arguments{
-\item{id}{id to link shiny modules}
+\item{id}{A string used to create a namespace within the shiny app.}
+
+\item{testing}{Logical, whether to run the app in testing mode.}
+}
+\value{
+A UI definition.
+
+A list containing reactive values for the data object (\code{dat_obj}),
+the data source, the data type, and the biomarker API.
 }
 \description{
-Shiny module to select data for assessment table
+A short description...
+
+Server logic for dataSelectModule.
 }

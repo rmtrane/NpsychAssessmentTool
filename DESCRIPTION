@@ -1,7 +1,7 @@
 Package: NpsychAssessmentTool
 Type: Package
 Title: UDS Battery Scores in Interactive Tables and Figures
-Version: 0.1.0
+Version: 0.2.0
 Description: Building on the NpsychBatteryNorms package,
     this package includes a Shiny application that makes 
     it easy to present UDS battery scores in a way useful
@@ -12,10 +12,19 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Suggests: 
-    htmltools,
+    httr2,
+    jsonlite,
+    mirai,
+    pagedown,
     REDCapR,
-    testthat (>= 3.0.0)
+    shinytest2,
+    testthat (>= 3.0.0),
+    rvest,
+    dplyr,
+    htmlwidgets,
+    tidyr
 Config/testthat/edition: 3
+Config/testthat/load-all: list(export_all = TRUE, helpers = TRUE)
 RoxygenNote: 7.3.2
 Depends: 
     R (>= 4.2.0)

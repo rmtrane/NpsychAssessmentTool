@@ -6,8 +6,12 @@
 #'
 #' @export
 calc_fill_colors <- function(n) {
-  stopifnot("n must be at least 3" = n >= 3)
-  stopifnot("n must be at most 11" = n <= 11)
+  if (n < 3) {
+    cli::cli_abort("n must be at least 3")
+  }
+  if (n > 11) {
+    cli::cli_abort("n must be at most 11")
+  }
   switch(
     n - 2,
     grDevices::rgb(

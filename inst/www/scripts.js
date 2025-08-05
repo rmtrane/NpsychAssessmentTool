@@ -12,18 +12,23 @@ $(document).on('shiny:idle', function(event) {
 
 // Custom message handler to click virtual buttons
 Shiny.addCustomMessageHandler("click", (message) => {
-  Shiny.setInputValue(message, "clicked", {priority: "event"});
+  Shiny.setInputValue(message, "click", {priority: "event"});
 })
 
 // Custom Message Handler to set input value
 Shiny.addCustomMessageHandler("setInputValue", (message) => {
-  // console.log("setInputValue!!!");
   console.log("Setting input " + message.inputId + " to " + message.inputValue);
   if (message.priority) {
     Shiny.setInputValue(message.inputId, message.inputValue, {priority: message.priority});
   } else {
     Shiny.setInputValue(message.inputId, message.inputValue);
   }
+})
+
+// Custom Message Handler to show/hide accordion panels
+Shiny.addCustomMessageHandler("accordionPanelToggle", (message) => {
+  console.log("accordionPanelToggle with id " + message.id + " and action " + message.action);
+  $("[data-value='"+message.id+"']").find('.accordion-collapse').collapse(message.action);
 })
 
 // Function to resize dropdown menu so that the width is determined by the longest 
@@ -109,6 +114,19 @@ Shiny.addCustomMessageHandler("removeRawSuffix", (message) => {
   removeRawSuffix();
 })
 
+// Custom Message Handler to show/hide API token 
+Shiny.addCustomMessageHandler("showHidePassword", (message) => {
+  console.log(message);
+
+  var x = document.getElementsByClassName("shiny-input-password");
+
+  if (message.show) {
+    x[0].type = "text";
+  } else {
+    x[0].type = "password";
+  }
+})
+
 
 // Enable hitting enter after password input
 $(document).keyup(function(event) {
@@ -130,4 +148,50 @@ function addEventListenersToColors(id) {
       Shiny.setInputValue(id + "-newColorPicked", event.target.id, {priority: "event"});
     })
   })
+}
+
+// Function to call when base plots are plotted. This includes re-plotting after restyling and relayout.
+// We use this to keep track of visibility of traces
+function afterPlot (x, input) {
+  // Array to hold info on all traces
+  var out = [];
+
+  // inputName to use in Shiny
+  var inputName = input.ns + '-' + input.name
+
+  // Function to get needed info from traces.
+  function getTraceInfo(trace, traceindex) {
+    // If trace has a name, set tracename
+    if (typeof trace.name !== 'undefined') {
+      var tracename = trace.name ;
+    } else {
+      var tracename = '';
+    }
+
+    // If trace has visible attribute, set tracevisible
+    if (typeof trace.visible !== 'undefined') {
+      var tracevisible = trace.visible ;
+    } else {
+      var tracevisible = '';
+    }
+
+    // If trace has customdata attribute, set name and create
+    // input$ns-name_visibility in R session
+    if (typeof trace.customdata !== 'undefined') {
+      var name = trace.customdata ;
+
+      Shiny.setInputValue(input.ns + '-' + name + '_visibility', tracevisible);
+    } else {
+      var name = '';
+    }
+
+    // Add to out list
+    out.push([tracename=tracename, index=traceindex, name = name, visible = tracevisible]);
+  }
+
+  // Run function for each trace
+  x.data.forEach(getTraceInfo);
+
+  // Create input$input.name. This holds all traces with name, index, and visibility.
+  Shiny.setInputValue(inputName, out);
 }

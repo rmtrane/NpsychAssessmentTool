@@ -57,7 +57,8 @@ assessment_summary_table <- function(
   out <- for_main_table |>
     gt::gt(
       rowname_col = "labels",
-      groupname_col = "group"
+      groupname_col = "group",
+      id = "assessment-summary-table"
     ) |>
     gt::cols_hide(columns = c("name", "is_error")) |>
     ## Make parts of the table bold
@@ -254,7 +255,9 @@ assessment_summary_table <- function(
 
   if ("cap" %in% names(summary_dat)) {
     cap <- summary_dat$cap |>
-      gt::gt() |>
+      gt::gt(
+        id = "summary-table-caption"
+      ) |>
       gt::fmt_markdown() |>
       gt::tab_options(
         column_labels.hidden = TRUE,

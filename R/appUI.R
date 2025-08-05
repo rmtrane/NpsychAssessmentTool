@@ -1,25 +1,12 @@
 #' UI for shinyAssessmentApp
 #'
 #' @keywords internal
-#'
 #' @export
+#'
 appUI <- function() {
   bslib::page_navbar(
     ## Header: add JS scripts, CSS, and spinner elements to be shown/hidden later.
-    header = shiny::tagList(
-      shiny::tags$head(
-        shiny::tags$script(
-          src = "www/scripts.js"
-        ),
-        shiny::tags$link(
-          rel = "stylesheet",
-          type = "text/css",
-          href = "www/styles.css"
-        )
-      ),
-      shiny::tags$div(id = "spinner", class = "loader"),
-      shiny::tags$div(id = "spinner_overlay", class = "loader_overlay")
-    ),
+    header = shinyApp_header(),
     theme = bslib::bs_theme(version = 5),
     title = "Npsych Scoring Application",
     id = "main_navbar",
@@ -40,11 +27,7 @@ appUI <- function() {
     bslib::nav_panel(
       title = "Data Selection",
       value = "dataSelect",
-      bslib::layout_columns(
-        max_height = 500,
-        col_widths = c(-3, 6, -3),
-        dataSelectUI("dataSelect")
-      )
+      dataSelectUI("dataSelect")
     ),
     ## Main Panels
     bslib::nav_panel(
@@ -138,9 +121,17 @@ appUI <- function() {
             full_screen = T,
             bslib::card_header("Longitudinal Trends"),
             bslib::navset_card_underline(
+              id = "long-trends",
               bslib::nav_panel(
                 title = "Cognitive Scores (Plots)",
-                plotVarUI("plot_var")
+                # plotVarUI("plot_var")
+                #do.call(
+                #htmltools::tagList,
+                bslib::accordion(
+                  !!!lapply(unique(nacc_var_groups), \(x) plotUI(id = x)),
+                  id = "plots-accordion",
+                  open = TRUE
+                ) #
               ),
               bslib::nav_panel(
                 title = "Cognitive Scores (Table)",
@@ -152,7 +143,8 @@ appUI <- function() {
               ),
               bslib::nav_panel(
                 title = "Biomarkers",
-                shiny::h6("Coming soon...")
+                value = "biomarkers",
+                biomarkerUI("biomarker-tables")
               )
             )
           )

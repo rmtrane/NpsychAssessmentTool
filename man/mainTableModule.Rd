@@ -20,7 +20,7 @@ mainTableServer(
   print_updating = F
 )
 
-mainTableApp(dat)
+mainTableApp(dat, testing = FALSE)
 }
 \arguments{
 \item{id}{An ID string to match module UI and server UI}
@@ -45,6 +45,11 @@ to indicate the methods used.}
 with age and IQCODEs at current visit?}
 
 \item{print_updating}{logical (defualt \code{FALSE}); should a message be displayed when table is being updated? For debugging.}
+
+\item{testing}{logical (default \code{FALSE}); should the app be run in testing mode?}
+}
+\value{
+a Shiny app object.
 }
 \description{
 Shiny Module to Display NACC T-Cog Neuropsychological Assessment Summary Table

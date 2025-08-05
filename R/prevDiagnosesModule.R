@@ -25,7 +25,9 @@ prevDiagnosesServer <- function(
 ) {
   shiny::moduleServer(id, function(input, output, session) {
     output$prev_diagnoses_table <- shiny::renderUI({
-      if (print_updating) print("Updating longitudinal table...")
+      if (print_updating) {
+        print("Updating previous diagnoses table...")
+      }
 
       prev_diagnoses_table(
         dat(),
@@ -36,13 +38,22 @@ prevDiagnosesServer <- function(
 }
 
 #' @rdname prevDiagnosesModule
-prevDiagnosesApp <- function(dat) {
+prevDiagnosesApp <- function(
+  dat,
+  print_updating = F,
+  table_font_size = shiny::reactive(100)
+) {
   ui <- bslib::page_fillable(
     prevDiagnosesUI("prev_diagnoses_table")
   )
 
   server <- function(input, output, session) {
-    prevDiagnosesServer("prev_diagnoses_table", shiny::reactive(dat))
+    prevDiagnosesServer(
+      "prev_diagnoses_table",
+      shiny::reactive(dat),
+      print_updating,
+      table_font_size
+    )
   }
 
   shiny::shinyApp(ui, server)

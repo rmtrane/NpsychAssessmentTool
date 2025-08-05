@@ -7,6 +7,7 @@ appServer <- function(input, output, session) {
   ## Hide 'Participant Data' on startup
   bslib::nav_hide(id = "main_navbar", target = "colSelect")
   bslib::nav_hide(id = "main_navbar", target = "tables-and-figures")
+  bslib::nav_hide(id = "long-trends", target = "biomarkers")
 
   ## Setup data select module
   dat_sel <- dataSelectServer("dataSelect")
@@ -18,13 +19,40 @@ appServer <- function(input, output, session) {
   dat_obj <- shiny::reactiveVal()
   data_source <- shiny::reactiveVal()
   data_type <- shiny::reactiveVal()
+  biomarker_api <- shiny::reactiveVal()
   allow_col_selections <- shiny::reactiveVal()
 
+  devmode <- shiny::reactiveVal(value = FALSE)
+
+  selected_date <- shiny::reactiveVal()
+
   shiny::observe({
+    # shiny::req(
+    #   dat_sel$dat_obj(),
+    #   dat_sel$data_source(),
+    #   dat_sel$data_type()
+    # )
+
     dat_obj(dat_sel$dat_obj())
     data_source(dat_sel$data_source())
     data_type(dat_sel$data_type())
-    allow_col_selections(data_source() == "csv_upload")
+    biomarker_api(dat_sel$biomarker_api())
+
+    if (!is.null(dat_sel$biomarker_api())) {
+      bslib::nav_show(id = "long-trends", target = "biomarkers")
+    }
+
+    allow_col_selections("disable")
+
+    if (!is.null(data_source()) && data_source() == "csv_upload") {
+      allow_col_selections("enable")
+    }
+
+    if (!is.null(data_source()) && data_source() == "redcap") {
+      allow_col_selections("hide")
+    }
+
+    # allow_col_selections(data_source() == "csv_upload")
   })
 
   ## Reactive object with available columns to use to select from
@@ -94,7 +122,7 @@ appServer <- function(input, output, session) {
       DIGIB = c(method = "regression", version = "nacc"),
       DIGIBLEN = c(method = "regression", version = "nacc")
     ),
-    allow_col_selection = allow_col_selections()
+    col_selection = allow_col_selections()
   )
 
   shiny::observe({
@@ -125,14 +153,12 @@ appServer <- function(input, output, session) {
   shiny::observe({
     if (!all(is.na(std_methods())) & !all(is.na(col_sel()))) {
       fin_dat(
-        #data.frame(
         prepare_data(
           dat_obj(),
           selected_cols = col_sel(),
           methods = std_methods(),
           print_messages = F
         )
-        #)
       )
     }
   }) |>
@@ -212,7 +238,7 @@ appServer <- function(input, output, session) {
         session,
         "current_studyid",
         choices = cur_choices,
-        selected = cur_select, #cur_choices[1],
+        selected = cur_select,
         server = TRUE
       )
     }
@@ -241,8 +267,9 @@ appServer <- function(input, output, session) {
 
     sel_date <- NULL
 
-    if (!is.null(selected_date()) && selected_date() %in% dates)
+    if (!is.null(selected_date()) && selected_date() %in% dates) {
       sel_date <- selected_date()
+    }
 
     shiny::updateSelectizeInput(
       session,
@@ -271,7 +298,7 @@ appServer <- function(input, output, session) {
     )
   })
 
-  ## Get default descriptions if saved as option, other set defaults
+  ## Get default descriptions if saved as option, otherwise set defaults
   default_descriptions <- getOption("NpsychAssessmentTool.default_descriptions")
   if (is.null(default_descriptions)) {
     default_descriptions <- c(
@@ -285,7 +312,7 @@ appServer <- function(input, output, session) {
     )
   }
 
-  ## Get default colors if saved as option, other set defaults
+  ## Get default colors if saved as option, otherwise set defaults
   default_fill_values <- getOption("NpsychAssessmentTool.default_fill_values")
   if (is.null(default_fill_values)) {
     default_fill_values <- setNames(
@@ -303,9 +330,6 @@ appServer <- function(input, output, session) {
   fill_values <- shiny::reactiveVal(
     value = default_fill_values
   )
-
-  ## Setup reactiveVal for devmode
-  devmode <- shiny::reactiveVal(value = FALSE)
 
   ## Setup reactiveVal for table_font_size
   table_font_size <- shiny::reactiveVal(
@@ -348,21 +372,8 @@ appServer <- function(input, output, session) {
   )
 
   #### Longitudinal Trends
-
-  ### Cognitive scores (Plots)
-  plotVarServer(
-    "plot_var",
-    dat = fin_dat,
-    studyid = shiny::reactive(input$current_studyid),
-    descriptions = descriptions,
-    fill_values = fill_values,
-    print_updating = F,
-    shade_descriptions = shade_descriptions
-  )
-
-  ### Cognitive scores (Table)
-  ## Subset full data to the data needed for longitudinal and prev diagnoses tables
-  dat_for_long <- shiny::reactive({
+  ## Subset full data to the data specific to input$current_studyid
+  current_studyid_dat <- shiny::reactive({
     shiny::req(input$current_studyid)
 
     # Note: use data.table since `[[` doesn't preserve attributes, which we need
@@ -372,9 +383,62 @@ appServer <- function(input, output, session) {
     ]
   })
 
+  ### Cognitive scores (Plots)
+  ## Get x_range
+  x_range <- shiny::reactiveVal()
+
+  shiny::observe({
+    shiny::req(fin_dat())
+
+    x_range(date_range(fin_dat()$VISITDATE))
+  }) |>
+    shiny::bindEvent(
+      fin_dat()
+    )
+
+  ## Get y-range's
+  y_ranges <- shiny::reactiveValues()
+
+  shiny::observe({
+    lapply(unique(nacc_var_groups), \(cur_group) {
+      ## Get variables in group corresponding
+      cur_vars <- paste(
+        "std",
+        names(nacc_var_groups[nacc_var_groups == cur_group]),
+        sep = "_"
+      ) |>
+        intersect(
+          colnames(fin_dat())
+        )
+
+      y_ranges[[cur_group]] <- get_y_range(
+        dat = fin_dat()[, cur_vars, with = F]
+      )
+    })
+  }) |>
+    shiny::bindEvent(
+      fin_dat()
+    )
+
+  ## Create all plots
+  lapply(unique(nacc_var_groups), \(x) {
+    plotServer(
+      x,
+      dat = current_studyid_dat,
+      x_range = x_range,
+      y_range = shiny::reactive(y_ranges[[x]]),
+      descriptions = descriptions,
+      fill_values = fill_values,
+      print_updating = T,
+      shade_descriptions = shade_descriptions,
+      new_id = x
+    )
+  })
+
+  ### Cognitive scores (Table)
   longTableServer(
     "long_table",
-    dat = dat_for_long,
+    dat = current_studyid_dat,
     methods = std_methods,
     table_font_size = table_font_size, # shiny::reactive(input$main_table_pct),
     fill_values = fill_values,
@@ -385,14 +449,42 @@ appServer <- function(input, output, session) {
   ## Diagnoses
   prevDiagnosesServer(
     "prev_diagnoses_table",
-    dat = dat_for_long,
+    dat = current_studyid_dat,
     table_font_size = table_font_size, # shiny::reactive(input$main_table_pct),
     print_updating = F
   )
 
-  ## Update reactiveVals for values chosen in Options pane.
-  selected_date <- shiny::reactiveVal()
+  ## Biomarkers
+  biomarkerServer(
+    "biomarker-tables",
+    adrc_ptid = shiny::reactive(input$current_studyid),
+    biomarker_api = biomarker_api
+  )
 
+  # } else {
+  #   # If mirai is not installed, use simple reactiveValues
+  #   biomarker_dat <- shiny::reactiveVal()
+  #   biomarker_status <- shiny::reactiveVal("initiated")
+
+  #   shiny::observe({
+  #     biomarker_dat(
+  #       get_biomarker_data(
+  #         adrc_ptid = input$current_studyid,
+  #         api_key = biomarker_api()
+  #       )
+  #     )
+
+  #     biomarker_status("done")
+  #   })
+
+  #   biomarkerServer(
+  #     "biomarker-tables",
+  #     biomarker_data = biomarker_dat,
+  #     biomarker_status = biomarker_status
+  #   )
+  # }
+
+  ## Update reactiveVals for values chosen in Options pane.
   shiny::observe({
     bslib::accordion_panel_close(id = "options", values = TRUE)
 

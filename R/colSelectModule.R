@@ -25,7 +25,7 @@ colSelectUI <- function(id) {
 #' @param col_names reactive character vector with names to choose from
 #' @param data_type reactive value; one of 'wls', 'nacc', 'wadrc'
 #' @param default_methods named list. Each entry should be named after a variable. The entry should be a named character vector with to elements: one named 'method' to indicate the standardization method to use, and one name 'version' to indicate the version to use for standardization.
-#' @param allow_col_selection logical; if `TRUE` (default), allow user to select which columns should be used for each variable.
+#' @param col_selection string; one of 'enable', 'disable', or 'hide'. If 'enable', allow user to select which columns should be used for each variable. If 'disable', show columns used, but without the option to select. If 'hide', hide the column.
 #'
 #' @export
 
@@ -34,10 +34,25 @@ colSelectServer <- function(
   col_names,
   default_methods,
   data_type,
-  allow_col_selection = T
+  col_selection = c("enable", "disable", "hide")
 ) {
-  stopifnot("data_type must be reactive" = shiny::is.reactive(data_type))
-  stopifnot("col_names must be reactive" = shiny::is.reactive(col_names))
+  if (!shiny::is.reactive(col_names)) {
+    shiny::stopApp()
+    cli::cli_abort("{.arg col_names} must be a reactive")
+  }
+
+  if (!shiny::is.reactive(data_type)) {
+    shiny::stopApp()
+    cli::cli_abort("{.arg data_type} must be a reactive")
+  }
+
+  # if (shiny::is.reactive(default_methods)) {
+  #   cli::cli_abort("{.arg default_methods} should NOT be a reactive")
+  # }
+
+  # if (shiny::is.reactive(col_selection)) {
+  #   cli::cli_abort("{.arg col_selection} should NOT be a reactive")
+  # }
 
   shiny::moduleServer(id, function(input, output, session) {
     ## All variables
@@ -57,7 +72,7 @@ colSelectServer <- function(
 
     ## Demographics
     names(all_vars)[
-      all_vars %in% c(critical_vars, "RACE", "HANDEDNESS")
+      all_vars %in% c(critical_vars, "RACE", "HANDED")
     ] <- "Demographics"
 
     names(all_vars)[all_vars %in% birth_vars] <- "Age/Birthdate"
@@ -145,11 +160,11 @@ colSelectServer <- function(
             y <- x %in% critical_vars
             out <- c("(blank)", "SELECT COLUMN")[as.numeric(y) + 1]
 
-            if (data_type() == "nacc") {
+            if (data_type() != "wls") {
               if (x %in% col_names()) {
                 out <- x
               } else {
-                if (x %in% c("REYTOTAL", "REYAREC")) {
+                if (x %in% c("REYTOTAL", "REYAREC", "FAS", "MOCACLOCK")) {
                   out <- "(CALCULATED)"
                 }
               }
@@ -159,21 +174,21 @@ colSelectServer <- function(
               if (nacc_to_wls[x] %in% col_names()) {
                 out <- unname(nacc_to_wls[x])
               } else {
-                if (x %in% c("REYTOTAL", "REYAREC")) {
+                if (x %in% c("REYTOTAL", "REYAREC", "FAS", "MOCACLOCK")) {
                   out <- "(CALCULATED)"
                 }
               }
             }
 
-            if (data_type() == "wadrc") {
-              if (nacc_to_wadrc[x] %in% col_names()) {
-                out <- unname(nacc_to_wadrc[x])
-              } else {
-                if (x %in% c("REYTOTAL", "REYAREC")) {
-                  out <- "(CALCULATED)"
-                }
-              }
-            }
+            # if (data_type() == "wadrc_uds3") {
+            #   if (nacc_to_wadrc_uds3[x] %in% col_names()) {
+            #     out <- unname(nacc_to_wadrc_uds3[x])
+            #   } else {
+            #     if (x %in% c("REYTOTAL", "REYAREC")) {
+            #       out <- "(CALCULATED)"
+            #     }
+            #   }
+            # }
 
             out
           }
@@ -217,6 +232,12 @@ colSelectServer <- function(
 
       tmp_table <- tmp_table[order(tmp_table$var_group)]
 
+      if (col_selection == "hide" | T) {
+        tmp_table <- tmp_table[
+          !tmp_table$Column %in% c("(blank)")
+        ]
+      }
+
       vars_table(tmp_table)
       for_DT(tmp_table)
     }) |>
@@ -250,8 +271,13 @@ colSelectServer <- function(
               targets = 0
             ),
             list(
+              visible = (col_selection != "hide"),
+              targets = which(colnames(tmp) == "Required") - 1
+            ),
+            list(
+              visible = (col_selection != "hide"),
               targets = which(colnames(tmp) == "Column") - 1,
-              render = if (allow_col_selection) {
+              render = if (col_selection == "enable") {
                 DT::JS(
                   'function (data, type, row, meta) {
                   if (data == "(CALCULATED)") {
@@ -295,22 +321,7 @@ colSelectServer <- function(
             )
           )
         )
-      ) #|>
-      # DT::formatStyle(
-      #  columns = which(colnames(tmp) == "Column"),
-      # cursor = "pointer" # ,
-      # border = "1px", # solid #8D959E;",
-      # "border-style" = "solid",
-      # "border-width" = "1px",
-      # "border-color" = "#8D959E",
-      # "padding-top" = "0.375rem",
-      # "padding-bottom" = "0.375rem",
-      # "border-radius" = "3px",
-      # margin = "5px",
-      # position = "relative",
-      # target = "cell" ,
-      # color = "red"
-      # )
+      )
     })
 
     vars_table_output_proxy <- DT::dataTableProxy("vars_table_output")
@@ -339,13 +350,15 @@ colSelectServer <- function(
     shiny::observe({
       shiny::req(input$vars_table_output_cells_selected)
 
-      row_clicked <- input$vars_table_output_cells_selected[1, 1]
-      col_clicked <- input$vars_table_output_cells_selected[1, 2]
+      print(input$vars_table_output_cells_selected)
+
+      row_clicked <- as.numeric(input$vars_table_output_cells_selected[1, 1])
+      col_clicked <- as.numeric(input$vars_table_output_cells_selected[1, 2])
 
       if (
         col_clicked == 5 &
           vars_table()$Column[row_clicked] != "(CALCULATED)" &
-          allow_col_selection
+          col_selection == "enable"
       ) {
         shiny::showModal(
           shiny::modalDialog(
@@ -490,18 +503,34 @@ colSelectServer <- function(
       # print(paste0("Assign clicked... (", input$assign, ")"))
 
       var_cols_tmp <- setNames(vars_table()$Column, vars_table()$Variable)
-      var_cols_tmp <- var_cols_tmp[-which(var_cols_tmp %in% "(blank)")]
 
+      ## Remove any (blank) entries
+      blank_cols <- which(var_cols_tmp == "(blank)")
+
+      if (length(blank_cols) > 0) {
+        var_cols_tmp <- var_cols_tmp[-blank_cols]
+      }
+
+      ## Start list with standardization methods. Note: initiate before removing (CALCULATED),
+      # otherwise we would miss these.
       std_methods_tmp <- setNames(
         as.list(rep(NA, length(var_cols_tmp))),
         nm = names(var_cols_tmp)
       )
 
-      var_cols_tmp <- var_cols_tmp[-which(var_cols_tmp %in% "(CALCULATED)")]
+      ## Check for calculated entries
+      calculated_cols <- which(var_cols_tmp == "(CALCULATED)")
 
-      std_methods_tmp[which(std_methods_tmp == "(CALCULATED)")] <- names(
-        std_methods_tmp
-      )[which(std_methods_tmp == "(CALCULATED)")]
+      ## If there are any...
+      if (length(calculated_cols) > 0) {
+        ## ... remove from var_cols
+        var_cols_tmp <- var_cols_tmp[-calculated_cols]
+
+        ## Overwrite methods for calculated variables (but why??)
+        std_methods_tmp[which(std_methods_tmp == "(CALCULATED)")] <- names(
+          std_methods_tmp
+        )[which(std_methods_tmp == "(CALCULATED)")]
+      }
 
       for (i in names(std_methods_tmp)) {
         if (paste0(i, "method") %in% names(input)) {
@@ -560,8 +589,8 @@ colSelectServer <- function(
 #' @param col_names Column names.
 #' @param default_methods Default methods.
 #' @param data_type One of `"nacc"`, `"wls"`, or `"wadrc"`.
-#' @param allow_col_selection A logical; whether column selection is allowed. If
-#'   `TRUE`,
+#' @param col_selection string; one of 'enable', 'disable', or 'hide'. If 'enable', allow user to select which columns should be used for each variable. If 'disable', show columns used, but without the option to select. If 'hide', hide the column.
+#' @param testing logical; passed to `shiny::shinyApp(..., options = list(test.mode))`
 #'
 #' @rdname colSelectModule
 #'
@@ -574,9 +603,28 @@ colSelectApp <- function(
   col_names,
   default_methods,
   data_type = c("nacc", "wls", "wadrc"),
-  allow_col_selection = T
+  col_selection = "enable",
+  testing = FALSE
 ) {
+  development <- dir.exists("inst/www") &&
+    basename(getwd()) == "NpsychAssessmentTool"
+
+  if (development) {
+    print("Development...")
+    www_path <- "inst/www"
+    qmd_path <- "inst/qmd"
+  } else {
+    require("NpsychAssessmentTool")
+
+    www_path <- system.file("www", package = "NpsychAssessmentTool")
+    qmd_path <- system.file("qmd", package = "NpsychAssessmentTool")
+  }
+
+  shiny::addResourcePath("www", www_path)
+  shiny::addResourcePath("qmd", qmd_path)
+
   ui <- bslib::page_fluid(
+    shinyApp_header(),
     shiny::selectizeInput(
       inputId = "whatever",
       label = NULL,
@@ -591,13 +639,12 @@ colSelectApp <- function(
       col_names,
       default_methods = default_methods,
       data_type = data_type,
-      allow_col_selection = allow_col_selection
+      col_selection = col_selection
     )
 
-    shiny::observe({
-      print(var_cols$var_cols())
-    })
+    shiny::exportTestValues(var_cols = var_cols$var_cols())
+    shiny::exportTestValues(std_methods = var_cols$std_methods())
   }
 
-  shiny::shinyApp(ui, server)
+  shiny::shinyApp(ui, server, options = list(test.mode = testing))
 }
