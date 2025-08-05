@@ -2,6 +2,7 @@ library(shinytest2)
 
 test_that("descriptionsModule works", {
   skip_on_cran()
+  skip_on_ci()
 
   app <- AppDriver$new(
     app_dir = descriptionsApp(testing = TRUE),

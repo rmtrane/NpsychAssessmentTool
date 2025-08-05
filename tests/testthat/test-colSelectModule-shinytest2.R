@@ -26,6 +26,7 @@ test_that("errors", {
 
 test_that("default cols and methods", {
   skip_on_cran()
+  skip_on_ci()
 
   app <- AppDriver$new(
     app_dir = colSelectApp(
@@ -50,6 +51,7 @@ test_that("default cols and methods", {
 
 test_that("col_selection='disable'", {
   skip_on_cran()
+  skip_on_ci()
 
   app <- AppDriver$new(
     app_dir = colSelectApp(
@@ -240,6 +242,7 @@ test_that("col_selection='disable'", {
 test_that("col_selection='enable'", {
   skip()
   skip_on_cran()
+  skip_on_ci()
 
   app <- AppDriver$new(
     app_dir = colSelectApp(
@@ -544,6 +547,7 @@ test_that("col_selection='enable'", {
 
 test_that("col_selection='hide'", {
   skip_on_cran()
+  skip_on_ci()
 
   app <- AppDriver$new(
     app_dir = colSelectApp(

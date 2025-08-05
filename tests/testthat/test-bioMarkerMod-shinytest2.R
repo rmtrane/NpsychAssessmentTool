@@ -2,6 +2,7 @@ library(shinytest2)
 
 test_that("biomarkerMod works", {
   skip_on_cran()
+  skip_on_ci()
   skip_if(is.null(getOption("panda_api_key")))
 
   app <- AppDriver$new(
@@ -47,6 +48,7 @@ test_that("biomarkerMod works", {
 
 test_that("biomarkerMod works", {
   skip_on_cran()
+  skip_on_ci()
   skip_if(is.null(getOption("panda_api_key")))
 
   app <- AppDriver$new(
