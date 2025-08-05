@@ -5,7 +5,7 @@ test_that("{shinytest2} testing initialization of shinyAssessmentTool", {
   skip_on_ci()
 
   app <- AppDriver$new(
-    app_dir = shinyAssessmentApp(testing = T),
+    app_dir = shinyAssessmentApp(testing = TRUE),
     variant = platform_variant(),
     name = "shinyApp",
     height = 968,
