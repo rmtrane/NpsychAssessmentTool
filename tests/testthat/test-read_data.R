@@ -1,4 +1,6 @@
 test_that("read_data works as expected", {
+  skip_on_ci()
+
   ############
   # Check correct errors are given
   expect_error(

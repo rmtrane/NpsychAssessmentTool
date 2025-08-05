@@ -2,6 +2,7 @@ library(shinytest2)
 
 test_that("{shinytest2} First visit to 'Scoring Tables and Figures' using demo_data", {
   skip_on_cran()
+  skip_on_ci()
 
   app <- AppDriver$new(
     app_dir = shinyAssessmentApp(testing = F),

@@ -84,11 +84,16 @@ read_data <- function(
       "wadrc_uds4" = wadrc_uds4_redcap_fields
     )
 
-    from_redcap <- REDCapR::redcap_read_oneshot(
-      redcap_uri = redcap_auth$redcap_uri,
-      token = redcap_auth$token,
-      fields = redcap_fields,
-      guess_max = Inf
+    suppressMessages(
+      from_redcap <- try(
+        REDCapR::redcap_read_oneshot(
+          redcap_uri = redcap_auth$redcap_uri,
+          token = redcap_auth$token,
+          fields = redcap_fields,
+          guess_max = Inf
+        ),
+        silent = TRUE
+      )
     )
 
     if (!is.null(shiny::getDefaultReactiveDomain())) {

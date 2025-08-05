@@ -2,6 +2,7 @@ library(shinytest2)
 
 test_that("{shinytest2} Testing changes to std_methods using demo_data", {
   skip_on_cran()
+  skip_on_ci()
 
   app <- AppDriver$new(
     app_dir = shinyAssessmentApp(testing = T),

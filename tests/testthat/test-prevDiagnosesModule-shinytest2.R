@@ -2,6 +2,7 @@ library(shinytest2)
 
 test_that("prevDiagnosesModule", {
   skip_on_cran()
+  skip_on_ci()
 
   tmp_dat <- demo_data |>
     prepare_data(

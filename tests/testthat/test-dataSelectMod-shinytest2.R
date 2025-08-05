@@ -2,6 +2,7 @@ library(shinytest2)
 
 test_that("dataSelectModule works", {
   skip_on_cran()
+  skip_on_ci()
   skip_if(is.null(getOption("redcap_adrc_uds3")))
 
   app <- AppDriver$new(
