@@ -84,14 +84,11 @@ read_data <- function(
       "wadrc_uds4" = wadrc_uds4_redcap_fields
     )
 
-    from_redcap <- try(
-      REDCapR::redcap_read_oneshot(
-        redcap_uri = redcap_auth$redcap_uri,
-        token = redcap_auth$token,
-        fields = redcap_fields,
-        guess_max = Inf
-      ),
-      TRUE
+    from_redcap <- REDCapR::redcap_read_oneshot(
+      redcap_uri = redcap_auth$redcap_uri,
+      token = redcap_auth$token,
+      fields = redcap_fields,
+      guess_max = Inf
     )
 
     if (!is.null(shiny::getDefaultReactiveDomain())) {
@@ -111,7 +108,7 @@ read_data <- function(
         cli::cli_abort(
           message = c(
             "Unable to access REDCap. {.fn REDCapR::redcap_read_oneshot} returned the error:",
-            from_redcap
+            from_redcap$outcome_message
           )
         )
       }
