@@ -3,6 +3,8 @@
 #' @description
 #' Adds resource paths for Shiny applications to access static files.
 #'
+#' @param development logical; indicading if run in development mode. If `TRUE`, resources will be pulled from `inst/www` and `inst/qmd`. Otherwise, the path for the installed package will be used.
+#'
 #' @returns
 #' No return value. This function is called for its side effects of adding
 #' resource paths for Shiny applications, mapping `"www"` and `"qmd"`

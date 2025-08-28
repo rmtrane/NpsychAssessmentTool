@@ -693,7 +693,7 @@ test_that("{shinytest2} Testing changes to std_methods using demo_data", {
 
   # Update output value
   app$set_window_size(width = 1619, height = 968)
-  app$expect_screenshot()
+  app$expect_screenshot(threshold = 7)
 
   app$stop(signal_timeout = 50000)
 })

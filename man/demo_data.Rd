@@ -5,7 +5,7 @@
 \alias{demo_data}
 \title{Demo Data}
 \format{
-An object of class \code{data.table} (inherits from \code{data.frame}) with 344 rows and 160 columns.
+An object of class \code{data.table} (inherits from \code{data.frame}) with 344 rows and 159 columns.
 }
 \usage{
 demo_data

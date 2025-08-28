@@ -255,6 +255,7 @@ test_that("save and retrieve works", {
 })
 
 test_that("Works when packages not installed", {
+  
   local_mocked_bindings(
     is_installed = function(pkg, quietly = TRUE) {
       FALSE
