@@ -6,6 +6,7 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/rmtrane/NpsychAssessmentTool/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rmtrane/NpsychAssessmentTool/actions/workflows/R-CMD-check.yaml)
+[![codecov](https://codecov.io/gh/rmtrane/NpsychAssessmentTool/graph/badge.svg?token=FRFC07GNEW)](https://codecov.io/gh/rmtrane/NpsychAssessmentTool)
 <!-- badges: end -->
 
 This package provides an [R Shiny](https://shiny.posit.co) application
