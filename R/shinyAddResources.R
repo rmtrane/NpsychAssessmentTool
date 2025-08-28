@@ -11,6 +11,7 @@
 #' to their respective directories within the package installation or
 #' development environment.
 #'
+#' @keywords internal
 #' @export
 shinyAddResources <- function(development) {
   if (missingArg(development)) {
