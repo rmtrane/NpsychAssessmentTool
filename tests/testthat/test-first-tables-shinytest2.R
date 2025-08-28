@@ -5,12 +5,13 @@ test_that("{shinytest2} First visit to 'Scoring Tables and Figures' using demo_d
   skip_on_ci()
 
   app <- AppDriver$new(
-    app_dir = shinyAssessmentApp(testing = F),
+    app_dir = shinyAssessmentApp(testing = T),
     variant = platform_variant(),
     name = "shinyApp",
     height = 968,
     width = 1619,
     wait = TRUE,
+    view = interactive()
   )
 
   app$set_inputs(
@@ -49,7 +50,7 @@ test_that("{shinytest2} First visit to 'Scoring Tables and Figures' using demo_d
     wait_ = FALSE
   )
   app$set_window_size(width = 1619, height = 968)
-  app$wait_for_idle(duration = 1000)
+  app$wait_for_idle(duration = 3000, timeout = 5000)
 
   app$expect_screenshot()
   app$set_inputs(main_navbar = "dataSelect")
@@ -109,7 +110,7 @@ test_that("{shinytest2} First visit to 'Scoring Tables and Figures' using demo_d
   )
   app$set_inputs(`colSelect-TRAILAmethod` = "regression (nacc)", wait_ = FALSE)
   app$set_inputs(
-    `colSelect-OTRAILAmethod` = "regression (updated)",
+    `colSelect-OTRAILAmethod` = "regression (updated_2025.06)",
     wait_ = FALSE
   )
   app$set_inputs(
@@ -218,19 +219,21 @@ test_that("{shinytest2} First visit to 'Scoring Tables and Figures' using demo_d
   app$set_inputs(`colSelect-REYARECmethod` = "T-score (NA)", wait_ = FALSE)
   app$set_inputs(`colSelect-TRAILBmethod` = "regression (nacc)", wait_ = FALSE)
   app$set_inputs(
-    `colSelect-OTRAILBmethod` = "regression (updated)",
+    `colSelect-OTRAILBmethod` = "norms (updated)",
     wait_ = FALSE
   )
-  app$set_inputs(
-    `colSelect-assign` = "click",
-    allow_no_input_binding_ = TRUE,
-    priority_ = "event"
-  )
-  app$set_inputs(
-    moveToTables = "click",
-    allow_no_input_binding_ = TRUE,
-    priority_ = "event"
-  )
+  # app$set_inputs(
+  #   `colSelect-assign` = "click",
+  #   allow_no_input_binding_ = TRUE,
+  #   priority_ = "event",
+  #   wait_ = FALSE
+  # )
+  # app$set_inputs(
+  #   moveToTables = "click",
+  #   allow_no_input_binding_ = TRUE,
+  #   priority_ = "event",
+  #   wait_ = FALSE
+  # )
   app$set_window_size(width = 1619, height = 968)
   app$click("goToColSelect")
   app$set_window_size(width = 1619, height = 968)

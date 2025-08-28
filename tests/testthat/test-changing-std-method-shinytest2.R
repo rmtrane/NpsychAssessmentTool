@@ -10,7 +10,8 @@ test_that("{shinytest2} Testing changes to std_methods using demo_data", {
     name = "shinyApp",
     height = 968,
     width = 1619,
-    wait = TRUE
+    wait = TRUE,
+    view = interactive()
   )
 
   app$set_inputs(
@@ -37,6 +38,9 @@ test_that("{shinytest2} Testing changes to std_methods using demo_data", {
   app$set_inputs(`dataSelect-fetch_data_button` = "click")
   app$wait_for_idle()
   app$click("dataSelect-submit")
+  app$wait_for_idle(timeout = 5000)
+  app$run_js(script = "$('button[data-dismiss=\"modal\"]').click()")
+
   # Update output value
   app$set_inputs(
     `colSelect-varstableDrawn` = "on",
@@ -68,7 +72,10 @@ test_that("{shinytest2} Testing changes to std_methods using demo_data", {
     wait_ = F
   )
   app$set_inputs(`colSelect-TRAILAmethod` = "regression (nacc)", wait_ = F)
-  app$set_inputs(`colSelect-OTRAILAmethod` = "regression (updated)", wait_ = F)
+  app$set_inputs(
+    `colSelect-OTRAILAmethod` = "regression (updated_2025.06)",
+    wait_ = F
+  )
   app$set_inputs(`colSelect-DIGFORCTmethod` = "regression (nacc)", wait_ = F)
   app$set_inputs(`colSelect-DIGFORSLmethod` = "regression (nacc)", wait_ = F)
   app$set_inputs(`colSelect-DIGBACCTmethod` = "regression (nacc)", wait_ = F)
@@ -120,7 +127,10 @@ test_that("{shinytest2} Testing changes to std_methods using demo_data", {
   app$set_inputs(`colSelect-REYTOTALmethod` = "T-score (NA)", wait_ = F)
   app$set_inputs(`colSelect-REYARECmethod` = "T-score (NA)", wait_ = F)
   app$set_inputs(`colSelect-TRAILBmethod` = "regression (nacc)", wait_ = F)
-  app$set_inputs(`colSelect-OTRAILBmethod` = "regression (updated)", wait_ = F)
+  app$set_inputs(
+    `colSelect-OTRAILBmethod` = "regression (updated_2025.06)",
+    wait_ = F
+  )
   app$wait_for_idle(duration = 1000)
   app$set_inputs(
     `colSelect-assign` = "click",
@@ -139,7 +149,7 @@ test_that("{shinytest2} Testing changes to std_methods using demo_data", {
 
   #  app$set_window_size(width = 1619, height = 968)
 
-  app$set_inputs(current_studyid = "NACC000460", wait_ = F)
+  app$set_inputs(current_studyid = "NACC074283", wait_ = F)
   # Update output value
   app$set_inputs(
     `plotly_afterplot-General Cognition` = "\"General Cognition-plot\"",
@@ -429,22 +439,22 @@ test_that("{shinytest2} Testing changes to std_methods using demo_data", {
   #   allow_no_input_binding_ = TRUE
   # )
 
-  app$set_inputs(
-    # fmt: skip
-    `colSelect-vars_table_output_cell_clicked` = c("14", "6", "<div class=\"form-group shiny-input-container\">
-  <label class=\"control-label shiny-label-null\" for=\"colSelect-MOCATOTSmethod\" id=\"colSelect-MOCATOTSmethod-label\"></label>
-  <div>
-    <select class=\"shiny-input-select form-control\" id=\"colSelect-MOCATOTSmethod\"><option value=\"norms (nacc)\">norms (nacc)</option>
-<option value=\"norms (updated)\">norms (updated)</option>
-<option value=\"regression (nacc)\" selected>regression (nacc)</option>
-<option value=\"regression (updated)\">regression (updated)</option></select>
-    <script type=\"application/json\" data-for=\"colSelect-MOCATOTSmethod\">{\"plugins\":[\"selectize-plugin-a11y\"]}</script>
-  </div>
-</div>"),
-    allow_no_input_binding_ = TRUE,
-    priority_ = "event",
-    wait_ = FALSE
-  )
+  #   app$set_inputs(
+  #     # fmt: skip
+  #     `colSelect-vars_table_output_cell_clicked` = c("14", "6", "<div class=\"form-group shiny-input-container\">
+  #   <label class=\"control-label shiny-label-null\" for=\"colSelect-MOCATOTSmethod\" id=\"colSelect-MOCATOTSmethod-label\"></label>
+  #   <div>
+  #     <select class=\"shiny-input-select form-control\" id=\"colSelect-MOCATOTSmethod\"><option value=\"norms (nacc)\">norms (nacc)</option>
+  # <option value=\"norms (updated)\">norms (updated)</option>
+  # <option value=\"regression (nacc)\" selected>regression (nacc)</option>
+  # <option value=\"regression (updated_2025.06)\">regression (updated_2025.06)</option></select>
+  #     <script type=\"application/json\" data-for=\"colSelect-MOCATOTSmethod\">{\"plugins\":[\"selectize-plugin-a11y\"]}</script>
+  #   </div>
+  # </div>"),
+  #     allow_no_input_binding_ = TRUE,
+  #     priority_ = "event",
+  #     wait_ = FALSE
+  #   )
   app$set_inputs(
     `colSelect-MOCATOTSmethod` = "norms (nacc)",
     wait_ = FALSE
@@ -679,7 +689,7 @@ test_that("{shinytest2} Testing changes to std_methods using demo_data", {
     wait_ = FALSE
   )
 
-  app$wait_for_idle(timeout = 5000)
+  app$wait_for_idle(timeout = 10000)
 
   # Update output value
   app$set_window_size(width = 1619, height = 968)

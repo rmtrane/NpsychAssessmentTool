@@ -10,14 +10,16 @@
 #' development environment.
 #'
 #' @export
-shinyAddResources <- function() {
-  development <- dir.exists("inst/www") &&
-    basename(getwd()) == "NpsychAssessmentTool"
+shinyAddResources <- function(development) {
+  if (missingArg(development)) {
+    development <- dir.exists("inst/www") &&
+      basename(getwd()) == "NpsychAssessmentTool"
+  }
 
   if (development) {
-    print("Development...")
-    www_path <- "inst/www"
-    qmd_path <- "inst/qmd"
+    cli::cli_inform("Running in development mode...")
+    www_path <- "./inst/www"
+    qmd_path <- "./inst/qmd"
   } else {
     require("NpsychAssessmentTool")
 
@@ -27,4 +29,6 @@ shinyAddResources <- function() {
 
   shiny::addResourcePath("www", www_path)
   shiny::addResourcePath("qmd", qmd_path)
+
+  return()
 }

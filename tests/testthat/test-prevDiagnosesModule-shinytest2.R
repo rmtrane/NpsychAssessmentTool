@@ -13,7 +13,7 @@ test_that("prevDiagnosesModule", {
 
   app <- AppDriver$new(
     app = prevDiagnosesApp(
-      dat = tmp_dat |> subset(NACCID == "NACC036131")
+      dat = tmp_dat |> subset(NACCID == "NACC017767")
     ),
     variant = platform_variant(),
     height = 968,
@@ -28,7 +28,7 @@ test_that("prevDiagnosesModule", {
 
   app <- AppDriver$new(
     app = prevDiagnosesApp(
-      dat = tmp_dat |> subset(NACCID == "NACC036131"),
+      dat = tmp_dat |> subset(NACCID == "NACC017767"),
       print_updating = TRUE
     ),
     variant = platform_variant(),

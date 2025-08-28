@@ -100,7 +100,24 @@ read_data <- function(
       shiny::removeNotification(id = "pulling_from_redcap")
     }
 
-    if (!inherits(from_redcap, "try-error") && from_redcap$success) {
+    if (inherits(from_redcap, "try-error")) {
+      if (!is.null(shiny::getDefaultReactiveDomain())) {
+        shiny::showNotification(
+          "Unable to access REDCap",
+          type = "error"
+        )
+        return()
+      } else {
+        cli::cli_abort(
+          message = c(
+            "Unable to access REDCap (1). {.fn REDCapR::redcap_read_oneshot} returned the error:",
+            as.character(from_redcap)
+          )
+        )
+      }
+    }
+
+    if (from_redcap$success) {
       from_redcap <- data.table::data.table(from_redcap$data)
     } else {
       if (!is.null(shiny::getDefaultReactiveDomain())) {
@@ -112,7 +129,7 @@ read_data <- function(
       } else {
         cli::cli_abort(
           message = c(
-            "Unable to access REDCap. {.fn REDCapR::redcap_read_oneshot} returned the error:",
+            "Unable to access REDCap (2). {.fn REDCapR::redcap_read_oneshot} returned the error:",
             from_redcap$outcome_message
           )
         )

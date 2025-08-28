@@ -95,4 +95,16 @@ test_that("demographics_table", {
   )
 
   expect_snapshot(gt::as_raw_html(tmp_dem_tab))
+
+  expect_error(
+    demographics_table(
+      tmp_dat_in |> dplyr::mutate(NACCID = paste0("ptid", 1:4))
+    ),
+    regexp = "There should only be one study ID in data, not 4"
+  )
+
+  expect_error(
+    demographics_table(data.frame(tmp_dat_in)),
+    regexp = "The `dat` argument must be a"
+  )
 })

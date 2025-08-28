@@ -238,20 +238,6 @@ wadrc_data_prep <- function(adrc_data, uds = c("uds2", "uds3", "uds4")) {
   out
 }
 
-collapse_vals <- \(x) {
-  no_nas <- na.omit(unique(x))
-
-  if (length(no_nas) == 0) {
-    return(NA)
-  }
-
-  if (length(no_nas) > 1) {
-    return(x)
-  }
-
-  no_nas
-}
-
 
 return_single <- function(x, if_multiple = NA) {
   if (all(is.na(x))) {
@@ -343,7 +329,8 @@ fill_data_downup <- function(
   if (length(char_cols) > 0) {
     out[, (char_cols) := lapply(.SD, factor), .SDcols = char_cols]
     ## Next, get levels of factors (for later refill)
-    lev = sapply(char_cols, function(x) levels(out[[x]]))
+    lev = lapply(char_cols, function(x) levels(out[[x]])) |>
+      setNames(char_cols)
     ## Now, make integer...
     out[, (char_cols) := lapply(.SD, as.integer), .SDcols = char_cols]
     ## ... then fill

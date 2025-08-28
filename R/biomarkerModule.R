@@ -96,7 +96,7 @@ biomarkerServer <- function(
         mirai::stop_mirai(m)
       }
 
-      if (adrc_ptid() != "") {
+      if (adrc_ptid() != "" && !adrc_ptid() %in% names(biomarker_dat_tables)) {
         # Invoke, i.e. evaluate the ExtendedTask
         biomarker_dat$invoke(
           cur_id = adrc_ptid(),
@@ -147,8 +147,10 @@ biomarkerServer <- function(
             bio_tab_for_gt
           ) |>
             bio_tab_to_gt()
-        } else {
+        } else if (biomarker_dat$status() == "running") {
           loading_gt
+        } else {
+          cli::cli_inform("{biomarker_dat$status()}")
         }
       },
       align = "left"
@@ -167,8 +169,10 @@ biomarkerServer <- function(
             bio_tab_for_gt
           ) |>
             bio_tab_to_gt()
-        } else {
+        } else if (biomarker_dat$status() == "running") {
           loading_gt
+        } else {
+          cli::cli_inform("{biomarker_dat$status()}")
         }
       },
       align = "left"
@@ -202,24 +206,13 @@ biomarkerApp <- function(
     )
   }
 
-  development <- dir.exists("inst/shiny/www")
+  shinyAddResources()
 
-  if (development) {
-    print("Development...")
+  if (mirai::daemons_set()) {
+    mirai::daemons(0)
   }
 
-  shiny::addResourcePath(
-    "www",
-    ifelse(
-      development,
-      "inst/shiny/www",
-      system.file("www", package = "NpsychAssessmentTool")
-    )
-  )
-
-  if (!mirai::daemons_set()) {
-    mirai::daemons(1)
-  }
+  mirai::daemons(1)
   shiny::onStop(\(x) mirai::daemons(0))
 
   ui <- bslib::page_fluid(

@@ -80,8 +80,8 @@ appServer <- function(input, output, session) {
     data_type = data_type,
     default_methods = list(
       MOCATOTS = c(method = "regression", version = "nacc"),
-      OTRAILA = c(method = "regression", version = "updated"),
-      OTRAILB = c(method = "regression", version = "updated"),
+      OTRAILA = c(method = "regression", version = "updated_2025.06"),
+      OTRAILB = c(method = "regression", version = "updated_2025.06"),
       # OTRLARR = c(method = "regression", version = "updated"),
       # OTRLBRR = c(method = "regression", version = "updated"),
       DIGFORCT = c(method = "regression", version = "nacc"),

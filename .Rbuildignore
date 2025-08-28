@@ -9,6 +9,7 @@
 ^inst/qmd/*.mp4
 ^references.bib$
 ^scratch/*
+^paper/*
 ^LICENSE\.md$
 ^\.github$
 ^README\.Rmd$

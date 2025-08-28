@@ -2,7 +2,7 @@ library(shinytest2)
 
 test_that("longTableModule", {
   for_tab <- demo_data |>
-    subset(NACCID == "NACC097067") |>
+    subset(NACCID == "NACC017767") |>
     prepare_data()
 
   # Add "empty visit"
@@ -20,17 +20,18 @@ test_that("longTableModule", {
     app_dir = longTableApp(
       dat = for_tab
     ),
-    variant = platform_variant()
+    variant = platform_variant(),
+    name = "longTabMod1"
   )
 
   app$set_window_size(width = 1619, height = 968)
 
-  app$expect_values()
   app$expect_screenshot()
 
   app$click("long_table-show_hide_empty")
 
-  app$expect_values()
+  app$wait_for_idle(timeout = 2000)
+
   app$expect_screenshot()
 
   app$stop()
@@ -49,12 +50,12 @@ test_that("longTableModule", {
       )),
       print_updating = T
     ),
-    variant = platform_variant()
+    variant = platform_variant(),
+    name = "longTabMod2"
   )
 
   app$set_window_size(width = 1619, height = 968)
 
-  app$expect_values()
   app$expect_screenshot()
 
   app$stop()

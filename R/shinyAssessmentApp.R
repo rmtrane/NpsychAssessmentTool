@@ -17,12 +17,15 @@ shinyAssessmentApp <- function(
     shiny.autoload.r = FALSE
   )
 
+  ## Add resources
   shinyAddResources()
 
+  ## Stop daemons if they are running
   if (mirai::daemons_set()) {
     mirai::daemons(0)
   }
 
+  ## Start single daemon for asynchronously loading biomarker data
   mirai::daemons(1)
   shiny::onStop(\(x) mirai::daemons(0))
 

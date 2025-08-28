@@ -34,12 +34,18 @@ The video below shows a brief walk through using the demo data that is included.
 (Note: the application might have been updated since the recording of this video,
 but the core functionality has not changed.)
 
-<center>
-  <video width="750px" controls style="border-style: solid; border-width: 7px; border-color: #757575; border-radius: 10px;">
-    <source src="https://github.com/rmtrane/NpsychAssessmentTool/raw/refs/heads/main/inst/qmd/walk-through.mp4" type="video/mp4" data-external="1">
-    <!-- <source src="walk-through.mp4" type="video/mp4"> -->
-  </video>
-</center>
+```{r}
+#| classes: '.g-col-lg-6 .g-col-12 .g-col-md-12'
+#| warning: false
+#| echo: false
+source(here::here("inst/qmd/carousel.R"))
+
+carousel(
+  "gallery-carousel",
+  5000,
+  yaml.load_file(here::here("inst/qmd/carousel.yml"))
+)
+```
 
 ## Standardization Methods
 
@@ -82,7 +88,7 @@ library(tidyverse)
 
 for_tab <- data.frame(
   method = c("norms", "norms", "regression", "regression", "T-score"),
-  version = c("nacc", "updated", "nacc", "updated", NA)
+  version = c("nacc", "updated", "nacc", "updated_2024.06", NA)
 ) |>
   mutate(
     variables = map2(
@@ -96,7 +102,7 @@ for_tab <- data.frame(
     method = factor(method, levels = c("norms", "regression", "T-score")),
     version = factor(
       if_else(is.na(version), "T", version),
-      levels = c("nacc", "updated", "T")
+      levels = c("nacc", "updated", "updated_2024.06", "T")
     ),
     available = "check"
   ) |>
@@ -135,6 +141,7 @@ for_tab <- data.frame(
           c(
             "nacc" = "<span style=\"font-weight: bold; text-decoration: underline;\">NACC</span>",
             "updated" = "<span style=\"font-weight: bold; text-decoration: underline;\">Updated</span>",
+            "updated_2024.06" = "<span style=\"font-weight: bold; text-decoration: underline;\">Updated (June 2024)</span>",
             "T" = "",
             "_check" = " (<span style=\"font-weight: bold; color: #1D8A28; text-decoration: underline;\">&#10003;</span>)"
           )
@@ -145,6 +152,7 @@ for_tab <- data.frame(
           c(
             "nacc" = "NACC",
             "updated" = "Updated",
+            "updated_2024.06" = "Updated (June 2024)",
             "T" = "",
             "_check" = " (<span style=\"font-weight: bold; color: #1D8A28;\">&#10003;</span>)",
             "_x" = " (<span style=\"font-weight: bold; color: #B61717;\">&#10007;</span>)"

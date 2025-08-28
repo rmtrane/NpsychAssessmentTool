@@ -1,7 +1,6 @@
 library(shinytest2)
 
 test_that("plotModule works", {
-  skip()
   skip_on_cran()
   skip_on_ci()
   skip_if(is.null(getOption("panda_api_key")))
@@ -27,7 +26,9 @@ test_that("plotModule works", {
   app$set_inputs(`Mood-showPlot` = "yes", allow_no_input_binding_ = TRUE, wait_ = FALSE)
   app$set_window_size(width = 1619, height = 968)
   # Update output value
-  app$set_inputs(studyid = "NACC097622")
+  app$set_inputs(studyid = "NACC012002")
+
+  app$wait_for_idle()
 
   app$set_inputs(
     `plotly_afterplot-General Cognition` = "\"General Cognition-plot\"",
@@ -194,7 +195,7 @@ test_that("plotModule works", {
 
   app$expect_screenshot()
 
-  app$set_inputs(studyid = "NACC057967")
+  app$set_inputs(studyid = "NACC093132")
   app$wait_for_idle()
   app$expect_screenshot()
 

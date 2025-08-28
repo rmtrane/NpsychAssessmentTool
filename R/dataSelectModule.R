@@ -36,7 +36,13 @@ dataSelectUI <- function(id) {
           "Upload Previously Saved Data Sources" = "retrieve",
           "Demo" = "demo"
         ),
+
         options = list(
+          onInitialize = I(
+            "function() {
+            this.$control_input.attr('readonly', true);
+          }"
+          ),
           disabledField = "disabled",
           options = list(
             list(
@@ -252,6 +258,8 @@ dataSelectServer <- function(id) {
       shiny::bindEvent(input$show_password)
 
     output$fetch_data <- shiny::renderUI({
+      out <- NULL
+
       redcap_uri_and_token <-
         !is.null(input$api_token) &&
         input$api_token != "" &&
@@ -276,7 +284,7 @@ dataSelectServer <- function(id) {
           csv_file_ready |
           panda_ready
       ) {
-        bslib::input_task_button(
+        out <- bslib::input_task_button(
           id = shiny::NS(id, "fetch_data_button"),
           label = "Add"
         )
@@ -287,23 +295,25 @@ dataSelectServer <- function(id) {
           !is.null(input$data_file_key) &&
           input$data_file_key != ""
       ) {
-        bslib::input_task_button(
+        out <- bslib::input_task_button(
           id = shiny::NS(id, "retrieve_data_button"),
           label = "Upload"
         )
       }
+
+      out
     })
 
     shiny::observe({
-      loaded_data_sources <- safer::retrieve_object(
+      loaded_data_sources <- try(safer::retrieve_object(
         conn = input$saved_data_file$datapath,
         key = input$data_file_key
-      )
+      ))
 
       if (inherits(loaded_data_sources, "try-error")) {
         shiny::showNotification(
           type = "error",
-          "Could not load data sources. Make sure the file is a valid .bin file."
+          "Could not load data sources. Make sure the file is a valid .bin file, and that the password is correct."
         )
         return()
       }
@@ -476,7 +486,7 @@ dataSelectServer <- function(id) {
       }
     )
 
-    output$save_data_sources <- shiny::downloadHandler(
+    output$download_data_sources <- shiny::downloadHandler(
       filename = function() {
         paste0("data_sources_", Sys.Date(), ".bin")
       },
@@ -500,13 +510,18 @@ dataSelectServer <- function(id) {
             label = "Enter a key to save data sources"
           ),
           shiny::downloadButton(
-            outputId = shiny::NS(id, "save_data_sources"),
+            outputId = shiny::NS(id, "download_data_sources"),
             label = "Save Data Sources"
           )
         )
       )
     }) |>
       shiny::bindEvent(input$save_data_sources)
+
+    shiny::observe({
+      shiny::removeModal()
+    }) |>
+      shiny::bindEvent(input$download_data_sources)
 
     output$submit_button <- shiny::renderUI({
       if (length(shiny::reactiveValuesToList(data_sources)) == 0) {
@@ -622,6 +637,10 @@ dataSelectServer <- function(id) {
     }) |>
       shiny::bindEvent(input$submit)
 
+    shiny::exportTestValues(
+      data_sources = shiny::reactiveValuesToList(data_sources)
+    )
+
     return(list(
       dat_obj = dat_obj,
       data_source = data_source,
@@ -655,8 +674,8 @@ dataSelectApp <- function(testing = FALSE) {
     #   shiny::tags$div(id = "spinner_overlay", class = "loader_overlay")
     # ),
     shinyApp_header(),
-    dataSelectUI("dat_select"),
-    shiny::actionButton("fetch_data", label = "Submit")
+    dataSelectUI("dat_select") #,
+    # shiny::actionButton("fetch_data", label = "Submit")
   )
 
   server <- function(input, output, session) {
@@ -669,11 +688,16 @@ dataSelectApp <- function(testing = FALSE) {
     shiny::observe({
       dat_obj(data_input$dat_obj())
 
-      shiny::showNotification(
-        ui = paste(dim(dat_obj()), collapse = "; "),
-        duration = 2
-      )
+      if (!testing) {
+        shiny::showNotification(
+          ui = paste(dim(dat_obj()), collapse = "; "),
+          duration = 2
+        )
+      }
     })
+
+    shiny::exportTestValues(dat_obj = dat_obj())
+    shiny::exportTestValues(biomarker_api = data_input$biomarker_api())
   }
 
   shiny::shinyApp(ui, server, options = list(test.mode = testing))
