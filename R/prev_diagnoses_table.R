@@ -207,10 +207,10 @@ prev_diagnoses_table <- function(dat, table_font_size = 100) {
             unique(.SD$MOCATOTS),
             unique(.SD$cdr),
             unique(.SD$FAS),
-            NpsychBatteryNorms::values_to_labels(
-              as.numeric(unique(.SD$NACCUDSD)),
+            as.character(NpsychBatteryNorms::values_to_labels(
+              raw_score = as.numeric(unique(.SD$NACCUDSD)),
               var_name = "NACCUDSD"
-            ),
+            )),
             unname(.SD$etiologies)
           )
         ))[

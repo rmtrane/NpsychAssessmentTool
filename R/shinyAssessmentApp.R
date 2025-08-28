@@ -17,27 +17,15 @@ shinyAssessmentApp <- function(
     shiny.autoload.r = FALSE
   )
 
-  development <- dir.exists("inst/www") &&
-    basename(getwd()) == "NpsychAssessmentTool"
+  ## Add resources
+  shinyAddResources()
 
-  if (development) {
-    print("Development...")
-    www_path <- "inst/www"
-    qmd_path <- "inst/qmd"
-  } else {
-    require("NpsychAssessmentTool")
-
-    www_path <- system.file("www", package = "NpsychAssessmentTool")
-    qmd_path <- system.file("qmd", package = "NpsychAssessmentTool")
-  }
-
-  shiny::addResourcePath("www", www_path)
-  shiny::addResourcePath("qmd", qmd_path)
-
+  ## Stop daemons if they are running
   if (mirai::daemons_set()) {
     mirai::daemons(0)
   }
 
+  ## Start single daemon for asynchronously loading biomarker data
   mirai::daemons(1)
   shiny::onStop(\(x) mirai::daemons(0))
 

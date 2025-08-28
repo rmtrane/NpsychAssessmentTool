@@ -1,3 +1,7 @@
+# NpsychAssessmentTool (development version)
+
+-   Data sources can now be saved to an encrypted file with user specified password. Note: password is NOT saved anywhere, and if forgotten, file is not accessible.
+
 # NpsychAssessmentTool 0.2.0
 
 -   Multiple data sources can be added and combined.

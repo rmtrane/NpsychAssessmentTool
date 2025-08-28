@@ -64,7 +64,8 @@ test_that("col_selection='disable'", {
     variant = platform_variant(),
     name = "sel_disabled",
     height = 968,
-    width = 1619
+    width = 1619,
+    view = interactive()
   )
 
   app$set_inputs(
@@ -90,128 +91,128 @@ test_that("col_selection='disable'", {
     allow_no_input_binding_ = TRUE,
     wait_ = FALSE
   )
-  app$set_inputs(
-    `colselect-MOCATOTSmethod` = "regression (nacc)",
-    wait_ = FALSE
-  )
-  app$set_inputs(
-    `colselect-NACCMMSEmethod` = "regression (nacc_legacy)",
-    wait_ = FALSE
-  )
-  app$set_inputs(`colselect-TRAILAmethod` = "regression (nacc)", wait_ = FALSE)
-  app$set_inputs(
-    `colselect-OTRAILAmethod` = "regression (updated)",
-    wait_ = FALSE
-  )
-  app$set_inputs(
-    `colselect-OTRLARRmethod` = "regression (updated)",
-    wait_ = FALSE
-  )
-  app$set_inputs(
-    `colselect-DIGFORCTmethod` = "regression (nacc)",
-    wait_ = FALSE
-  )
-  app$set_inputs(
-    `colselect-DIGFORSLmethod` = "regression (nacc)",
-    wait_ = FALSE
-  )
-  app$set_inputs(
-    `colselect-DIGBACCTmethod` = "regression (nacc)",
-    wait_ = FALSE
-  )
-  app$set_inputs(
-    `colselect-DIGBACLSmethod` = "regression (nacc)",
-    wait_ = FALSE
-  )
-  app$set_inputs(`colselect-WAISmethod` = "T-score (NA)", wait_ = FALSE)
-  app$set_inputs(
-    `colselect-DIGIFmethod` = "regression (nacc_legacy)",
-    wait_ = FALSE
-  )
-  app$set_inputs(
-    `colselect-DIGIFLENmethod` = "regression (nacc_legacy)",
-    wait_ = FALSE
-  )
-  app$set_inputs(
-    `colselect-DIGIBmethod` = "regression (nacc_legacy)",
-    wait_ = FALSE
-  )
-  app$set_inputs(
-    `colselect-DIGIBLENmethod` = "regression (nacc_legacy)",
-    wait_ = FALSE
-  )
-  app$set_inputs(
-    `colselect-MINTTOTSmethod` = "regression (nacc)",
-    wait_ = FALSE
-  )
-  app$set_inputs(`colselect-ANIMALSmethod` = "regression (nacc)", wait_ = FALSE)
-  app$set_inputs(`colselect-VEGmethod` = "regression (nacc)", wait_ = FALSE)
-  app$set_inputs(
-    `colselect-UDSVERTNmethod` = "regression (nacc)",
-    wait_ = FALSE
-  )
-  app$set_inputs(
-    `colselect-UDSVERFCmethod` = "regression (nacc)",
-    wait_ = FALSE
-  )
-  app$set_inputs(
-    `colselect-UDSVERLCmethod` = "regression (nacc)",
-    wait_ = FALSE
-  )
-  app$set_inputs(
-    `colselect-BOSTONmethod` = "regression (nacc_legacy)",
-    wait_ = FALSE
-  )
-  app$set_inputs(
-    `colselect-UDSBENTCmethod` = "regression (nacc)",
-    wait_ = FALSE
-  )
-  app$set_inputs(
-    `colselect-UDSBENTDmethod` = "regression (nacc)",
-    wait_ = FALSE
-  )
-  app$set_inputs(
-    `colselect-CRAFTVRSmethod` = "regression (nacc)",
-    wait_ = FALSE
-  )
-  app$set_inputs(
-    `colselect-CRAFTURSmethod` = "regression (nacc)",
-    wait_ = FALSE
-  )
-  app$set_inputs(
-    `colselect-CRAFTDVRmethod` = "regression (nacc)",
-    wait_ = FALSE
-  )
-  app$set_inputs(
-    `colselect-CRAFTDREmethod` = "regression (nacc)",
-    wait_ = FALSE
-  )
-  app$set_inputs(`colselect-REY1RECmethod` = "T-score (NA)", wait_ = FALSE)
-  app$set_inputs(`colselect-REY2RECmethod` = "T-score (NA)", wait_ = FALSE)
-  app$set_inputs(`colselect-REY3RECmethod` = "T-score (NA)", wait_ = FALSE)
-  app$set_inputs(`colselect-REY4RECmethod` = "T-score (NA)", wait_ = FALSE)
-  app$set_inputs(`colselect-REY5RECmethod` = "T-score (NA)", wait_ = FALSE)
-  app$set_inputs(`colselect-REY6RECmethod` = "T-score (NA)", wait_ = FALSE)
-  app$set_inputs(`colselect-REYDRECmethod` = "T-score (NA)", wait_ = FALSE)
-  app$set_inputs(
-    `colselect-LOGIMEMmethod` = "regression (nacc_legacy)",
-    wait_ = FALSE
-  )
-  app$set_inputs(
-    `colselect-MEMUNITSmethod` = "regression (nacc_legacy)",
-    wait_ = FALSE
-  )
-  app$set_inputs(`colselect-REYTOTALmethod` = "T-score (NA)", wait_ = FALSE)
-  app$set_inputs(`colselect-REYARECmethod` = "T-score (NA)", wait_ = FALSE)
-  app$set_inputs(`colselect-TRAILBmethod` = "regression (nacc)", wait_ = FALSE)
-  app$set_inputs(
-    `colselect-OTRAILBmethod` = "regression (updated)",
-    wait_ = FALSE
-  )
-  app$set_inputs(
-    `colselect-OTRLBRRmethod` = "regression (updated)",
-    wait_ = FALSE
-  )
+  # app$set_inputs(
+  #   `colselect-MOCATOTSmethod` = "regression (nacc)",
+  #   wait_ = FALSE
+  # )
+  # app$set_inputs(
+  #   `colselect-NACCMMSEmethod` = "regression (nacc_legacy)",
+  #   wait_ = FALSE
+  # )
+  # app$set_inputs(`colselect-TRAILAmethod` = "regression (nacc)", wait_ = FALSE)
+  # app$set_inputs(
+  #   `colselect-OTRAILAmethod` = "regression (updated_2025.06)",
+  #   wait_ = FALSE
+  # )
+  # app$set_inputs(
+  #   `colselect-OTRLARRmethod` = "regression (updated_2025.06)",
+  #   wait_ = FALSE
+  # )
+  # app$set_inputs(
+  #   `colselect-DIGFORCTmethod` = "regression (nacc)",
+  #   wait_ = FALSE
+  # )
+  # app$set_inputs(
+  #   `colselect-DIGFORSLmethod` = "regression (nacc)",
+  #   wait_ = FALSE
+  # )
+  # app$set_inputs(
+  #   `colselect-DIGBACCTmethod` = "regression (nacc)",
+  #   wait_ = FALSE
+  # )
+  # app$set_inputs(
+  #   `colselect-DIGBACLSmethod` = "regression (nacc)",
+  #   wait_ = FALSE
+  # )
+  # app$set_inputs(`colselect-WAISmethod` = "T-score (NA)", wait_ = FALSE)
+  # app$set_inputs(
+  #   `colselect-DIGIFmethod` = "regression (nacc_legacy)",
+  #   wait_ = FALSE
+  # )
+  # app$set_inputs(
+  #   `colselect-DIGIFLENmethod` = "regression (nacc_legacy)",
+  #   wait_ = FALSE
+  # )
+  # app$set_inputs(
+  #   `colselect-DIGIBmethod` = "regression (nacc_legacy)",
+  #   wait_ = FALSE
+  # )
+  # app$set_inputs(
+  #   `colselect-DIGIBLENmethod` = "regression (nacc_legacy)",
+  #   wait_ = FALSE
+  # )
+  # app$set_inputs(
+  #   `colselect-MINTTOTSmethod` = "regression (nacc)",
+  #   wait_ = FALSE
+  # )
+  # app$set_inputs(`colselect-ANIMALSmethod` = "regression (nacc)", wait_ = FALSE)
+  # app$set_inputs(`colselect-VEGmethod` = "regression (nacc)", wait_ = FALSE)
+  # app$set_inputs(
+  #   `colselect-UDSVERTNmethod` = "regression (nacc)",
+  #   wait_ = FALSE
+  # )
+  # app$set_inputs(
+  #   `colselect-UDSVERFCmethod` = "regression (nacc)",
+  #   wait_ = FALSE
+  # )
+  # app$set_inputs(
+  #   `colselect-UDSVERLCmethod` = "regression (nacc)",
+  #   wait_ = FALSE
+  # )
+  # app$set_inputs(
+  #   `colselect-BOSTONmethod` = "regression (nacc_legacy)",
+  #   wait_ = FALSE
+  # )
+  # app$set_inputs(
+  #   `colselect-UDSBENTCmethod` = "regression (nacc)",
+  #   wait_ = FALSE
+  # )
+  # app$set_inputs(
+  #   `colselect-UDSBENTDmethod` = "regression (nacc)",
+  #   wait_ = FALSE
+  # )
+  # app$set_inputs(
+  #   `colselect-CRAFTVRSmethod` = "regression (nacc)",
+  #   wait_ = FALSE
+  # )
+  # app$set_inputs(
+  #   `colselect-CRAFTURSmethod` = "regression (nacc)",
+  #   wait_ = FALSE
+  # )
+  # app$set_inputs(
+  #   `colselect-CRAFTDVRmethod` = "regression (nacc)",
+  #   wait_ = FALSE
+  # )
+  # app$set_inputs(
+  #   `colselect-CRAFTDREmethod` = "regression (nacc)",
+  #   wait_ = FALSE
+  # )
+  # app$set_inputs(`colselect-REY1RECmethod` = "T-score (NA)", wait_ = FALSE)
+  # app$set_inputs(`colselect-REY2RECmethod` = "T-score (NA)", wait_ = FALSE)
+  # app$set_inputs(`colselect-REY3RECmethod` = "T-score (NA)", wait_ = FALSE)
+  # app$set_inputs(`colselect-REY4RECmethod` = "T-score (NA)", wait_ = FALSE)
+  # app$set_inputs(`colselect-REY5RECmethod` = "T-score (NA)", wait_ = FALSE)
+  # app$set_inputs(`colselect-REY6RECmethod` = "T-score (NA)", wait_ = FALSE)
+  # app$set_inputs(`colselect-REYDRECmethod` = "T-score (NA)", wait_ = FALSE)
+  # app$set_inputs(
+  #   `colselect-LOGIMEMmethod` = "regression (nacc_legacy)",
+  #   wait_ = FALSE
+  # )
+  # app$set_inputs(
+  #   `colselect-MEMUNITSmethod` = "regression (nacc_legacy)",
+  #   wait_ = FALSE
+  # )
+  # app$set_inputs(`colselect-REYTOTALmethod` = "T-score (NA)", wait_ = FALSE)
+  # app$set_inputs(`colselect-REYARECmethod` = "T-score (NA)", wait_ = FALSE)
+  # app$set_inputs(`colselect-TRAILBmethod` = "regression (nacc)", wait_ = FALSE)
+  # app$set_inputs(
+  #   `colselect-OTRAILBmethod` = "norms (updated)",
+  #   wait_ = FALSE
+  # )
+  # app$set_inputs(
+  #   `colselect-OTRLBRRmethod` = "norms (updated)",
+  #   wait_ = FALSE
+  # )
   app$expect_values()
   app$set_window_size(width = 1619, height = 968)
   app$expect_screenshot()
@@ -256,8 +257,7 @@ test_that("col_selection='enable'", {
     name = "sel_enabled",
     height = 968,
     width = 1619,
-    clean_logs = FALSE,
-    view = TRUE
+    clean_logs = FALSE
   )
 
   # Update output value
@@ -294,11 +294,11 @@ test_that("col_selection='enable'", {
   )
   app$set_inputs(`colselect-TRAILAmethod` = "regression (nacc)", wait_ = FALSE)
   app$set_inputs(
-    `colselect-OTRAILAmethod` = "regression (updated)",
+    `colselect-OTRAILAmethod` = "regression (updated_2025.06)",
     wait_ = FALSE
   )
   app$set_inputs(
-    `colselect-OTRLARRmethod` = "regression (updated)",
+    `colselect-OTRLARRmethod` = "regression (updated_2025.06)",
     wait_ = FALSE
   )
   app$set_inputs(
@@ -399,28 +399,28 @@ test_that("col_selection='enable'", {
   app$set_inputs(`colselect-REYARECmethod` = "T-score (NA)", wait_ = FALSE)
   app$set_inputs(`colselect-TRAILBmethod` = "regression (nacc)", wait_ = FALSE)
   app$set_inputs(
-    `colselect-OTRAILBmethod` = "regression (updated)",
+    `colselect-OTRAILBmethod` = "regression (updated_2025.06)",
     wait_ = FALSE
   )
   app$set_inputs(
-    `colselect-OTRLBRRmethod` = "regression (updated)",
+    `colselect-OTRLBRRmethod` = "regression (updated_2025.06)",
     wait_ = FALSE
   )
   app$set_window_size(width = 1619, height = 968)
   app$set_inputs(
-    "colselect-vars_table_output_cells_selected" = matrix(c(1, 5), nrow = 1),
+    "colselect-vars_table_output_cells_selected" = data.frame(row = 1, col = 5),
     allow_no_input_binding_ = TRUE,
-    priority_ = "input"
+    wait_ = FALSE
   )
-  app$wait_for_idle()
   app$set_inputs(
     `colselect-vars_table_output_cell_clicked` = data.frame(
-      row = 1,
-      col = 5,
+      row = "1",
+      col = "5",
       value = "NACCID"
     ),
     allow_no_input_binding_ = TRUE,
-    priority_ = "input"
+    priority_ = "event",
+    wait_ = FALSE
   )
   app$click("colselect-change_column")
   # Update output value
@@ -596,11 +596,11 @@ test_that("col_selection='hide'", {
   )
   app$set_inputs(`colselect-TRAILAmethod` = "regression (nacc)", wait_ = FALSE)
   app$set_inputs(
-    `colselect-OTRAILAmethod` = "regression (updated)",
+    `colselect-OTRAILAmethod` = "regression (updated_2025.06)",
     wait_ = FALSE
   )
   app$set_inputs(
-    `colselect-OTRLARRmethod` = "regression (updated)",
+    `colselect-OTRLARRmethod` = "regression (updated_2025.06)",
     wait_ = FALSE
   )
   app$set_inputs(
@@ -701,11 +701,11 @@ test_that("col_selection='hide'", {
   app$set_inputs(`colselect-REYARECmethod` = "T-score (NA)", wait_ = FALSE)
   app$set_inputs(`colselect-TRAILBmethod` = "regression (nacc)", wait_ = FALSE)
   app$set_inputs(
-    `colselect-OTRAILBmethod` = "regression (updated)",
+    `colselect-OTRAILBmethod` = "regression (updated_2025.06)",
     wait_ = FALSE
   )
   app$set_inputs(
-    `colselect-OTRLBRRmethod` = "regression (updated)",
+    `colselect-OTRLBRRmethod` = "regression (updated_2025.06)",
     wait_ = FALSE
   )
   app$expect_values()

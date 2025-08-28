@@ -19,10 +19,10 @@
     "colselect-MINTTOTSmethod": "regression (nacc)",
     "colselect-MOCATOTSmethod": "norms (nacc)",
     "colselect-NACCMMSEmethod": "regression (nacc_legacy)",
-    "colselect-OTRAILAmethod": "regression (updated)",
-    "colselect-OTRAILBmethod": "regression (updated)",
-    "colselect-OTRLARRmethod": "regression (updated)",
-    "colselect-OTRLBRRmethod": "regression (updated)",
+    "colselect-OTRAILAmethod": "regression (updated_2025.06)",
+    "colselect-OTRAILBmethod": "regression (updated_2025.06)",
+    "colselect-OTRLARRmethod": "regression (updated_2025.06)",
+    "colselect-OTRLBRRmethod": "regression (updated_2025.06)",
     "colselect-REY1RECmethod": "T-score (NA)",
     "colselect-REY2RECmethod": "T-score (NA)",
     "colselect-REY3RECmethod": "T-score (NA)",
@@ -637,11 +637,11 @@
       },
       "OTRAILA": {
         "method": "regression",
-        "version": "updated"
+        "version": "updated_2025.06"
       },
       "OTRLARR": {
         "method": "regression",
-        "version": "updated"
+        "version": "updated_2025.06"
       },
       "DIGFORCT": {
         "method": "regression",
@@ -781,11 +781,11 @@
       },
       "OTRAILB": {
         "method": "regression",
-        "version": "updated"
+        "version": "updated_2025.06"
       },
       "OTRLBRR": {
         "method": "regression",
-        "version": "updated"
+        "version": "updated_2025.06"
       }
     },
     "var_cols": {

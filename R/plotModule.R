@@ -494,6 +494,8 @@ plotApp <- function(
   studyids = NULL,
   testing = FALSE
 ) {
+  shinyAddResources()
+
   ui <- bslib::page_sidebar(
     theme = bslib::bs_theme(
       version = 5
@@ -512,11 +514,7 @@ plotApp <- function(
         selected = NULL
       )
     ),
-    shiny::tags$head(
-      shiny::tags$script(
-        src = "www/scripts.js"
-      )
-    ),
+    shinyApp_header(),
     bslib::layout_columns(
       col_widths = c(6, 6),
       bslib::card(
@@ -540,15 +538,11 @@ plotApp <- function(
         id = "main-plot",
         full_screen = T,
         bslib::card_header("Longitudinal Trends"),
-        # plotUI(id = "Attention/Processing")
-        # do.call(
-        # htmltools::tagList,
         bslib::accordion(
           !!!lapply(unique(nacc_var_groups), \(x) plotUI(id = x)),
           open = TRUE,
           id = "plots-accordion"
         )
-        # )
       )
     )
   )
@@ -676,23 +670,6 @@ plotApp <- function(
         print_updating = T,
         shade_descriptions = shade_descriptions,
         new_id = x
-        # x,
-        # dat = current_studyid_dat, # Could improve by removing columns not relevant to this group.
-        # x_range = x_range,
-        # y_range = shiny::reactive(y_ranges[[x]]),
-        # descriptions = shiny::reactiveVal(c(
-        #   "Impaired" = 0.03,
-        #   "Borderline" = 0.10,
-        #   "Low Average" = 0.26,
-        #   "Average" = 0.76,
-        #   "High Average" = 0.92,
-        #   "Superior" = 0.97,
-        #   "Very Superior" = 1
-        # )),
-        # fill_values = shiny::reactiveVal(calc_fill_colors(7)),
-        # shade_descriptions = shiny::reactiveVal(TRUE),
-        # print_updating = T,
-        # new_id = x
       )
     })
 

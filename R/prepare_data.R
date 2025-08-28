@@ -273,7 +273,7 @@ prepare_data <- function(
       cur_raw_scores <- dat[[cur_raw]]
 
       digits_only <- grepl(
-        "^[0-9]*\\.?[0-9]*$",
+        "^-?[0-9]*\\.?[0-9]*$",
         na.omit(cur_raw_scores),
         perl = TRUE
       )

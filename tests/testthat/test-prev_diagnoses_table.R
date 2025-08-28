@@ -14,13 +14,13 @@ test_that("prev_diagnoses_table works", {
   )
 
   no_diagnoses <- prep_demo |>
-    subset(NACCID == "NACC097067") |>
+    subset(NACCID == "NACC017767") |>
     transform(
       NACCUDSD = NA_integer_
     )
 
   tmp_tab <- prev_diagnoses_table(
-    dat = prep_demo |> subset(NACCID == "NACC097067")
+    dat = prep_demo |> subset(NACCID == "NACC017767")
   )
 
   expect_snapshot(tmp_tab)

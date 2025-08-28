@@ -170,15 +170,15 @@ colSelectServer <- function(
               }
             }
 
-            if (data_type() == "wls") {
-              if (nacc_to_wls[x] %in% col_names()) {
-                out <- unname(nacc_to_wls[x])
-              } else {
-                if (x %in% c("REYTOTAL", "REYAREC", "FAS", "MOCACLOCK")) {
-                  out <- "(CALCULATED)"
-                }
-              }
-            }
+            # if (data_type() == "wls") {
+            #   if (nacc_to_wls[x] %in% col_names()) {
+            #     out <- unname(nacc_to_wls[x])
+            #   } else {
+            #     if (x %in% c("REYTOTAL", "REYAREC", "FAS", "MOCACLOCK")) {
+            #       out <- "(CALCULATED)"
+            #     }
+            #   }
+            # }
 
             # if (data_type() == "wadrc_uds3") {
             #   if (nacc_to_wadrc_uds3[x] %in% col_names()) {
