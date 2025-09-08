@@ -7,7 +7,7 @@ reference:
       - shinyAssessmentApp
   - title: "Tables"
     desc: >
-      Function to create tables
+      Functions to create tables
     contents:
       - ends_with("_table")
   - title: "Shiny Modules"

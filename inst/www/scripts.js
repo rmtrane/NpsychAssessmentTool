@@ -115,17 +115,17 @@ Shiny.addCustomMessageHandler("removeRawSuffix", (message) => {
 })
 
 // Custom Message Handler to show/hide API token 
-Shiny.addCustomMessageHandler("showHidePassword", (message) => {
-  console.log(message);
+// Shiny.addCustomMessageHandler("showHidePassword", (message) => {
+//   console.log(message);
 
-  var x = document.getElementsByClassName("shiny-input-password");
+//   var x = document.getElementsByClassName("shiny-input-password");
 
-  if (message.show) {
-    x[0].type = "text";
-  } else {
-    x[0].type = "password";
-  }
-})
+//   if (message.show) {
+//     x[0].type = "text";
+//   } else {
+//     x[0].type = "password";
+//   }
+// })
 
 
 // Enable hitting enter after password input
@@ -195,3 +195,72 @@ function afterPlot (x, input) {
   // Create input$input.name. This holds all traces with name, index, and visibility.
   Shiny.setInputValue(inputName, out);
 }
+
+// For password toggles
+$(document).ready(function() {
+  // Function to initialize password toggle for a specific input
+  function initPasswordToggle(inputId) {
+    var input = $('#' + inputId);
+    var wrapper = input.parent();
+    
+    // Check if already initialized
+    if (wrapper.hasClass('password-wrapper')) {
+      return;
+    }
+    
+    // Wrap the input
+    input.wrap('<div class=\"password-wrapper\"></div>');
+    wrapper = input.parent();
+    
+    // Add the eye icon (using Font Awesome)
+    var eyeIcon = $('<i class=\"password-toggle fas fa-eye\" data-target=\"' + inputId + '\"></i>');
+    wrapper.append(eyeIcon);
+    
+    // Toggle functionality
+    eyeIcon.on('click', function() {
+      var targetInput = $('#' + $(this).data('target'));
+      var currentType = targetInput.attr('type');
+      
+      if (currentType === 'password') {
+        targetInput.attr('type', 'text');
+        $(this).removeClass('fa-eye').addClass('fa-eye-slash');
+        $(this).attr('title', 'Hide password');
+      } else {
+        targetInput.attr('type', 'password');
+        $(this).removeClass('fa-eye-slash').addClass('fa-eye');
+        $(this).attr('title', 'Show password');
+      }
+    });
+    
+    // Set initial tooltip
+    eyeIcon.attr('title', 'Show password');
+  }
+  
+  // Initialize for existing password inputs
+  setTimeout(function() {
+    $('input[type=\"password\"]').each(function() {
+      if ($(this).attr('id')) {
+        initPasswordToggle($(this).attr('id'));
+      }
+    });
+  }, 100);
+  
+  // Watch for dynamically added password inputs
+  var observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      $(mutation.addedNodes).find('input[type=\"password\"]').each(function() {
+        if ($(this).attr('id')) {
+          var id = $(this).attr('id');
+          setTimeout(function() {
+            initPasswordToggle(id);
+          }, 100);
+        }
+      });
+    });
+  });
+  
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+});

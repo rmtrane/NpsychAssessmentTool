@@ -236,26 +236,26 @@ dataSelectServer <- function(id) {
         )
       }
 
-      if (input$data_source %in% c("redcap", "panda")) {
-        out <- shiny::tagList(
-          out,
-          shiny::checkboxInput(
-            inputId = shiny::NS(id, "show_password"),
-            label = "Show token"
-          )
-        )
-      }
+      # if (input$data_source %in% c("redcap", "panda")) {
+      #   out <- shiny::tagList(
+      #     out,
+      #     shiny::checkboxInput(
+      #       inputId = shiny::NS(id, "show_password"),
+      #       label = "Show token"
+      #     )
+      #   )
+      # }
 
       out
     })
 
-    shiny::observe({
-      session$sendCustomMessage(
-        "showHidePassword",
-        list(show = input$show_password)
-      )
-    }) |>
-      shiny::bindEvent(input$show_password)
+    # shiny::observe({
+    #   session$sendCustomMessage(
+    #     "showHidePassword",
+    #     list(show = input$show_password)
+    #   )
+    # }) |>
+    #   shiny::bindEvent(input$show_password)
 
     output$fetch_data <- shiny::renderUI({
       out <- NULL
@@ -505,23 +505,66 @@ dataSelectServer <- function(id) {
           title = "Save Data Sources",
           easyClose = TRUE,
           footer = NULL,
-          shiny::textInput(
-            inputId = shiny::NS(id, "data_file_key"),
-            label = "Enter a key to save data sources"
+          shiny::tagAppendAttributes(
+            shiny::passwordInput(
+              inputId = shiny::NS(id, "data_file_key"),
+              label = "Enter a password to save data sources",
+              placeholder = "Enter Password"
+            ),
+            .cssSelector = "input",
+            autocomplete = "new-password"
           ),
-          shiny::downloadButton(
-            outputId = shiny::NS(id, "download_data_sources"),
-            label = "Save Data Sources"
-          )
+          shiny::tagAppendAttributes(
+            shiny::passwordInput(
+              inputId = shiny::NS(id, "data_file_key_repeated"),
+              label = "Confirm Password",
+              placeholder = "Re-enter Password"
+            ),
+            .cssSelector = "input",
+            autocomplete = "new-password"
+          ),
+          shiny::uiOutput(shiny::NS(id, "check_passwords"))
         )
       )
     }) |>
       shiny::bindEvent(input$save_data_sources)
 
+    output$check_passwords <- shiny::renderUI({
+      shiny::req(input$data_file_key, input$data_file_key_repeated)
+
+      if (input$data_file_key != input$data_file_key_repeated) {
+        return(shiny::HTML(
+          "<span style='color: red; font-weight: bold;'>Passwords don't match</span>"
+        ))
+      }
+
+      shiny::tagList(
+        shiny::downloadButton(
+          outputId = shiny::NS(id, "download_data_sources"),
+          label = "Save Data Sources"
+        ),
+        shiny::tags$script(HTML(
+          # paste0(
+          #   "$(document).on('click', '#",
+          #   shiny::NS(id, "download_data_sources"),
+          #   "', function() {
+          #     Shiny.setInputValue('",
+          #   shiny::NS(id, "download_data_sources_clicked"),
+          #   "', 1, {priority: 'event'});
+          #   });"
+          # )
+          sprintf(
+            "$(document).on('click', '#%1$s-download_data_sources', function() {Shiny.setInputValue(%1$s-download_data_sources, 1, {priority: 'event'});});",
+            id
+          )
+        ))
+      )
+    })
+
     shiny::observe({
       shiny::removeModal()
     }) |>
-      shiny::bindEvent(input$download_data_sources)
+      shiny::bindEvent(input$download_data_sources_clicked)
 
     output$submit_button <- shiny::renderUI({
       if (length(shiny::reactiveValuesToList(data_sources)) == 0) {

@@ -219,12 +219,16 @@ test_that("save and retrieve works", {
   app$wait_for_idle()
 
   app$set_inputs(`dat_select-data_file_key` = "testing")
-
+  app$set_inputs(`dat_select-data_file_key_repeated` = "testing")
   app$wait_for_idle()
 
   downloaded_file <- app$get_download(
     "dat_select-download_data_sources",
     filename = tempfile(fileext = ".bin")
+  )
+
+  app$run_js(
+    script = "Shiny.setInputValue('dat_select-download_data_sources_clicked', 1, {priority: 'event'})"
   )
 
   data_obj <- safer::retrieve_object(conn = downloaded_file, key = "testing")
@@ -240,7 +244,8 @@ test_that("save and retrieve works", {
   # Update output value
   # Uploaded file outside of: ./tests/testthat
   app$upload_file(`dat_select-saved_data_file` = downloaded_file)
-  app$set_inputs(`dat_select-data_file_key` = "testing2")
+  app$set_inputs(`dat_select-data_file_key` = "testing")
+  app$wait_for_idle()
   # Update output value
   app$click("dat_select-retrieve_data_button")
 
@@ -255,7 +260,6 @@ test_that("save and retrieve works", {
 })
 
 test_that("Works when packages not installed", {
-  
   local_mocked_bindings(
     is_installed = function(pkg, quietly = TRUE) {
       FALSE

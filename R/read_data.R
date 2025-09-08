@@ -4,7 +4,7 @@
 #' Function used to read in data based on the output returned from `dataSelectServer()`.
 #'
 #' @param data_source One of `"redcap"`, `"csv_upload"`, or `"demo"`.
-#' @param data_type Optional. If `data_source` is `"redcap"`, then must be one of `"wadrc_uds3"` or `"wadrc_uds4"`.
+#' @param data_type Optional. If `data_source` is `"redcap"`, then must be one of `"wadrc_uds2"`, `"wadrc_uds3"` or `"wadrc_uds4"`.
 #' @param redcap_auth Optional. A list with entries `redcap_uri` and `token` (when `data_source = "redcap"`).
 #' @param data_file Optional. A character vector with path to data file (when `data_source = "csv"`).
 #'
@@ -80,6 +80,7 @@ read_data <- function(
 
     redcap_fields <- switch(
       data_type,
+      "wadrc_uds2" = wadrc_uds2_redcap_fields,
       "wadrc_uds3" = wadrc_uds3_redcap_fields,
       "wadrc_uds4" = wadrc_uds4_redcap_fields
     )
