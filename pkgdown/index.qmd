@@ -1,17 +1,6 @@
 ---
-format: gfm
+format: md
 ---
-
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
-)
-```
 
 # NpsychAssessmentTool
 
@@ -25,20 +14,30 @@ This package provides an [R Shiny](https://shiny.posit.co) application used for 
 ## Screenshots
 
 ```{r}
+#| echo: false
+#| results: asis
+
+cat("<style>\n")
+cat(readLines(here::here("inst/qmd/style.css")), sep = "\n")
+cat("</style>\n")
+```
+
+```{r}
 #| classes: '.g-col-lg-6 .g-col-12 .g-col-md-12'
 #| warning: false
 #| echo: false
-#| include: false
+#| eval: true
 
 if (!require("yaml")) install.packages("yaml")
 if (!require("htmltools")) install.packages("htmltools")
 
-source("inst/qmd/carousel.R")
+source(here::here("inst/qmd/carousel.R"))
 
 carousel(
   "gallery-carousel",
   5000,
-  yaml.load_file("inst/qmd/carousel.yml")
+  yaml.load_file(here::here("inst/qmd/carousel.yml")),
+  base_url = here::here()
 )
 ```
 
