@@ -1,9 +1,5 @@
 ---
-format:
-  html:
-    toc: false
-    embed-resources: true
-    css: inst/qmd/style.css
+format: gfm
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -27,6 +23,15 @@ knitr::opts_chunk$set(
 This package provides an [R Shiny](https://shiny.posit.co) application used for diagnosis of cognitive status based on neuropsychological scores. 
 
 ## Screenshots
+
+```{r}
+#| echo: false
+#| results: asis
+
+cat("<style>\n")
+cat(readLines(here::here("inst/qmd/style.css")), sep = "\n")
+cat("</style>\n")
+```
 
 ```{r}
 #| classes: '.g-col-lg-6 .g-col-12 .g-col-md-12'

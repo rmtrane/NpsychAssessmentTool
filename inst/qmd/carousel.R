@@ -2,13 +2,13 @@ library(htmltools)
 library(yaml)
 
 # carousel displays a list of items w/ nav buttons
-carousel <- function(id, duration, items) {
+carousel <- function(id, duration, items, base_url = NULL) {
   index <- -1
   items <- lapply(items, function(item) {
     index <<- index + 1
     carouselItem(
       caption = item$caption,
-      image = item$image,
+      image = paste(c(base_url, item$image), collapse = "/"),
       index = index,
       interval = duration
     )
@@ -22,6 +22,7 @@ carousel <- function(id, duration, items) {
     class = "carousel-inner",
     tagList(lapply(items, function(item) item$item))
   )
+
   div(
     id = id,
     class = "carousel carousel-dark slide",
@@ -96,6 +97,7 @@ get_image_uri <- function(file) {
   image_raw <- lapply(file, FUN = function(x) {
     readBin(con = x, what = "raw", n = file.info(x)$size)
   })
+
   vapply(
     seq_along(image_raw),
     FUN.VALUE = character(1L),
