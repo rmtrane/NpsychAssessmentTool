@@ -45,7 +45,7 @@ jobs:
         uses: quarto-dev/quarto-actions/render@v2
         with: 
           to: md
-          path: index.qmd
+          path: pkgdown/index.qmd
 
       - name: Build site
         run: pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
