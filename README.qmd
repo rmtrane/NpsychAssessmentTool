@@ -35,6 +35,7 @@ This package provides an [R Shiny](https://shiny.posit.co) application used for 
 
 if (!require("yaml")) install.packages("yaml")
 if (!require("htmltools")) install.packages("htmltools")
+if (!require("here")) install.packages("here")
 
 source("inst/qmd/carousel.R")
 
@@ -72,7 +73,7 @@ remotes::install_github("rmtrane/NpsychAssessmentTool", dependencies = TRUE)
 
 You can start the application as follows:
 
-```{r example, eval=FALSE}
+``` r
 library(NpsychAssessmentTool)
 shinyAssessmentApp()
 ```
