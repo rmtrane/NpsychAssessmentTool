@@ -1,37 +1,52 @@
 on:
   push:
-    paths: ['README.Rmd']
+    branches: ['main']
+    paths: ['README.qmd']
 
-name: render-rmarkdown.yaml
-
-permissions: read-all
+name: Render and Commit README.qmd 
 
 jobs:
-  render-rmarkdown:
-    runs-on: ubuntu-latest
-    env:
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+  build-deploy:
     permissions:
       contents: write
+    
+    runs-on: macos-latest
+    
     steps:
-      - name: Checkout repo
+      - name: Check out repository
         uses: actions/checkout@v4
+        
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v2
+
+      - name: Install packages
+        uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          fetch-depth: 0
-
-      - uses: r-lib/actions/setup-pandoc@v2
-
-      - uses: r-lib/actions/setup-r@v2
-        with:
-          r-version: renv
-
-      - uses: r-lib/actions/setup-renv@v2
-
-      - name: Render Rmarkdown files and Commit Results
+          extra-packages: any::rcmdcheck
+          needs: check
+      
+      - name: Install NpsychAssessmentTools
         run: |
-          RMD_PATH=($(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '[.]Rmd$'))
-          Rscript -e 'for (f in commandArgs(TRUE)) if (file.exists(f)) rmarkdown::render(f)' ${RMD_PATH[*]}
-          git config --local user.name "$GITHUB_ACTOR"
-          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
-          git commit ${RMD_PATH[*]/.Rmd/.md} -m 'Re-build Rmarkdown files' || echo "No changes to commit"
-          git push origin || echo "No changes to commit"
+          install.packages("devtools")
+          devtools::install(reload=FALSE,quick=TRUE,build=TRUE,dependencies=FALSE,build_vignettes=FALSE)
+        shell: Rscript {0}
+      
+      - name: Render README.qmd
+        uses: quarto-dev/quarto-actions/render@v2
+        with:
+          to: gfm
+          path: README.qmd
+
+      - name: Commit results
+        run: |
+          git config --global user.name "rmtrane"
+          git config --global user.email "rmtrane@users.noreply.github.com"
+
+          git add README.md
+          git commit -m "Rebuild README.qmd"
+          git push
