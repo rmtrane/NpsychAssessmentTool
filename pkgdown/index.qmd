@@ -28,9 +28,6 @@ cat("</style>\n")
 #| echo: false
 #| eval: true
 
-if (!require("yaml")) install.packages("yaml")
-if (!require("htmltools")) install.packages("htmltools")
-
 source(here::here("inst/qmd/carousel.R"))
 
 carousel(
@@ -75,4 +72,4 @@ shinyAssessmentApp()
 
 Alternatively, the app is also available as an RStudio add-in. I.e., once the package is installed, you should be able to launch it from the RStudio add-in dropdown menu:
 
-![Screenshot showing the RStudio add-in.](`r get_image_uri(here::here("man/figures/rstudio-addin.png"))`)
+![Screenshot showing the RStudio add-in.](`r get_image_uri("man/figures/rstudio-addin.png")`)

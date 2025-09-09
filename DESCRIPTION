@@ -51,3 +51,7 @@ Authors@R: c(
   )
 URL: https://rmtrane.github.io/NpsychAssessmentTool
 BugReports: https://github.com/rmtrane/NpsychAssessmentTool/issues
+Config/Needs/website:
+    htmltools,
+    here,
+    yaml
