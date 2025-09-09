@@ -2,13 +2,13 @@ library(htmltools)
 library(yaml)
 
 # carousel displays a list of items w/ nav buttons
-carousel <- function(id, duration, items) {
+carousel <- function(id, duration, items, base_url = NULL) {
   index <- -1
   items <- lapply(items, function(item) {
     index <<- index + 1
     carouselItem(
       item$caption,
-      here::here(item$image),
+      paste(c(base_url, item$image), collapse = "/"),
       # item$link,
       index,
       duration

@@ -35,14 +35,14 @@ This package provides an [R Shiny](https://shiny.posit.co) application used for 
 
 if (!require("yaml")) install.packages("yaml")
 if (!require("htmltools")) install.packages("htmltools")
-if (!require("here")) install.packages("here")
 
 source("inst/qmd/carousel.R")
 
 carousel(
   "gallery-carousel",
   5000,
-  yaml.load_file("inst/qmd/carousel.yml")
+  yaml.load_file("inst/qmd/carousel.yml"),
+  base_url = "https://www.github.com/rmtrane/NpsychAssessmentTool/main/tree/"
 )
 ```
 
