@@ -9,7 +9,7 @@ read_data(data_source = "redcap", data_type = NULL, redcap_auth, data_file)
 \arguments{
 \item{data_source}{One of \code{"redcap"}, \code{"csv_upload"}, or \code{"demo"}.}
 
-\item{data_type}{Optional. If \code{data_source} is \code{"redcap"}, then must be one of \code{"wadrc_uds3"} or \code{"wadrc_uds4"}.}
+\item{data_type}{Optional. If \code{data_source} is \code{"redcap"}, then must be one of \code{"wadrc_uds2"}, \code{"wadrc_uds3"} or \code{"wadrc_uds4"}.}
 
 \item{redcap_auth}{Optional. A list with entries \code{redcap_uri} and \code{token} (when \code{data_source = "redcap"}).}
 

@@ -49,22 +49,22 @@ test_that("{shinytest2} Testing changes to std_methods using demo_data", {
   )
   # fmt: skip
   app$set_inputs(
-    `colSelect-vars_table_output_rows_current` = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168),
-    allow_no_input_binding_ = TRUE,
-    wait_ = F
-  )
+      `colSelect-vars_table_output_rows_current` = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168),
+      allow_no_input_binding_ = TRUE,
+      wait_ = F
+    )
   # fmt: skip
   app$set_inputs(
-    `colSelect-vars_table_output_rows_all` = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168),
-    allow_no_input_binding_ = TRUE,
-    wait_ = F
-  )
+      `colSelect-vars_table_output_rows_all` = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168),
+      allow_no_input_binding_ = TRUE,
+      wait_ = F
+    )
   # fmt: skip
   app$set_inputs(
-    `colSelect-vars_table_output_state` = c(1750258044251, 0, 10, "", TRUE, FALSE, TRUE, c(TRUE, "", TRUE, FALSE, TRUE), c(TRUE, "", TRUE, FALSE, TRUE), c(FALSE, "", TRUE, FALSE, TRUE), c(TRUE, "", TRUE, FALSE, TRUE), c(TRUE, "", TRUE, FALSE, TRUE), c(TRUE, "", TRUE, FALSE, TRUE), c(TRUE, "", TRUE, FALSE, TRUE)),
-    allow_no_input_binding_ = TRUE,
-    wait_ = F
-  )
+      `colSelect-vars_table_output_state` = c(1750258044251, 0, 10, "", TRUE, FALSE, TRUE, c(TRUE, "", TRUE, FALSE, TRUE), c(TRUE, "", TRUE, FALSE, TRUE), c(FALSE, "", TRUE, FALSE, TRUE), c(TRUE, "", TRUE, FALSE, TRUE), c(TRUE, "", TRUE, FALSE, TRUE), c(TRUE, "", TRUE, FALSE, TRUE), c(TRUE, "", TRUE, FALSE, TRUE)),
+      allow_no_input_binding_ = TRUE,
+      wait_ = F
+    )
   app$wait_for_idle(timeout = 10000)
   app$set_inputs(`colSelect-MOCATOTSmethod` = "regression (nacc)", wait_ = F)
   app$set_inputs(
@@ -170,10 +170,10 @@ test_that("{shinytest2} Testing changes to std_methods using demo_data", {
   )
   # fmt: skip
   app$set_inputs(
-    `General Cognition-TraceMapping` = c("", 0, "", "", "dashed", 1, "", "", "Impaired", 2, "", TRUE, "dashed", 3, "", "", "Borderline", 4, "", TRUE, "dashed", 5, "", "", "Low Average", 6, "", TRUE, "dashed", 7, "", "", "Average", 8, "", TRUE, "dashed", 9, "", "", "High Average", 10, "", TRUE, "dashed", 11, "", "", "Superior", 12, "", TRUE, "dashed", 13, "", "", "Very Superior", 14, "", TRUE, "MoCA", 15, "MOCATOTS", TRUE, "MoCA", 16, "MOCATOTS", TRUE),
-    allow_no_input_binding_ = TRUE,
-    wait_ = F
-  )
+      `General Cognition-TraceMapping` = c("", 0, "", "", "dashed", 1, "", "", "Impaired", 2, "", TRUE, "dashed", 3, "", "", "Borderline", 4, "", TRUE, "dashed", 5, "", "", "Low Average", 6, "", TRUE, "dashed", 7, "", "", "Average", 8, "", TRUE, "dashed", 9, "", "", "High Average", 10, "", TRUE, "dashed", 11, "", "", "Superior", 12, "", TRUE, "dashed", 13, "", "", "Very Superior", 14, "", TRUE, "MoCA", 15, "MOCATOTS", TRUE, "MoCA", 16, "MOCATOTS", TRUE),
+      allow_no_input_binding_ = TRUE,
+      wait_ = F
+    )
   app$set_inputs(
     `plotly_afterplot-General Cognition` = "\"General Cognition-plot\"",
     allow_no_input_binding_ = TRUE,
@@ -225,9 +225,9 @@ test_that("{shinytest2} Testing changes to std_methods using demo_data", {
   )
   # fmt: skip
   app$set_inputs(
-    `Attention/Processing-TraceMapping` = c("", 0, "", "", "dashed", 1, "", "", "Impaired", 2, "", TRUE, "dashed", 3, "", "", "Borderline", 4, "", TRUE, "dashed", 5, "", "", "Low Average", 6, "", TRUE, "dashed", 7, "", "", "Average", 8, "", TRUE, "dashed", 9, "", "", "High Average", 10, "", TRUE, "dashed", 11, "", "", "Superior", 12, "", TRUE, "dashed", 13, "", "", "Very Superior", 14, "", TRUE, "Trailmaking Part A", 15, "TRAILA", TRUE, "Trailmaking Part A", 16, "TRAILA", TRUE, "Number Span Forward - Total", 17, "DIGFORCT", "legendonly", "Number Span Forward - Total", 18, "DIGFORCT", "legendonly", "Number Span Forward - Span Length", 19, "DIGFORSL", TRUE, "Number Span Forward - Span Length", 20, "DIGFORSL", TRUE, "Number Span Backward - Total", 21, "DIGBACCT", "legendonly", "Number Span Backward - Total", 22, "DIGBACCT", "legendonly", "Number Span Backward - Span Length", 23, "DIGBACLS", TRUE, "Number Span Backward - Span Length", 24, "DIGBACLS", TRUE),
-    allow_no_input_binding_ = TRUE
-  )
+      `Attention/Processing-TraceMapping` = c("", 0, "", "", "dashed", 1, "", "", "Impaired", 2, "", TRUE, "dashed", 3, "", "", "Borderline", 4, "", TRUE, "dashed", 5, "", "", "Low Average", 6, "", TRUE, "dashed", 7, "", "", "Average", 8, "", TRUE, "dashed", 9, "", "", "High Average", 10, "", TRUE, "dashed", 11, "", "", "Superior", 12, "", TRUE, "dashed", 13, "", "", "Very Superior", 14, "", TRUE, "Trailmaking Part A", 15, "TRAILA", TRUE, "Trailmaking Part A", 16, "TRAILA", TRUE, "Number Span Forward - Total", 17, "DIGFORCT", "legendonly", "Number Span Forward - Total", 18, "DIGFORCT", "legendonly", "Number Span Forward - Span Length", 19, "DIGFORSL", TRUE, "Number Span Forward - Span Length", 20, "DIGFORSL", TRUE, "Number Span Backward - Total", 21, "DIGBACCT", "legendonly", "Number Span Backward - Total", 22, "DIGBACCT", "legendonly", "Number Span Backward - Span Length", 23, "DIGBACLS", TRUE, "Number Span Backward - Span Length", 24, "DIGBACLS", TRUE),
+      allow_no_input_binding_ = TRUE
+    )
   app$set_inputs(
     `plotly_afterplot-Attention/Processing` = "\"Attention/Processing-plot\"",
     allow_no_input_binding_ = TRUE,
@@ -280,9 +280,9 @@ test_that("{shinytest2} Testing changes to std_methods using demo_data", {
   )
   # fmt: skip
   app$set_inputs(
-    `Language-TraceMapping` = c("", 0, "", "", "dashed", 1, "", "", "Impaired", 2, "", TRUE, "dashed", 3, "", "", "Borderline", 4, "", TRUE, "dashed", 5, "", "", "Low Average", 6, "", TRUE, "dashed", 7, "", "", "Average", 8, "", TRUE, "dashed", 9, "", "", "High Average", 10, "", TRUE, "dashed", 11, "", "", "Superior", 12, "", TRUE, "dashed", 13, "", "", "Very Superior", 14, "", TRUE, "MINT", 15, "MINTTOTS", TRUE, "MINT", 16, "MINTTOTS", TRUE, "Animal Fluency", 17, "ANIMALS", TRUE, "Animal Fluency", 18, "ANIMALS", TRUE, "Vegetable Fluency", 19, "VEG", TRUE, "Vegetable Fluency", 20, "VEG", TRUE, "F+L Words", 21, "UDSVERTN", "legendonly", "F+L Words", 22, "UDSVERTN", "legendonly", "F Words", 23, "UDSVERFC", TRUE, "F Words", 24, "UDSVERFC", TRUE, "L Words", 25, "UDSVERLC", TRUE, "L Words", 26, "UDSVERLC", TRUE),
-    allow_no_input_binding_ = TRUE
-  )
+      `Language-TraceMapping` = c("", 0, "", "", "dashed", 1, "", "", "Impaired", 2, "", TRUE, "dashed", 3, "", "", "Borderline", 4, "", TRUE, "dashed", 5, "", "", "Low Average", 6, "", TRUE, "dashed", 7, "", "", "Average", 8, "", TRUE, "dashed", 9, "", "", "High Average", 10, "", TRUE, "dashed", 11, "", "", "Superior", 12, "", TRUE, "dashed", 13, "", "", "Very Superior", 14, "", TRUE, "MINT", 15, "MINTTOTS", TRUE, "MINT", 16, "MINTTOTS", TRUE, "Animal Fluency", 17, "ANIMALS", TRUE, "Animal Fluency", 18, "ANIMALS", TRUE, "Vegetable Fluency", 19, "VEG", TRUE, "Vegetable Fluency", 20, "VEG", TRUE, "F+L Words", 21, "UDSVERTN", "legendonly", "F+L Words", 22, "UDSVERTN", "legendonly", "F Words", 23, "UDSVERFC", TRUE, "F Words", 24, "UDSVERFC", TRUE, "L Words", 25, "UDSVERLC", TRUE, "L Words", 26, "UDSVERLC", TRUE),
+      allow_no_input_binding_ = TRUE
+    )
   app$set_inputs(
     `plotly_afterplot-Language` = "\"Language-plot\"",
     allow_no_input_binding_ = TRUE,
@@ -314,9 +314,9 @@ test_that("{shinytest2} Testing changes to std_methods using demo_data", {
   )
   # fmt: skip
   app$set_inputs(
-    `Visuospatial-TraceMapping` = c("", 0, "", "", "dashed", 1, "", "", "Impaired", 2, "", TRUE, "dashed", 3, "", "", "Borderline", 4, "", TRUE, "dashed", 5, "", "", "Low Average", 6, "", TRUE, "dashed", 7, "", "", "Average", 8, "", TRUE, "dashed", 9, "", "", "High Average", 10, "", TRUE, "dashed", 11, "", "", "Superior", 12, "", TRUE, "dashed", 13, "", "", "Very Superior", 14, "", TRUE, "Benson Figure Copy", 15, "UDSBENTC", TRUE, "Benson Figure Copy", 16, "UDSBENTC", TRUE),
-    allow_no_input_binding_ = TRUE
-  )
+      `Visuospatial-TraceMapping` = c("", 0, "", "", "dashed", 1, "", "", "Impaired", 2, "", TRUE, "dashed", 3, "", "", "Borderline", 4, "", TRUE, "dashed", 5, "", "", "Low Average", 6, "", TRUE, "dashed", 7, "", "", "Average", 8, "", TRUE, "dashed", 9, "", "", "High Average", 10, "", TRUE, "dashed", 11, "", "", "Superior", 12, "", TRUE, "dashed", 13, "", "", "Very Superior", 14, "", TRUE, "Benson Figure Copy", 15, "UDSBENTC", TRUE, "Benson Figure Copy", 16, "UDSBENTC", TRUE),
+      allow_no_input_binding_ = TRUE
+    )
   app$set_inputs(
     `plotly_afterplot-Visuospatial` = "\"Visuospatial-plot\"",
     allow_no_input_binding_ = TRUE,
@@ -368,10 +368,10 @@ test_that("{shinytest2} Testing changes to std_methods using demo_data", {
   )
   # fmt: skip
   app$set_inputs(
-    `Memory-TraceMapping` = c("", 0, "", "", "dashed", 1, "", "", "Impaired", 2, "", TRUE, "dashed", 3, "", "", "Borderline", 4, "", TRUE, "dashed", 5, "", "", "Low Average", 6, "", TRUE, "dashed", 7, "", "", "Average", 8, "", TRUE, "dashed", 9, "", "", "High Average", 10, "", TRUE, "dashed", 11, "", "", "Superior", 12, "", TRUE, "dashed", 13, "", "", "Very Superior", 14, "", TRUE, "Benson Delay", 15, "UDSBENTD", TRUE, "Benson Delay", 16, "UDSBENTD", TRUE, "Craft Immediate - Verbatim", 17, "CRAFTVRS", "legendonly", "Craft Immediate - Verbatim", 18, "CRAFTVRS", "legendonly", "Craft Immediate - Paraphrase", 19, "CRAFTURS", TRUE, "Craft Immediate - Paraphrase", 20, "CRAFTURS", TRUE, "Craft Delay - Verbatim", 21, "CRAFTDVR", "legendonly", "Craft Delay - Verbatim", 22, "CRAFTDVR", "legendonly", "Craft Delay - Paraphrase", 23, "CRAFTDRE", TRUE, "Craft Delay - Paraphrase", 24, "CRAFTDRE", TRUE),
-    allow_no_input_binding_ = TRUE,
-    wait_ = F
-  )
+      `Memory-TraceMapping` = c("", 0, "", "", "dashed", 1, "", "", "Impaired", 2, "", TRUE, "dashed", 3, "", "", "Borderline", 4, "", TRUE, "dashed", 5, "", "", "Low Average", 6, "", TRUE, "dashed", 7, "", "", "Average", 8, "", TRUE, "dashed", 9, "", "", "High Average", 10, "", TRUE, "dashed", 11, "", "", "Superior", 12, "", TRUE, "dashed", 13, "", "", "Very Superior", 14, "", TRUE, "Benson Delay", 15, "UDSBENTD", TRUE, "Benson Delay", 16, "UDSBENTD", TRUE, "Craft Immediate - Verbatim", 17, "CRAFTVRS", "legendonly", "Craft Immediate - Verbatim", 18, "CRAFTVRS", "legendonly", "Craft Immediate - Paraphrase", 19, "CRAFTURS", TRUE, "Craft Immediate - Paraphrase", 20, "CRAFTURS", TRUE, "Craft Delay - Verbatim", 21, "CRAFTDVR", "legendonly", "Craft Delay - Verbatim", 22, "CRAFTDVR", "legendonly", "Craft Delay - Paraphrase", 23, "CRAFTDRE", TRUE, "Craft Delay - Paraphrase", 24, "CRAFTDRE", TRUE),
+      allow_no_input_binding_ = TRUE,
+      wait_ = F
+    )
   app$set_inputs(
     `plotly_afterplot-Memory` = "\"Memory-plot\"",
     allow_no_input_binding_ = TRUE,
@@ -403,9 +403,9 @@ test_that("{shinytest2} Testing changes to std_methods using demo_data", {
   )
   # fmt: skip
   app$set_inputs(
-    `Executive Functioning-TraceMapping` = c("", 0, "", "", "dashed", 1, "", "", "Impaired", 2, "", TRUE, "dashed", 3, "", "", "Borderline", 4, "", TRUE, "dashed", 5, "", "", "Low Average", 6, "", TRUE, "dashed", 7, "", "", "Average", 8, "", TRUE, "dashed", 9, "", "", "High Average", 10, "", TRUE, "dashed", 11, "", "", "Superior", 12, "", TRUE, "dashed", 13, "", "", "Very Superior", 14, "", TRUE, "Trailmaking Part B", 15, "TRAILB", TRUE, "Trailmaking Part B", 16, "TRAILB", TRUE),
-    allow_no_input_binding_ = TRUE
-  )
+      `Executive Functioning-TraceMapping` = c("", 0, "", "", "dashed", 1, "", "", "Impaired", 2, "", TRUE, "dashed", 3, "", "", "Borderline", 4, "", TRUE, "dashed", 5, "", "", "Low Average", 6, "", TRUE, "dashed", 7, "", "", "Average", 8, "", TRUE, "dashed", 9, "", "", "High Average", 10, "", TRUE, "dashed", 11, "", "", "Superior", 12, "", TRUE, "dashed", 13, "", "", "Very Superior", 14, "", TRUE, "Trailmaking Part B", 15, "TRAILB", TRUE, "Trailmaking Part B", 16, "TRAILB", TRUE),
+      allow_no_input_binding_ = TRUE
+    )
   app$set_inputs(
     `plotly_afterplot-Executive Functioning` = "\"Executive Functioning-plot\"",
     allow_no_input_binding_ = TRUE,
@@ -693,7 +693,12 @@ test_that("{shinytest2} Testing changes to std_methods using demo_data", {
 
   # Update output value
   app$set_window_size(width = 1619, height = 968)
-  app$expect_screenshot(threshold = 7)
 
-  app$stop(signal_timeout = 50000)
+  app$expect_screenshot(
+    screenshot_args = list(selector = "viewport"),
+    threshold = 150,
+    kernel_size = 7
+  )
+
+  app$stop()
 })

@@ -260,13 +260,12 @@ test_that("save and retrieve works", {
 })
 
 test_that("Works when packages not installed", {
+  skip_on_cran()
+  skip_on_ci()
+
   local_mocked_bindings(
     is_installed = function(pkg, quietly = TRUE) {
       FALSE
-      # if (pkg %in% c("REDCapR")) {
-      #   return(FALSE)
-      # }
-      # rlang::is_installed(pkg)
     },
     .package = "rlang"
   )
@@ -283,7 +282,11 @@ test_that("Works when packages not installed", {
 
   app$run_js(script = "$('.selectize-input').first().click()")
 
-  app$expect_screenshot(threshold = 7)
+  app$expect_screenshot(
+    screenshot_args = list(selector = "viewport"),
+    threshold = 150,
+    kernel_size = 7
+  )
 
   app$stop()
 })

@@ -543,16 +543,7 @@ dataSelectServer <- function(id) {
           outputId = shiny::NS(id, "download_data_sources"),
           label = "Save Data Sources"
         ),
-        shiny::tags$script(HTML(
-          # paste0(
-          #   "$(document).on('click', '#",
-          #   shiny::NS(id, "download_data_sources"),
-          #   "', function() {
-          #     Shiny.setInputValue('",
-          #   shiny::NS(id, "download_data_sources_clicked"),
-          #   "', 1, {priority: 'event'});
-          #   });"
-          # )
+        shiny::tags$script(shiny::HTML(
           sprintf(
             "$(document).on('click', '#%1$s-download_data_sources', function() {Shiny.setInputValue(%1$s-download_data_sources, 1, {priority: 'event'});});",
             id

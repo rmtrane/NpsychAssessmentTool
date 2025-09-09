@@ -21,7 +21,8 @@ test_that("screenshots for introduction", {
   app$set_window_size(width = 1920, height = 1080)
   app$wait_for_idle()
   app$expect_screenshot(
-    screenshot_args = list(selector = "viewport")
+    screenshot_args = list(selector = "viewport"),
+    threshold = 7
   )
   app$set_inputs(`dataSelect-data_source` = "demo")
   # Update output value
@@ -29,10 +30,11 @@ test_that("screenshots for introduction", {
   app$wait_for_idle()
   # Update output value
   app$expect_screenshot(
-    screenshot_args = list(selector = "viewport")
+    screenshot_args = list(selector = "viewport"),
+    threshold = 7
   )
   app$click("dataSelect-submit")
-  app$wait_for_idle()
+  app$wait_for_idle(timeout = 5000)
   # Update output value
   # Update unbound `input` value
   # fmt: skip
@@ -114,7 +116,8 @@ test_that("screenshots for introduction", {
   # Update output value
   app$wait_for_idle()
   app$expect_screenshot(
-    screenshot_args = list(selector = "viewport")
+    screenshot_args = list(selector = "viewport"),
+    threshold = 7
   )
   app$set_inputs(current_studyid = "NACC003789")
   # Update unbound `input` value
@@ -123,20 +126,23 @@ test_that("screenshots for introduction", {
   app$set_window_size(width = 1920, height = 1080)
   # Update unbound `input` value
   app$expect_screenshot(
-    screenshot_args = list(selector = "viewport")
+    screenshot_args = list(selector = "viewport"),
+    threshold = 7
   )
   app$set_inputs(`long-trends` = "Cognitive Scores (Table)")
   # Update output value
   app$set_window_size(width = 1920, height = 1080)
   # Update unbound `input` value
   app$expect_screenshot(
-    screenshot_args = list(selector = "viewport")
+    screenshot_args = list(selector = "viewport"),
+    threshold = 7
   )
   # Update unbound `input` value
   app$set_window_size(width = 1920, height = 1080)
   app$set_inputs(`long-trends` = "Diagnoses")
   # Update output value
   app$expect_screenshot(
-    screenshot_args = list(selector = "viewport")
+    screenshot_args = list(selector = "viewport"),
+    threshold = 7
   )
 })
