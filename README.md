@@ -16,10 +16,6 @@ scores.
 
 ## Screenshots
 
-    #> 
-    #> The downloaded binary packages are in
-    #>  /var/folders/x7/ch5v91h56_zbvbd1y2f600dm0000gn/T//RtmpVChX0B/downloaded_packages
-
 <div id="gallery-carousel" class="carousel carousel-dark slide" data-bs-ride="carousel">
 <div class="carousel-indicators">
 <button type="button" data-bs-target="#gallery-carousel" data-bs-slide-to="0" aria-label="Slide 1" class="active" aria-current="true"></button>
@@ -32,7 +28,7 @@ scores.
 <div class="carousel-inner">
 <div class="carousel-item active" data-bs-interval="5000">
 <a>
-<img src="/Users/runner/work/NpsychAssessmentTool/NpsychAssessmentTool/tests/testthat/_snaps/mac-4.5/screenshots_for_intro/shinyApp-001.png" class="d-block  mx-auto border" width="100%"/>
+<img src="https://www.github.com/rmtrane/NpsychAssessmentTool/main/tree//tests/testthat/_snaps/mac-4.5/screenshots_for_intro/shinyApp-001.png" class="d-block  mx-auto border" width="100%"/>
 </a>
 <div class="carousel-caption d-none d-md-block">
 <p class="fw-light">Data Selection. Data can be imported straight from REDCap or from a .csv file.</p>
@@ -40,7 +36,7 @@ scores.
 </div>
 <div class="carousel-item" data-bs-interval="5000">
 <a>
-<img src="/Users/runner/work/NpsychAssessmentTool/NpsychAssessmentTool/tests/testthat/_snaps/mac-4.5/screenshots_for_intro/shinyApp-002.png" class="d-block  mx-auto border" width="100%"/>
+<img src="https://www.github.com/rmtrane/NpsychAssessmentTool/main/tree//tests/testthat/_snaps/mac-4.5/screenshots_for_intro/shinyApp-002.png" class="d-block  mx-auto border" width="100%"/>
 </a>
 <div class="carousel-caption d-none d-md-block">
 <p class="fw-light">Data Selection. A demo data set is included for users to explore the program's capabilities.</p>
@@ -48,7 +44,7 @@ scores.
 </div>
 <div class="carousel-item" data-bs-interval="5000">
 <a>
-<img src="/Users/runner/work/NpsychAssessmentTool/NpsychAssessmentTool/tests/testthat/_snaps/mac-4.5/screenshots_for_intro/shinyApp-003.png" class="d-block  mx-auto border" width="100%"/>
+<img src="https://www.github.com/rmtrane/NpsychAssessmentTool/main/tree//tests/testthat/_snaps/mac-4.5/screenshots_for_intro/shinyApp-003.png" class="d-block  mx-auto border" width="100%"/>
 </a>
 <div class="carousel-caption d-none d-md-block">
 <p class="fw-light">Scoring Tables and Figures. The main table shows scores from single visit, while plots include longitudinal (standardized) scores across all available visits.</p>
@@ -56,7 +52,7 @@ scores.
 </div>
 <div class="carousel-item" data-bs-interval="5000">
 <a>
-<img src="/Users/runner/work/NpsychAssessmentTool/NpsychAssessmentTool/tests/testthat/_snaps/mac-4.5/screenshots_for_intro/shinyApp-004.png" class="d-block  mx-auto border" width="100%"/>
+<img src="https://www.github.com/rmtrane/NpsychAssessmentTool/main/tree//tests/testthat/_snaps/mac-4.5/screenshots_for_intro/shinyApp-004.png" class="d-block  mx-auto border" width="100%"/>
 </a>
 <div class="carousel-caption d-none d-md-block">
 <p class="fw-light">Scoring Tables and Figures. Switching between participants is as easy as selecting the ID from the dropdown menu.</p>
@@ -64,7 +60,7 @@ scores.
 </div>
 <div class="carousel-item" data-bs-interval="5000">
 <a>
-<img src="/Users/runner/work/NpsychAssessmentTool/NpsychAssessmentTool/tests/testthat/_snaps/mac-4.5/screenshots_for_intro/shinyApp-005.png" class="d-block  mx-auto border" width="100%"/>
+<img src="https://www.github.com/rmtrane/NpsychAssessmentTool/main/tree//tests/testthat/_snaps/mac-4.5/screenshots_for_intro/shinyApp-005.png" class="d-block  mx-auto border" width="100%"/>
 </a>
 <div class="carousel-caption d-none d-md-block">
 <p class="fw-light">Scoring Tables and Figures. The longitudinal (standardized) scores are also available in the form of a color coded table.</p>
@@ -72,7 +68,7 @@ scores.
 </div>
 <div class="carousel-item" data-bs-interval="5000">
 <a>
-<img src="/Users/runner/work/NpsychAssessmentTool/NpsychAssessmentTool/tests/testthat/_snaps/mac-4.5/screenshots_for_intro/shinyApp-006.png" class="d-block  mx-auto border" width="100%"/>
+<img src="https://www.github.com/rmtrane/NpsychAssessmentTool/main/tree//tests/testthat/_snaps/mac-4.5/screenshots_for_intro/shinyApp-006.png" class="d-block  mx-auto border" width="100%"/>
 </a>
 <div class="carousel-caption d-none d-md-block">
 <p class="fw-light">Scoring Tables and Figures. Diagnoses from previous visits are also made available.</p>
