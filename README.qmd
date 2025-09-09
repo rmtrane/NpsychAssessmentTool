@@ -1,5 +1,6 @@
 ---
 format: gfm
+title: NpsychAssessmentTool
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -12,8 +13,6 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
-
-# NpsychAssessmentTool
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/rmtrane/NpsychAssessmentTool/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rmtrane/NpsychAssessmentTool/actions/workflows/R-CMD-check.yaml)
