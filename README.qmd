@@ -41,8 +41,7 @@ source("inst/qmd/carousel.R")
 carousel(
   "gallery-carousel",
   5000,
-  yaml.load_file("inst/qmd/carousel.yml"),
-  base_url = "https://www.github.com/rmtrane/NpsychAssessmentTool/main/tree/"
+  yaml.load_file("inst/qmd/carousel.yml")
 )
 ```
 

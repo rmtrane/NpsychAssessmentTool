@@ -2,16 +2,15 @@ library(htmltools)
 library(yaml)
 
 # carousel displays a list of items w/ nav buttons
-carousel <- function(id, duration, items, base_url = NULL) {
+carousel <- function(id, duration, items) {
   index <- -1
   items <- lapply(items, function(item) {
     index <<- index + 1
     carouselItem(
-      item$caption,
-      paste(c(base_url, item$image), collapse = "/"),
-      # item$link,
-      index,
-      duration
+      caption = item$caption,
+      image = item$image,
+      index = index,
+      interval = duration
     )
   })
 
@@ -38,7 +37,6 @@ carousel <- function(id, duration, items, base_url = NULL) {
 carouselItem <- function(
   caption,
   image,
-  # link,
   index,
   interval
 ) {
@@ -61,7 +59,11 @@ carouselItem <- function(
     `data-bs-interval` = interval,
     a(
       # href = link,
-      img(src = image, class = "d-block  mx-auto border", width = "100%")
+      img(
+        src = get_image_uri(image),
+        class = "d-block  mx-auto border",
+        width = "100%"
+      )
     ),
     div(
       class = "carousel-caption d-none d-md-block",
@@ -86,5 +88,35 @@ navButton <- function(targetId, type, text) {
       `aria-hidden` = "true"
     ),
     span(class = "visually-hidden", text)
+  )
+}
+
+
+get_image_uri <- function(file) {
+  image_raw <- lapply(file, FUN = function(x) {
+    readBin(con = x, what = "raw", n = file.info(x)$size)
+  })
+  vapply(
+    seq_along(image_raw),
+    FUN.VALUE = character(1L),
+    USE.NAMES = FALSE,
+    FUN = function(x) {
+      file <- file[x]
+      pos <- regexpr("\\.([[:alnum:]]+)$", file)
+      extension <- tolower(ifelse(pos > -1L, substring(file, pos + 1L), ""))
+
+      file <- switch(
+        extension,
+        svg = "image/svg+xml",
+        jpg = "image/jpeg",
+        paste("image", extension, sep = "/")
+      )
+      paste0(
+        "data:",
+        file,
+        ";base64,",
+        base64enc::base64encode(image_raw[[x]])
+      )
+    }
   )
 }
