@@ -29,7 +29,7 @@ This package provides an [R Shiny](https://shiny.posit.co) application used for 
 #| results: asis
 
 cat("<style>\n")
-cat(readLines(here::here("inst/qmd/style.css")), sep = "\n")
+cat(readLines("inst/qmd/style.css"), sep = "\n")
 cat("</style>\n")
 ```
 
