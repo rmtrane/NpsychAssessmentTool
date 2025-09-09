@@ -68,7 +68,7 @@ carouselItem <- function(
     ),
     div(
       class = "carousel-caption d-none d-md-block",
-      tags$p(class = "fw-light", caption)
+      tags$p(caption)
     )
   )
   list(
