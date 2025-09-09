@@ -56,4 +56,10 @@ shinyAssessmentApp()
 
 Alternatively, the app is also available as an RStudio add-in. I.e., once the package is installed, you should be able to launch it from the RStudio add-in dropdown menu:
 
+```{r}
+#| include: false
+
+source("inst/qmd/get_image_uri.R")
+```
+
 ![Screenshot showing the RStudio add-in.](`r get_image_uri("man/figures/rstudio-addin.png")`)
