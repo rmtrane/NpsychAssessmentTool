@@ -54,8 +54,122 @@
   </div>
 </nav><div class="container template-home">
 <div class="row">
-  <main id="main" class="col-md-9">
-Building on the NpsychBatteryNorms package, this package includes a Shiny application that makes it easy to present UDS battery scores in a way useful to consensus diagnosis. Data can be imported as an .csv file or pulled directly from a REDCap database (`REDCapR` needed).
+  <main id="main" class="col-md-9"><div class="section level1">
+<div class="page-header"><h1 id="npsychassessmenttool">NpsychAssessmentTool<a class="anchor" aria-label="anchor" href="#npsychassessmenttool"></a>
+</h1></div>
+<!-- badges: start -->
+
+<p>This package provides an <a href="https://shiny.posit.co" class="external-link">R Shiny</a> application used for diagnosis of cognitive status based on neuropsychological scores.</p>
+<div class="section level2">
+<h2 id="screenshots">Screenshots<a class="anchor" aria-label="anchor" href="#screenshots"></a>
+</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="co">#&gt; The downloaded binary packages are in</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="co">#&gt;  /var/folders/x7/ch5v91h56_zbvbd1y2f600dm0000gn/T//RtmpVChX0B/downloaded_packages</span></span></code></pre></div>
+<div id="gallery-carousel" class="carousel carousel-dark slide" data-bs-ride="carousel">
+<div class="carousel-indicators">
+<button type="button" data-bs-target="#gallery-carousel" data-bs-slide-to="0" aria-label="Slide 1" class="active" aria-current="true">
+</button>
+<button type="button" data-bs-target="#gallery-carousel" data-bs-slide-to="1" aria-label="Slide 2">
+</button>
+<button type="button" data-bs-target="#gallery-carousel" data-bs-slide-to="2" aria-label="Slide 3">
+</button>
+<button type="button" data-bs-target="#gallery-carousel" data-bs-slide-to="3" aria-label="Slide 4">
+</button>
+<button type="button" data-bs-target="#gallery-carousel" data-bs-slide-to="4" aria-label="Slide 5">
+</button>
+<button type="button" data-bs-target="#gallery-carousel" data-bs-slide-to="5" aria-label="Slide 6">
+</button>
+</div>
+<div class="carousel-inner">
+<div class="carousel-item active" data-bs-interval="5000">
+<a> <img src="/Users/runner/work/NpsychAssessmentTool/NpsychAssessmentTool/tests/testthat/_snaps/mac-4.5/screenshots_for_intro/shinyApp-001.png" class="d-block  mx-auto border" width="100%"></a>
+<div class="carousel-caption d-none d-md-block">
+<p class="fw-light">
+Data Selection. Data can be imported straight from REDCap or from a .csv file.
+</p>
+</div>
+</div>
+<div class="carousel-item" data-bs-interval="5000">
+<a> <img src="/Users/runner/work/NpsychAssessmentTool/NpsychAssessmentTool/tests/testthat/_snaps/mac-4.5/screenshots_for_intro/shinyApp-002.png" class="d-block  mx-auto border" width="100%"></a>
+<div class="carousel-caption d-none d-md-block">
+<p class="fw-light">
+Data Selection. A demo data set is included for users to explore the program’s capabilities.
+</p>
+</div>
+</div>
+<div class="carousel-item" data-bs-interval="5000">
+<a> <img src="/Users/runner/work/NpsychAssessmentTool/NpsychAssessmentTool/tests/testthat/_snaps/mac-4.5/screenshots_for_intro/shinyApp-003.png" class="d-block  mx-auto border" width="100%"></a>
+<div class="carousel-caption d-none d-md-block">
+<p class="fw-light">
+Scoring Tables and Figures. The main table shows scores from single visit, while plots include longitudinal (standardized) scores across all available visits.
+</p>
+</div>
+</div>
+<div class="carousel-item" data-bs-interval="5000">
+<a> <img src="/Users/runner/work/NpsychAssessmentTool/NpsychAssessmentTool/tests/testthat/_snaps/mac-4.5/screenshots_for_intro/shinyApp-004.png" class="d-block  mx-auto border" width="100%"></a>
+<div class="carousel-caption d-none d-md-block">
+<p class="fw-light">
+Scoring Tables and Figures. Switching between participants is as easy as selecting the ID from the dropdown menu.
+</p>
+</div>
+</div>
+<div class="carousel-item" data-bs-interval="5000">
+<a> <img src="/Users/runner/work/NpsychAssessmentTool/NpsychAssessmentTool/tests/testthat/_snaps/mac-4.5/screenshots_for_intro/shinyApp-005.png" class="d-block  mx-auto border" width="100%"></a>
+<div class="carousel-caption d-none d-md-block">
+<p class="fw-light">
+Scoring Tables and Figures. The longitudinal (standardized) scores are also available in the form of a color coded table.
+</p>
+</div>
+</div>
+<div class="carousel-item" data-bs-interval="5000">
+<a> <img src="/Users/runner/work/NpsychAssessmentTool/NpsychAssessmentTool/tests/testthat/_snaps/mac-4.5/screenshots_for_intro/shinyApp-006.png" class="d-block  mx-auto border" width="100%"></a>
+<div class="carousel-caption d-none d-md-block">
+<p class="fw-light">
+Scoring Tables and Figures. Diagnoses from previous visits are also made available.
+</p>
+</div>
+</div>
+</div>
+<button class="carousel-control-prev" type="button" data-bs-target="#gallery-carousel" data-bs-slide="prev">
+<span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Prevoius</span>
+</button>
+<button class="carousel-control-next" type="button" data-bs-target="#gallery-carousel" data-bs-slide="next">
+<span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span>
+</button>
+</div>
+</div>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>You can install the development version of NpsychAssessmentTool from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"rmtrane/NpsychAssessmentTool"</span><span class="op">)</span></span></code></pre></div>
+<p>or</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"rmtrane/NpsychAssessmentTool"</span><span class="op">)</span></span></code></pre></div>
+<p>Note that some features of the application mean additional resources. For example, the R package <a href="https://ouhscbbmc.github.io/REDCapR/" class="external-link"><code>REDCapR</code></a> is necessary to be able to pull data straight from REDCap. To install the packages needed to enable all features, use</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"rmtrane/NpsychAssessmentTool"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p>or</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"rmtrane/NpsychAssessmentTool"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+</h2>
+<p>You can start the application as follows:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rmtrane.github.io/NpsychAssessmentTool">NpsychAssessmentTool</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/shinyAssessmentApp.html">shinyAssessmentApp</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>Alternatively, the app is also available as an RStudio add-in. I.e., once the package is installed, you should be able to launch it from the RStudio add-in dropdown menu:</p>
+<div class="float">
+<img src="reference/figures/rstudio-addin.png" alt="Screenshot showing the RStudio add-in."><div class="figcaption">Screenshot showing the RStudio add-in.</div>
+</div>
+</div>
+</div>
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
@@ -87,7 +201,13 @@ Building on the NpsychBatteryNorms package, this package includes a Shiny applic
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/rmtrane/NpsychAssessmentTool/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/rmtrane/NpsychAssessmentTool/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://codecov.io/gh/rmtrane/NpsychAssessmentTool" class="external-link"><img src="https://codecov.io/gh/rmtrane/NpsychAssessmentTool/graph/badge.svg?token=FRFC07GNEW" alt="codecov"></a></li>
+</ul>
+</div>
 
   </aside>
 </div>
