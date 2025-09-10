@@ -11,7 +11,7 @@ Building on the NpsychBatteryNorms package, this package includes a Shiny applic
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/rmtrane/NpsychAssessmentTool}
+  \item \url{https://rmtrane.github.io/NpsychAssessmentTool}
   \item Report bugs at \url{https://github.com/rmtrane/NpsychAssessmentTool/issues}
 }
 

@@ -141,11 +141,20 @@ dataSelectServer <- function(id) {
             label = "Select File",
             accept = ".bin"
           ),
-          shiny::textInput(
-            inputId = shiny::NS(id, "data_file_key"),
-            label = "Data File Password",
-            value = NULL,
-            placeholder = "Enter password to load data"
+          # shiny::textInput(
+          #   inputId = shiny::NS(id, "data_file_key"),
+          #   label = "Data File Password",
+          #   value = NULL,
+          #   placeholder = "Enter password to load data"
+          # )
+          shiny::tagAppendAttributes(
+            shiny::passwordInput(
+              inputId = shiny::NS(id, "data_file_key"),
+              label = "Data File Password",
+              placeholder = "Enter Password"
+            ),
+            .cssSelector = "input",
+            autocomplete = "current-password"
           )
         )
       }

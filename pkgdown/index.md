@@ -2,10 +2,10 @@
 
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/rmtrane/NpsychAssessmentTool/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rmtrane/NpsychAssessmentTool/actions/workflows/R-CMD-check.yaml)
+[![pkgdown](https://github.com/rmtrane/NpsychAssessmentTool/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/rmtrane/NpsychAssessmentTool/actions/workflows/pkgdown.yaml)
 [![codecov](https://codecov.io/gh/rmtrane/NpsychAssessmentTool/graph/badge.svg?token=FRFC07GNEW)](https://codecov.io/gh/rmtrane/NpsychAssessmentTool)
 <!-- badges: end -->
 
@@ -59,9 +59,14 @@ Alternatively, the app is also available as an RStudio add-in. I.e.,
 once the package is installed, you should be able to launch it from the
 RStudio add-in dropdown menu:
 
-![Screenshot showing the RStudio add-in.](man/figures/rstudio-addin.png)
+<figure>
+<img src="man/figures/rstudio-addin.png"
+alt="Screenshot showing the RStudio add-in." />
+<figcaption aria-hidden="true">Screenshot showing the RStudio
+add-in.</figcaption>
+</figure>
 
-## Screenshots
+# Screenshots
 
 <style>
 .carousel { overflow: hidden; padding-bottom: 5rem; }
@@ -73,7 +78,6 @@ RStudio add-in dropdown menu:
 .carousel-inner { overflow: visible; }
 .carousel-control-next, .carousel-control-prev, .carousel-indicators { bottom: 4rem; }
 </style>
-
 <div id="gallery-carousel" class="carousel carousel-dark slide" data-bs-ride="carousel">
 <div class="carousel-indicators">
 <button type="button" data-bs-target="#gallery-carousel" data-bs-slide-to="0" aria-label="Slide 1" class="active" aria-current="true"></button>
