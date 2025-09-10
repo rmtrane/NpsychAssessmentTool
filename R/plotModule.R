@@ -283,6 +283,7 @@ plotServer <- function(
           )
         ) |>
         ## Register events on click and double click in legend
+        plotly::event_register(event = "plotly_click") |>
         plotly::event_register(event = "plotly_legendclick") |>
         plotly::event_register(event = "plotly_legenddoubleclick") |>
         ## Add JS function to run on render
@@ -309,6 +310,19 @@ plotServer <- function(
         descriptions(),
         fill_values()
       )
+
+    shiny::observe({
+      # Don't trigger until plot has been drawn
+      shiny::req(input$base_plot_drawn)
+
+      d <- plotly::event_data("plotly_click", source = id)
+
+      if (!is.null(d) && !is.null(d$x)) {
+        shiny::showNotification(shiny::h2(d$x))
+
+        session$sendCustomMessage("updateDate", message = list(value = d$x))
+      }
+    })
 
     ## Here we update the reactiveValues 'visibility'
     ## For all names in 'visibility_defaults', we want
@@ -525,7 +539,7 @@ plotApp <- function(
         ),
         bslib::card_body(
           shiny::selectInput(
-            inputId = "test_date",
+            inputId = "current_date",
             label = "Date",
             choices = NULL
           ),
@@ -577,7 +591,7 @@ plotApp <- function(
       shiny::req(input$studyid, dat)
 
       shiny::updateSelectInput(
-        inputId = "test_date",
+        inputId = "current_date",
         choices = dat()$VISITDATE[dat()$NACCID == input$studyid]
       )
     }) |>

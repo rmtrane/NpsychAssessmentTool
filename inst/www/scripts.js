@@ -196,6 +196,12 @@ function afterPlot (x, input) {
   Shiny.setInputValue(inputName, out);
 }
 
+// Update current_date when plot is clicked
+Shiny.addCustomMessageHandler('updateDate', (message) => {
+  console.log(message.value);
+  $('#current_date')[0].selectize.setValue(message.value, false);
+});
+
 // For password toggles
 $(document).ready(function() {
   // Function to initialize password toggle for a specific input
