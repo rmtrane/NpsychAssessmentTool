@@ -175,7 +175,19 @@ wadrc_data_prep <- function(adrc_data, uds = c("uds2", "uds3", "uds4")) {
   ## Create diagnosis variable udsd
   out$udsd <- NA
 
-  if (uds %in% c("uds2", "uds3")) {
+  if (uds == "uds2") {
+    out$udsd[out$normcog == 1] <- 1
+    out$udsd[out$impnomci == 1] <- 2
+    out$udsd[
+      out$mciamem == 1 |
+        out$mciaplus == 1 |
+        out$mcinon1 == 1 |
+        out$mcinon2 == 1
+    ] <- 3
+    out$udsd[out$demented == 1] <- 4
+  }
+
+  if (uds == "uds3") {
     out$udsd[out$normcog == 1] <- 1
     out$udsd[out$impnomci == 1] <- 2
     out$udsd[

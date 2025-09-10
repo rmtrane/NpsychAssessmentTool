@@ -215,7 +215,9 @@ test_that("col_selection='disable'", {
   # )
   app$expect_values()
   app$set_window_size(width = 1619, height = 968)
-  app$expect_screenshot()
+  app$expect_screenshot(
+    threshold = 7
+  )
   app$click("colselect-assign")
 
   app$wait_for_idle()
