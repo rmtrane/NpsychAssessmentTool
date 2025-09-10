@@ -554,7 +554,7 @@ dataSelectServer <- function(id) {
         ),
         shiny::tags$script(shiny::HTML(
           sprintf(
-            "$(document).on('click', '#%1$s-download_data_sources', function() {Shiny.setInputValue(%1$s-download_data_sources, 1, {priority: 'event'});});",
+            "$(document).on('click', '#%1$s-download_data_sources', function() {Shiny.setInputValue(%1$s-download_data_sources_clicked, 1, {priority: 'event'});});",
             id
           )
         ))
