@@ -6,7 +6,7 @@
 #' @param tab_for_gt A list of `data.table`s, where each `data.table` is named after the Panda table that was queried to get the data.
 #' @param densities A list of density data.
 #' @param cuts A list or data structure containing cut-off values.
-#' @param www_pah Path to www/ folder that contains .css and .js files. Defaults to either inst/www or www subdir of NpsychAssessmentTool pacakge.
+#' @param www_path Path to www/ folder that contains .css and .js files. Defaults to either inst/www or www subdir of NpsychAssessmentTool pacakge.
 #'
 #' @returns
 #' A `shiny::tagList` object representing the HTML table. Will error if `tab_for_gt` is not
@@ -24,6 +24,10 @@ bio_tab_to_html_table <- function(
   },
   print_x = FALSE
 ) {
+  ## To avoid notes in R CMD check
+  method <- NULL
+  name <- NULL
+
   if (!is.list(tab_for_gt) | inherits(tab_for_gt, "data.table")) {
     cli::cli_abort(
       "{.arg tab_for_gt} must be a list of {.cls data.table}'s named after the Panda table that was queried to get the data."
@@ -417,6 +421,13 @@ create_td <- function(
   )]],
   cur_cut = all_cuts[[tab]][name == nam, ]
 ) {
+  # To avoid notes in R CMD check
+  densities <- NULL
+  all_cuts <- NULL
+  tab <- NULL
+  nam <- NULL
+  name <- NULL
+
   ## Check if this is an LP/PET visit by checking if age is NA
   true_visit <- idy %in%
     c("method", "table", "name", "append", true_visits)
@@ -545,7 +556,8 @@ cell_content <- function(
             dens = dens,
             cuts = cur_cuts,
             height = 200,
-            width = 400
+            width = 400,
+            new_id = paste("density-plotly", cell_id, sep = "-")
           )
         ),
         `data-tooltip` = shiny::HTML(sprintf(

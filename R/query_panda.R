@@ -675,8 +675,14 @@ bio_tab_to_gt <- function(tab_for_gt) {
 
 get_all_values <- function(
   api_key = getOption("panda_api_key"),
-  base_query_file = "inst/json/panda_template.json"
+  base_query_file = system.file(
+    "json/panda_template.json",
+    package = "NpsychAssessmentTool"
+  )
 ) {
+  # To avoid notes in R CMD check
+  name <- NULL
+
   base_query <- readLines(base_query_file) |>
     jsonlite::fromJSON()
 
@@ -694,9 +700,10 @@ get_all_values <- function(
 
   ## Tables to work with (remove participants, appointments, visual rating)
   all_tables_names <- all_tables$name[
-    !stringr::str_detect(
-      all_tables$name,
-      "Participants|Appointments|Visual Rating"
+    # !stringr::str_detect(
+    !grepl(
+      "Participants|Appointments|Visual Rating",
+      x = all_tables$name
     )
   ]
 
@@ -716,7 +723,7 @@ get_all_values <- function(
 
       cur_query$query$tables$columns[[1]] <- subset(
         cur_query$query$tables$columns[[1]],
-        !stringr::str_detect(name, "enumber|date|age")
+        !grepl("enumber|date|age", x = name)
       )
 
       cur_req <- base_request |>
@@ -863,6 +870,13 @@ get_all_values <- function(
 
 
 get_all_cuts <- function(all_values) {
+  # To avoid notes in R CMD check
+  name <- NULL
+  value.name <- NULL
+  bin <- NULL
+  min_obs <- NULL
+  max_obs <- NULL
+
   lapply(all_values, \(x) {
     if (any(grep("_cat$", colnames(x)))) {
       colnames(x) <- gsub("_cat", "_bin", colnames(x))

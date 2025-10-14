@@ -44,6 +44,7 @@ biomarkerUI <- function(id) {
 #' @param id A string used to namespace the module.
 #' @param adrc_ptid A reactive value specifying the ADRC patient ID.
 #' @param biomarker_api A reactive value giving the Panda API token.
+#' @param all_values A reactive value
 #'
 #' @returns
 #' NULL.
@@ -54,7 +55,12 @@ biomarkerUI <- function(id) {
 biomarkerServer <- function(
   id,
   adrc_ptid,
-  biomarker_api #,
+  biomarker_api,
+  base_query_file = system.file(
+    "json/panda_template.json",
+    package = "NpsychAssessmentTool"
+  ),
+  all_values
   # densities,
   # all_cuts
 ) {
@@ -83,13 +89,14 @@ biomarkerServer <- function(
             get_biomarker_data(
               adrc_ptid = cur_id,
               api_key = api,
-              base_query_file = "inst/json/panda_template.json"
+              base_query_file = base_query_file #"inst/json/panda_template.json"
             )
           },
           .args = list(
             get_biomarker_data = get_biomarker_data,
             cur_id = cur_id,
-            api = api
+            api = api,
+            base_query_file = base_query_file
           )
         )
 
@@ -101,28 +108,17 @@ biomarkerServer <- function(
     all_cuts <- shiny::reactiveVal()
 
     shiny::observe({
-      req(biomarker_api())
+      shiny::req(all_values())
 
-      all_values <- get_all_values(
-        api_key = biomarker_api(),
-        base_query_file = system.file(
-          "json/panda_template.json",
-          package = "NpsychAssessmentTool"
-        )
-      )
+      # all_values <- get_all_values(
+      #   api_key = biomarker_api(),
+      #   base_query_file = base_query_file
+      # )
 
-      all_densities(get_all_densities(all_values))
+      all_densities(get_all_densities(all_values()))
 
-      all_cuts(get_all_cuts(all_values))
+      all_cuts(get_all_cuts(all_values()))
     })
-
-    # shiny::observe({
-    #   shiny::req(biomarker_api())
-
-    #   dens_cuts$invoke(
-    #     api = biomarker_api()
-    #   )
-    # })
 
     shiny::exportTestValues(biomarker_dat = biomarker_dat)
 
@@ -268,11 +264,18 @@ biomarkerServer <- function(
 biomarkerApp <- function(
   adrc_ptid,
   biomarker_api,
+  all_values,
   testing = FALSE
 ) {
   if (!shiny::is.reactive(biomarker_api)) {
     cli::cli_abort(
       "The `biomarker_api` argument must be a reactive value, such as `shiny::reactive()`."
+    )
+  }
+
+  if (!shiny::is.reactive(all_values)) {
+    cli::cli_abort(
+      "The `all_values` argument must be a reactive value, such as `shiny::reactive()`."
     )
   }
 
@@ -299,7 +302,8 @@ biomarkerApp <- function(
     biomarkerServer(
       "biomarker-module",
       adrc_ptid = shiny::reactive(input$current_studyid),
-      biomarker_api = biomarker_api
+      biomarker_api = biomarker_api,
+      all_values = all_values
     )
   }
 

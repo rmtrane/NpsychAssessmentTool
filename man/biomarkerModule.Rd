@@ -8,9 +8,16 @@
 \usage{
 biomarkerUI(id)
 
-biomarkerServer(id, adrc_ptid, biomarker_api)
+biomarkerServer(
+  id,
+  adrc_ptid,
+  biomarker_api,
+  base_query_file = system.file("json/panda_template.json", package =
+    "NpsychAssessmentTool"),
+  all_values
+)
 
-biomarkerApp(adrc_ptid, biomarker_api, testing = FALSE)
+biomarkerApp(adrc_ptid, biomarker_api, all_values, testing = FALSE)
 }
 \arguments{
 \item{id}{A string used to namespace the module.}
@@ -18,6 +25,8 @@ biomarkerApp(adrc_ptid, biomarker_api, testing = FALSE)
 \item{adrc_ptid}{ADRC ptid. A character vector with patient ID's that can be chosen.}
 
 \item{biomarker_api}{Panda API key.}
+
+\item{all_values}{A reactive value}
 }
 \value{
 A UI definition.

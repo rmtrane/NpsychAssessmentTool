@@ -69,7 +69,11 @@ test_that("Querying Panda when accessible", {
 
   bio_dat <- get_biomarker_data(
     adrc_ptid = "adrc00031",
-    api_key = getOption("panda_api_key")
+    api_key = getOption("panda_api_key"),
+    base_query_file = system.file(
+      "json/panda_template.json",
+      package = "NpsychAssessmentTool"
+    )
   )
 
   expect_equal(
@@ -100,7 +104,18 @@ test_that("Querying Panda when accessible", {
     purrr::iwalk(check_table_colnames)
 
   for_gt <- bio_dat |>
-    lapply(bio_tab_for_gt)
+    purrr::discard(is.null) |>
+    purrr::map(
+      \(x) {
+        x[,
+          names(.SD) := lapply(.SD, \(y) round(y, digits = 4)),
+          .SDcols = grep("_raw$", colnames(x), value = T)
+        ]
+
+        bio_tab_for_gt(x, return = "both")
+      }
+    )
+  # lapply(bio_tab_for_gt)
 
   ## Make sure all tables are data.tables
   purrr::walk(
@@ -114,8 +129,21 @@ test_that("Querying Panda when accessible", {
     \(x) expect_snapshot_value(as.list(x), style = "json2")
   )
 
+  all_values <- get_all_values()
+
+  all_densities <- get_all_densities(all_values)
+  all_cuts <- get_all_cuts(all_values)
+
   ## Snapshot the HTML output
-  expect_snapshot(bslib::page(bio_tab_to_gt(for_gt)))
+  expect_snapshot(
+    bslib::page(
+      bio_tab_to_html_table(
+        for_gt,
+        densities = all_densities,
+        cuts = all_cuts
+      )
+    )
+  )
 
   ## We perform the same checks for a different patient ID to make sure we hit all tables
   bio_dat <- get_biomarker_data(

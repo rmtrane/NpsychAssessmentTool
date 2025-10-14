@@ -455,10 +455,57 @@ appServer <- function(input, output, session) {
   )
 
   ## Biomarkers
+  # To avoid R CMD check warnings:
+  m <- NULL
+
+  base_query_file <- system.file(
+    "json/panda_template.json",
+    package = "NpsychAssessmentTool"
+  )
+
+  all_values_et <- shiny::ExtendedTask$new(
+    \(api) {
+      m <<- mirai::mirai(
+        {
+          get_all_values(
+            api_key = api,
+            base_query_file = base_query_file #"inst/json/panda_template.json"
+          )
+        },
+        .args = list(
+          get_all_values = get_all_values,
+          api = api,
+          base_query_file = base_query_file
+        )
+      )
+
+      m
+    }
+  )
+
+  shiny::observe({
+    shiny::req(biomarker_api())
+    all_values_et$invoke(
+      api = biomarker_api()
+    )
+  })
+
+  all_values <- shiny::reactiveVal()
+
+  shiny::observe({
+    # If ExtendedTask successfully ran...
+    if (all_values_et$status() == "success") {
+      shiny::showNotification("Getting all_values")
+      all_values(all_values_et$result())
+    }
+  }) |>
+    shiny::bindEvent(all_values_et$status())
+
   biomarkerServer(
     "biomarker-tables",
     adrc_ptid = shiny::reactive(input$current_studyid),
-    biomarker_api = biomarker_api
+    biomarker_api = biomarker_api,
+    all_values = all_values
   )
 
   # } else {

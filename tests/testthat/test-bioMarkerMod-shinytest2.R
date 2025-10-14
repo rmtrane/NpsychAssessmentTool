@@ -5,10 +5,19 @@ test_that("biomarkerMod works", {
   skip_on_ci()
   skip_if(is.null(getOption("panda_api_key")))
 
+  all_values <- get_all_values(
+    api_key = shiny::reactive(getOption("panda_api_key")),
+    base_query_file = system.file(
+      "json/panda_template.json",
+      package = "NpsychAssessmentTool"
+    )
+  )
+
   app <- AppDriver$new(
     app_dir = biomarkerApp(
       adrc_ptid = c("adrc00006", "adrc00031"),
       biomarker_api = shiny::reactive(getOption("panda_api_key")),
+      all_values = shiny::reactive(all_values),
       testing = TRUE
     ),
     variant = platform_variant(),

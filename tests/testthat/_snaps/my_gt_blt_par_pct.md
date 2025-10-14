@@ -29,7 +29,6 @@
       <td headers="y" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left"><div style="flex-grow:1;margin-left:8px;background:#e1e1e1;"><div style="background:purple; width:100.000004%;height:16px;"></div></div></td></tr>
         </tbody>
         
-        
       </table>
       </div>
 
@@ -63,7 +62,6 @@
           <tr style="border-style: none;"><td headers="x" class="gt_row gt_right" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: right; font-variant-numeric: tabular-nums;" valign="middle" align="right">5</td>
       <td headers="y" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left"><div style="flex-grow:1;margin-left:8px;background:#e1e1e1;"><div style="background:purple;width:100.000004%;height:16px;display:flex;align-items:center;justify-content:flex-start;position:relative;"><span style="color:#FFFFFF;position:absolute;left:0px;margin-left:5px;font-weight:bold;font-size:10px;">100%</span></div></div></td></tr>
         </tbody>
-        
         
       </table>
       </div>
@@ -99,7 +97,6 @@
       <td headers="y" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left"><div style="flex-grow:1;margin-left:8px;background:#e1e1e1;"><div style="background:purple;width:0.833333333333333%;height:16px;display:flex;align-items:center;justify-content:flex-start;position:relative;"><span style="color:#FFFFFF;position:absolute;left:0px;margin-left:5px;font-weight:bold;font-size:10px;">0.8%</span></div></div></td></tr>
         </tbody>
         
-        
       </table>
       </div>
 
@@ -133,7 +130,6 @@
           <tr style="border-style: none;"><td headers="x" class="gt_row gt_right" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: right; font-variant-numeric: tabular-nums;" valign="middle" align="right">5</td>
       <td headers="y" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left"><div style="flex-grow:1;margin-left:8px;background:#e1e1e1;"><div style="background:purple;width:100.000004%;height:16px;display:flex;align-items:center;justify-content:flex-start;position:relative;"><span style="color:#FFFFFF;position:absolute;left:0px;margin-left:5px;font-weight:bold;font-size:10px;">100%</span></div></div></td></tr>
         </tbody>
-        
         
       </table>
       </div>

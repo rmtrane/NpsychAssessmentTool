@@ -42,7 +42,8 @@ Imports:
     methods,
     utils,
     cli,
-    safer
+    safer,
+    stats
 Remotes: 
     rmtrane/NpsychBatteryNorms
 Roxygen: list(markdown = TRUE)

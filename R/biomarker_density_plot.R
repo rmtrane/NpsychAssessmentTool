@@ -18,8 +18,17 @@ density_plot <- function(
   dens = all_densities[[2]]$pTau_raw,
   cuts = all_cuts[[2]][name == "pTau", list(color, min_obs, max_obs)],
   height = 100,
-  width = 400
+  width = 400,
+  new_id = NULL
 ) {
+  # To avoid notes in R CMD check
+  all_densities <- NULL
+  all_cuts <- NULL
+  name <- NULL
+  color <- NULL
+  min_obs <- NULL
+  max_obs <- NULL
+
   if (is.na(obs)) {
     return()
   }
@@ -73,8 +82,24 @@ density_plot <- function(
     mode = "lines",
     height = height,
     width = width,
-    hoverinfo = "none"
+    hoverinfo = "none",
+    source = "A"
   )
+
+  # if (!is.null(new_id)) {
+  #   names(p$x$visdat) <- new_id
+  #   p$x$cur_data <- new_id
+
+  #   names(p$x$attrs) <- new_id
+  # }
+
+  if (!is.null(new_id)) {
+    names(p$x$visdat) <- new_id
+    p$x$cur_data <- new_id
+
+    names(p$x$attrs) <- new_id
+    # names(p$x$layoutAttrs) <- new_id
+  }
 
   for (i in seq_along(cuts)[-1]) {
     p <- p |>
@@ -89,7 +114,7 @@ density_plot <- function(
       )
   }
 
-  p |>
+  p <- p |>
     plotly::add_trace(
       mode = "markers",
       x = obs,
@@ -160,4 +185,9 @@ density_plot <- function(
       displayModeBar = FALSE,
       responsive = T
     )
+
+  if (!is.null(new_id)) {
+    p$elementId <- new_id
+  }
+  p
 }
