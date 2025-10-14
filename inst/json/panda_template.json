@@ -1,6 +1,7 @@
 {
     "query": {
-        "tables": [{
+        "tables": [
+            {
                 "name": "Participants",
                 "id": 679,
                 "class": "cg_tn",
@@ -127,34 +128,6 @@
                         "class": "cg_tn_cn",
                         "show": true,
                         "constraints": []
-                    },
-                    {
-                        "name": "ABeta_1_42_xw",
-                        "id": 45335,
-                        "class": "cg_tn_cn",
-                        "show": true,
-                        "constraints": []
-                    },
-                    {
-                        "name": "ABeta_1_42_xw_bin",
-                        "id": 45336,
-                        "class": "cg_tn_cn",
-                        "show": true,
-                        "constraints": []
-                    },
-                    {
-                        "name": "pTau_ABeta_1_42_xw_derived",
-                        "id": 45337,
-                        "class": "cg_tn_cn",
-                        "show": true,
-                        "constraints": []
-                    },
-                    {
-                        "name": "pTau_ABeta_1_42_xw_derived_bin",
-                        "id": 45338,
-                        "class": "cg_tn_cn",
-                        "show": true,
-                        "constraints": []
                     }
                 ]
             },
@@ -201,34 +174,6 @@
                     {
                         "name": "tTau_bin",
                         "id": 52812,
-                        "class": "cg_tn_cn",
-                        "show": true,
-                        "constraints": []
-                    },
-                    {
-                        "name": "ABeta_1_42_xw",
-                        "id": 52820,
-                        "class": "cg_tn_cn",
-                        "show": true,
-                        "constraints": []
-                    },
-                    {
-                        "name": "ABeta_1_42_xw_bin",
-                        "id": 52821,
-                        "class": "cg_tn_cn",
-                        "show": true,
-                        "constraints": []
-                    },
-                    {
-                        "name": "pTau_ABeta_1_42_xw_derived",
-                        "id": 52822,
-                        "class": "cg_tn_cn",
-                        "show": true,
-                        "constraints": []
-                    },
-                    {
-                        "name": "pTau_ABeta_1_42_xw_derived_bin",
-                        "id": 52823,
                         "class": "cg_tn_cn",
                         "show": true,
                         "constraints": []

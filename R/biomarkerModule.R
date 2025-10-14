@@ -12,17 +12,27 @@
 #'
 #' @keywords internal
 biomarkerUI <- function(id) {
-  bslib::accordion(
-    id = "biomarker-accordion",
-    open = TRUE,
-    bslib::accordion_panel(
-      title = shiny::HTML('<strong>LP Visits</strong>'),
-      gt::gt_output(shiny::NS(id, "lp_visits_table"))
-    ),
-    bslib::accordion_panel(
-      title = shiny::HTML("<strong>PET Visits</strong>"),
-      gt::gt_output(shiny::NS(id, "pet_visits_table"))
-    )
+  # bslib::accordion(
+  #   id = "biomarker-accordion",
+  #   open = TRUE,
+  #   class = "spaced-accordion",
+  #   bslib::accordion_panel(
+  #     title = shiny::HTML('<strong>LP Visits</strong>'),
+  #     # gt::gt_output(shiny::NS(id, "lp_visits_table"))
+  #     shiny::uiOutput(shiny::NS(id, "lp_visits_table"))
+  #   ),
+  #   bslib::accordion_panel(
+  #     title = shiny::HTML("<strong>PET Visits</strong>"),
+  #     # gt::gt_output(shiny::NS(id, "pet_visits_table")),
+  #     shiny::uiOutput(shiny::NS(id, "pet_visits_table"))
+  #   )
+  # )
+  shiny::tagList(
+    # shiny::h2("LP Visits"),
+    # shiny::uiOutput(shiny::NS(id, "lp_visits_table")),
+    # shiny::h2("PET Visits"),
+    # shiny::uiOutput(shiny::NS(id, "pet_visits_table"))
+    shiny::uiOutput(shiny::NS(id, "biomarker_table"))
   )
 }
 
@@ -44,7 +54,9 @@ biomarkerUI <- function(id) {
 biomarkerServer <- function(
   id,
   adrc_ptid,
-  biomarker_api
+  biomarker_api #,
+  # densities,
+  # all_cuts
 ) {
   ###################
   ## BEFORE SERVER
@@ -70,7 +82,8 @@ biomarkerServer <- function(
           {
             get_biomarker_data(
               adrc_ptid = cur_id,
-              api_key = api
+              api_key = api,
+              base_query_file = "inst/json/panda_template.json"
             )
           },
           .args = list(
@@ -83,6 +96,33 @@ biomarkerServer <- function(
         m
       }
     )
+
+    all_densities <- shiny::reactiveVal()
+    all_cuts <- shiny::reactiveVal()
+
+    shiny::observe({
+      req(biomarker_api())
+
+      all_values <- get_all_values(
+        api_key = biomarker_api(),
+        base_query_file = system.file(
+          "json/panda_template.json",
+          package = "NpsychAssessmentTool"
+        )
+      )
+
+      all_densities(get_all_densities(all_values))
+
+      all_cuts(get_all_cuts(all_values))
+    })
+
+    # shiny::observe({
+    #   shiny::req(biomarker_api())
+
+    #   dens_cuts$invoke(
+    #     api = biomarker_api()
+    #   )
+    # })
 
     shiny::exportTestValues(biomarker_dat = biomarker_dat)
 
@@ -131,52 +171,82 @@ biomarkerServer <- function(
       gt::cols_label(x = "") |>
       gt::opt_table_lines("none")
 
-    # Table for LP visits
-    output$lp_visits_table <- gt::render_gt(
-      {
-        if (adrc_ptid() %in% names(biomarker_dat_tables)) {
-          lapply(
-            biomarker_dat_tables[[adrc_ptid()]][c(
-              "HDX Plasma - pTau217",
-              "Local Roche CSF - Sarstedt freeze, cleaned",
-              "Local Roche CSF - Sarstedt freeze 2, cleaned",
-              "Local Roche CSF - Sarstedt freeze 3",
-              "NTK MultiObs - CSF analytes",
-              "NTK2 MultiObs - CSF, 20230311"
-            )],
-            bio_tab_for_gt
-          ) |>
-            bio_tab_to_gt()
-        } else if (biomarker_dat$status() == "running") {
-          loading_gt
-        } else {
-          cli::cli_inform("{biomarker_dat$status()}")
-        }
-      },
-      align = "left"
-    )
+    output$biomarker_table <- shiny::renderUI({
+      if (is.null(all_densities()) | is.null(all_cuts())) {
+        return(loading_gt)
+      }
 
-    # Table for PET visits
-    output$pet_visits_table <- gt::render_gt(
-      {
-        if (adrc_ptid() %in% names(biomarker_dat_tables)) {
-          lapply(
-            biomarker_dat_tables[[adrc_ptid()]][c(
-              "MK6240_NFT_Rating",
-              "NAV4694 Visual Ratings",
-              "PIB Visual Rating 20180126"
-            )],
-            bio_tab_for_gt
-          ) |>
-            bio_tab_to_gt()
-        } else if (biomarker_dat$status() == "running") {
-          loading_gt
-        } else {
-          cli::cli_inform("{biomarker_dat$status()}")
-        }
-      },
-      align = "left"
-    )
+      if (adrc_ptid() %in% names(biomarker_dat_tables)) {
+        lapply(biomarker_dat_tables[[adrc_ptid()]], \(x) {
+          bio_tab_for_gt(x, return = "both")
+        }) |>
+          bio_tab_to_html_table(
+            densities = all_densities(),
+            cuts = all_cuts(),
+            print_x = F
+          )
+      } else if (biomarker_dat$status() == "running") {
+        loading_gt
+      } else {
+        cli::cli_inform("{biomarker_dat$status()}")
+      }
+    })
+
+    # Table for LP visits
+    # output$lp_visits_table <- #gt::render_gt(
+    #   shiny::renderUI(
+    #     {
+    #       if (is.null(all_densities) | is.null(all_cuts)) {
+    #         return(loading_gt)
+    #       }
+
+    #       if (adrc_ptid() %in% names(biomarker_dat_tables)) {
+    #         lapply(
+    #           biomarker_dat_tables[[adrc_ptid()]][c(
+    #             "HDX Plasma - pTau217",
+    #             "Local Roche CSF - Sarstedt freeze, cleaned",
+    #             "Local Roche CSF - Sarstedt freeze 2, cleaned",
+    #             "Local Roche CSF - Sarstedt freeze 3",
+    #             "NTK MultiObs - CSF analytes",
+    #             "NTK2 MultiObs - CSF, 20230311"
+    #           )],
+    #           \(x) bio_tab_for_gt(x, return = "both")
+    #         ) |>
+    #           bio_tab_to_html_table(
+    #             densities = all_densities,
+    #             cuts = all_cuts
+    #           )
+    #       } else if (biomarker_dat$status() == "running") {
+    #         loading_gt
+    #       } else {
+    #         cli::cli_inform("{biomarker_dat$status()}")
+    #       }
+    #     } #,
+    #     #align = "left"
+    #   )
+
+    # # Table for PET visits
+    # output$pet_visits_table <- # gt::render_gt(
+    #   shiny::renderUI(
+    #     {
+    #       if (adrc_ptid() %in% names(biomarker_dat_tables)) {
+    #         lapply(
+    #           biomarker_dat_tables[[adrc_ptid()]][c(
+    #             "MK6240_NFT_Rating",
+    #             "NAV4694 Visual Ratings",
+    #             "PIB Visual Rating 20180126"
+    #           )],
+    #           \(x) bio_tab_for_gt(x, return = "both")
+    #         ) |>
+    #           bio_tab_to_html_table()
+    #       } else if (biomarker_dat$status() == "running") {
+    #         loading_gt
+    #       } else {
+    #         cli::cli_inform("{biomarker_dat$status()}")
+    #       }
+    #     } #,
+    #     # align = "left"
+    #   )
   })
 }
 

@@ -166,6 +166,9 @@ wadrc_data_prep <- function(adrc_data, uds = c("uds2", "uds3", "uds4")) {
     out$race <- NA
 
     out$visitdate <- NULL
+
+    # Make sure birthyr is numeric
+    out$birthyr <- as.numeric(out$birthyr)
   }
 
   ## Remove redcap_event_name
@@ -378,6 +381,10 @@ fill_data_downup <- function(
   out[,
     names(.SD) := lapply(.SD, \(x) {
       if (length(x) == 1) {
+        return(x)
+      }
+
+      if (all(is.na(x))) {
         return(x)
       }
 

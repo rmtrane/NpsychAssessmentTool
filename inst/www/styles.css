@@ -82,6 +82,10 @@
 }
 */
 
+.spaced-accordion .accordion-item  {
+  margin: 12px 0;
+}
+
 /* For toggling of passwords */
 .password-wrapper {
   position: relative;

@@ -106,7 +106,17 @@ appUI <- function() {
                     width = NULL,
                     options = list(
                       ## When new options loaded, resize the dropdown.
-                      onLoad = I("resizeSelectize('current_date')")
+                      onLoad = I("resizeSelectize('current_date')"),
+                      onInitialize = I(
+                        "
+                        function() {
+                          var controlInput = this.$control_input;
+                          controlInput.attr('autocomplete', 'nope');
+                          controlInput.on('focus', function() {
+                            $(this).attr('name', Math.random().toString(36).substring(7));
+                          });
+                        }"
+                      )
                     )
                   )
                 )
