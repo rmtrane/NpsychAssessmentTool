@@ -7,6 +7,7 @@
 #' @param densities A list of density data.
 #' @param cuts A list or data structure containing cut-off values.
 #' @param www_path Path to www/ folder that contains .css and .js files. Defaults to either inst/www or www subdir of NpsychAssessmentTool pacakge.
+#' @param print_x For debugging
 #'
 #' @returns
 #' A `shiny::tagList` object representing the HTML table. Will error if `tab_for_gt` is not

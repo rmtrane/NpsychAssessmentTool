@@ -23,6 +23,8 @@ density_plot(
 \item{height}{A single numeric for the plot height. Optional.}
 
 \item{width}{A single numeric for the plot width. Optional.}
+
+\item{new_id}{String to use for elementId of plotly container to avoid randomly assigned IDs.}
 }
 \value{
 A \code{plotly} object. Returns \code{NULL} invisibly if \code{obs} is \code{NA}.
