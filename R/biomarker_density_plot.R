@@ -8,6 +8,7 @@
 #' @param cuts A numeric vector of cut points.
 #' @param height A single numeric for the plot height. Optional.
 #' @param width A single numeric for the plot width. Optional.
+#' @param new_id String to use for elementId of plotly container to avoid randomly assigned IDs.
 #'
 #' @returns
 #' A `plotly` object. Returns `NULL` invisibly if `obs` is `NA`.
