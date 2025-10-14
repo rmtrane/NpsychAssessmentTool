@@ -66,13 +66,13 @@ function toggleHoverBox(event, cellId) {
   // Calculate available space
   const spaceBelow = window.innerHeight - cellRect.bottom;
   const spaceAbove = cellRect.top - tableRect.top;
-  const spaceRightInTable = tableRect.right - cellRect.left;  // Space from cell to right edge of table
-  const spaceLeftInTable = cellRect.right - tableRect.left;   // Space from left edge of table to cell
+  const spaceRightInTable = tableRect.right - cellRect.left;
+  const spaceLeftInTable = cellRect.right - tableRect.left;
   
   // Determine best position
   let position = {};
   
-  // Vertical positioning (keep as is)
+  // Vertical positioning
   if (spaceBelow >= hoverBoxHeight + 10) {
     position.top = '100%';
     position.marginTop = '5px';
@@ -90,20 +90,15 @@ function toggleHoverBox(event, cellId) {
     }
   }
   
-  // Horizontal positioning - keep within table bounds
+  // Horizontal positioning
   if (spaceRightInTable >= hoverBoxWidth) {
-    // Enough space on the right within table
     position.left = '0';
   } else if (spaceLeftInTable >= hoverBoxWidth) {
-    // Not enough space on right, position to the left
     position.right = '0';
     position.left = 'auto';
   } else {
-    // Hover box is wider than available space
-    // Position it to align with the right edge of the table
     const offsetFromCellLeft = tableRect.right - cellRect.left - hoverBoxWidth - 10;
     if (offsetFromCellLeft < 0) {
-      // If hover box is wider than table, align with left edge of table
       const leftOffset = tableRect.left - cellRect.left + 10;
       position.left = leftOffset + 'px';
     } else {
@@ -126,7 +121,19 @@ function toggleHoverBox(event, cellId) {
   activeHoverBox = hoverBox;
 }
 
-// Close hover box when clicking outside - with cell pointer events handling
+// ADDED: Capture Plotly clicks in capture phase to prevent them from closing the hover box
+document.addEventListener('click', function(event) {
+  // Check if the click originated from within a Plotly plot inside an active hover box
+  if (activeHoverBox && activeHoverBox.contains(event.target)) {
+    const plotlyElement = event.target.closest('.plotly');
+    if (plotlyElement) {
+      event.stopPropagation();
+      return;
+    }
+  }
+}, true); // 'true' means this runs in the capture phase (before bubble phase)
+
+// Close hover box when clicking outside
 document.addEventListener('click', function (event) {
   if (!activeHoverBox) return;
 
@@ -150,7 +157,7 @@ document.addEventListener('click', function (event) {
     activeIcon = null;
   }
 
-  // Close the hover box for clicks outside
+  // Close the hover box
   activeHoverBox.classList.remove('active');
   activeHoverBox = null;
 });
@@ -168,7 +175,6 @@ document.addEventListener('DOMContentLoaded', function () {
 // Close hover box with Escape key
 document.addEventListener('keydown', function (event) {
   if (event.key === 'Escape' && activeHoverBox) {
-    // Re-enable hover on the active cell
     if (activeCell) {
       activeCell.style.pointerEvents = '';
       activeCell = null;
