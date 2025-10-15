@@ -33,11 +33,11 @@ yaml_file <- lapply(
     if (file.exists(x$image)) {
       return(x)
     } else {
-      x$image <- gsub(
-        pattern = "../..",
-        replacement = here::here(),
+      x$image <- here::here(gsub(
+        pattern = "\\.\\./\\.\\./",
+        replacement = "",
         x$image
-      )
+      ))
 
       x
     }
