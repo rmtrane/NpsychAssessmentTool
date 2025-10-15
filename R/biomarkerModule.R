@@ -174,7 +174,6 @@ biomarkerServer <- function(
           bio_tab_to_html_table(
             densities = all_densities(),
             cuts = all_cuts(),
-            # www_path = "www",
             print_x = F
           )
       } else if (biomarker_dat$status() == "running") {
