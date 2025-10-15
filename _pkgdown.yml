@@ -46,5 +46,6 @@ reference:
       - chrome_extra_args
       - onRender
       - plotly_new_traces
+      - density_plot
       - prepare_data
       - read_data
