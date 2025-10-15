@@ -21,7 +21,9 @@ dataSelectUI <- function(id) {
         open = "always",
         width = 400,
         bslib::card_body(
-          gt::gt_output(ns("data_sources_table")),
+          # gt::gt_output(ns("data_sources_table")),
+          shiny::h4("Data Sources"),
+          DT::dataTableOutput(ns("data_sources_table")),
           shiny::uiOutput(ns("submit_button"))
         )
       ),
@@ -442,58 +444,87 @@ dataSelectServer <- function(id) {
         ignoreInit = TRUE
       )
 
-    output$data_sources_table <- gt::render_gt(
-      {
-        tmp <- shiny::reactiveValuesToList(data_sources)
+    output$data_sources_table <- # gt::render_gt(
+      DT::renderDataTable(
+        {
+          tmp <- shiny::reactiveValuesToList(data_sources)
 
-        if (length(tmp) == 0) {
-          for_out <- data.frame(
-            .id = NA,
-            data_source = NA,
-            data_type = NA
-          )
-        } else {
-          for_out <- lapply(tmp, \(x) {
-            x[c("data_source", "data_type")]
-          }) |>
-            data.table::rbindlist(idcol = TRUE)
-        }
+          if (length(tmp) == 0) {
+            # for_out <- data.frame(
+            #   .id = NA,
+            #   data_source = NA,
+            #   data_type = NA
+            # )
 
-        out <- gt::gt(for_out, id = "gt_data_sources") |>
-          gt::sub_missing(missing_text = "") |>
-          gt::cols_hide(".id") |>
-          gt::cols_label(
-            # ".id" = "",
-            "data_source" = gt::md("*Source*"),
-            "data_type" = gt::md("*Type*")
-          ) |>
-          gt::tab_header(
-            title = gt::md("**Data Sources**")
-          ) |>
-          gt::tab_style(
-            style = list(
-              gt::cell_borders(sides = "top", style = "hidden"),
-              gt::cell_text(align = "left")
+            out <- DT::datatable(
+              data = data.frame(
+                x = "Add data sources using the UI on the right"
+              ),
+              colnames = c(
+                " " = "x"
+              ),
+              escape = FALSE,
+              rownames = FALSE,
+              selection = list(mode = "multiple", target = "row"),
+              class = list(stripe = FALSE),
+              filter = "none",
+              options = list(
+                dom = "t",
+                ordering = F
+              )
+            )
+
+            return(out)
+          } else {
+            for_out <- lapply(tmp, \(x) {
+              x[c("data_source", "data_type")]
+            }) |>
+              data.table::rbindlist(idcol = TRUE)
+          }
+
+          # out <- gt::gt(for_out, id = "gt_data_sources") |>
+          #   gt::sub_missing(missing_text = "") |>
+          #   gt::cols_hide(".id") |>
+          #   gt::cols_label(
+          #     # ".id" = "",
+          #     "data_source" = gt::md("*Source*"),
+          #     "data_type" = gt::md("*Type*")
+          #   ) |>
+          #   gt::tab_header(
+          #     title = gt::md("**Data Sources**")
+          #   ) |>
+          #   gt::tab_style(
+          #     style = list(
+          #       gt::cell_borders(sides = "top", style = "hidden"),
+          #       gt::cell_text(align = "left")
+          #     ),
+          #     locations = list(
+          #       gt::cells_title(),
+          #       gt::cells_column_labels()
+          #     )
+          #   ) |>
+          #   gt::tab_options(
+          #     table.width = gt::pct(100)
+          #   )
+
+          DT::datatable(
+            for_out[, -1],
+            escape = FALSE,
+            rownames = FALSE,
+            selection = list(mode = "multiple", target = "row"),
+            class = list(stripe = FALSE),
+            filter = "none",
+            colnames = c(
+              "Data Source" = "data_source",
+              "Data Type" = "data_type"
             ),
-            locations = list(
-              gt::cells_title(),
-              gt::cells_column_labels()
+            options = list(
+              dom = "ltip",
+              ordering = F
             )
-          ) |>
-          gt::tab_options(
-            table.width = gt::pct(100)
           )
-
-        if (length(tmp) == 0) {
-          out <- out |>
-            gt::tab_footnote(
-              footnote = "Add data sources using the UI on the right"
-            )
         }
-
-        out
-      }
-    )
+      )
 
     output$download_data_sources <- shiny::downloadHandler(
       filename = function() {
@@ -561,6 +592,10 @@ dataSelectServer <- function(id) {
       )
     })
 
+    shiny::observe(
+      print(input$data_sources_table_rows_selected)
+    )
+
     shiny::observe({
       shiny::removeModal()
     }) |>
@@ -572,6 +607,12 @@ dataSelectServer <- function(id) {
       }
 
       shiny::tagList(
+        if (!is.null(input$data_sources_table_rows_selected)) {
+          shiny::actionButton(
+            inputId = shiny::NS(id, "remove_rows"),
+            label = "Remove highlighted data source"
+          )
+        },
         shiny::p(
           "When all needed data sources have been added, click the 'Save Data Sources' below to save data sources for later use, or 'Load Data' button below to continue."
         ),
@@ -586,6 +627,17 @@ dataSelectServer <- function(id) {
       )
     })
 
+    shiny::observe({
+      data_sources_names <- names(data_sources)
+
+      for (nm in data_sources_names[input$data_sources_table_rows_selected]) {
+        data_sources[[nm]] <- NULL
+      }
+    }) |>
+      shiny::bindEvent(
+        input$remove_rows
+      )
+
     dat_obj <- shiny::reactiveVal()
     data_source <- shiny::reactiveVal()
     data_type <- shiny::reactiveVal()
@@ -593,90 +645,111 @@ dataSelectServer <- function(id) {
 
     shiny::observe({
       all_data_sources <- shiny::reactiveValuesToList(data_sources)
+      all_data_sources <- all_data_sources[
+        !unlist(lapply(all_data_sources, is.null))
+      ]
 
       biomarker_sources <- all_data_sources[unlist(lapply(
         all_data_sources,
         \(x) !is.null(x$panda_auth)
       ))]
 
-      other_sources <- all_data_sources[setdiff(
-        names(all_data_sources),
-        names(biomarker_sources)
-      )]
+      if (length(biomarker_sources) > 0) {
+        panda_accessible <- check_connection(
+          api_key = biomarker_sources[[1]]$panda_auth,
+          timeout =
+        )
 
-      tmp <- lapply(
-        other_sources,
-        \(x) {
-          cbind(
-            uds = x$data_type,
-            do.call(read_data, args = x)
+        panda_check <- ifelse(panda_accessible$connected, "passed", "failed")
+      } else {
+        panda_check <- "passed"
+      }
+
+      if (panda_check == "failed") {
+        shiny::showNotification(
+          type = "error",
+          "Cannot reach Panda. Make sure you are connected to the VPN, and that your API key is correct."
+        )
+      } else {
+        other_sources <- all_data_sources[setdiff(
+          names(all_data_sources),
+          names(biomarker_sources)
+        )]
+
+        tmp <- lapply(
+          other_sources,
+          \(x) {
+            cbind(
+              uds = x$data_type,
+              do.call(read_data, args = x)
+            )
+          }
+        ) |>
+          data.table::rbindlist(idcol = FALSE, fill = TRUE) |>
+          fill_data_downup(
+            ptid = "NACCID",
+            visityr = "VISITYR",
+            visitmo = "VISITMO",
+            visitday = "VISITDAY",
+            educ = "EDUC",
+            constant_across_visits = c(
+              "SEX",
+              "RACE",
+              "BIRTHYR",
+              "BIRTHMO"
+            )
           )
-        }
-      ) |>
-        data.table::rbindlist(idcol = FALSE, fill = TRUE) |>
-        fill_data_downup(
+
+        uds <- NULL # for R check
+
+        ## Set uds to NA if there is only one value for a visit
+        tmp[,
+          uds := ifelse(nrow(unique(.SD)) == 1, NA, uds),
+          .SDcols = setdiff(colnames(tmp), "uds"),
+          by = c("NACCID", "VISITYR", "VISITMO", "VISITDAY")
+        ]
+
+        ## For those visits with entries in both UDS-3 and UDS-4, keep only the UDS-4 data
+        tmp <- tmp[
+          is.na(uds) | uds == "wadrc_uds4"
+        ] |>
+          unique()
+
+        ## Remove the uds column
+        tmp$uds <- NULL
+
+        ## Remove rows with missing VISITYR
+        tmp <- tmp[!is.na(tmp$VISITYR)]
+
+        tmp <- fill_data_downup(
+          out = tmp,
           ptid = "NACCID",
           visityr = "VISITYR",
           visitmo = "VISITMO",
           visitday = "VISITDAY",
           educ = "EDUC",
-          constant_across_visits = c(
-            "SEX",
-            "RACE",
-            "BIRTHYR",
-            "BIRTHMO"
-          )
+          constant_across_visits = c("BIRTHYR", "BIRTHMO", "SEX", "RACE")
         )
 
-      uds <- NULL # for R check
+        dat_obj(tmp)
 
-      ## Set uds to NA if there is only one value for a visit
-      tmp[,
-        uds := ifelse(nrow(unique(.SD)) == 1, NA, uds),
-        .SDcols = setdiff(colnames(tmp), "uds"),
-        by = c("NACCID", "VISITYR", "VISITMO", "VISITDAY")
-      ]
+        if ("csv" %in% all_data_sources$data_source) {
+          data_source("csv")
+        } else if (length(unique(all_data_sources$data_source)) == 1) {
+          data_source(all_data_sources$data_source[1])
+        } else if ("redcap" %in% all_data_sources$data_source) {
+          data_source("redcap")
+        }
 
-      ## For those visits with entries in both UDS-3 and UDS-4, keep only the UDS-4 data
-      tmp <- tmp[
-        is.na(uds) | uds == "wadrc_uds4"
-      ] |>
-        unique()
+        data_type("wadrc")
 
-      ## Remove the uds column
-      tmp$uds <- NULL
+        if (length(biomarker_sources) > 0) {
+          biomarker_api(biomarker_sources[[1]]$panda_auth)
+        }
 
-      ## Remove rows with missing VISITYR
-      tmp <- tmp[!is.na(tmp$VISITYR)]
-
-      tmp <- fill_data_downup(
-        out = tmp,
-        ptid = "NACCID",
-        visityr = "VISITYR",
-        visitmo = "VISITMO",
-        visitday = "VISITDAY",
-        educ = "EDUC",
-        constant_across_visits = c("BIRTHYR", "BIRTHMO", "SEX", "RACE")
-      )
-
-      dat_obj(tmp)
-
-      if ("csv" %in% all_data_sources$data_source) {
-        data_source("csv")
-      } else if (length(unique(all_data_sources$data_source)) == 1) {
-        data_source(all_data_sources$data_source[1])
-      } else if ("redcap" %in% all_data_sources$data_source) {
-        data_source("redcap")
+        shiny::updateTextInput(inputId = "redcap_uri", value = NULL)
+        shiny::updateTextInput(inputId = "panda_api_token", value = NULL)
       }
-
-      data_type("wadrc")
-
-      if (length(biomarker_sources) > 0) {
-        biomarker_api(biomarker_sources[[1]]$panda_auth)
-      }
-
-      shiny::updateTextInput(inputId = "redcap_uri", value = NULL)
-      shiny::updateTextInput(inputId = "panda_api_token", value = NULL)
     }) |>
       shiny::bindEvent(input$submit)
 

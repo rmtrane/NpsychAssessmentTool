@@ -18,6 +18,7 @@ carousel <- function(id, duration, items, base_url = NULL) {
     class = "carousel-indicators",
     tagList(lapply(items, function(item) item$button))
   )
+
   items <- div(
     class = "carousel-inner",
     tagList(lapply(items, function(item) item$item))

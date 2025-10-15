@@ -142,7 +142,8 @@ test_that("biomarker_api passed through", {
     variant = platform_variant(),
     name = "biomarker_api",
     height = 968,
-    width = 1619
+    width = 1619,
+    view = interactive()
   )
 
   app$wait_for_idle()
@@ -176,7 +177,7 @@ test_that("biomarker_api passed through", {
   app$set_window_size(width = 1619, height = 968)
 
   app$set_inputs(
-    `dat_select-panda_api_token` = "secret-panda-api"
+    `dat_select-panda_api_token` = getOption("panda_api_key") # "secret-panda-api"
   )
 
   app$expect_screenshot()
@@ -186,7 +187,10 @@ test_that("biomarker_api passed through", {
 
   app$click("dat_select-submit")
 
-  expect_identical(app$get_value(export = "biomarker_api"), "secret-panda-api")
+  expect_identical(
+    app$get_value(export = "biomarker_api"),
+    getOption("panda_api_key")
+  )
 
   app$stop()
 })

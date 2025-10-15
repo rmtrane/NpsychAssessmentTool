@@ -31,15 +31,36 @@ on the plots, and error codes in the summary table (highlighted with red text
 and underlined) will show description when hovered.
 
 ```{r}
+#| echo: false
+#| warning: false
+
+if (file.exists(here::here("inst/qmd/carousel.R"))) {
+  source(here::here("inst/qmd/carousel.R"))
+  source(here::here("inst/qmd/get_image_uri.R"))
+} 
+
+if (file.exists("carousel.R")) {
+  source("carousel.R")
+  source("get_image_uri.R")
+} 
+
+
+if (!file.exists(here::here("inst/qmd/carousel.yml")) & !file.exists("carousel.yml")) {
+  tmp <- getwd()
+  cli::cli_abort(paste("File does not exist. Current directory is", tmp))
+}
+
+carousel_yaml_file <- yaml.load_file(here::here("inst/qmd/carousel.yml"))
+```
+
+```{r}
 #| classes: '.g-col-lg-6 .g-col-12 .g-col-md-12'
 #| warning: false
 #| echo: false
-source(here::here("inst/qmd/carousel.R"))
-
 carousel(
   "gallery-carousel",
   5000,
-  yaml.load_file(here::here("inst/qmd/carousel.yml"))
+  carousel_yaml_file
 )
 ```
 
@@ -65,7 +86,7 @@ regression model published by @weintraubVersionAlzheimerDisease2018, while
 "Updated (`X Y`)" tries to refit the same model to an updated normative 
 sample using the data lock from month `X` of year `Y`. 
 
-* `T-score` refers to the model presented in @strickerMayoNormativeStudies2021.
+* `T-score` refers to the models presented in @strickerMayoNormativeStudies2021 and @karstensMayoNormativeStudies2024.
 
 Default methods are underlined in @tbl-implemented-methods. Not all variables 
 have default methods. This is because some variables are not used standardized 

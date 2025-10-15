@@ -958,3 +958,46 @@ get_all_densities <- function(all_values) {
     dens[!unlist(lapply(dens, is.null))]
   })
 }
+
+
+check_connection <- function(
+  api_key = getOption("panda_api_key"),
+  timeout = 5
+) {
+  # Try to make a simple request to the URL
+  tryCatch(
+    {
+      response <- httr2::request(
+        base_url = 'https://panda.medicine.wisc.edu/api/search/search'
+      ) |>
+        httr2::req_timeout(timeout) |>
+        # Next, add authorization piece (this is where the API key is needed)
+        httr2::req_headers(
+          Authorization = paste("Bearer", api_key)
+        ) |>
+        # Finally, specify request method
+        httr2::req_method("POST") |>
+        httr2::req_body_json(
+          jsonlite::fromJSON(
+            '{"query":{"tables":[{"name":"Participants","id":679,"class":"cg_tn","join":"left","columns":[{"name":"Adrc Number","id":690,"class":"cg_tn_cn","show":true,"constraints":[{"operator":"=","values":["\'adrc00001\'"]}]}]}],"offset":0,"limit":-1,"format":"csv","row_format":"participant_centric","name":null,"save":null}}'
+          )
+        ) |>
+        httr2::req_perform()
+
+      # If we get here, connection succeeded
+      return(list(
+        connected = TRUE,
+        status = httr2::resp_status(response),
+        message = "Connection successful"
+      ))
+    },
+    error = function(e) {
+      # Connection failed
+      return(list(
+        connected = FALSE,
+        status = NA,
+        message = paste("Connection failed:", e$message)
+      ))
+    }
+  )
+}

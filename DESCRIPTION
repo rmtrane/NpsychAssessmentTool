@@ -14,7 +14,6 @@ LazyData: true
 Suggests: 
     httr2,
     jsonlite,
-    mirai,
     pagedown,
     REDCapR (>= 1.5.0),
     shinytest2,
@@ -43,7 +42,8 @@ Imports:
     utils,
     cli,
     safer,
-    stats
+    stats,
+    mirai
 Remotes: 
     rmtrane/NpsychBatteryNorms
 Roxygen: list(markdown = TRUE)
