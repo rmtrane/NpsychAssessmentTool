@@ -25,10 +25,28 @@ cat("</style>\n")
 source(here::here("inst/qmd/carousel.R"))
 source(here::here("inst/qmd/get_image_uri.R"))
 
+yaml_file <- yaml.load_file(here::here("inst/qmd/carousel.yml"))
+
+yaml_file <- lapply(
+  yaml_file,
+  \(x) {
+    if (file.exists(x$image)) {
+      return(x)
+    } else {
+      x$image <- gsub(
+        pattern = "../..",
+        replacement = here::here(),
+        x$image
+      )
+
+      x
+    }
+  }
+)
+
 carousel(
   "gallery-carousel",
   5000,
-  yaml.load_file(here::here("inst/qmd/carousel.yml")),
-  base_url = here::here()
+  yaml_file
 )
 ```
