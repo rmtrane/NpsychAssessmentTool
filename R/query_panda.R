@@ -934,7 +934,7 @@ get_all_cuts <- function(all_values) {
 
 get_all_densities <- function(all_values) {
   purrr::map(all_values, \(x) {
-    if (nrow(x) == 0) {
+    if (is.null(x) | nrow(x) == 0) {
       return(NULL)
     }
 

@@ -495,7 +495,7 @@ appServer <- function(input, output, session) {
   shiny::observe({
     # If ExtendedTask successfully ran...
     if (all_values_et$status() == "success") {
-      shiny::showNotification("Getting all_values")
+      # shiny::showNotification("Getting all_values")
       all_values(all_values_et$result())
     }
   }) |>

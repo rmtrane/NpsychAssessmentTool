@@ -110,11 +110,6 @@ biomarkerServer <- function(
     shiny::observe({
       shiny::req(all_values())
 
-      # all_values <- get_all_values(
-      #   api_key = biomarker_api(),
-      #   base_query_file = base_query_file
-      # )
-
       all_densities(get_all_densities(all_values()))
 
       all_cuts(get_all_cuts(all_values()))
@@ -179,7 +174,7 @@ biomarkerServer <- function(
           bio_tab_to_html_table(
             densities = all_densities(),
             cuts = all_cuts(),
-            www_path = "inst/www",
+            # www_path = "www",
             print_x = F
           )
       } else if (biomarker_dat$status() == "running") {
