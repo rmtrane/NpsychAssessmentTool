@@ -691,7 +691,7 @@ get_all_values <- function(
   ) |>
     # Next, add authorization piece (this is where the API key is needed)
     httr2::req_headers(
-      Authorization = paste("Bearer", getOption("panda_api_key"))
+      Authorization = paste("Bearer", api_key)
     ) |>
     # Finally, specify request method
     httr2::req_method("POST")
@@ -721,10 +721,13 @@ get_all_values <- function(
 
       cur_query$query$tables$columns[[1]]$constraints <- NULL
 
-      cur_query$query$tables$columns[[1]] <- subset(
-        cur_query$query$tables$columns[[1]],
-        !grepl("enumber|date|age", x = name)
-      )
+      cur_query$query$tables$columns[[1]] <-
+        cur_query$query$tables$columns[[1]][
+          !grepl(
+            "enumber|date|age",
+            x = cur_query$query$tables$columns[[1]]$name
+          ),
+        ]
 
       cur_req <- base_request |>
         httr2::req_body_json(
