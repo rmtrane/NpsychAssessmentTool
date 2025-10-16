@@ -1,7 +1,7 @@
 Package: NpsychAssessmentTool
 Type: Package
 Title: UDS Battery Scores in Interactive Tables and Figures
-Version: 0.3.0
+Version: 0.3.1
 Description: Building on the NpsychBatteryNorms package,
     this package includes a Shiny application that makes 
     it easy to present UDS battery scores in a way useful
