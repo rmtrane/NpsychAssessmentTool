@@ -482,31 +482,6 @@ dataSelectServer <- function(id) {
               data.table::rbindlist(idcol = TRUE)
           }
 
-          # out <- gt::gt(for_out, id = "gt_data_sources") |>
-          #   gt::sub_missing(missing_text = "") |>
-          #   gt::cols_hide(".id") |>
-          #   gt::cols_label(
-          #     # ".id" = "",
-          #     "data_source" = gt::md("*Source*"),
-          #     "data_type" = gt::md("*Type*")
-          #   ) |>
-          #   gt::tab_header(
-          #     title = gt::md("**Data Sources**")
-          #   ) |>
-          #   gt::tab_style(
-          #     style = list(
-          #       gt::cell_borders(sides = "top", style = "hidden"),
-          #       gt::cell_text(align = "left")
-          #     ),
-          #     locations = list(
-          #       gt::cells_title(),
-          #       gt::cells_column_labels()
-          #     )
-          #   ) |>
-          #   gt::tab_options(
-          #     table.width = gt::pct(100)
-          #   )
-
           DT::datatable(
             for_out[, -1],
             escape = FALSE,

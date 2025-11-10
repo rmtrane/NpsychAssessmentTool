@@ -44,6 +44,10 @@ bio_tab_to_html_table <- function(
       )
     }
 
+    if (inherits(x, "error-message")) {
+      x <- data.table::data.table(name = x)
+    }
+
     x
   })
 
@@ -85,23 +89,10 @@ bio_tab_to_html_table <- function(
   ## Create method column giving the visit type (LP or PET)
   tab_for_gt[,
     method := data.table::fcase(
-      table %in%
-        c(
-          "Local Roche CSF - Sarstedt freeze 2, cleaned",
-          "Local Roche CSF - Sarstedt freeze 3",
-          "Local Roche CSF - Sarstedt freeze, cleaned",
-          "NTK MultiObs - CSF analytes",
-          "NTK2 MultiObs - CSF, 20230311",
-          "HDX Plasma - pTau217"
-        ),
-      "LP Visits",
-      table %in%
-        c(
-          "MK6240_NFT_Rating",
-          "NAV4694 Visual Ratings",
-          "PIB Visual Rating 20180126"
-        ),
-      "PET Visits",
+      table %in% c("Local Roche CSF - Sarstedt freeze 2, cleaned", "Local Roche CSF - Sarstedt freeze 3", "Local Roche CSF - Sarstedt freeze, cleaned", "NTK MultiObs - CSF analytes", "NTK2 MultiObs - CSF, 20230311", "HDX Plasma - pTau217") ,
+      "LP Visits"                                                                                                                                                                                                                               ,
+      table %in% c("MK6240_NFT_Rating", "NAV4694 Visual Ratings", "PIB Visual Rating 20180126")                                                                                                                                                 ,
+      "PET Visits"                                                                                                                                                                                                                              ,
       default = "Other"
     )
   ]
@@ -310,20 +301,17 @@ bio_tab_to_html_table <- function(
                 ),
                 shiny::tags$td()
               )
-            } else if (nam == "No values found") {
+            } else if (grepl("^Error|No values found", nam)) {
               cur_tr <- shiny::tags$tr(
                 class = if (last_row) "last-row",
                 shiny::tags$td(),
                 shiny::tags$td(
                   nam,
-                  class = "no-values",
-                  # class = paste(
-                  #   c(
-                  #     "no-values",
-                  #     if (last_row) "last-row"
-                  #   ),
-                  #   collapse = " "
-                  # ),
+                  class = ifelse(
+                    grepl("^Error", nam),
+                    "error-message",
+                    "no-values"
+                  ),
                   colspan = ncol(tab_for_gt) - 2
                 ),
                 shiny::tags$td()

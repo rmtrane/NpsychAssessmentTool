@@ -163,6 +163,17 @@ table.biomarkerTable {
   font-weight: bold;
 }
 
+.biomarkerTable .error-message.last-row {
+  border-bottom: 2px solid #cccccc;
+}
+
+.biomarkerTable .error-message {
+  padding: 12px;
+  text-align: center;
+  color: darkred;
+  font-weight: bold;
+}
+
 .biomarkerTable tr.subtable-header td {
   padding-top: 12px;
   text-align: left;

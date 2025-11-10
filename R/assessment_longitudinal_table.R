@@ -236,7 +236,6 @@ assessment_longitudinal_table <- function(
 
   ## Create gt
   out <- gt::gt(
-    # gt::gt(
     for_table,
     id = table_id,
     rowname_col = "labels",

@@ -75,6 +75,7 @@ get_biomarker_data <- function(
   ## We perform the request once for each table except for the Participants table.
   ## This is included in all queries.
   tables <- my_query$query$tables
+
   tables <- tables[
     !tables$name %in%
       c(
@@ -136,7 +137,10 @@ get_biomarker_data <- function(
     }
 
     if (x == "[]") {
-      return(NULL)
+      out <- "No values found"
+      class(out) <- "error-message"
+
+      return(out)
     }
 
     as_df <- data.table::data.table(jsonlite::fromJSON(x))
@@ -198,6 +202,14 @@ get_biomarker_data <- function(
       )
     )
 
+    if (nrow(as_df) == 0) {
+      out <- "Error: visits could not be matched to dates."
+
+      class(out) <- "error-message"
+
+      return(out)
+    }
+
     for (i in seq_along(replace_in_colnames)) {
       # For i = 1, we want to match on expression, but replace different expression. Hence the extra gsub in new.
       data.table::setnames(
@@ -238,6 +250,22 @@ get_biomarker_data <- function(
         vec = c(0.4, 0.63)
       )
     }
+
+    ## Check that there are at least some non-missing biomarker data. If not, return NULL
+    if (
+      all(
+        is.na(as_df[,
+          !grepl(pattern = "age_|_date", colnames(as_df)),
+          with = F
+        ])
+      )
+    ) {
+      out <- "Error: no non-missing biomarker data found."
+      class(out) <- "error-message"
+
+      return(out)
+    }
+
     as_df
   })
 }
@@ -266,6 +294,10 @@ bio_tab_for_gt <- function(
 
   if (is.null(tab)) {
     return(data.table::data.table(name = "No values found"))
+  }
+
+  if (inherits(tab, "error-message")) {
+    return(data.table::data.table(name = unclass(tab)))
   }
 
   if (!inherits(tab, "data.table")) {
@@ -937,7 +969,7 @@ get_all_cuts <- function(all_values) {
 
 get_all_densities <- function(all_values) {
   purrr::map(all_values, \(x) {
-    if (is.null(x) | nrow(x) == 0) {
+    if (is.null(x) | nrow(x) == 0 | inherits(x, "try-error")) {
       return(NULL)
     }
 
