@@ -43,5 +43,5 @@ assessment_longitudinal_table(
 A \code{shiny::HTML} table created from a \code{gt::gt} object.
 }
 \description{
-Create a table of standardized scores across multiple visits
+Create a table of raw scores across multiple visits colored by the corresponding standardized scores.
 }

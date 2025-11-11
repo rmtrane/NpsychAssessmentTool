@@ -36,7 +36,7 @@ density_plot <- function(
 
   density_df <- with(
     dens,
-    data.frame(x = x, y = y)
+    data.frame(x = round(x, digits = 5), y = round(y, digits = 5))
   )
 
   percentile <- with(
