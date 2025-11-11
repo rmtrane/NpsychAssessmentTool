@@ -1,5 +1,10 @@
 # Changelog
 
+## NpsychAssessmentTool 0.3.2
+
+- Longitudinal table now shows raw scores with color coding
+  corresponding to standardized scores
+
 ## NpsychAssessmentTool 0.3.1
 
 Bug fixes:

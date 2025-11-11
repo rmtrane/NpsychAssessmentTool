@@ -1,6 +1,7 @@
 # Assessment Longitudinal Table
 
-Create a table of standardized scores across multiple visits
+Create a table of raw scores across multiple visits colored by the
+corresponding standardized scores.
 
 ## Usage
 
