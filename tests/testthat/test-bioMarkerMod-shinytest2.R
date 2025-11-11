@@ -6,7 +6,7 @@ test_that("biomarkerMod works", {
   skip_if(is.null(getOption("panda_api_key")))
 
   all_values <- get_all_values(
-    api_key = shiny::reactive(getOption("panda_api_key")),
+    api_key = getOption("panda_api_key"),
     base_query_file = system.file(
       "json/panda_template.json",
       package = "NpsychAssessmentTool"

@@ -797,7 +797,7 @@ get_all_values <- function(
       return(x)
     }
 
-    if (x == "[]") {
+    if (x == "[]" | inherits(x, "error-message")) {
       return(NULL)
     }
 

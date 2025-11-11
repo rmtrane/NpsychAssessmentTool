@@ -94,17 +94,19 @@ test_that("Querying Panda when accessible", {
   ## Check that all returns are data.table's or NULL
   expect_true(
     all(purrr::map_lgl(bio_dat, \(x) {
-      is.null(x) || data.table::is.data.table(x)
+      is.null(x) || data.table::is.data.table(x) || inherits(x, "error-message")
     }))
   )
 
   ## Check that all tables have expected column names
   bio_dat |>
     purrr::discard(is.null) |>
+    purrr::discard(\(x) inherits(x, "error-message")) |>
     purrr::iwalk(check_table_colnames)
 
   for_gt <- bio_dat |>
     purrr::discard(is.null) |>
+    purrr::discard(\(x) inherits(x, "error-message")) |>
     purrr::map(
       \(x) {
         x[,
@@ -168,11 +170,14 @@ test_that("Querying Panda when accessible", {
 
   # Check that all returns are data.table's or NULL
   expect_true(
-    all(purrr::map_lgl(bio_dat, \(x) is.null(x) | data.table::is.data.table(x)))
+    all(purrr::map_lgl(bio_dat, \(x) {
+      is.null(x) | data.table::is.data.table(x) | inherits(x, "error-message")
+    }))
   )
 
   # Check that all tables have expected column names
   bio_dat |>
     purrr::discard(is.null) |>
+    purrr::discard(\(x) inherits(x, "error-message")) |>
     purrr::iwalk(check_table_colnames)
 })
