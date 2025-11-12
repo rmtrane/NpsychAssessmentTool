@@ -31,6 +31,7 @@ wadrc_data_prep <- function(
     raceasian <-
     racemena <-
     raceunkn <- 
+    ethispanic <- 
       NULL
 
   if (!data.table::is.data.table(adrc_data)) {
@@ -178,13 +179,13 @@ wadrc_data_prep <- function(
     # Create 'race' column
     out[,
       race := data.table::fcase(
-        racewhite == 1 ,  1 ,
-        raceblack == 1 ,  2 ,
-        raceaian == 1  ,  3 ,
-        racenhpi == 1  ,  4 ,
-        raceasian == 1 ,  5 ,
-        racemena == 1  , 50 ,
-        raceunkn == 1  , 99 ,
+        racewhite == 1                  ,  1 ,
+        raceblack == 1                  ,  2 ,
+        raceaian == 1                   ,  3 ,
+        racenhpi == 1                   ,  4 ,
+        raceasian == 1                  ,  5 ,
+        racemena == 1 | ethispanic == 1 , 50 ,
+        raceunkn == 1                   , 99 ,
         default = NA
       )
     ]
