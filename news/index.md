@@ -5,6 +5,9 @@
 - Longitudinal table now shows raw scores with color coding
   corresponding to standardized scores
 
+- Changed default methods to use updated regression models which also
+  adjusts for race
+
 ## NpsychAssessmentTool 0.3.1
 
 Bug fixes:
