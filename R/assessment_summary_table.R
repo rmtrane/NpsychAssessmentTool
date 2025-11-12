@@ -208,10 +208,18 @@ assessment_summary_table <- function(
   if ("footnotes" %in% names(summary_dat)) {
     out <- out |>
       gt::tab_footnote(
+        footnote = "Z-scores based on regression models adjusting for age, sex, race, and years of education.",
+        locations = gt::cells_body(
+          columns = "std",
+          rows = summary_dat$footnotes$regression_rows_w_updated
+        ),
+        placement = "right"
+      ) |>
+      gt::tab_footnote(
         footnote = "Z-scores based on regression models adjusting for age, sex, and years of education.",
         locations = gt::cells_body(
           columns = "std",
-          rows = summary_dat$footnotes$regression_rows
+          rows = summary_dat$footnotes$regression_rows_w_nacc
         ),
         placement = "right"
       ) |>
@@ -397,6 +405,7 @@ assessment_summary_data <- function(
   ]
   ## Replace error codes with NA
   raw_cols <- grep(pattern = "^raw_", x = colnames(for_main_table), value = T)
+
   for (x in raw_cols) {
     for_main_table[[x]] <- NpsychBatteryNorms::valid_values_only(
       raw_score = for_main_table[[x]],
@@ -557,8 +566,17 @@ assessment_summary_data <- function(
   )
 
   if (!missingArg(methods)) {
-    regression_rows <- for_main_table$name %in%
-      names(methods)[lapply(methods, `[[`, "method") == "regression"] &
+    regression_rows_w_nacc <- for_main_table$name %in%
+      names(which(unlist(lapply(methods, \(x) {
+        x[["method"]] == "regression" && grepl("^nacc", x[["version"]])
+      })))) &
+      !for_main_table$is_error &
+      for_main_table$name != "MEMUNITS"
+
+    regression_rows_w_updated <- for_main_table$name %in%
+      names(which(unlist(lapply(methods, \(x) {
+        x[["method"]] == "regression" && !grepl("^nacc", x[["version"]])
+      })))) &
       !for_main_table$is_error &
       for_main_table$name != "MEMUNITS"
 
@@ -576,7 +594,8 @@ assessment_summary_data <- function(
       !for_main_table$is_error
 
     out$footnotes <- list(
-      regression_rows = regression_rows,
+      regression_rows_w_nacc = regression_rows_w_nacc,
+      regression_rows_w_updated = regression_rows_w_updated,
       regression_rows_w_delay = regression_rows_w_delay,
       t_score_rows = t_score_rows,
       norm_rows = norm_rows

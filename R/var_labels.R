@@ -358,7 +358,8 @@ var_labels <- function(
       "OTRAILB" = "Oral Trailmaking Part B - Completion Time",
       "OTRLBRR" = "Oral Trailmaking Part B - Errors",
       ## Mood
-      "NACCGDS" = "GDS-15 (Depression Symptoms)"
+      "NACCGDS" = "GDS-15 (Depression Symptoms)",
+      "CESDTOTAL" = "CES-D (Total Score)"
     )
   )
 }
