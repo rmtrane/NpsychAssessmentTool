@@ -488,30 +488,30 @@ prepare_data(demo_data)
 #> 344:      NA     2        NA           NA          NA          NA          NA
 #>      std_OTRLBRR std_DIGFORCT std_DIGFORSL std_DIGBACCT std_DIGBACLS std_TRAILA
 #>            <num>        <num>        <num>        <num>        <num>      <num>
-#>   1:          NA           NA           NA           NA           NA  0.7082273
-#>   2:          NA           NA           NA           NA           NA -0.3168948
-#>   3:          NA           NA           NA           NA           NA -0.5267330
-#>   4:          NA           NA           NA           NA           NA -7.1029964
-#>   5:          NA           NA           NA           NA           NA -0.5147449
+#>   1:          NA           NA           NA           NA           NA  0.9327959
+#>   2:          NA           NA           NA           NA           NA  0.4104428
+#>   3:          NA           NA           NA           NA           NA  0.3741602
+#>   4:          NA           NA           NA           NA           NA -4.0658750
+#>   5:          NA           NA           NA           NA           NA  0.3300840
 #>  ---                                                                           
-#> 340:          NA           NA           NA           NA           NA -3.2758183
+#> 340:          NA           NA           NA           NA           NA -1.7866315
 #> 341:          NA           NA           NA           NA           NA         NA
-#> 342:          NA           NA           NA           NA           NA -3.2342782
-#> 343:          NA           NA           NA           NA           NA -0.5414161
-#> 344:          NA           NA           NA           NA           NA  1.3707325
-#>      std_TRAILB  std_WAIS std_MINTTOTS std_ANIMALS      std_VEG std_UDSVERFC
-#>           <num>     <num>        <num>       <num>        <num>        <num>
-#>   1: -1.3560479  9.936317           NA   1.0078416 -3.129586776           NA
-#>   2: -0.6202545 42.777352           NA   0.8784501  0.366620115           NA
-#>   3:         NA 31.805875           NA  -0.2803483  0.824086354           NA
-#>   4:         NA 42.616302           NA  -2.2383969 -1.561557773           NA
-#>   5:  0.5369585 34.813298           NA  -0.2734779 -0.026880497           NA
-#>  ---                                                                        
-#> 340:  0.2121699 72.448842           NA  -0.8937175 -2.238299179           NA
-#> 341:  0.6192812 70.727242           NA   0.3856936 -0.786254543           NA
-#> 342:  1.3956639        NA           NA  -0.1021010 -2.466534512    1.5625754
-#> 343:  1.0132519        NA           NA   1.9338115 -2.403564458    1.6800390
-#> 344: -4.7276735        NA           NA  -0.3211887  0.001742254    0.2263162
+#> 342:          NA           NA           NA           NA           NA -1.7662635
+#> 343:          NA           NA           NA           NA           NA  0.1036007
+#> 344:          NA           NA           NA           NA           NA  1.3242420
+#>       std_TRAILB  std_WAIS std_MINTTOTS std_ANIMALS    std_VEG std_UDSVERFC
+#>            <num>     <num>        <num>       <num>      <num>        <num>
+#>   1: -0.92475293  9.936317           NA   1.5198097 -2.9694400           NA
+#>   2:  0.07781661 42.777352           NA   1.4784477  0.7508739           NA
+#>   3:          NA 31.805875           NA   0.3697707  1.3280407           NA
+#>   4:          NA 42.616302           NA  -1.6828977 -1.1713856           NA
+#>   5:  1.41022966 34.813298           NA   0.3330619  0.3973346           NA
+#>  ---                                                                       
+#> 340:  0.68991102 72.448842           NA  -0.4870567 -2.1022026           NA
+#> 341:  1.15329905 70.727242           NA   0.8462516 -0.5887339           NA
+#> 342:  1.95806869        NA           NA   0.3239073 -2.3452388    1.8656138
+#> 343:  1.64881478        NA           NA   2.4819875 -2.2127057    2.0178328
+#> 344: -4.65166604        NA           NA   0.1039906  0.2094390    0.4725764
 #>      std_UDSVERLC std_UDSVERTN std_UDSBENTC std_UDSBENTD std_CRAFTVRS
 #>             <num>        <num>        <num>        <num>        <num>
 #>   1:           NA           NA           NA           NA           NA
@@ -522,9 +522,9 @@ prepare_data(demo_data)
 #>  ---                                                                 
 #> 340:           NA           NA           NA           NA           NA
 #> 341:           NA           NA           NA           NA           NA
-#> 342:    0.8863316    0.2318152    -1.883097   -0.2266991           NA
-#> 343:    1.7183836   -1.8311439    -1.214242    0.8711626           NA
-#> 344:   -1.7103944   -1.6157296     1.136978   -0.9342854           NA
+#> 342:     1.153110     0.503752   -1.6219837   -0.1213943           NA
+#> 343:     2.032260    -1.619080   -0.9375307    1.1141948           NA
+#> 344:    -1.460683    -1.421505    1.4099008   -0.8782322           NA
 #>      std_CRAFTURS std_CRAFTDVR std_CRAFTDRE std_REY1REC std_REY2REC std_REY3REC
 #>             <num>        <num>        <num>       <num>       <num>       <num>
 #>   1:           NA           NA           NA          NA          NA          NA
