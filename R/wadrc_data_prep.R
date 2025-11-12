@@ -11,17 +11,27 @@ wadrc_data_prep <- function(
   uds = c("uds2", "uds3", "uds4")
 ) {
   ## Due to NSE notes in R CMD check:
+  # fmt: skip
   NACCID <-
     VISITDATE <-
-      NACCUDSD <-
-        contributions_character <-
-          var <-
-            val <-
-              for_tab <-
-                visityr <-
-                  visitmo <-
-                    visitday <-
-                      ptid <- NULL
+    NACCUDSD <-
+    contributions_character <-
+    var <-
+    val <-
+    for_tab <-
+    visityr <-
+    visitmo <-
+    visitday <-
+    ptid <-
+    race <-
+    racewhite <-
+    raceblack <-
+    raceaian <-
+    racenhpi <-
+    raceasian <-
+    racemena <-
+    raceunkn <- 
+      NULL
 
   if (!data.table::is.data.table(adrc_data)) {
     cli::cli_abort(
