@@ -170,6 +170,6 @@ var_labels(
 #> 1 Trailmaking Part B (2 errors; 24/24 CL) Clock Drawing Test
 #>                                     OTRAILB                          OTRLBRR
 #> 1 Oral Trailmaking Part B - Completion Time Oral Trailmaking Part B - Errors
-#>                        NACCGDS
-#> 1 GDS-15 (Depression Symptoms)
+#>                        NACCGDS           CESDTOTAL
+#> 1 GDS-15 (Depression Symptoms) CES-D (Total Score)
 ```
