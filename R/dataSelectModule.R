@@ -368,7 +368,7 @@ dataSelectServer <- function(id) {
         if (inherits(req_panda, "try-error")) {
           shiny::showNotification(
             type = "error",
-            "Could not access https://panda.medicine.wisc.edu. Make sure you are connected to the campus network, either directly or via VPN."
+            "Could not access https://panda.medicine.wisc.edu. Make sure you are connected to the campus network, either directly or via VPN. If you just connected to the VPN, restart the R session, and relaunch the application."
           )
           new_source <- NULL
         } else {

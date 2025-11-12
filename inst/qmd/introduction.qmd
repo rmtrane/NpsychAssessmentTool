@@ -157,10 +157,6 @@ for_tab <- map(
           }
         )
       ) |> 
-      # filter(
-      #   !(method == "T-score" & version != "T"),
-      #   !(method != "T-score" & version == "T")
-      # ) |>
       arrange(variables) 
 
     if (mth != "norms") {
@@ -171,7 +167,7 @@ for_tab <- map(
           filter(method == mth) |> 
           mutate(
             default = T,
-            version = if_else(method == "T-score", "T", version) # replace_na(version, "T")
+            version = if_else(method == "T-score", "T", version) 
           )
       )
     } else {
@@ -226,7 +222,9 @@ for_tab <- map(
   }
 ) |> 
   set_names(all_methods) |> 
-  bind_rows(.id = "method")
+  bind_rows(
+    .id = "method"
+  )
 ```
 
 

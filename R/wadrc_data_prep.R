@@ -6,7 +6,10 @@
 #' @param uds Spefify if data are from UDS-2, UDS-3 or UDS-4 database.
 #'
 #' @keywords internal
-wadrc_data_prep <- function(adrc_data, uds = c("uds2", "uds3", "uds4")) {
+wadrc_data_prep <- function(
+  adrc_data,
+  uds = c("uds2", "uds3", "uds4")
+) {
   ## Due to NSE notes in R CMD check:
   NACCID <-
     VISITDATE <-
@@ -163,7 +166,18 @@ wadrc_data_prep <- function(adrc_data, uds = c("uds2", "uds3", "uds4")) {
     colnames(out)[colnames(out) == "birthsex"] <- "sex"
 
     # Create 'race' column
-    out$race <- NA
+    out[,
+      race := data.table::fcase(
+        racewhite == 1 ,  1 ,
+        raceblack == 1 ,  2 ,
+        raceaian == 1  ,  3 ,
+        racenhpi == 1  ,  4 ,
+        raceasian == 1 ,  5 ,
+        racemena == 1  , 50 ,
+        raceunkn == 1  , 99 ,
+        default = NA
+      )
+    ]
 
     out$visitdate <- NULL
 
