@@ -625,7 +625,7 @@
     "std_methods": {
       "MOCATOTS": {
         "method": "regression",
-        "version": "nacc"
+        "version": "updated_2025.06"
       },
       "NACCMMSE": {
         "method": "regression",
@@ -633,7 +633,7 @@
       },
       "TRAILA": {
         "method": "regression",
-        "version": "nacc"
+        "version": "updated_2025.06"
       },
       "OTRAILA": {
         "method": "regression",
@@ -645,19 +645,19 @@
       },
       "DIGFORCT": {
         "method": "regression",
-        "version": "nacc"
+        "version": "updated_2025.06"
       },
       "DIGFORSL": {
         "method": "regression",
-        "version": "nacc"
+        "version": "updated_2025.06"
       },
       "DIGBACCT": {
         "method": "regression",
-        "version": "nacc"
+        "version": "updated_2025.06"
       },
       "DIGBACLS": {
         "method": "regression",
-        "version": "nacc"
+        "version": "updated_2025.06"
       },
       "WAIS": {
         "method": "T-score",
@@ -681,27 +681,27 @@
       },
       "MINTTOTS": {
         "method": "regression",
-        "version": "nacc"
+        "version": "updated_2025.06"
       },
       "ANIMALS": {
         "method": "regression",
-        "version": "nacc"
+        "version": "updated_2025.06"
       },
       "VEG": {
         "method": "regression",
-        "version": "nacc"
+        "version": "updated_2025.06"
       },
       "UDSVERTN": {
         "method": "regression",
-        "version": "nacc"
+        "version": "updated_2025.06"
       },
       "UDSVERFC": {
         "method": "regression",
-        "version": "nacc"
+        "version": "updated_2025.06"
       },
       "UDSVERLC": {
         "method": "regression",
-        "version": "nacc"
+        "version": "updated_2025.06"
       },
       "BOSTON": {
         "method": "regression",
@@ -709,27 +709,27 @@
       },
       "UDSBENTC": {
         "method": "regression",
-        "version": "nacc"
+        "version": "updated_2025.06"
       },
       "UDSBENTD": {
         "method": "regression",
-        "version": "nacc"
+        "version": "updated_2025.06"
       },
       "CRAFTVRS": {
         "method": "regression",
-        "version": "nacc"
+        "version": "updated_2025.06"
       },
       "CRAFTURS": {
         "method": "regression",
-        "version": "nacc"
+        "version": "updated_2025.06"
       },
       "CRAFTDVR": {
         "method": "regression",
-        "version": "nacc"
+        "version": "updated_2025.06"
       },
       "CRAFTDRE": {
         "method": "regression",
-        "version": "nacc"
+        "version": "updated_2025.06"
       },
       "REY1REC": {
         "method": "T-score",
@@ -777,7 +777,7 @@
       },
       "TRAILB": {
         "method": "regression",
-        "version": "nacc"
+        "version": "updated_2025.06"
       },
       "OTRAILB": {
         "method": "regression",

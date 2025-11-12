@@ -1,23 +1,23 @@
 {
   "input": {
-    "colselect-ANIMALSmethod": "regression (nacc)",
+    "colselect-ANIMALSmethod": "regression (updated_2025.06)",
     "colselect-BOSTONmethod": "regression (nacc_legacy)",
-    "colselect-CRAFTDREmethod": "regression (nacc)",
-    "colselect-CRAFTDVRmethod": "regression (nacc)",
-    "colselect-CRAFTURSmethod": "regression (nacc)",
-    "colselect-CRAFTVRSmethod": "regression (nacc)",
-    "colselect-DIGBACCTmethod": "regression (nacc)",
-    "colselect-DIGBACLSmethod": "regression (nacc)",
-    "colselect-DIGFORCTmethod": "regression (nacc)",
-    "colselect-DIGFORSLmethod": "regression (nacc)",
+    "colselect-CRAFTDREmethod": "regression (updated_2025.06)",
+    "colselect-CRAFTDVRmethod": "regression (updated_2025.06)",
+    "colselect-CRAFTURSmethod": "regression (updated_2025.06)",
+    "colselect-CRAFTVRSmethod": "regression (updated_2025.06)",
+    "colselect-DIGBACCTmethod": "regression (updated_2025.06)",
+    "colselect-DIGBACLSmethod": "regression (updated_2025.06)",
+    "colselect-DIGFORCTmethod": "regression (updated_2025.06)",
+    "colselect-DIGFORSLmethod": "regression (updated_2025.06)",
     "colselect-DIGIBLENmethod": "regression (nacc_legacy)",
     "colselect-DIGIBmethod": "regression (nacc_legacy)",
     "colselect-DIGIFLENmethod": "regression (nacc_legacy)",
     "colselect-DIGIFmethod": "regression (nacc_legacy)",
     "colselect-LOGIMEMmethod": "regression (nacc_legacy)",
     "colselect-MEMUNITSmethod": "regression (nacc_legacy)",
-    "colselect-MINTTOTSmethod": "regression (nacc)",
-    "colselect-MOCATOTSmethod": "regression (nacc)",
+    "colselect-MINTTOTSmethod": "regression (updated_2025.06)",
+    "colselect-MOCATOTSmethod": "regression (updated_2025.06)",
     "colselect-NACCMMSEmethod": "regression (nacc_legacy)",
     "colselect-OTRAILAmethod": "regression (updated_2025.06)",
     "colselect-OTRAILBmethod": "regression (updated_2025.06)",
@@ -32,14 +32,14 @@
     "colselect-REYARECmethod": "T-score (NA)",
     "colselect-REYDRECmethod": "T-score (NA)",
     "colselect-REYTOTALmethod": "T-score (NA)",
-    "colselect-TRAILAmethod": "regression (nacc)",
-    "colselect-TRAILBmethod": "regression (nacc)",
-    "colselect-UDSBENTCmethod": "regression (nacc)",
-    "colselect-UDSBENTDmethod": "regression (nacc)",
-    "colselect-UDSVERFCmethod": "regression (nacc)",
-    "colselect-UDSVERLCmethod": "regression (nacc)",
-    "colselect-UDSVERTNmethod": "regression (nacc)",
-    "colselect-VEGmethod": "regression (nacc)",
+    "colselect-TRAILAmethod": "regression (updated_2025.06)",
+    "colselect-TRAILBmethod": "regression (updated_2025.06)",
+    "colselect-UDSBENTCmethod": "regression (updated_2025.06)",
+    "colselect-UDSBENTDmethod": "regression (updated_2025.06)",
+    "colselect-UDSVERFCmethod": "regression (updated_2025.06)",
+    "colselect-UDSVERLCmethod": "regression (updated_2025.06)",
+    "colselect-UDSVERTNmethod": "regression (updated_2025.06)",
+    "colselect-VEGmethod": "regression (updated_2025.06)",
     "colselect-WAISmethod": "T-score (NA)",
     "colselect-assign": 1,
     "colselect-vars_table_output_cell_clicked": {
@@ -625,7 +625,7 @@
     "std_methods": {
       "MOCATOTS": {
         "method": "regression",
-        "version": "nacc"
+        "version": "updated_2025.06"
       },
       "NACCMMSE": {
         "method": "regression",
@@ -633,7 +633,7 @@
       },
       "TRAILA": {
         "method": "regression",
-        "version": "nacc"
+        "version": "updated_2025.06"
       },
       "OTRAILA": {
         "method": "regression",
@@ -645,19 +645,19 @@
       },
       "DIGFORCT": {
         "method": "regression",
-        "version": "nacc"
+        "version": "updated_2025.06"
       },
       "DIGFORSL": {
         "method": "regression",
-        "version": "nacc"
+        "version": "updated_2025.06"
       },
       "DIGBACCT": {
         "method": "regression",
-        "version": "nacc"
+        "version": "updated_2025.06"
       },
       "DIGBACLS": {
         "method": "regression",
-        "version": "nacc"
+        "version": "updated_2025.06"
       },
       "WAIS": {
         "method": "T-score",
@@ -681,27 +681,27 @@
       },
       "MINTTOTS": {
         "method": "regression",
-        "version": "nacc"
+        "version": "updated_2025.06"
       },
       "ANIMALS": {
         "method": "regression",
-        "version": "nacc"
+        "version": "updated_2025.06"
       },
       "VEG": {
         "method": "regression",
-        "version": "nacc"
+        "version": "updated_2025.06"
       },
       "UDSVERTN": {
         "method": "regression",
-        "version": "nacc"
+        "version": "updated_2025.06"
       },
       "UDSVERFC": {
         "method": "regression",
-        "version": "nacc"
+        "version": "updated_2025.06"
       },
       "UDSVERLC": {
         "method": "regression",
-        "version": "nacc"
+        "version": "updated_2025.06"
       },
       "BOSTON": {
         "method": "regression",
@@ -709,27 +709,27 @@
       },
       "UDSBENTC": {
         "method": "regression",
-        "version": "nacc"
+        "version": "updated_2025.06"
       },
       "UDSBENTD": {
         "method": "regression",
-        "version": "nacc"
+        "version": "updated_2025.06"
       },
       "CRAFTVRS": {
         "method": "regression",
-        "version": "nacc"
+        "version": "updated_2025.06"
       },
       "CRAFTURS": {
         "method": "regression",
-        "version": "nacc"
+        "version": "updated_2025.06"
       },
       "CRAFTDVR": {
         "method": "regression",
-        "version": "nacc"
+        "version": "updated_2025.06"
       },
       "CRAFTDRE": {
         "method": "regression",
-        "version": "nacc"
+        "version": "updated_2025.06"
       },
       "REY1REC": {
         "method": "T-score",
@@ -777,7 +777,7 @@
       },
       "TRAILB": {
         "method": "regression",
-        "version": "nacc"
+        "version": "updated_2025.06"
       },
       "OTRAILB": {
         "method": "regression",
