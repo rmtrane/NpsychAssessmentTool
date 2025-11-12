@@ -4,6 +4,8 @@
 
 -   Changed default methods to use updated regression models which also adjusts for race
 
+-   CES-D total score included in assessment summary table in the Mood section
+
 # NpsychAssessmentTool 0.3.1
 
 Bug fixes:
