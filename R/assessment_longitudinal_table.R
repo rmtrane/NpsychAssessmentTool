@@ -345,7 +345,7 @@ assessment_longitudinal_table <- function(
     gt::cols_hide(
       columns = c(
         "name",
-        ends_with("_std")
+        dplyr::ends_with("_std")
       )
     ) |>
     gt::cols_align("right", columns = -c("group", "labels")) |>
