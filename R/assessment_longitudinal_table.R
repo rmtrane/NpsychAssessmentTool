@@ -201,14 +201,16 @@ assessment_longitudinal_table <- function(
 
       for_table_std[[paste(x, collapse = "--")]] <- ifelse(
         !is.na(for_table_std[[x[1]]]),
-        sprintf(fmt = "%.2f", for_table_std[[x[1]]]),
+        # sprintf(fmt = "%.2f", for_table_std[[x[1]]]),
+        for_table_std[[x[1]]],
         ifelse(
           !is.na(for_table_std[[x[2]]]),
-          paste0(
-            "<u><i>",
-            sprintf(fmt = "%.2f", for_table_std[[x[2]]]),
-            "</i></u>"
-          ),
+          # paste0(
+          #   "<u><i>",
+          #   sprintf(fmt = "%.2f", for_table_std[[x[2]]]),
+          #   "</i></u>"
+          # ),
+          for_table_std[[x[2]]],
           NA
         )
       )
@@ -244,12 +246,23 @@ assessment_longitudinal_table <- function(
     keep.names = "name"
   )
 
+  data.table::setnames(
+    for_table_std,
+    old = setdiff(colnames(for_table_std), "name"),
+    new = paste(setdiff(colnames(for_table_std), "name"), "std", sep = "_")
+  )
+
+  for_table <- for_table[
+    for_table_std,
+    on = "name"
+  ]
+
   if (!show_all_visits) {
     empty_cols <- colSums(!is.na(for_table)) == 0
 
     if (any(empty_cols)) {
       for_table <- for_table[, !empty_cols, with = F]
-      for_table_std <- for_table_std[, !empty_cols, with = F]
+      # for_table_std <- for_table_std[, !empty_cols, with = F]
     }
   }
 
@@ -274,25 +287,25 @@ assessment_longitudinal_table <- function(
     }
   ))
 
-  for_table_std$labels <- unlist(lapply(
-    for_table_std$name,
-    \(x) {
-      if (x %in% names(nacc_var_labels)) {
-        return(nacc_var_labels[x])
-      }
+  # for_table_std$labels <- unlist(lapply(
+  #   for_table_std$name,
+  #   \(x) {
+  #     if (x %in% names(nacc_var_labels)) {
+  #       return(nacc_var_labels[x])
+  #     }
 
-      to_combine <- nacc_var_labels[unlist(strsplit(x, split = "--"))]
-      to_combine[2] <- gsub(
-        pattern = " Span (Forward|Backward) - (Span Length|Total)",
-        replacement = "",
-        x = to_combine[2]
-      )
+  #     to_combine <- nacc_var_labels[unlist(strsplit(x, split = "--"))]
+  #     to_combine[2] <- gsub(
+  #       pattern = " Span (Forward|Backward) - (Span Length|Total)",
+  #       replacement = "",
+  #       x = to_combine[2]
+  #     )
 
-      to_combine[2] <- paste0(" <u><i>", to_combine[2], "</i></u>")
+  #     to_combine[2] <- paste0(" <u><i>", to_combine[2], "</i></u>")
 
-      paste(to_combine, collapse = " /")
-    }
-  ))
+  #     paste(to_combine, collapse = " /")
+  #   }
+  # ))
 
   ## Remove (--legacy) from name column
   for_table$name <- gsub(
@@ -300,22 +313,22 @@ assessment_longitudinal_table <- function(
     replacement = "",
     x = for_table$name
   )
-  for_table_std$name <- gsub(
-    pattern = "--(.+)",
-    replacement = "",
-    x = for_table_std$name
-  )
+  # for_table_std$name <- gsub(
+  #   pattern = "--(.+)",
+  #   replacement = "",
+  #   x = for_table_std$name
+  # )
 
   ## Add column indicating groups
   for_table$group <- unname(nacc_var_groups[for_table$name])
-  for_table_std$group <- unname(nacc_var_groups[for_table_std$name])
+  # for_table_std$group <- unname(nacc_var_groups[for_table_std$name])
   ## Make sure both tables are in right order. Remove "--(legacy)" from names involving
   ## two scores
   for_table <- for_table[order(match(for_table$name, names(nacc_var_labels)))]
-  for_table_std <- for_table_std[order(match(
-    for_table_std$name,
-    names(nacc_var_labels)
-  ))]
+  # for_table_std <- for_table_std[order(match(
+  #   for_table_std$name,
+  #   names(nacc_var_labels)
+  # ))]
 
   ## Create gt
   out <- gt::gt(
@@ -329,12 +342,13 @@ assessment_longitudinal_table <- function(
         unique(nacc_var_groups) %in% for_table$group
       ]
     ) |>
-    gt::cols_hide("name") |>
+    gt::cols_hide(
+      columns = c(
+        "name",
+        ends_with("_std")
+      )
+    ) |>
     gt::cols_align("right", columns = -c("group", "labels")) |>
-    # gt::cols_width(
-    #   -c("name", "labels", "group") ~ px(95),
-    #   labels ~ px(375)
-    # ) |>
     gt::tab_style(
       style = gt::css(
         "white-space" = "nowrap",
@@ -373,11 +387,11 @@ assessment_longitudinal_table <- function(
   z_scores_from_percentiles <- qnorm(c(0, descriptions))
 
   for (cur_col in colnames(out$`_data`)[grepl(
-    "\\d{4}-\\d{2}-\\d{2}",
+    "^\\d{4}-\\d{2}-\\d{2}$",
     x = colnames(out$`_data`)
   )]) {
     cur_vals <- # out$`_data`[[cur_col]]
-      for_table_std[[cur_col]]
+      for_table[[paste(cur_col, "std", sep = "_")]]
 
     if (any(grepl(pattern = "<u><i>", cur_vals))) {
       matches <- regexpr(pattern = "[0-9\\.]+", text = cur_vals)
