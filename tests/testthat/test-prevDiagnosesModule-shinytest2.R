@@ -15,6 +15,7 @@ test_that("prevDiagnosesModule", {
     app = prevDiagnosesApp(
       dat = tmp_dat |> subset(NACCID == "NACC017767")
     ),
+    name = "prevDiagnoses1",
     variant = platform_variant(),
     height = 968,
     width = 1619,
@@ -31,6 +32,7 @@ test_that("prevDiagnosesModule", {
       dat = tmp_dat |> subset(NACCID == "NACC017767"),
       print_updating = TRUE
     ),
+    name = "prevDiagnoses2",
     variant = platform_variant(),
     height = 968,
     width = 1619,
