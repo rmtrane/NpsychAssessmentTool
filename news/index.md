@@ -4,6 +4,8 @@
 
 - Fixed bug that meant the colors on the longitudinal table were wrong
 
+- Include aSyn-SAA biomarker (WADRC specific)
+
 ## NpsychAssessmentTool 0.3.2
 
 - Longitudinal table now shows raw scores with color coding
