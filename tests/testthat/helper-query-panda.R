@@ -18,7 +18,8 @@ check_table_names <- function(panda_returns) {
       "MK6240_NFT_Rating",
       "NAV4694 Visual Ratings",
       "PIB Visual Rating 20180126",
-      "HDX Plasma - pTau217"
+      "HDX Plasma - pTau217",
+      "Amprion - CSF a-Synuclein"
     )
   )
 }
