@@ -89,10 +89,10 @@ bio_tab_to_html_table <- function(
   ## Create method column giving the visit type (LP or PET)
   tab_for_gt[,
     method := data.table::fcase(
-      table %in% c("Local Roche CSF - Sarstedt freeze 2, cleaned", "Local Roche CSF - Sarstedt freeze 3", "Local Roche CSF - Sarstedt freeze, cleaned", "NTK MultiObs - CSF analytes", "NTK2 MultiObs - CSF, 20230311", "HDX Plasma - pTau217") ,
-      "LP Visits"                                                                                                                                                                                                                               ,
-      table %in% c("MK6240_NFT_Rating", "NAV4694 Visual Ratings", "PIB Visual Rating 20180126")                                                                                                                                                 ,
-      "PET Visits"                                                                                                                                                                                                                              ,
+      table %in% c("Local Roche CSF - Sarstedt freeze 2, cleaned", "Local Roche CSF - Sarstedt freeze 3", "Local Roche CSF - Sarstedt freeze, cleaned", "NTK MultiObs - CSF analytes", "NTK2 MultiObs - CSF, 20230311", "HDX Plasma - pTau217", "Amprion - CSF a-Synuclein") ,
+      "LP Visits"                                                                                                                                                                                                                                                            ,
+      table %in% c("MK6240_NFT_Rating", "NAV4694 Visual Ratings", "PIB Visual Rating 20180126")                                                                                                                                                                              ,
+      "PET Visits"                                                                                                                                                                                                                                                           ,
       default = "Other"
     )
   ]
@@ -115,7 +115,12 @@ bio_tab_to_html_table <- function(
                 if (is.null(y)) {
                   return(NA)
                 }
-                y
+
+                if (is.list(y)) {
+                  y <- y[[1]]
+                }
+
+                as.numeric(y)
               })
             )
           }
@@ -165,6 +170,7 @@ bio_tab_to_html_table <- function(
           "NTK MultiObs - CSF analytes",
           "NTK2 MultiObs - CSF, 20230311",
           "HDX Plasma - pTau217",
+          "Amprion - CSF a-Synuclein",
           "MK6240_NFT_Rating",
           "NAV4694 Visual Ratings",
           "PIB Visual Rating 20180126"
@@ -532,7 +538,7 @@ cell_content <- function(
         x = cell$text
       ))
     ),
-    if (!is.null(cell$raw)) {
+    if (!is.null(cell$raw) && !is.na(cell$raw)) {
       shiny::tags$span(
         class = "flex-cell-right plot-icon",
         shiny::icon("chart-line"),

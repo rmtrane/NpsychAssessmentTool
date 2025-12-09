@@ -6,25 +6,30 @@
                 "id": 679,
                 "class": "cg_tn",
                 "join": "inner",
-                "columns": [{
-                    "name": "Adrc Number",
-                    "id": 690,
-                    "class": "cg_tn_cn",
-                    "show": true,
-                    "constraints": [{
-                        "operator": "=",
-                        "values": [
-                            "adrc_ptid"
+                "columns": [
+                    {
+                        "name": "Adrc Number",
+                        "id": 690,
+                        "class": "cg_tn_cn",
+                        "show": true,
+                        "constraints": [
+                            {
+                                "operator": "=",
+                                "values": [
+                                    "adrc_ptid"
+                                ]
+                            }
                         ]
-                    }]
-                }]
+                    }
+                ]
             },
             {
                 "name": "MRI Appointments",
                 "id": 673,
                 "class": "cg_tn",
                 "join": "left",
-                "columns": [{
+                "columns": [
+                    {
                         "name": "Mri date",
                         "id": 729,
                         "class": "cg_tn_cn",
@@ -45,7 +50,8 @@
                 "id": 674,
                 "class": "cg_tn",
                 "join": "left",
-                "columns": [{
+                "columns": [
+                    {
                         "name": "Petscan date",
                         "id": 719,
                         "class": "cg_tn_cn",
@@ -66,7 +72,8 @@
                 "id": 675,
                 "class": "cg_tn",
                 "join": "left",
-                "columns": [{
+                "columns": [
+                    {
                         "name": "Lumbarpuncture Date",
                         "id": 705,
                         "class": "cg_tn_cn",
@@ -87,7 +94,8 @@
                 "id": 1227,
                 "class": "cg_tn",
                 "join": "left",
-                "columns": [{
+                "columns": [
+                    {
                         "name": "age_lp",
                         "id": 45322,
                         "class": "cg_tn_cn",
@@ -136,7 +144,8 @@
                 "id": 1330,
                 "class": "cg_tn",
                 "join": "left",
-                "columns": [{
+                "columns": [
+                    {
                         "name": "age_lp",
                         "id": 52807,
                         "class": "cg_tn_cn",
@@ -241,7 +250,8 @@
                 "id": 1152,
                 "class": "cg_tn",
                 "join": "left",
-                "columns": [{
+                "columns": [
+                    {
                         "name": "age_lp",
                         "id": 39576,
                         "class": "cg_tn_cn",
@@ -318,7 +328,8 @@
                 "id": 1043,
                 "class": "cg_tn",
                 "join": "left",
-                "columns": [{
+                "columns": [
+                    {
                         "name": "age_lp",
                         "id": 27112,
                         "class": "cg_tn_cn",
@@ -374,7 +385,8 @@
                 "id": 1233,
                 "class": "cg_tn",
                 "join": "left",
-                "columns": [{
+                "columns": [
+                    {
                         "name": "LPdate",
                         "id": 45565,
                         "class": "cg_tn_cn",
@@ -437,7 +449,8 @@
                 "id": 865,
                 "class": "cg_tn",
                 "join": "left",
-                "columns": [{
+                "columns": [
+                    {
                         "name": "comment",
                         "id": 11284,
                         "class": "cg_tn_cn",
@@ -493,43 +506,50 @@
                 "id": 1235,
                 "class": "cg_tn",
                 "join": "left",
-                "columns": [{
-                    "name": "rating_0_1_2_3",
-                    "id": 45651,
-                    "class": "cg_tn_cn",
-                    "show": true,
-                    "constraints": []
-                }]
+                "columns": [
+                    {
+                        "name": "rating_0_1_2_3",
+                        "id": 45651,
+                        "class": "cg_tn_cn",
+                        "show": true,
+                        "constraints": []
+                    }
+                ]
             },
             {
                 "name": "PIB Visual Rating 20180126",
                 "id": 845,
                 "class": "cg_tn",
                 "join": "left",
-                "columns": [{
-                    "name": "rating_0_1_2_3",
-                    "id": 10364,
-                    "class": "cg_tn_cn",
-                    "show": true,
-                    "constraints": []
-                }]
+                "columns": [
+                    {
+                        "name": "rating_0_1_2_3",
+                        "id": 10364,
+                        "class": "cg_tn_cn",
+                        "show": true,
+                        "constraints": []
+                    }
+                ]
             },
             {
                 "name": "HDX Plasma - pTau217",
                 "id": 1347,
                 "class": "cg_tn",
                 "join": "left",
-                "columns": [{
+                "columns": [
+                    {
                         "name": "enumber",
                         "id": 53619,
                         "class": "cg_tn_cn",
                         "show": true,
-                        "constraints": [{
-                            "operator": "=",
-                            "values": [
-                                "adrc_ptid"
-                            ]
-                        }]
+                        "constraints": [
+                            {
+                                "operator": "=",
+                                "values": [
+                                    "adrc_ptid"
+                                ]
+                            }
+                        ]
                     },
                     {
                         "name": "age_at_appointment",
@@ -548,6 +568,35 @@
                     {
                         "name": "mean_conc",
                         "id": 53637,
+                        "class": "cg_tn_cn",
+                        "show": true,
+                        "constraints": []
+                    }
+                ]
+            },
+            {
+                "name": "Amprion - CSF a-Synuclein",
+                "id": 1288,
+                "class": "cg_tn",
+                "join": "left",
+                "columns": [
+                    {
+                        "name": "date_of_collection",
+                        "id": 49961,
+                        "class": "cg_tn_cn",
+                        "show": true,
+                        "constraints": []
+                    },
+                    {
+                        "name": "Result",
+                        "id": 49963,
+                        "class": "cg_tn_cn",
+                        "show": true,
+                        "constraints": []
+                    },
+                    {
+                        "name": "age_at_appointment",
+                        "id": 54938,
                         "class": "cg_tn_cn",
                         "show": true,
                         "constraints": []

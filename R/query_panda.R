@@ -210,6 +210,14 @@ get_biomarker_data <- function(
       return(out)
     }
 
+    if (col_prefix == "cg_amprion_csf_alpha_synuclein") {
+      data.table::setnames(
+        as_df,
+        c("Result", "date_of_collection"),
+        c("AlphaSyn-SAA_cat", "obtained_date")
+      )
+    }
+
     for (i in seq_along(replace_in_colnames)) {
       # For i = 1, we want to match on expression, but replace different expression. Hence the extra gsub in new.
       data.table::setnames(
@@ -516,8 +524,73 @@ bio_tab_for_gt <- function(
     )
   }
 
+  if (any(grepl("AlphaSyn-SAA", names(tab)))) {
+    tab <- data.table::melt(
+      tab,
+      id.vars = c("date"),
+      measure.vars = data.table::measure(
+        name,
+        value.name,
+        pattern = "(.*)_(raw|cat)"
+      )
+    )
+
+    if (return == "both") {
+      tab[,
+        c("name", "raw", "cat") := list(
+          factor(name, levels = unique(name)),
+          lapply(
+            data.table::transpose(.SD),
+            \(x) {
+              icon <- data.table::fcase(
+                x[2] == "Not Detected"                  , '<i class="glyphicon glyphicon-minus-sign" style="color: green;"></i>' ,
+                x[2] %in% c("Detected-1", "Detected-2") , '<i class="glyphicon glyphicon-plus-sign" style="color: red;"></i>'    ,
+                default = NA
+              )
+
+              c(
+                list(raw = as.numeric(x[1])),
+                # list(
+                list(
+                  icon = if (!is.na(icon)) icon,
+                  text = x[2]
+                  # )
+                  # list(
+                  #   icon = '<i class="glyphicon glyphicon-minus-sign" style="color: green;"></i>',
+                  #   text = 'Not Detected'
+                  # ),
+                  # list(
+                  #   icon = '<i class="glyphicon glyphicon-plus-sign" style="color: red;"></i>',
+                  #   text = 'Detected-1'
+                  # ),
+                  # list(
+                  #   icon = '<i class="glyphicon glyphicon-plus-sign" style="color: red;"></i>',
+                  #   text = 'Detected-2'
+                  # ),
+                  # list(
+                  #   text = "QND"
+                  # )
+                ) #[[match(x[2], c("Not Detected", "Detected-1", "Detected-2"))]]
+              )
+            }
+          ),
+          NULL
+        ),
+        .SDcols = c("raw", "cat")
+      ]
+    }
+
+    tab <- data.table::dcast(
+      tab,
+      name ~ date,
+      value.var = "raw"
+    )
+
+    tab$name <- as.character(tab$name)
+  }
+
   if (any(grepl("_cat$", x = names(tab)))) {
-    ## In rare cases, entries might be present with no raw or bin values. We remove these
+    ## In rare cases, entries might be present with no raw or bin values.
     rows_include <- rowSums(
       !(tab[,
         lapply(.SD, is.na),
@@ -530,7 +603,7 @@ bio_tab_for_gt <- function(
 
     tab <- data.table::melt(
       tab[rows_include],
-      id.vars = c("date"),
+      id.vars = "date",
       measure.vars = data.table::measure(
         name,
         value.name,
@@ -973,6 +1046,12 @@ get_all_densities <- function(all_values) {
       return(NULL)
     }
 
+    x <- x[, grepl(pattern = "_raw$", names(x)), with = F]
+
+    if (ncol(x) == 0) {
+      return(NULL)
+    }
+
     dens <- purrr::imap(x, \(y, idy) {
       if (!grepl(pattern = "_raw$", idy)) {
         return(NULL)
@@ -991,7 +1070,8 @@ get_all_densities <- function(all_values) {
     })
 
     dens[!unlist(lapply(dens, is.null))]
-  })
+  }) |>
+    purrr::discard(purrr::is_null)
 }
 
 
